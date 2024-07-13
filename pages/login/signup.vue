@@ -1,0 +1,230 @@
+<template>
+  <div id="signup">
+    <div class="row py-2 px-2 m-0">
+      <div class="col-auto px-0">
+        <button class="btn btn-40 btn-link back-btn" type="button">
+          <span class="material-icons"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#fff"
+            >
+              <path
+                d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"
+              /></svg
+          ></span>
+        </button>
+      </div>
+      <div class="text-left col align-self-center"></div>
+      <div class="ml-auto col-auto align-self-center">
+        <NuxtLink to="/login">
+          <div class="text-white">Đã có tài khoản, đăng nhập</div>
+        </NuxtLink>
+      </div>
+    </div>
+    <div class="container h-100 text-white">
+      <div class="row h-100">
+        <div class="col-12 align-self-center mb-4">
+          <div class="row justify-content-center">
+            <div class="col">
+              <div class="d-flex align-items-center justify-content-center">
+                <img
+                  src="../../assets/logo-7992.jpg"
+                  class="center-block mt-5 mb-2"
+                  style="width: 100%; border-radius: 2rem; max-width: 500px"
+                />
+              </div>
+              <h6 class="font-weight-normal mb-5 text-center">
+                <b><!--SaigonToursit--></b>
+              </h6>
+              <a-form :form="form" @submit="handleSubmit">
+                <a-form-item>
+                  <a-input
+                    placeholder="Số điện thoại"
+                    v-decorator="[
+                      'phone',
+                      {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Số điện thoại không được để trống!',
+                          },
+                        ],
+                      },
+                    ]"
+                  />
+                </a-form-item>
+                <a-form-item>
+                  <a-input
+                    placeholder="Tên"
+                    v-decorator="[
+                      'phone',
+                      {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Tên không được để trống!',
+                          },
+                        ],
+                      },
+                    ]"
+                  />
+                </a-form-item>
+                <a-form-item>
+                  <a-input
+                    type="password"
+                    placeholder="Mật khẩu"
+                    v-decorator="[
+                      'password',
+                      {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Mật khẩu không được để trống!',
+                          },
+                        ],
+                      },
+                    ]"
+                  />
+                </a-form-item>
+                <a-form-item>
+                  <a-input
+                    placeholder="Xác nhận mật khẩu"
+                    v-decorator="[
+                      'confirm',
+                      {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Vui lòng xác nhận mật khẩu!',
+                          },
+                          {
+                            validator: compareToFirstPassword,
+                          },
+                        ],
+                      },
+                    ]"
+                    type="password"
+                  />
+                </a-form-item>
+                <a-form-item>
+                  <a-input
+                    placeholder="Mật khẩu rút tiền"
+                    v-decorator="[
+                      'passwordMoney',
+                      {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Mật khẩu rút tiền không được để trống!',
+                          },
+                        ],
+                      },
+                    ]"
+                  />
+                </a-form-item>
+                <a-form-item>
+                  <a-input
+                    placeholder="Mã mời"
+                    v-decorator="[
+                      'inviteCode',
+                      {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Mã mời không được để trống !',
+                          },
+                        ],
+                      },
+                    ]"
+                  />
+                </a-form-item>
+                <div class="terms mb-2">
+                  <a-checkbox
+                    v-decorator="['agreement', { valuePropName: 'checked' }]"
+                  >
+                    Tôi đồng ý với điều khoản
+                  </a-checkbox>
+                </div>
+                <div class="row">
+                  <div class="col align-self-center pl-0 ml-3">
+                    <NuxtLink to="/terms">
+                      <h6 class="mb-1 text-white">
+                        Xem điều khoản & điều kiện
+                      </h6>
+                    </NuxtLink>
+                  </div>
+                </div>
+                <a-form-item>
+                  <a-button
+                    class="w-100 btn-login"
+                    type="primary"
+                    html-type="submit"
+                  >
+                    Đăng nhập
+                  </a-button>
+                </a-form-item>
+              </a-form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  layout: 'account',
+  data() {
+    return {
+      username: null,
+      password: null,
+      password2: null,
+    }
+  },
+  beforeCreate() {
+    this.form = this.$form.createForm(this, { name: 'register' })
+  },
+  methods: {
+    compareToFirstPassword(rule, value, callback) {
+      const form = this.form
+      if (value && value !== form.getFieldValue('password')) {
+        callback('Mật khẩu không khớp !')
+      } else {
+        callback()
+      }
+    },
+    handleSubmit(e) {
+      e.preventDefault()
+      this.form.validateFieldsAndScroll((err, values) => {
+        if (!err) {
+          console.log('Received values of form: ', values)
+        }
+      })
+    },
+  },
+}
+</script>
+
+<style lang="scss">
+#signup {
+  height: 70%;
+  .ant-input:placeholder-shown {
+    font-weight: 600;
+  }
+  .btn-login {
+    background-color: #c62a1c;
+    border-color: #c62a1c;
+  }
+  .terms {
+    color: #fff;
+    span {
+      color: #fff;
+      font-size: 16px;
+    }
+  }
+}
+</style>
