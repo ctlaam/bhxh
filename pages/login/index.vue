@@ -21,7 +21,7 @@
       <div class="ml-auto col-auto align-self-center">
         <NuxtLink to="/login/signup">
           <div href="/index/user/register" class="text-white">
-            Tạo Tài Khoản Mới
+            Tạo tài khoản mới
           </div>
         </NuxtLink>
       </div>
@@ -104,7 +104,9 @@ export default {
       password2: null,
     }
   },
-
+  beforeCreate() {
+    this.form = this.$form.createForm(this, { name: 'login' })
+  },
   methods: {
     handleSubmit(e) {
       e.preventDefault()
@@ -127,6 +129,12 @@ export default {
   .btn-login {
     background-color: #c62a1c;
     border-color: #c62a1c;
+  }
+  .has-error .ant-form-explain,
+  .has-error .ant-form-split {
+    color: #f5222d;
+    font-size: 14px;
+    font-weight: 600;
   }
 }
 </style>

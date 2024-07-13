@@ -211,7 +211,7 @@ export default {
 
 <style lang="scss">
 #signup {
-  height: 70%;
+  height: 80%;
   .ant-input:placeholder-shown {
     font-weight: 600;
   }
@@ -225,6 +225,12 @@ export default {
       color: #fff;
       font-size: 16px;
     }
+  }
+  .has-error .ant-form-explain,
+  .has-error .ant-form-split {
+    color: #f5222d;
+    font-size: 14px;
+    font-weight: 600;
   }
 }
 </style>
