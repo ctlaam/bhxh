@@ -19,7 +19,6 @@ import Header from '../components/apps/header.vue'
 export default {
   components: {
     Footer,
-    FullscreenModal,
     Header,
   },
   methods: {},
