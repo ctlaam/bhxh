@@ -3,9 +3,9 @@
     <div class="container mt-3 mb-4 text-center"><h2 class="text-white">0.00</h2>
       <p class="text-white mb-4">Tổng Tài Sản</p></div>
     <div class="container text-center overflow-hidden">
-      <iframe class="chartjs-hidden-iframe" tabindex="-1"
-              style="display: block; overflow: hidden; border: 0px; margin: 0px; inset: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-      <canvas id="mixedchartjs" style="display: block; height: 150px; width: 430px;" width="537" height="187"></canvas>
+      <div id="chart-container">
+        <canvas id="mixedchartjs"></canvas>
+      </div>
     </div>
     <div class="main-container">
       <div class="container">
@@ -86,10 +86,14 @@
         </div>
       </div>
     </div>
+    <script src="https://saigontour.cc/newdome/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="https://saigontour.cc/newdome/vendor/chartjs/utils.js"></script>
+    <script src="https://saigontour.cc/newdome/vendor/chartjs/chart-js-data.js"></script>
   </div>
 </template>
 
 <script>
+
 export default {
   name: "index"
 }
@@ -97,5 +101,7 @@ export default {
 
 <style scoped lang="scss">
 @import '~/assets/scss/my.scss';
-
+#mixedchartjs{
+  padding-right: 20px;
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="profile">
     <div class="container mb-4 text-center text-white">
       <h6 class="mb-1" style="font-weight: 600; font-size:1.5rem">thuy du</h6>
       <img src="~/assets/vip1.png" style="width: 3rem;">
@@ -29,7 +29,10 @@
             <div class="card">
               <div class="card-body">
                 <div class="row">
-                  <div class="col"><h6 class="mb-1">Hành Trình Hôm Nay<span class="text-success">0/20</span></h6></div>
+                  <div class="col"><h6 class="mb-1">Hành Trình Hôm Nay
+                    <span class="text-success float-right">0/20</span>
+                  </h6>
+                  </div>
                 </div>
                 <div class="progress h-5 mt-3">
                   <div class="progress-bar bg-default" role="progressbar" style="width:0%" aria-valuenow="25"

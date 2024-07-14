@@ -82,13 +82,16 @@ export default {
   background: url('~/assets/bg.webp') no-repeat;
   height: 100vh;
 }
-#content::-webkit-scrollbar {
+#content div::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
 
-#content {
+#content .profile{
   scrollbar-width: none; /* Ẩn thanh cuộn */
+  overflow-y: auto;
+  height: 841px;
+  padding-bottom: 50px;
 }
 
 #content {
