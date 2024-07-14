@@ -29,24 +29,24 @@ export default {
   methods: {
     handleScroll() {
       // Lấy vị trí cuộn của phần tử "content"
-      const scrollPosition = this.$refs.content.scrollTop;
-      console.log('Scroll position:', scrollPosition);
+      const scrollPosition = this.$refs.content.scrollTop
+      console.log('Scroll position:', scrollPosition)
 
       // Thêm logic dựa trên vị trí cuộn
       if (scrollPosition > 50) {
         this.activeHeader = true
-      } else if (scrollPosition == 0){
-        this.activeHeader = false;
+      } else if (scrollPosition == 0) {
+        this.activeHeader = false
       }
-    }
+    },
   },
   mounted() {
-    console.log('Component mounted');
-    this.$refs.content.addEventListener('scroll', this.handleScroll);
+    console.log('Component mounted')
+    this.$refs.content.addEventListener('scroll', this.handleScroll)
   },
   beforeDestroy() {
-    this.$refs.content.removeEventListener('scroll', this.handleScroll);
-  }
+    this.$refs.content.removeEventListener('scroll', this.handleScroll)
+  },
 }
 </script>
 
@@ -79,7 +79,7 @@ export default {
     border-radius: 10px;
     background: #888888;
   }
-  background: url('~/assets/bg.webp') no-repeat;
+  background: url('~/assets/beach-phone.webp') no-repeat;
   height: 100vh;
 }
 #content div::-webkit-scrollbar {
@@ -90,7 +90,7 @@ export default {
 #content .profile{
   scrollbar-width: none; /* Ẩn thanh cuộn */
   overflow-y: auto;
-  height: 841px;
+  height: 900px;
   padding-bottom: 50px;
 }
 
