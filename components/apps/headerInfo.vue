@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="text-left col align-self-center"><a class="navbar-brand" href="#">
-        <h6 class="mb-0" style="font-size: 20px;">Thay đổi mật khẩu đăng nhập</h6>
+        <h6 class="mb-0" style="font-size: 20px;">{{title}}</h6>
       </a>
       </div>
       <div class="ml-auto col-auto">
@@ -27,13 +27,19 @@
 <script>
 export default {
   name: "headerInfo",
+  data() {
+    return {
+      title: null,
+    }
+  },
   methods: {
     previousPage() {
       this.$router.push({ path: '/my' })
     }
   },
   created() {
-    console.log(this.$router, 'a')
+    this.title = this.$route.query.title
+    console.log(this.$route.query.title, 'a')
   }
 }
 </script>

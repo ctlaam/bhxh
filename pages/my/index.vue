@@ -2,18 +2,22 @@
   <div class="profile">
     <div class="container mb-4 text-center text-white" style="margin-top: 80px">
       <h6 class="mb-1" style="font-weight: 600; font-size: 1.5rem">thuy du</h6>
-      <img src="~/assets/vip1.png" style="width: 3rem" />
+      <img src="~/assets/vip1.png" style="width: 3rem"/>
       <span class="iconfont" style="font-weight: 600">Level1</span>
     </div>
     <div class="main-container">
       <div class="container mb-4">
         <div class="row mb-4">
-          <div class="col-6"><a href="/index/my/invite" class="btn btn-outline-default px-2 btn-block rounded">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#25a0fe">
-              <path
-                d="M80-680v-200h200v80H160v120H80Zm0 600v-200h80v120h120v80H80Zm600 0v-80h120v-120h80v200H680Zm120-600v-120H680v-80h200v200h-80ZM700-260h60v60h-60v-60Zm0-120h60v60h-60v-60Zm-60 60h60v60h-60v-60Zm-60 60h60v60h-60v-60Zm-60-60h60v60h-60v-60Zm120-120h60v60h-60v-60Zm-60 60h60v60h-60v-60Zm-60-60h60v60h-60v-60Zm240-320v240H520v-240h240ZM440-440v240H200v-240h240Zm0-320v240H200v-240h240Zm-60 500v-120H260v120h120Zm0-320v-120H260v120h120Zm320 0v-120H580v120h120Z"/>
-            </svg>
-            Xin Mời</a></div>
+          <div class="col-6">
+            <NuxtLink to="/my/invite?title=Yêu cầu đăng ký" class="btn btn-outline-default px-2 btn-block rounded">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                   fill="#25a0fe">
+                <path
+                  d="M80-680v-200h200v80H160v120H80Zm0 600v-200h80v120h120v80H80Zm600 0v-80h120v-120h80v200H680Zm120-600v-120H680v-80h200v200h-80ZM700-260h60v60h-60v-60Zm0-120h60v60h-60v-60Zm-60 60h60v60h-60v-60Zm-60 60h60v60h-60v-60Zm-60-60h60v60h-60v-60Zm120-120h60v60h-60v-60Zm-60 60h60v60h-60v-60Zm-60-60h60v60h-60v-60Zm240-320v240H520v-240h240ZM440-440v240H200v-240h240Zm0-320v240H200v-240h240Zm-60 500v-120H260v120h120Zm0-320v-120H260v120h120Zm320 0v-120H580v120h120Z"/>
+              </svg>
+              Xin Mời
+            </NuxtLink>
+          </div>
           <div class="col-6">
             <a href="https://t.me/CSKHLINH1992" class="btn btn-outline-default px-2 btn-block rounded">
               <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
@@ -110,7 +114,7 @@
               <!--    </div>-->
               <!--</a>-->
               <nuxt-link
-                to="/my/password"
+                to="/my/password?title=Thay đổi mật khẩu đăng nhập"
                 class="list-group-item list-group-item-action border-color"
               >
                 <div class="row">
@@ -135,9 +139,11 @@
                     <h6 class="mb-1">Mật khẩu đăng nhập</h6>
                     <p class="text-secondary">Thay đổi mật khẩu đăng nhập</p>
                   </div>
-                </div> </nuxt-link
-              ><nuxt-link
-                to="/my/withdrawalpassword"
+                </div>
+              </nuxt-link
+              >
+              <nuxt-link
+                to="/my/withdrawalpassword?title=Thay đổi mật tài khoản"
                 class="list-group-item list-group-item-action border-color"
               >
                 <div class="row">
@@ -162,9 +168,11 @@
                     <h6 class="mb-1">Mật Khẩu Rút Tiền</h6>
                     <p class="text-secondary">Thay đổi mật khẩu tài khoản</p>
                   </div>
-                </div> </nuxt-link
-              ><a
-                href="/index/my/bind_bank"
+                </div>
+              </nuxt-link
+              >
+              <NuxtLink
+                to="/my/Bankaccount?title=Tài khoản ngân hàng"
                 class="list-group-item list-group-item-action border-color"
               >
                 <div class="row">
@@ -189,7 +197,8 @@
                     <h6 class="mb-1">Tài Khoản Ngân Hàng</h6>
                     <p class="text-secondary">Sửa Thông Tin Tài Khoản</p>
                   </div>
-                </div> </a
+                </div>
+              </NuxtLink
               ><!--<a href="/vip/company.pdf" class="list-group-item list-group-item-action border-color">-->
               <!--    <div class="row">--><!--        <div class="col-auto">-->
               <!--            <div class="avatar avatar-50 bg-default-light text-default rounded">-->
@@ -197,8 +206,9 @@
               <!--        </div>--><!--        <div class="col align-self-center pl-0">-->
               <!--            <h6 class="mb-1">Certificate</h6>-->
               <!--            <p class="text-secondary">Visit Certificate</p>--><!--        </div>--><!--    </div>-->
-              <!--</a>--><a
-                href="/index/my/index_msg_detail.html?id=14"
+              <!--</a>-->
+              <NuxtLink
+                to="/my/rules?title=Điều khoản và điều kiện"
                 class="list-group-item list-group-item-action border-color"
               >
                 <div class="row">
@@ -223,9 +233,11 @@
                     <h6 class="mb-1">Điều khoản và điều kiện</h6>
                     <p class="text-secondary">Điều khoản và điều kiện</p>
                   </div>
-                </div> </a
-              ><a
-                href="/index/my/index_msg_detail.html?id=15"
+                </div>
+              </NuxtLink
+              >
+              <NuxtLink
+                to="/my/faq?title=Câu hỏi thường gặp"
                 class="list-group-item list-group-item-action border-color"
               >
                 <div class="row">
@@ -250,9 +262,11 @@
                     <h6 class="mb-1">Câu hỏi thường gặp</h6>
                     <p class="text-secondary">Câu hỏi thường gặp</p>
                   </div>
-                </div> </a
-              ><a
-                href="/index/my/index_msg_detail.html?id=16"
+                </div>
+              </NuxtLink
+              >
+              <NuxtLink
+                to="/my/about?title=Về chúng tôi"
                 class="list-group-item list-group-item-action border-color"
               >
                 <div class="row">
@@ -277,8 +291,10 @@
                     <h6 class="mb-1">Về chúng tôi</h6>
                     <p class="text-secondary">Về chúng tôi</p>
                   </div>
-                </div> </a
-              ><a
+                </div>
+              </NuxtLink
+              >
+              <a
                 href="/index/user/logout"
                 class="list-group-item list-group-item-action border-color"
               >

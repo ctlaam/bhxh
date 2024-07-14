@@ -55,9 +55,7 @@ export default {
           'sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N',
         crossorigin: 'anonymous',
       },
-
     ],
-
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
