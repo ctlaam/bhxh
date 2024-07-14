@@ -1,5 +1,5 @@
 <template>
-  <div>ăâêăâê</div>
+  <div >ăâêăâê</div>
 </template>
 <!-- End of LiveChat code -->
 
@@ -12,3 +12,8 @@ export default {
   },
 }
 </script>
+<style>
+#content {
+  padding: 75px 10px 10px 10px;
+}
+</style>

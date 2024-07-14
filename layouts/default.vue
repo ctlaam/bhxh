@@ -1,8 +1,8 @@
 <template>
   <div class="d-flex app align-items-center justify-content-center">
     <div class="main-content">
-      <Header></Header>
-      <div id="content">
+      <Header :activeHeader="activeHeader"></Header>
+      <div id="content" ref="content">
         <Nuxt />
       </div>
       <Footer></Footer>
@@ -21,7 +21,32 @@ export default {
     Footer,
     Header,
   },
-  methods: {},
+  data() {
+    return {
+      activeHeader: false,
+    }
+  },
+  methods: {
+    handleScroll() {
+      // Lấy vị trí cuộn của phần tử "content"
+      const scrollPosition = this.$refs.content.scrollTop;
+      console.log('Scroll position:', scrollPosition);
+
+      // Thêm logic dựa trên vị trí cuộn
+      if (scrollPosition > 50) {
+        this.activeHeader = true
+      } else if (scrollPosition == 0){
+        this.activeHeader = false;
+      }
+    }
+  },
+  mounted() {
+    console.log('Component mounted');
+    this.$refs.content.addEventListener('scroll', this.handleScroll);
+  },
+  beforeDestroy() {
+    this.$refs.content.removeEventListener('scroll', this.handleScroll);
+  }
 }
 </script>
 
@@ -30,7 +55,7 @@ export default {
 }
 .main-content {
   background-color: #fdfbef;
-  max-width: 400px;
+  max-width: 480px;
   color: #000;
   position: relative;
   width: 100vw;
@@ -54,6 +79,20 @@ export default {
     border-radius: 10px;
     background: #888888;
   }
+  background: url('~/assets/bg.webp') no-repeat;
+  height: 100vh;
+}
+#content::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+#content {
+  scrollbar-width: none; /* Ẩn thanh cuộn */
+}
+
+#content {
+  -ms-overflow-style: none; /* Ẩn thanh cuộn */
 }
 
 // @media only screen and (max-width: 1024px) {
