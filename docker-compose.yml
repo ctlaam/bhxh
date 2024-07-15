@@ -1,7 +1,7 @@
 version: '3.8'
 services:
-  web-customer-vnselly:
-    image: web-customer-vnselly
+  web-customer-vietnamtoure:
+    image: web-customer-vietnamtoure
     restart: unless-stopped
     build:
       context: .
