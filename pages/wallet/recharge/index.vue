@@ -87,7 +87,6 @@
 export default {
   name: "index",
   layout: 'info',
-  meta: 'Thay đổi mật khẩu',
   data() {
     return {
       value: null,
@@ -108,10 +107,8 @@ export default {
       })
     },
     selectAmount(amount) {
-      this.inputValue = amount.toString(); // Chuyển đổi số sang chuỗi và gán vào biến inputValue
-      console.log("this.form:", this.form)
+      this.inputValue = amount.toString();
       this.form.setFieldsValue({ value: this.inputValue });
-      console.log("this.inputValue:", this.inputValue)
     },
   }
 }

@@ -16,7 +16,7 @@
         </a>
       </div>
       <div class="ml-auto col-auto pl-0">
-        <a class="btn btn-40 btn-link">
+        <NuxtLink to="/order" class="btn btn-40 btn-link">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24px"
@@ -29,7 +29,7 @@
             />
           </svg>
           <span class=""></span>
-        </a>
+        </NuxtLink>
         <!--<a href="/index/my/index" class="avatar avatar-30 shadow-sm rounded-circle ml-2 text-white">-->
         <!--    <i class="material-icons">account_circle</i>--><!--</a>-->
       </div>

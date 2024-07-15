@@ -64,7 +64,7 @@ export default {
     '@/assets/styles.css',
   ],
   router: {
-    middleware: [], // Sử dụng middleware auth.js
+    middleware: ['axios', 'auth','fetchProfile'], // Sử dụng middleware auth.js
   },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [

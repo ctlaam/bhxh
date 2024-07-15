@@ -95,6 +95,10 @@
 </template>
 
 <script>
+import * as authApi from '../../api/auth';
+import * as volatilityApi from '../../api/volatility';
+import Cookies from 'js-cookie';
+
 export default {
   layout: 'account',
   data() {
@@ -102,6 +106,7 @@ export default {
       username: null,
       password: null,
       password2: null,
+      profile: null,
     }
   },
   beforeCreate() {
@@ -112,8 +117,41 @@ export default {
       e.preventDefault()
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values)
+          this.$store.dispatch('loading/setModalLoading', true)
+          authApi
+            .logIn({
+              identifier: values.username,
+              password: values.password,
+            })
+
+            .then(async (res) => {
+              console.log("res:", res)
+              this.$store.dispatch('loading/setModalLoading', false)
+              this.$message.success('Đăng nhập thành công')
+              this.$store.dispatch('auth/login', {
+                accessToken: res.token,
+              })
+              Cookies.set('access_token', res.token, { expires: 1 })
+              await this.getProfile()
+              this.$router.push('/')
+            })
+            .catch((err) => {
+              console.log("err:", err)
+              this.$store.dispatch('loading/setModalLoading', false)
+              if (err.message) {
+                this.$message.error('Sai tài khoản hoặc mật khẩu')
+              } else {
+                this.$message.error('Có lỗi xảy ra vui lòng thử lại sau')
+              }
+            })
         }
+      })
+    },
+    async getProfile() {
+      volatilityApi.getProfileUser().then((res) => {
+        this.profile = _.get(res, 'data')
+
+        this.$store.dispatch('profile/saveProfile', this.profile)
       })
     },
   },

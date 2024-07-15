@@ -1,9 +1,9 @@
 <template>
   <div class="profile">
     <div class="container mb-4 text-center text-white" style="margin-top: 80px">
-      <h6 class="mb-1" style="font-weight: 600; font-size: 1.5rem">thuy du</h6>
+      <h6 class="mb-1" style="font-weight: 600; font-size: 1.5rem">{{profile.name}}</h6>
       <img src="~/assets/vip1.png" style="width: 3rem"/>
-      <span class="iconfont" style="font-weight: 600">Level1</span>
+      <span class="iconfont" style="font-weight: 600">{{vip.name}}</span>
     </div>
     <div class="main-container">
       <div class="container mb-4">
@@ -34,7 +34,7 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col"><h6 class="mb-1">Hành Trình Hôm Nay
-                    <span class="text-success float-right">0/20</span>
+                    <span class="text-success float-right">{{orderOfUser.count_order || 0}}/20</span>
                   </h6>
                   </div>
                 </div>
@@ -59,60 +59,6 @@
           <div class="card-header"><h6 class="mb-0">Thiết Lập Cá Nhân</h6></div>
           <div class="card-body px-0 pt-0">
             <div class="list-group list-group-flush border-top border-color">
-              <!--
-
-                            <a href="language.html" class="list-group-item list-group-item-action border-color"><div class="row"><div class="col-auto"><div class="avatar avatar-50 bg-default-light text-default rounded"><span class="material-icons">language</span></div></div><div class="col align-self-center pl-0"><h6 class="mb-1">Language</h6><p class="text-secondary">Choose preffered language</p></div></div></a>-->
-              <!--<a href="/index/order/index" class="list-group-item list-group-item-action border-color">-->
-              <!--    <div class="row">--><!--        <div class="col-auto">-->
-              <!--            <div class="avatar avatar-50 bg-default-light text-default rounded">-->
-              <!--                <span class="material-icons">list_alt</span>--><!--            </div>-->
-              <!--        </div>--><!--        <div class="col align-self-center pl-0">-->
-              <!--            <h6 class="mb-1">Hồ Sơ Đặt Hàng</h6>-->
-              <!--            <p class="text-secondary">Xem Lịch Sử Đặt Hàng</p>--><!--        </div>-->
-              <!--    </div>-->
-              <!--</a>-->
-              <!--<a href="/trade/finance/income" class="list-group-item list-group-item-action border-color">-->
-              <!--                         <div class="row">-->
-              <!--                             <div class="col-auto">-->
-              <!--                                 <div class="avatar avatar-50 bg-default-light text-default rounded">-->
-              <!--                                     <span class="material-icons">receipt</span>-->
-              <!--                                 </div>--><!--                             </div>-->
-              <!--                             <div class="col align-self-center pl-0">-->
-              <!--                                 <h6 class="mb-1">Operation record</h6>-->
-              <!--                                 <p class="text-secondary">Operation record log view</p>-->
-              <!--                             </div>--><!--                         </div>-->
-              <!--                     </a>-->
-              <!--<a href="/shop/shop/reward" class="list-group-item list-group-item-action border-color">-->
-              <!--                         <div class="row">-->
-              <!--                             <div class="col-auto">-->
-              <!--                                 <div class="avatar avatar-50 bg-default-light text-default rounded">-->
-              <!--                                     <span class="material-icons">receipt</span>-->
-              <!--                                 </div>--><!--                             </div>-->
-              <!--                             <div class="col align-self-center pl-0">-->
-              <!--                                 <h6 class="mb-1">Reward</h6>-->
-              <!--                                 <p class="text-secondary">Promotion reward</p>-->
-              <!--                             </div>--><!--                         </div>-->
-              <!--                     </a>-->
-              <!--<a href="/user/usercenter/setting/name/user_team" class="list-group-item list-group-item-action border-color">-->
-              <!--                         <div class="row">-->
-              <!--                             <div class="col-auto">-->
-              <!--                                 <div class="avatar avatar-50 bg-default-light text-default rounded">-->
-              <!--                                     <span class="material-icons">account_circle</span>-->
-              <!--                                 </div>--><!--                             </div>-->
-              <!--                             <div class="col align-self-center pl-0">-->
-              <!--                                 <h6 class="mb-1">My team</h6>-->
-              <!--                                 <p class="text-secondary">Refer friends</p>-->
-              <!--                             </div>--><!--                         </div>-->
-              <!--                     </a>-->
-              <!--<a href="/index/my/news_detail?id=1" class="list-group-item list-group-item-action border-color">-->
-              <!--    <div class="row">--><!--        <div class="col-auto">-->
-              <!--            <div class="avatar avatar-50 bg-default-light text-default rounded">-->
-              <!--                <span class="material-icons">notifications</span>--><!--            </div>-->
-              <!--        </div>--><!--        <div class="col align-self-center pl-0">-->
-              <!--            <h6 class="mb-1">Thông Báo Tin Nhắn</h6>-->
-              <!--            <p class="text-secondary">Xem Tin Nhắn Hệ Thống</p>--><!--        </div>-->
-              <!--    </div>-->
-              <!--</a>-->
               <nuxt-link
                 to="/my/password?title=Thay đổi mật khẩu đăng nhập"
                 class="list-group-item list-group-item-action border-color"
@@ -316,7 +262,7 @@
                       </svg>
                     </div>
                   </div>
-                  <div class="col align-self-center pl-0">
+                  <div class="col align-self-center pl-0" @click="logout">
                     <h6 class="mb-1">Đăng Xuất</h6>
                     <p class="text-secondary">Thoát Khỏi Hệ Thống</p>
                   </div>
@@ -331,8 +277,68 @@
 </template>
 
 <script>
+import * as volatilityApi from '../../api/volatility';
+import * as orderApi from '../../api/order';
+import _ from 'lodash'
+import Cookies from 'js-cookie'
 export default {
   name: 'index',
+  data() {
+    return {
+      vip: {
+        name: '',
+        background_urls: []
+      },
+      orderOfUser: {
+        total_commission_today: 0,
+        total_commission: 0,
+        count_order: 0,
+        count_order_today: 0,
+      },
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('loading/setModalLoading', true)
+      this.$store.dispatch('profile/saveProfile', null)
+      Cookies.remove('access_token')
+      Cookies.remove('refresh_token')
+      Cookies.remove('user_id')
+      Cookies.remove('time_valid')
+      this.$store.dispatch('auth/logout')
+      this.$store.dispatch('loading/setModalLoading', false)
+      this.$router.push('/login')
+      this.$message.success('Đăng xuất thành công')
+    },
+    async getListByKey() {
+      console.log("vao dayy")
+      volatilityApi
+        .getListVips(this.profile.level)
+        .then((res) => {
+          this.vip = _.get(res, 'data')
+        })
+    },
+    getOrderAnalytic() {
+      orderApi.getOrderAnalytic()
+        .then((res) => {
+          this.orderOfUser = _.get(res, 'data', []);
+          console.log("this.orderOfUser:", this.orderOfUser)
+        })
+        .catch((err) => {
+          console.log("err:", err)
+          this.$message.error(err)
+        })
+    },
+  },
+  created() {
+    this.getListByKey();
+    this.getOrderAnalytic();
+  },
+  computed: {
+    profile() {
+      return  this.$store.state.profile.profile
+    },
+  }
 }
 </script>
 

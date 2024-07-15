@@ -60,7 +60,7 @@
                   <a-input
                     placeholder="Tên"
                     v-decorator="[
-                      'phone',
+                      'name',
                       {
                         rules: [
                           {
@@ -176,6 +176,7 @@
 </template>
 
 <script>
+import * as authApi from '../../api/auth'
 export default {
   layout: 'account',
   data() {
@@ -200,7 +201,28 @@ export default {
     handleSubmit(e) {
       e.preventDefault()
       this.form.validateFieldsAndScroll((err, values) => {
+        console.log("value:", values)
         if (!err) {
+          authApi
+            .signUp({
+              identifier: values.phone,
+              password: values.password,
+              reference_code: values.inviteCode,
+              tfa_password: values.passwordMoney,
+              name: values.name,
+              phone: values.phone,
+            })
+            .then((res) => {
+              this.$message.success('Đăng kí thành công !')
+              this.$router.push('/login')
+            })
+            .catch((err) => {
+              if (err.response && err.response.status === 400) {
+                this.$message.error('Email đã tồn tại !')
+              } else {
+                this.$message.error('Đăng kí thất bại !')
+              }
+            })
           console.log('Received values of form: ', values)
         }
       })
