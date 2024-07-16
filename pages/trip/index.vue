@@ -1,18 +1,18 @@
 <template>
   <div style="margin-top: 80px">
-    <div class="row">
+    <div class="row w-100">
       <div class="col-6 mt-3 text-center"><h5 class="text-white">0.00</h5>
         <p class="text-white mb-4 fz14">Tổng Tài Sản</p></div>
       <div class="col-6 mt-3 text-center"><h5 class="text-white">0</h5>
         <p class="text-white mb-4 fz14">Hoa Hồng Hôm Nay</p></div>
     </div>
-    <div class="row">
+    <div class="row w-100">
       <div class="col-6 mt-3 text-center"><h5 class="text-white">20</h5>
         <p class="text-white mb-4 fz14">Hành Trình Hàng Ngày</p></div>
       <div class="col-6 mt-3 text-center"><h5 class="text-white">0</h5>
         <p class="text-white mb-4 fz14">Hành Trình Đã Đi</p></div>
     </div>
-    <div class="main-container"><!-- page content start -->
+    <div class="main-container w-100"><!-- page content start -->
       <div class="product-area" style="max-width: 100%; overflow-x: hidden;">
         <div class="d-flex align-items-center mb-2 animate-area-0 animated slideOutLeft infinite">
           <img src="~/assets/trips/8d4eb2242bdc6c89.jpg" class="border-radius-1 dashboard-product-image me-2">
