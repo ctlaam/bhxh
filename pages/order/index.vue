@@ -519,7 +519,11 @@
 
 <script>
 export default {
-  name: "index"
+  name: "index",
+  layout: 'info',
+  created() {
+    console.log(this.$route)
+  }
 }
 </script>
 

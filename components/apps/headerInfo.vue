@@ -1,5 +1,5 @@
 <template>
-  <header class="header col-md-offset-4 col-lg-offset-4col-xl-offset-4" style="max-width:30rem;">
+  <header class="header col-md-offset-4 col-lg-offset-4col-xl-offset-4" :class="{ active: activeHeader }" style="max-width:30rem;">
     <div class="row align-items-center">
       <div class="col-auto px-0">
         <button class="btn btn-40 btn-link back-btn" type="button" @click="previousPage">
@@ -27,6 +27,7 @@
 <script>
 export default {
   name: "headerInfo",
+  props: ["activeHeader"],
   data() {
     return {
       title: null,

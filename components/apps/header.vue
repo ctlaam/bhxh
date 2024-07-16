@@ -16,7 +16,7 @@
         </a>
       </div>
       <div class="ml-auto col-auto pl-0">
-        <NuxtLink to="/order" class="btn btn-40 btn-link">
+        <NuxtLink to="/order?title=Danh sách hành trình" class="btn btn-40 btn-link">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24px"
