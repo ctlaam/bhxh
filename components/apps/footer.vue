@@ -111,7 +111,7 @@ export default {
 }
 
 .footer a:not(.btn) p {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .footer a:not(.btn).active {

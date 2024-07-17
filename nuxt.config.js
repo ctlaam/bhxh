@@ -55,6 +55,26 @@ export default {
           'sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N',
         crossorigin: 'anonymous',
       },
+      {
+        rel: 'stylesheet',
+        href: 'https://saigontour.cc/newdome/vendor/chartjs/Chart.bundle.min.js',
+        crossorigin: 'anonymous',
+        defer: true
+
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://saigontour.cc/newdome/vendor/chartjs/utils.js',
+        crossorigin: 'anonymous',
+        defer: true
+
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://saigontour.cc/newdome/vendor/chartjs/chart-js-data.js',
+        crossorigin: 'anonymous',
+        defer: true
+      },
     ],
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
