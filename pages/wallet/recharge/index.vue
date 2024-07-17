@@ -39,7 +39,7 @@
                   class="input-value"
                   type="number"
                   v-decorator="[
-                      'value',
+                      'amount',
                       {
                         rules: [
                           {
@@ -84,6 +84,8 @@
 </template>
 
 <script>
+import * as volatilityApi from "../../../api/volatility";
+
 export default {
   name: "index",
   layout: 'info',
@@ -102,13 +104,35 @@ export default {
       e.preventDefault()
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values)
+          this.$store.dispatch('loading/setModalLoading', true)
+          volatilityApi
+            .cashIn({
+              amount: +values.amount,
+              type: 'CashIn',
+              method: 'Method1',
+              comment: values.comment,
+            })
+            .then((res) => {
+              this.$message.success('Gửi yêu cầu thành công');
+              this.$router.push('/wallet');
+            })
+            .catch((err) => {
+              this.$store.dispatch('loading/setModalLoading', false)
+              if (err.message) {
+                this.$message.error('Sai tài khoản hoặc mật khẩu')
+              } else {
+                this.$message.error('Có lỗi xảy ra vui lòng thử lại sau')
+              }
+            })
+            .finally(() => {
+              this.$store.dispatch('loading/setModalLoading', false);
+            });
         }
       })
     },
     selectAmount(amount) {
       this.inputValue = amount.toString();
-      this.form.setFieldsValue({ value: this.inputValue });
+      this.form.setFieldsValue({ amount: this.inputValue });
     },
   }
 }

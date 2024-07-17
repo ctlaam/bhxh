@@ -15,7 +15,7 @@
                 <a-input
                   placeholder="Số tiền rút"
                   v-decorator="[
-                      'currentPassword',
+                      'amount',
                       {
                         rules: [
                           {
@@ -33,7 +33,7 @@
                   type="password"
                   placeholder="Mật khẩu rút tiền"
                   v-decorator="[
-                      'password',
+                      'tfa_password',
                       {
                         rules: [
                           {
@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import * as volatilityApi from "../../../api/volatility";
 export default {
   name: "index",
   layout: 'info',
@@ -82,7 +83,29 @@ export default {
       e.preventDefault()
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values)
+          this.$store.dispatch('loading/setModalLoading', true)
+
+          volatilityApi
+            .cashOut({
+              amount: +values.amount,
+              tfa_password: values.tfa_password,
+              type: 'CashOut',
+            })
+            .then((res) => {
+              this.$message.success('Gửi yêu cầu thành công');
+              this.$router.push('/wallet');
+            })
+            .catch((err) => {
+              console.log("err:", err)
+              if (err.message) {
+                this.$message.error('Sai tài khoản hoặc mật khẩu')
+              } else {
+                this.$message.error(err)
+              }
+            })
+            .finally(() => {
+              this.$store.dispatch('loading/setModalLoading', false);
+            });
         }
       })
     },

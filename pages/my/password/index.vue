@@ -20,6 +20,7 @@
             <a-form :form="form" @submit="handleSubmit">
               <a-form-item>
                 <a-input
+                  type="password"
                   placeholder="Mật khẩu cũ"
                   v-decorator="[
                       'currentPassword',
@@ -56,14 +57,6 @@
                 <a-input type="password" v-decorator="['confirmPassword', { rules: [{ required: true, message: 'Xác nhận mật khẩu không được để trống' }, { validator: compareToFirstPassword }] }]" class="input-form-title" placeholder="Xác nhận mật khẩu của bạn" />
               </a-form-item>
               <a-form-item>
-<!--                <a-button-->
-<!--                  class="w-100 btn-login"-->
-<!--                  type="primary"-->
-<!--                  html-type="submit"-->
-<!--                >-->
-<!--                  Lưu Lại-->
-<!--                </a-button>-->
-
                 <a-button class="btn-login w-100" type="primary " html-type="submit">
                   Lưu
                 </a-button>
@@ -77,6 +70,7 @@
 </template>
 
 <script>
+import * as authApi from '../../../api/auth';
 export default {
   name: "index",
   layout: 'info',
@@ -96,6 +90,26 @@ export default {
       e.preventDefault()
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
+
+          this.$store.dispatch('loading/setModalLoading', true)
+
+          authApi
+            .updatePassword({
+              password: values.password,
+              type: 'password',
+              currentPassword: values.currentPassword,
+            })
+            .then((res) => {
+              this.$message.success('Đổi mật khẩu thành công.');
+              this.$router.push('/login');
+            })
+            .catch((err) => {
+              console.log(err)
+              this.$message.error("Mật khẩu hiện tại sai.");
+            })
+            .finally(() => {
+              this.$store.dispatch('loading/setModalLoading', false);
+            });
           console.log('Received values of form: ', values)
         }
       })

@@ -11,9 +11,9 @@
               </div>
               <div class="goods-line align-start flex">
                 <div class="flex-column">
-                  <div class="time">2024-07-16 10:59:03</div>
-                  <div class="goods-name">Khu nghỉ dưỡng Thế giới Walt Disney Hoa Kỳ</div>
-                  <div class="goods-money">1766.00</div>
+                  <div class="time text-left">2024-07-16 10:59:03</div>
+                  <div class="goods-name text-left">Khu nghỉ dưỡng Thế giới Walt Disney Hoa Kỳ</div>
+                  <div class="goods-money text-left">1766.00</div>
                 </div>
               </div>
               <div class="item-footer">

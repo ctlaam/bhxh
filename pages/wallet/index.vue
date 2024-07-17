@@ -46,7 +46,7 @@
           <div class="card-header"><h6 class="mb-0">Thông Tin Chi Tiết Qũy</h6></div>
           <div class="card-body px-0 pt-0">
             <div class="list-group list-group-flush border-top border-color">
-              <NuxtLink to="/wallet/recharge?title=Nạp tiền"
+              <span style="cursor: pointer" href="#" @click="navigateToPage()"
                         class="list-group-item list-group-item-action border-color">
                 <div class="row">
                   <div class="col-auto">
@@ -61,7 +61,7 @@
                   <div class="col align-self-center pl-0"><h6 class="mb-1">Nạp Tiền</h6>
                     <p class="text-secondary">Nạp Lại Số Dư</p></div>
                 </div>
-              </NuxtLink>
+              </span>
               <NuxtLink to="/wallet/withdraw?title=Rút tiền"
                         class="list-group-item list-group-item-action border-color">
                 <div class="row">
@@ -107,7 +107,23 @@
 <script>
 
 export default {
-  name: "index"
+  name: "index",
+  methods: {
+    navigateToPage() {
+      console.log('this.profileUser:', this.profileUser)
+      if (this.profileUser && !this.profileUser.bank) {
+        this.$router.push({ path: '/my/bankAccount' })
+        return
+      }
+
+      this.$router.push({ path: '/wallet/recharge' })
+    },
+  },
+  computed: {
+    profileUser() {
+      return  this.$store.state.profile.profile;
+    },
+  }
 }
 </script>
 

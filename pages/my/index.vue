@@ -311,7 +311,6 @@ export default {
       this.$message.success('Đăng xuất thành công')
     },
     async getListByKey() {
-      console.log("vao dayy")
       volatilityApi
         .getListVips(this.profile.level)
         .then((res) => {

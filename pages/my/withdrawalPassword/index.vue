@@ -22,7 +22,7 @@
                 <a-input
                   placeholder="Mật khẩu cũ"
                   v-decorator="[
-                      'currentPassword',
+                      'passwordCurrent',
                       {
                         rules: [
                           {
@@ -71,6 +71,7 @@
 </template>
 
 <script>
+import * as authApi from '../../../api/auth';
 export default {
   name: "index",
   layout: 'info',
@@ -90,6 +91,25 @@ export default {
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
           console.log('Received values of form: ', values)
+          this.$store.dispatch('loading/setModalLoading', true)
+
+          authApi
+            .updatePassword({
+              password: values.password,
+              type: 'tfa_password',
+              currentPassword: values.passwordCurrent,
+            })
+            .then((res) => {
+              this.$message.success('Đổi mật khẩu rút tiền thành công.');
+              this.$router.push('/my')
+            })
+            .catch((err) => {
+              this.$message.error('Có lỗi xảy ra vui lòng thử lại sau');
+            })
+            .finally(() => {
+              this.$store.dispatch('loading/setModalLoading', false);
+            });
+
         }
       })
     },

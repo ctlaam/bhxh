@@ -42,7 +42,7 @@
                   data-target="#exampleModalScrollable">
             Launch demo modal scroll
           </button>
-          <button class="btn btn-block btn-default rounded play" style="background-color: #25a0fe;font-weight:600"
+          <button class="btn btn-block btn-default rounded play text-white" style="background-color: #25a0fe;font-weight:600"
                   id="addtohome">Tour Hành Trình
           </button>
           <style>
