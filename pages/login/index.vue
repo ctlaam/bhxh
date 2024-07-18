@@ -20,7 +20,7 @@
       <div class="text-left col align-self-center"></div>
       <div class="ml-auto col-auto align-self-center">
         <NuxtLink to="/login/signup">
-          <div href="/index/user/register" class="text-white">
+          <div class="text-white">
             Tạo tài khoản mới
           </div>
         </NuxtLink>
