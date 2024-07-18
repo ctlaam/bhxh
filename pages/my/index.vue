@@ -304,11 +304,12 @@ export default {
       this.$router.push('/login')
       this.$message.success('Đăng xuất thành công')
     },
-    async getListByKey() {
-      volatilityApi.getListVips(this.profile.level).then((res) => {
-        this.vip = _.get(res, 'data')
-      })
-    },
+    // async getListByKey() {
+    //   volatilityApi.getListVips(this.profile.level).then((res) => {
+    //     this.vip = _.get(res, 'data')
+    //     this.$store.dispatch('profile/saveVip', this.vip)
+    //   })
+    // },
     getOrderAnalytic() {
       orderApi
         .getOrderAnalytic()
@@ -326,17 +327,18 @@ export default {
       handler: function (val) {
         if (val) {
           this.profile = this.$store.state.profile.profile
-          this.getListByKey()
+          // this.getListByKey()
           this.getOrderAnalytic()
         }
       },
       deep: true,
     },
   },
-  mouted() {
+  mounted() {
     if (this.$store.state.profile) {
       this.profile = this.$store.state.profile.profile
-      this.getListByKey()
+      this.vip = this.$store.state.profile.vip;
+      // this.getListByKey()
       this.getOrderAnalytic()
     }
   },

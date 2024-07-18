@@ -31,7 +31,7 @@
               <div class="tabItem">Partners</div>
             </div>
             <div class="vip-list">
-              <div class="vip-item">
+              <div class="vip-item" :class="{active: vip.name == 'Level 1'}">
                 <div class="vip-wrap-inset">
                   <a href=""
                     ><div class="vip-icon">
@@ -40,14 +40,14 @@
                   <div class="vip-name flex-auto">Level1</div>
                   <div class="num ml10">20%</div>
                 </div>
-                <div class="status" style="display: ">
+                <div class="status">
                   <img
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAoCAYAAAACJPERAAAAAXNSR0IArs4c6QAAAsJJREFUWEftlz9oFFEQxr/Z5IiBCCkMaKegYCMENMGATUBIse/d3sGRYCEYbAQbRQsDkVMQDNikCMTuUkQIEVnI2z0Um4BNCkWLiI1gBEGLKxTCEdjsjjxJjs1m73Y35x+E2/Z9M7/3ZmbfzCOk+MrlcvfQ0NAYgBKAcwBOA+hm5u8A1onoOREtmqb5OYU7UJLIcZwxZp4jopMJ2m1mXgAwJaWstdK2hCqlHhLRnaSNRda/ACgIId40s2sKdRznEYDbGYG/5My8yczn8/n8+zj7WKhSaoKIliIG2wAeB0HwJJ/Pr+m15eXlvp6enkJXV9ctAIMR/Ua9Xj8zPj6+GQXvg1YqlUMDAwOfABwNib/5vi8ty3odt3NdaMPDw2Vmng6vE9E90zTvJ0Jd172uCyck3PI8b6RYLL5LCrXruvPMfG1Xp6u7Vqsdm5yc3Nqzmagjx3FeAbgQMpyRUk4lAfW6bdv9uVzuQzhKRFQyTfNZEtTT/+CuyPf9U5ZlfUwD1Rql1DwRNU4LYFYIcbMp1Lbt47lcTuezUYVSysNpgVq3srJyxTCMSshmSQhxKTUUwIYQ4kSb0FUhxGgHqqtvT0474W1VWDHVu7+Qdn7oq0TUx8z9AG6EbxTDMGazVG8QBINEVAjZbBCRbnm6EawJIV6Q4zgvAVzM4rhNrdBQbtNJVvO5fwFd6ECb5omZdceZY+YfhmGcBaA7SqMrpUhw5vCu1+v1kfAIopQqEdHTFLBdSTao7/uXLctajGn8b2NmpGb7yAZl5lEp5WrUm1LKjlwIrQ6eGfpASnk37LHJIPf7oAD0gFUSQrjaqx5Be3t7K3oO+mM53XHcmCZiLvc07Gzh7UDTxDSk6YS3ZcD0602/QfUk0EdER/5GeDMy9skPlNP/F/o18gBu9yRJ9tNUrVYngiDQY2b45Z1keND1Vc/zij8B/KWP4xaca+gAAAAASUVORK5CYII="
                     width="12"
                   />
                 </div>
               </div>
-              <div class="vip-item">
+              <div class="vip-item" :class="{active: vip.name == 'Level 2'}">
                 <div class="vip-wrap-inset">
                   <a href=""
                     ><div class="vip-icon">
@@ -63,7 +63,7 @@
                   />
                 </div>
               </div>
-              <div class="vip-item">
+              <div class="vip-item" :class="{active: vip.name == 'Level 3'}">
                 <div class="vip-wrap-inset">
                   <a href=""
                     ><div class="vip-icon">
@@ -79,7 +79,7 @@
                   />
                 </div>
               </div>
-              <div class="vip-item active">
+              <div class="vip-item" :class="{active: vip.name == 'Level 4'}">
                 <div class="vip-wrap-inset">
                   <a href=""
                     ><div class="vip-icon">
@@ -88,6 +88,12 @@
                   <div class="vip-name flex-auto">Level4</div>
                   <div class="num ml10">30%</div>
                 </div>
+                <div class="status">
+                  <img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAoCAYAAAACJPERAAAAAXNSR0IArs4c6QAAAsJJREFUWEftlz9oFFEQxr/Z5IiBCCkMaKegYCMENMGATUBIse/d3sGRYCEYbAQbRQsDkVMQDNikCMTuUkQIEVnI2z0Um4BNCkWLiI1gBEGLKxTCEdjsjjxJjs1m73Y35x+E2/Z9M7/3ZmbfzCOk+MrlcvfQ0NAYgBKAcwBOA+hm5u8A1onoOREtmqb5OYU7UJLIcZwxZp4jopMJ2m1mXgAwJaWstdK2hCqlHhLRnaSNRda/ACgIId40s2sKdRznEYDbGYG/5My8yczn8/n8+zj7WKhSaoKIliIG2wAeB0HwJJ/Pr+m15eXlvp6enkJXV9ctAIMR/Ua9Xj8zPj6+GQXvg1YqlUMDAwOfABwNib/5vi8ty3odt3NdaMPDw2Vmng6vE9E90zTvJ0Jd172uCyck3PI8b6RYLL5LCrXruvPMfG1Xp6u7Vqsdm5yc3Nqzmagjx3FeAbgQMpyRUk4lAfW6bdv9uVzuQzhKRFQyTfNZEtTT/+CuyPf9U5ZlfUwD1Rql1DwRNU4LYFYIcbMp1Lbt47lcTuezUYVSysNpgVq3srJyxTCMSshmSQhxKTUUwIYQ4kSb0FUhxGgHqqtvT0474W1VWDHVu7+Qdn7oq0TUx8z9AG6EbxTDMGazVG8QBINEVAjZbBCRbnm6EawJIV6Q4zgvAVzM4rhNrdBQbtNJVvO5fwFd6ECb5omZdceZY+YfhmGcBaA7SqMrpUhw5vCu1+v1kfAIopQqEdHTFLBdSTao7/uXLctajGn8b2NmpGb7yAZl5lEp5WrUm1LKjlwIrQ6eGfpASnk37LHJIPf7oAD0gFUSQrjaqx5Be3t7K3oO+mM53XHcmCZiLvc07Gzh7UDTxDSk6YS3ZcD0602/QfUk0EdER/5GeDMy9skPlNP/F/o18gBu9yRJ9tNUrVYngiDQY2b45Z1keND1Vc/zij8B/KWP4xaca+gAAAAASUVORK5CYII="
+                    width="12"
+                  />
+                </div>
                 <div class="status" style="display: none">
                   <img
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAoCAYAAAACJPERAAAAAXNSR0IArs4c6QAAAsJJREFUWEftlz9oFFEQxr/Z5IiBCCkMaKegYCMENMGATUBIse/d3sGRYCEYbAQbRQsDkVMQDNikCMTuUkQIEVnI2z0Um4BNCkWLiI1gBEGLKxTCEdjsjjxJjs1m73Y35x+E2/Z9M7/3ZmbfzCOk+MrlcvfQ0NAYgBKAcwBOA+hm5u8A1onoOREtmqb5OYU7UJLIcZwxZp4jopMJ2m1mXgAwJaWstdK2hCqlHhLRnaSNRda/ACgIId40s2sKdRznEYDbGYG/5My8yczn8/n8+zj7WKhSaoKIliIG2wAeB0HwJJ/Pr+m15eXlvp6enkJXV9ctAIMR/Ua9Xj8zPj6+GQXvg1YqlUMDAwOfABwNib/5vi8ty3odt3NdaMPDw2Vmng6vE9E90zTvJ0Jd172uCyck3PI8b6RYLL5LCrXruvPMfG1Xp6u7Vqsdm5yc3Nqzmagjx3FeAbgQMpyRUk4lAfW6bdv9uVzuQzhKRFQyTfNZEtTT/+CuyPf9U5ZlfUwD1Rql1DwRNU4LYFYIcbMp1Lbt47lcTuezUYVSysNpgVq3srJyxTCMSshmSQhxKTUUwIYQ4kSb0FUhxGgHqqtvT0474W1VWDHVu7+Qdn7oq0TUx8z9AG6EbxTDMGazVG8QBINEVAjZbBCRbnm6EawJIV6Q4zgvAVzM4rhNrdBQbtNJVvO5fwFd6ECb5omZdceZY+YfhmGcBaA7SqMrpUhw5vCu1+v1kfAIopQqEdHTFLBdSTao7/uXLctajGn8b2NmpGb7yAZl5lEp5WrUm1LKjlwIrQ6eGfpASnk37LHJIPf7oAD0gFUSQrjaqx5Be3t7K3oO+mM53XHcmCZiLvc07Gzh7UDTxDSk6YS3ZcD0602/QfUk0EdER/5GeDMy9skPlNP/F/o18gBu9yRJ9tNUrVYngiDQY2b45Z1keND1Vc/zij8B/KWP4xaca+gAAAAASUVORK5CYII="
@@ -95,7 +101,7 @@
                   />
                 </div>
               </div>
-              <div class="vip-item">
+              <div class="vip-item" :class="{active: vip.name == 'Level 5'}">
                 <div class="vip-wrap-inset">
                   <a href=""
                     ><div class="vip-icon">
@@ -111,7 +117,7 @@
                   />
                 </div>
               </div>
-              <div class="vip-item">
+              <div class="vip-item" :class="{active: vip.name == 'Level 6'}">
                 <div class="vip-wrap-inset">
                   <a href=""
                     ><div class="vip-icon">
@@ -234,7 +240,25 @@ export default {
   name: 'IndexPage',
   components: {},
   data() {
-    return {}
+    return {
+      vip: {}
+    }
+  },
+  // mounted() {
+  //   if (this.$store.state.profile) {
+  //     this.vip = this.$store.state.profile.vip;
+  //     console.log("this.vipp mounted:", this.vip)
+  //   }
+  // },
+  watch: {
+    '$store.state.profile': {
+      handler: function (val) {
+        if (val) {
+          this.vip = this.$store.state.profile.vip;
+        }
+      },
+      deep: true,
+    },
   },
 }
 </script>
@@ -305,6 +329,19 @@ export default {
     font-weight: bold;
     cursor: pointer;
     color: #939393;
+  }
+  .vip-wrap .vip-list .active {
+    background-color: #fff !important;
+    -webkit-box-shadow: 0.3rem 0.3rem 0.3rem 0 rgba(0, 0, 0, .16) !important;
+    box-shadow: 0.3rem 0.3rem 0.3rem #00000029 !important;
+  }
+  .vip-wrap .vip-list .active .vip-name, .vip-wrap .vip-list .active .num {
+    color: #c62a1c;
+    text-shadow: 2px 1px 2px #dddddd;
+    font-weight: 700;
+  }
+  .vip-wrap .vip-list .active .status {
+    display: none;
   }
   .vip-wrap .vip-list .vip-item {
     -webkit-flex-basis: 32%;

@@ -8,7 +8,7 @@
             <div class="input-group mb-3">
               <input v-model="inviteCode" type="text" class="form-control" readonly placeholder="refferal Link" value="7BYZ9S" id="invite_code">
               <div class="input-group-append">
-                <button class="btn btn-default rounded" type="button" copy="" data-clipboard-target="#invite_code" @click="copy">sao chép
+                <button class="btn btn-default rounded text-white" type="button" copy="" data-clipboard-target="#invite_code" @click="copy">sao chép
                 </button>
               </div>
             </div>
@@ -46,8 +46,13 @@ export default {
   layout: 'info',
   data() {
     return {
-      inviteCode: '7BYZ9S'
+      inviteCode: '7BYZ9S',
+      profile: null,
     }
+  },
+  created() {
+    this.profile = this.$store.state.profile.profile;
+    this.inviteCode = this.$store.state.profile.profile.invite_code;
   },
   methods: {
     copy() {
@@ -76,7 +81,7 @@ export default {
         document.body.removeChild(textarea);
       }
     }
-  }
+  },
 }
 </script>
 

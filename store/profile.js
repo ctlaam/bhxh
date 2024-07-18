@@ -1,18 +1,25 @@
 // store/index.js
 
 export const state = () => ({
-  profile: null
+  profile: null,
+  vip: null,
 });
 
 export const mutations = {
   setProfile(state, profile) {
     state.profile = profile;
+  },
+  setVip(state, payload) {
+    state.vip = payload
   }
 };
 
 export const actions = {
   async saveProfile({ commit }, profile) {
     commit('setProfile', profile);
+  },
+  async saveVip({ commit }, payload) {
+    commit('setVip', payload);
   }
 };
 

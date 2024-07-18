@@ -49,9 +49,15 @@ export default {
   async created() {
     await volatilityApi
       .getProfileUser()
-      .then((res) => {
+      .then(async (res) => {
         let profile = res.data
         this.$store.dispatch('profile/saveProfile', profile)
+        await volatilityApi.getListVips(profile.level)
+          .then((data) => {
+            console.log("111111111")
+            this.$store.dispatch('profile/saveVip', data.data)
+          })
+        console.log('profile:', profile)
       })
       .catch((err) => {
         if (err == 'Phiên đăng nhập đã hết hạn') {
