@@ -342,21 +342,24 @@ export default {
         })
     },
   },
+  watch: {
+    '$store.state.profile': {
+      handler: function (val) {
+        if (val) {
+          this.profile = this.$store.state.profile.profile
+          this.getListByKey()
+          this.getOrderAnalytic()
+        }
+      },
+      deep: true,
+    },
+  },
   mouted() {
     if (this.$store.state.profile) {
       this.profile = this.$store.state.profile.profile
       this.getListByKey()
       this.getOrderAnalytic()
     }
-  },
-  computed: {
-    // profile() {
-    //   if (this.$store.state.profile) {
-    //     return this.$store.state.profile.profile
-    //   } else {
-    //     this.$router.push('/login')
-    //   }
-    // },
   },
 }
 </script>
