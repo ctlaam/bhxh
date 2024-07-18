@@ -19,7 +19,7 @@
             </NuxtLink>
           </div>
           <div class="col-6">
-            <a href="https://t.me/CSKHLINH1992" class="btn btn-outline-default px-2 btn-block rounded">
+            <a href="" class="btn btn-outline-default px-2 btn-block rounded">
               <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                    fill="#25a0fe">
                 <path

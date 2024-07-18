@@ -33,9 +33,9 @@
             <div class="vip-list">
               <div class="vip-item">
                 <div class="vip-wrap-inset">
-                  <a href="https://t.me/CSKHLINH1992"
+                  <a href=""
                     ><div class="vip-icon">
-                      <img src="https://saigontour.cc/vip/1.png" alt="" /></div
+                      <img src="../assets/img/1.png" alt="" /></div
                   ></a>
                   <div class="vip-name flex-auto">Level1</div>
                   <div class="num ml10">20%</div>
@@ -49,9 +49,9 @@
               </div>
               <div class="vip-item">
                 <div class="vip-wrap-inset">
-                  <a href="https://t.me/CSKHLINH1992"
+                  <a href=""
                     ><div class="vip-icon">
-                      <img src="https://saigontour.cc/vip/2.png" alt="" /></div
+                      <img src="../assets/img/2.png" alt="" /></div
                   ></a>
                   <div class="vip-name flex-auto">Level2</div>
                   <div class="num ml10">20%</div>
@@ -65,9 +65,9 @@
               </div>
               <div class="vip-item">
                 <div class="vip-wrap-inset">
-                  <a href="https://t.me/CSKHLINH1992"
+                  <a href=""
                     ><div class="vip-icon">
-                      <img src="https://saigontour.cc/vip/3.png" alt="" /></div
+                      <img src="../assets/img/3.png" alt="" /></div
                   ></a>
                   <div class="vip-name flex-auto">Level3</div>
                   <div class="num ml10">20%</div>
@@ -81,9 +81,9 @@
               </div>
               <div class="vip-item active">
                 <div class="vip-wrap-inset">
-                  <a href="https://t.me/CSKHLINH1992"
+                  <a href=""
                     ><div class="vip-icon">
-                      <img src="https://saigontour.cc/vip/4.png" alt="" /></div
+                      <img src="../assets/img/4.png" alt="" /></div
                   ></a>
                   <div class="vip-name flex-auto">Level4</div>
                   <div class="num ml10">30%</div>
@@ -97,9 +97,9 @@
               </div>
               <div class="vip-item">
                 <div class="vip-wrap-inset">
-                  <a href="https://t.me/CSKHLINH1992"
+                  <a href=""
                     ><div class="vip-icon">
-                      <img src="https://saigontour.cc/vip/5.png" alt="" /></div
+                      <img src="../assets/img/5.png" alt="" /></div
                   ></a>
                   <div class="vip-name flex-auto">Level5</div>
                   <div class="num ml10">30%</div>
@@ -113,9 +113,9 @@
               </div>
               <div class="vip-item">
                 <div class="vip-wrap-inset">
-                  <a href="https://t.me/CSKHLINH1992"
+                  <a href=""
                     ><div class="vip-icon">
-                      <img src="https://saigontour.cc/vip/6.png" alt="" /></div
+                      <img src="../assets/img/6.png" alt="" /></div
                   ></a>
                   <div class="vip-name flex-auto">Level6</div>
                   <div class="num ml10">40%</div>
@@ -134,7 +134,7 @@
           <div class="banner-list">
             <div class="list-item">
               <img
-                src="https://saigontour.cc/upload/6d2444b53959fbb9/486f5d68fac4f5d1.jpg"
+                src="../assets/img/486f5d68fac4f5d1.jpg"
               />
               <div class="right">
                 <p class="title">Vịnh Hạ Long</p>
@@ -149,7 +149,7 @@
             </div>
             <div class="list-item">
               <img
-                src="https://saigontour.cc/upload/b98ae22df12f6145/93985c9deee79d51.jpg"
+                src="../assets/img/93985c9deee79d51.jpg"
               />
               <div class="right">
                 <p class="title">Hội An</p>
@@ -162,7 +162,7 @@
             </div>
             <div class="list-item">
               <img
-                src="https://saigontour.cc/upload/e9c80098b2f75c08/3740631511d46098.jpg"
+                src="../assets/img/3740631511d46098.jpg"
               />
               <div class="right">
                 <p class="title">Sài Gòn</p>
@@ -178,7 +178,7 @@
             </div>
             <div class="list-item">
               <img
-                src="https://saigontour.cc/upload/d36e05ef0ef67e6a/5d8f7d8945d11842.jpg"
+                src="../assets/img/5d8f7d8945d11842.jpg"
               />
               <div class="right">
                 <p class="title">Phú Quốc</p>
@@ -192,7 +192,7 @@
             </div>
             <div class="list-item">
               <img
-                src="https://saigontour.cc/upload/17fc68440d99a770/b25c586e79f5bb15.jpg"
+                src="../assets/img/b25c586e79f5bb15.jpg"
               />
               <div class="right">
                 <p class="title">Đà Lạt</p>
@@ -207,7 +207,7 @@
             </div>
             <div class="list-item">
               <img
-                src="https://saigontour.cc/upload/568a4233a6468e16/522d377ca561061c.jpg"
+                src="../assets/img/522d377ca561061c.jpg"
               />
               <div class="right">
                 <p class="title">Sapa</p>
@@ -280,7 +280,7 @@ export default {
     -webkit-justify-content: space-between;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    background-image: url(https://saigontour.cc/vip/bg2.jpg);
+    background-image: url(../assets/img/bg2.jpg);
     background-size: cover;
     border-radius: 10px;
   }

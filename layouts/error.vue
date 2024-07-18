@@ -130,6 +130,7 @@
 
 <script>
 export default {
+  layout: 'account',
   props: {
     error: {
       type: Object,
@@ -253,6 +254,6 @@ export default {
   line-height: 45px;
   width: 50%;
   width: 120px;
-  margin-left: 20px;
+  margin: 10px 20px;
 }
 </style>

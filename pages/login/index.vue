@@ -2,7 +2,7 @@
   <div id="signup">
     <div class="row py-2 px-2 m-0">
       <div class="col-auto px-0">
-        <button class="btn btn-40 btn-link back-btn" type="button">
+        <button class="btn btn-40 btn-link back-btn" type="button" @click="backHistory">
           <span class="material-icons"
             ><svg
               xmlns="http://www.w3.org/2000/svg"
@@ -113,6 +113,9 @@ export default {
     this.form = this.$form.createForm(this, { name: 'login' })
   },
   methods: {
+    backHistory() {
+      this.$router.push({ path: '/' })
+    },
     handleSubmit(e) {
       e.preventDefault()
       this.form.validateFieldsAndScroll((err, values) => {

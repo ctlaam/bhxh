@@ -89,7 +89,8 @@ export function getProfileUser() {
         resolve(response.data)
       })
       .catch((response) => {
-        reject(response.response.data.message)
+        console.log(response);
+        // reject(response.response.data.message)
       })
   })
 }
