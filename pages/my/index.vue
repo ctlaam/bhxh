@@ -1,7 +1,7 @@
 <template>
   <div class="profile">
     <div class="container mb-4 text-center text-white" style="margin-top: 80px">
-      <h6 class="mb-1" style="font-weight: 600; font-size: 1.5rem">{{profile.name}}</h6>
+      <h6 class="mb-1" style="font-weight: 600; font-size: 1.5rem">{{profile?.name}}</h6>
       <img :src="'https://api.vietnamtour.pro/' + vip.background_urls[0]" style="width: 3rem" crossorigin="anonymous"/>
       <span class="iconfont" style="font-weight: 600">{{vip.name}}</span>
     </div>
@@ -115,8 +115,7 @@
                     <p class="text-secondary">Thay đổi mật khẩu tài khoản</p>
                   </div>
                 </div>
-              </nuxt-link
-              >
+              </nuxt-link>
               <NuxtLink
                 to="/my/Bankaccount?title=Tài khoản ngân hàng"
                 class="list-group-item list-group-item-action border-color"
@@ -143,8 +142,7 @@
                     <h6 class="mb-1">Tài Khoản Ngân Hàng</h6>
                     <p class="text-secondary">Sửa Thông Tin Tài Khoản</p>
                   </div>
-                </div>
-              </NuxtLink
+                </div> </NuxtLink
               ><!--<a href="/vip/company.pdf" class="list-group-item list-group-item-action border-color">-->
               <!--    <div class="row">--><!--        <div class="col-auto">-->
               <!--            <div class="avatar avatar-50 bg-default-light text-default rounded">-->
@@ -180,8 +178,7 @@
                     <p class="text-secondary">Điều khoản và điều kiện</p>
                   </div>
                 </div>
-              </NuxtLink
-              >
+              </NuxtLink>
               <NuxtLink
                 to="/my/faq?title=Câu hỏi thường gặp"
                 class="list-group-item list-group-item-action border-color"
@@ -209,8 +206,7 @@
                     <p class="text-secondary">Câu hỏi thường gặp</p>
                   </div>
                 </div>
-              </NuxtLink
-              >
+              </NuxtLink>
               <NuxtLink
                 to="/my/about?title=Về chúng tôi"
                 class="list-group-item list-group-item-action border-color"
@@ -238,12 +234,8 @@
                     <p class="text-secondary">Về chúng tôi</p>
                   </div>
                 </div>
-              </NuxtLink
-              >
-              <a
-                href="/index/user/logout"
-                class="list-group-item list-group-item-action border-color"
-              >
+              </NuxtLink>
+              <div class="list-group-item list-group-item-action border-color">
                 <div class="row">
                   <div class="col-auto">
                     <div
@@ -267,7 +259,7 @@
                     <p class="text-secondary">Thoát Khỏi Hệ Thống</p>
                   </div>
                 </div>
-              </a>
+              </div>
             </div>
           </div>
         </div>
@@ -277,9 +269,10 @@
 </template>
 
 <script>
-import * as volatilityApi from '../../api/volatility';
-import * as orderApi from '../../api/order';
+import * as volatilityApi from '../../api/volatility'
+import * as orderApi from '../../api/order'
 import _ from 'lodash'
+
 import Cookies from 'js-cookie'
 export default {
   name: 'index',
@@ -287,7 +280,7 @@ export default {
     return {
       vip: {
         name: '',
-        background_urls: []
+        background_urls: [],
       },
       orderOfUser: {
         total_commission_today: 0,
@@ -295,6 +288,7 @@ export default {
         count_order: 0,
         count_order_today: 0,
       },
+      profile: {},
     }
   },
   methods: {
@@ -311,33 +305,38 @@ export default {
       this.$message.success('Đăng xuất thành công')
     },
     async getListByKey() {
-      volatilityApi
-        .getListVips(this.profile.level)
-        .then((res) => {
-          this.vip = _.get(res, 'data')
-        })
+      volatilityApi.getListVips(this.profile.level).then((res) => {
+        this.vip = _.get(res, 'data')
+      })
     },
     getOrderAnalytic() {
-      orderApi.getOrderAnalytic()
+      orderApi
+        .getOrderAnalytic()
         .then((res) => {
-          this.orderOfUser = _.get(res, 'data', []);
-          console.log("this.orderOfUser:", this.orderOfUser)
+          this.orderOfUser = _.get(res, 'data', [])
+          console.log('this.orderOfUser:', this.orderOfUser)
         })
         .catch((err) => {
-          console.log("err:", err)
           this.$message.error(err)
         })
     },
   },
-  created() {
-    this.getListByKey();
-    this.getOrderAnalytic();
+  mouted() {
+    if (this.$store.state.profile) {
+      this.profile = this.$store.state.profile.profile
+      this.getListByKey()
+      this.getOrderAnalytic()
+    }
   },
   computed: {
-    profile() {
-      return  this.$store.state.profile.profile
-    },
-  }
+    // profile() {
+    //   if (this.$store.state.profile) {
+    //     return this.$store.state.profile.profile
+    //   } else {
+    //     this.$router.push('/login')
+    //   }
+    // },
+  },
 }
 </script>
 

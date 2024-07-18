@@ -7,12 +7,13 @@
       </div>
       <Footer></Footer>
     </div>
-    <fullscreen-modal> </fullscreen-modal>
+    <!-- <fullscreen-modal> </fullscreen-modal> -->
     <div class="modal"></div>
   </div>
 </template>
 
 <script>
+import * as volatilityApi from '../api/volatility.js'
 import Footer from '../components/apps/footer.vue'
 import Header from '../components/apps/header.vue'
 
@@ -30,8 +31,6 @@ export default {
     handleScroll() {
       // Lấy vị trí cuộn của phần tử "content"
       const scrollPosition = this.$refs.content.scrollTop
-      console.log('Scroll position:', scrollPosition)
-
       // Thêm logic dựa trên vị trí cuộn
       if (scrollPosition > 50) {
         this.activeHeader = true
@@ -46,6 +45,20 @@ export default {
   },
   beforeDestroy() {
     this.$refs.content.removeEventListener('scroll', this.handleScroll)
+  },
+  async created() {
+    await volatilityApi
+      .getProfileUser()
+      .then((res) => {
+        let profile = res.data
+        this.$store.dispatch('profile/saveProfile', profile)
+      })
+      .catch((err) => {
+        if (err == 'Phiên đăng nhập đã hết hạn') {
+          this.$router.push('/login')
+          return
+        }
+      })
   },
 }
 </script>
@@ -87,7 +100,7 @@ export default {
   height: 0;
 }
 
-#content .profile{
+#content .profile {
   scrollbar-width: none; /* Ẩn thanh cuộn */
   overflow-y: auto;
   height: 900px;
