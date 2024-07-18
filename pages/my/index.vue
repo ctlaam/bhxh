@@ -1,31 +1,49 @@
 <template>
   <div class="profile">
     <div class="container mb-4 text-center text-white" style="margin-top: 80px">
-      <h6 class="mb-1" style="font-weight: 600; font-size: 1.5rem">{{profile.name}}</h6>
-      <img src="~/assets/vip1.png" style="width: 3rem"/>
-      <span class="iconfont" style="font-weight: 600">{{vip.name}}</span>
+      <h6 class="mb-1" style="font-weight: 600; font-size: 1.5rem">
+        {{ profile?.name }}
+      </h6>
+      <img src="~/assets/vip1.png" style="width: 3rem" />
+      <span class="iconfont" style="font-weight: 600">{{ vip.name }}</span>
     </div>
     <div class="main-container">
       <div class="container mb-4">
         <div class="row mb-4">
           <div class="col-6">
-            <NuxtLink to="/my/invite?title=Yêu cầu đăng ký" class="btn btn-outline-default px-2 btn-block rounded">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                   fill="#25a0fe">
+            <NuxtLink
+              to="/my/invite?title=Yêu cầu đăng ký"
+              class="btn btn-outline-default px-2 btn-block rounded"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#25a0fe"
+              >
                 <path
-                  d="M80-680v-200h200v80H160v120H80Zm0 600v-200h80v120h120v80H80Zm600 0v-80h120v-120h80v200H680Zm120-600v-120H680v-80h200v200h-80ZM700-260h60v60h-60v-60Zm0-120h60v60h-60v-60Zm-60 60h60v60h-60v-60Zm-60 60h60v60h-60v-60Zm-60-60h60v60h-60v-60Zm120-120h60v60h-60v-60Zm-60 60h60v60h-60v-60Zm-60-60h60v60h-60v-60Zm240-320v240H520v-240h240ZM440-440v240H200v-240h240Zm0-320v240H200v-240h240Zm-60 500v-120H260v120h120Zm0-320v-120H260v120h120Zm320 0v-120H580v120h120Z"/>
+                  d="M80-680v-200h200v80H160v120H80Zm0 600v-200h80v120h120v80H80Zm600 0v-80h120v-120h80v200H680Zm120-600v-120H680v-80h200v200h-80ZM700-260h60v60h-60v-60Zm0-120h60v60h-60v-60Zm-60 60h60v60h-60v-60Zm-60 60h60v60h-60v-60Zm-60-60h60v60h-60v-60Zm120-120h60v60h-60v-60Zm-60 60h60v60h-60v-60Zm-60-60h60v60h-60v-60Zm240-320v240H520v-240h240ZM440-440v240H200v-240h240Zm0-320v240H200v-240h240Zm-60 500v-120H260v120h120Zm0-320v-120H260v120h120Zm320 0v-120H580v120h120Z"
+                />
               </svg>
               Xin Mời
             </NuxtLink>
           </div>
           <div class="col-6">
             <a href="" class="btn btn-outline-default px-2 btn-block rounded">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                   fill="#25a0fe">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#25a0fe"
+              >
                 <path
-                  d="M440-120v-80h320v-284q0-117-81.5-198.5T480-764q-117 0-198.5 81.5T200-484v244h-40q-33 0-56.5-23.5T80-320v-80q0-21 10.5-39.5T120-469l3-53q8-68 39.5-126t79-101q47.5-43 109-67T480-840q68 0 129 24t109 66.5Q766-707 797-649t40 126l3 52q19 9 29.5 27t10.5 38v92q0 20-10.5 38T840-249v49q0 33-23.5 56.5T760-120H440Zm-80-280q-17 0-28.5-11.5T320-440q0-17 11.5-28.5T360-480q17 0 28.5 11.5T400-440q0 17-11.5 28.5T360-400Zm240 0q-17 0-28.5-11.5T560-440q0-17 11.5-28.5T600-480q17 0 28.5 11.5T640-440q0 17-11.5 28.5T600-400Zm-359-62q-7-106 64-182t177-76q89 0 156.5 56.5T720-519q-91-1-167.5-49T435-698q-16 80-67.5 142.5T241-462Z"/>
+                  d="M440-120v-80h320v-284q0-117-81.5-198.5T480-764q-117 0-198.5 81.5T200-484v244h-40q-33 0-56.5-23.5T80-320v-80q0-21 10.5-39.5T120-469l3-53q8-68 39.5-126t79-101q47.5-43 109-67T480-840q68 0 129 24t109 66.5Q766-707 797-649t40 126l3 52q19 9 29.5 27t10.5 38v92q0 20-10.5 38T840-249v49q0 33-23.5 56.5T760-120H440Zm-80-280q-17 0-28.5-11.5T320-440q0-17 11.5-28.5T360-480q17 0 28.5 11.5T400-440q0 17-11.5 28.5T360-400Zm240 0q-17 0-28.5-11.5T560-440q0-17 11.5-28.5T600-480q17 0 28.5 11.5T640-440q0 17-11.5 28.5T600-400Zm-359-62q-7-106 64-182t177-76q89 0 156.5 56.5T720-519q-91-1-167.5-49T435-698q-16 80-67.5 142.5T241-462Z"
+                />
               </svg>
-              Chăm Sóc Khách Hàng</a>
+              Chăm Sóc Khách Hàng</a
+            >
           </div>
         </div>
         <div class="row">
@@ -33,9 +51,13 @@
             <div class="card">
               <div class="card-body">
                 <div class="row">
-                  <div class="col"><h6 class="mb-1">Hành Trình Hôm Nay
-                    <span class="text-success float-right">{{orderOfUser.count_order || 0}}/20</span>
-                  </h6>
+                  <div class="col">
+                    <h6 class="mb-1">
+                      Hành Trình Hôm Nay
+                      <span class="text-success float-right"
+                        >{{ orderOfUser.count_order || 0 }}/20</span
+                      >
+                    </h6>
                   </div>
                 </div>
                 <div class="progress h-5 mt-3">
@@ -86,8 +108,7 @@
                     <p class="text-secondary">Thay đổi mật khẩu đăng nhập</p>
                   </div>
                 </div>
-              </nuxt-link
-              >
+              </nuxt-link>
               <nuxt-link
                 to="/my/withdrawalpassword?title=Thay đổi mật tài khoản"
                 class="list-group-item list-group-item-action border-color"
@@ -115,8 +136,7 @@
                     <p class="text-secondary">Thay đổi mật khẩu tài khoản</p>
                   </div>
                 </div>
-              </nuxt-link
-              >
+              </nuxt-link>
               <NuxtLink
                 to="/my/Bankaccount?title=Tài khoản ngân hàng"
                 class="list-group-item list-group-item-action border-color"
@@ -143,8 +163,7 @@
                     <h6 class="mb-1">Tài Khoản Ngân Hàng</h6>
                     <p class="text-secondary">Sửa Thông Tin Tài Khoản</p>
                   </div>
-                </div>
-              </NuxtLink
+                </div> </NuxtLink
               ><!--<a href="/vip/company.pdf" class="list-group-item list-group-item-action border-color">-->
               <!--    <div class="row">--><!--        <div class="col-auto">-->
               <!--            <div class="avatar avatar-50 bg-default-light text-default rounded">-->
@@ -180,8 +199,7 @@
                     <p class="text-secondary">Điều khoản và điều kiện</p>
                   </div>
                 </div>
-              </NuxtLink
-              >
+              </NuxtLink>
               <NuxtLink
                 to="/my/faq?title=Câu hỏi thường gặp"
                 class="list-group-item list-group-item-action border-color"
@@ -209,8 +227,7 @@
                     <p class="text-secondary">Câu hỏi thường gặp</p>
                   </div>
                 </div>
-              </NuxtLink
-              >
+              </NuxtLink>
               <NuxtLink
                 to="/my/about?title=Về chúng tôi"
                 class="list-group-item list-group-item-action border-color"
@@ -238,12 +255,8 @@
                     <p class="text-secondary">Về chúng tôi</p>
                   </div>
                 </div>
-              </NuxtLink
-              >
-              <a
-                href="/index/user/logout"
-                class="list-group-item list-group-item-action border-color"
-              >
+              </NuxtLink>
+              <div class="list-group-item list-group-item-action border-color">
                 <div class="row">
                   <div class="col-auto">
                     <div
@@ -267,7 +280,7 @@
                     <p class="text-secondary">Thoát Khỏi Hệ Thống</p>
                   </div>
                 </div>
-              </a>
+              </div>
             </div>
           </div>
         </div>
@@ -277,9 +290,10 @@
 </template>
 
 <script>
-import * as volatilityApi from '../../api/volatility';
-import * as orderApi from '../../api/order';
+import * as volatilityApi from '../../api/volatility'
+import * as orderApi from '../../api/order'
 import _ from 'lodash'
+
 import Cookies from 'js-cookie'
 export default {
   name: 'index',
@@ -287,7 +301,7 @@ export default {
     return {
       vip: {
         name: '',
-        background_urls: []
+        background_urls: [],
       },
       orderOfUser: {
         total_commission_today: 0,
@@ -295,6 +309,7 @@ export default {
         count_order: 0,
         count_order_today: 0,
       },
+      profile: {},
     }
   },
   methods: {
@@ -311,33 +326,38 @@ export default {
       this.$message.success('Đăng xuất thành công')
     },
     async getListByKey() {
-      volatilityApi
-        .getListVips(this.profile.level)
-        .then((res) => {
-          this.vip = _.get(res, 'data')
-        })
+      volatilityApi.getListVips(this.profile.level).then((res) => {
+        this.vip = _.get(res, 'data')
+      })
     },
     getOrderAnalytic() {
-      orderApi.getOrderAnalytic()
+      orderApi
+        .getOrderAnalytic()
         .then((res) => {
-          this.orderOfUser = _.get(res, 'data', []);
-          console.log("this.orderOfUser:", this.orderOfUser)
+          this.orderOfUser = _.get(res, 'data', [])
+          console.log('this.orderOfUser:', this.orderOfUser)
         })
         .catch((err) => {
-          console.log("err:", err)
           this.$message.error(err)
         })
     },
   },
-  created() {
-    this.getListByKey();
-    this.getOrderAnalytic();
+  mouted() {
+    if (this.$store.state.profile) {
+      this.profile = this.$store.state.profile.profile
+      this.getListByKey()
+      this.getOrderAnalytic()
+    }
   },
   computed: {
-    profile() {
-      return  this.$store.state.profile.profile
-    },
-  }
+    // profile() {
+    //   if (this.$store.state.profile) {
+    //     return this.$store.state.profile.profile
+    //   } else {
+    //     this.$router.push('/login')
+    //   }
+    // },
+  },
 }
 </script>
 
