@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top: 80px">
+  <div style="margin-top: 80px;margin-bottom: 80px;">
     <div class="row w-100">
       <div class="col-6 mt-3 text-center"><h5 class="text-white">0.00</h5>
         <p class="text-white mb-4 fz14">Tổng Tài Sản</p></div>
