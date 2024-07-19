@@ -234,32 +234,40 @@
     >
       <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content" style="max-width: 100%">
-          <div class="modal-header">
-            <div class="goods-wrap" data-v-0234a37e="">
-              <div class="text" data-v-0234a37e="">
+          <div class="modal-header" >
+            <div style="width: 100%; height: 100%">
+              <img style="object-fit: cover"
+                   width="100%"
+                   height="100%"
+                   :src="domain + trip.image"
+                   alt=""
+                   crossorigin="anonymous"
+              >
+            </div>
+            <div class="goods-wrap">
+              <div class="text">
                 <img
                   src="data:image/png;base64,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"
                   alt=""
-                  data-v-0234a37e=""
                 />
-                <p class="goods_name" data-v-0234a37e="">Thung lũng Chết</p>
+                <p class="goods_name">{{trip.name}}</p>
               </div>
-              <div class="goods" data-v-0234a37e="">
-                <div class="goods-cell flex-center" data-v-0234a37e="">
-                  <div class="cell-item flex-row w100" data-v-0234a37e="">
-                    <div class="cell-item-title" data-v-0234a37e="">
+              <div class="goods">
+                <div class="goods-cell flex-center">
+                  <div class="cell-item flex-row w100">
+                    <div class="cell-item-title">
                       Số Tiền
                     </div>
-                    <div class="cell-item-value" data-v-0234a37e="">
-                      <span class="modal-price">1620.16</span>
+                    <div class="cell-item-value">
+                      <span class="modal-price">{{trip.price}}</span>
                     </div>
                   </div>
                 </div>
-                <div class="goods-cell flex-center" data-v-0234a37e="">
-                  <div class="cell-item flex-row w100" data-v-0234a37e="">
-                    <div class="cell-item-title" data-v-0234a37e="">Tỷ Lệ</div>
-                    <div class="cell-item-value" data-v-0234a37e="">
-                      <span class="commision">14.58</span>
+                <div class="goods-cell flex-center">
+                  <div class="cell-item flex-row w100">
+                    <div class="cell-item-title">Tỷ Lệ</div>
+                    <div class="cell-item-value">
+                      <span class="commision">{{trip.commission}}</span>
                     </div>
                   </div>
                 </div>
@@ -267,8 +275,8 @@
             </div>
           </div>
           <div class="modal-body">
-            <div class="flex rate-box" data-v-0234a37e="">
-              <span data-v-0234a37e="">Đánh Giá Bây Giờ</span>
+            <div class="flex rate-box">
+              <span>Đánh Giá Bây Giờ</span>
               <ul>
                 <li
                   @click="getIndexItem(item)"
@@ -290,7 +298,7 @@
             /><button
               type="submit"
               class="btn btn-primary btn2"
-              onclick="create()"
+              @click="create()"
             >
               Gửi
             </button>
@@ -302,21 +310,49 @@
 </template>
 
 <script>
+import * as tutorApi from '../../api/tuor';
+import axios from "axios";
 export default {
   name: 'index',
   data() {
     return {
       showModal: false,
       indexItem: 1,
+      trip: {
+        name: '',
+        price: '',
+        commission: ''
+      },
+      domain: 'https://api.vietnamtour.pro/',
+      orderId: null,
     }
   },
   methods: {
-    showModalTour() {
+    async showModalTour() {
+      await tutorApi.getTuor().then(async (res) => {
+        this.trip = res.data.product;
+        this.orderId = res.data._id;
+      })
+        .catch((err) => {
+          this.$message.error(err)
+          return;
+      })
       this.showModal = true
     },
     getIndexItem(item) {
       this.indexItem = item
     },
+    async create() {
+      await tutorApi.sendTuor(this.orderId)
+        .then((res) => {
+          this.$message.success('Đánh giá hành trình thành công!')
+          this.showModal = false;
+        })
+        .catch((err)=> {
+          this.$message.error(err)
+          return;
+        })
+    }
   },
 }
 </script>
@@ -333,16 +369,12 @@ export default {
     color: #333;
     text-align: center;
   }
-  .modal-header {
-    background: url(../../assets/trips/test.jpg) no-repeat;
-  }
   .modal-dialog {
-    top: 1rem;
   }
 
   .modal-header {
-    background-size: 100% 23rem !important;
     height: 23rem;
+    padding: 0;
   }
   .goods-wrap {
     color: #333;
@@ -499,11 +531,14 @@ export default {
 <style lang="scss">
 .modal-give-tour {
   .ant-modal-body {
-    padding: 0 5px 20px !important;
+    padding: 0!important;
     /* word-wrap: break-word; */
   }
   .modal-content {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  .modal-dialog{
+    margin: 0;
   }
 }
 </style>

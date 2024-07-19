@@ -98,6 +98,7 @@
 import * as authApi from '../../api/auth';
 import * as volatilityApi from '../../api/volatility';
 import Cookies from 'js-cookie';
+import _ from 'lodash';
 
 export default {
   layout: 'account',

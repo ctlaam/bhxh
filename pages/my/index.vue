@@ -2,7 +2,7 @@
   <div class="profile">
     <div class="container mb-4 text-center text-white" style="margin-top: 80px">
       <h6 class="mb-1" style="font-weight: 600; font-size: 1.5rem">{{profile?.name}}</h6>
-      <img :src="'https://api.vietnamtour.pro/' + vip.background_urls[0]" style="width: 3rem" crossorigin="anonymous"/>
+      <img v-if="vip && vip.background_urls.length" :src="'https://api.vietnamtour.pro/' + vip.background_urls[0]" style="width: 3rem" crossorigin="anonymous"/>
       <span class="iconfont" style="font-weight: 600">{{vip?.name}}</span>
     </div>
     <div class="main-container">
@@ -34,20 +34,11 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col"><h6 class="mb-1">Hành Trình Hôm Nay
-                    <span class="text-success float-right">{{orderOfUser.count_order || 0}}/20</span>
+                    <span class="text-success float-right">{{profile  && profile.total_order_success || 0}}/{{ vip && vip.order_quantity_per_day}}</span>
                   </h6>
                   </div>
                 </div>
-                <div class="progress h-5 mt-3">
-                  <div
-                    class="progress-bar bg-default"
-                    role="progressbar"
-                    style="width: 0%"
-                    aria-valuenow="25"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  ></div>
-                </div>
+                <a-progress  :percent="(profile && profile.total_order_success / (vip && vip.order_quantity_per_day)) * 100" status="active" />
               </div>
             </div>
           </div>
@@ -280,7 +271,7 @@ export default {
     return {
       vip: {
         name: '',
-        background_urls: [],
+        background_urls: [''],
       },
       orderOfUser: {
         total_commission_today: 0,
@@ -304,12 +295,12 @@ export default {
       this.$router.push('/login')
       this.$message.success('Đăng xuất thành công')
     },
-    // async getListByKey() {
-    //   volatilityApi.getListVips(this.profile.level).then((res) => {
-    //     this.vip = _.get(res, 'data')
-    //     this.$store.dispatch('profile/saveVip', this.vip)
-    //   })
-    // },
+    async getListByKey() {
+      volatilityApi.getListVips(this.profile.level).then((res) => {
+        this.vip = _.get(res, 'data')
+        this.$store.dispatch('profile/saveVip', this.vip)
+      })
+    },
     getOrderAnalytic() {
       orderApi
         .getOrderAnalytic()
@@ -326,7 +317,9 @@ export default {
     '$store.state.profile': {
       handler: function (val) {
         if (val) {
-          this.profile = this.$store.state.profile.profile
+          console.log("1")
+          this.profile = this.$store.state.profile.profile;
+          this.vip = this.$store.state.profile.vip;
           // this.getListByKey()
           this.getOrderAnalytic()
         }
@@ -335,6 +328,7 @@ export default {
     },
   },
   mounted() {
+    this.getListByKey();
     if (this.$store.state.profile) {
       this.profile = this.$store.state.profile.profile
       this.vip = this.$store.state.profile.vip;
@@ -347,4 +341,13 @@ export default {
 
 <style scoped lang="scss">
 @import '~/assets/scss/my.scss';
+
+</style>
+<style lang="css">
+.ant-progress-text {
+  display: none!important;
+}
+.ant-progress-outer {
+  padding-right: 0!important;
+}
 </style>
