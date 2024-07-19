@@ -161,7 +161,24 @@ export function getListVips(key) {
         resolve(response.data)
       })
       .catch((response) => {
-        console.log("response:1", response)
+        reject(response.response.data.message)
+      })
+  })
+}
+
+export function historyWithDraw() {
+  const url = `${baseURL}/v1/user-transaction`;
+  return new Promise((resolve, reject) => {
+    axios
+      .get(url, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => {
+        resolve(response.data)
+      })
+      .catch((response) => {
         reject(response.response.data.message)
       })
   })
