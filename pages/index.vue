@@ -231,6 +231,7 @@ export default {
     return {
       vip: {
         name: 0,
+        background_urls: []
       },
     }
   },
