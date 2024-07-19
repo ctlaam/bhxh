@@ -1,28 +1,26 @@
 // store/index.js
-import * as volatilityApi from '../api/volatility.js'
 
 export const state = () => ({
-  profile: null
+  profile: null,
+  vip: null,
 });
 
 export const mutations = {
   setProfile(state, profile) {
     state.profile = profile;
+  },
+  setVip(state, payload) {
+    state.vip = payload
   }
 };
 
 export const actions = {
-  async saveProfile({ commit }) {
-    let profile = null;
-    await volatilityApi.getProfileUser()
-      .then(res => {
-        profile = res.data
-      })
-      .catch(err => {
-        console.log(err);
-      })
+  async saveProfile({ commit }, profile) {
     commit('setProfile', profile);
   },
+  async saveVip({ commit }, payload) {
+    commit('setVip', payload);
+  }
 };
 
 export const getters = {

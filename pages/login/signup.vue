@@ -163,7 +163,7 @@
                     type="primary"
                     html-type="submit"
                   >
-                    Đăng nhập
+                    Đăng ký
                   </a-button>
                 </a-form-item>
               </a-form>

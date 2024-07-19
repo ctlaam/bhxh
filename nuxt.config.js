@@ -15,7 +15,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/faviconrm.png' }, // Đường dẫn đến favicon của bạn
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap',
@@ -84,7 +84,7 @@ export default {
     '@/assets/styles.css',
   ],
   router: {
-    middleware: ['axios', 'auth','fetchProfile'], // Sử dụng middleware auth.js
+    middleware: ['auth', 'axios'], // Sử dụng middleware auth.js
   },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
