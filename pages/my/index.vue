@@ -3,7 +3,7 @@
     <div class="container mb-4 text-center text-white" style="margin-top: 80px">
       <h6 class="mb-1" style="font-weight: 600; font-size: 1.5rem">{{profile?.name}}</h6>
       <img :src="'https://api.vietnamtour.pro/' + vip.background_urls[0]" style="width: 3rem" crossorigin="anonymous"/>
-      <span class="iconfont" style="font-weight: 600">{{vip.name}}</span>
+      <span class="iconfont" style="font-weight: 600">{{vip?.name}}</span>
     </div>
     <div class="main-container">
       <div class="container mb-4">

@@ -31,7 +31,7 @@
               <div class="tabItem">Partners</div>
             </div>
             <div class="vip-list">
-              <div class="vip-item" :class="{active: vip.name == 'Level 1'}">
+              <div class="vip-item" :class="{ active: vip.name == 'Level 1' }">
                 <div class="vip-wrap-inset">
                   <a href=""
                     ><div class="vip-icon">
@@ -47,7 +47,7 @@
                   />
                 </div>
               </div>
-              <div class="vip-item" :class="{active: vip.name == 'Level 2'}">
+              <div class="vip-item" :class="{ active: vip.name == 'Level 2' }">
                 <div class="vip-wrap-inset">
                   <a href=""
                     ><div class="vip-icon">
@@ -63,7 +63,7 @@
                   />
                 </div>
               </div>
-              <div class="vip-item" :class="{active: vip.name == 'Level 3'}">
+              <div class="vip-item" :class="{ active: vip.name == 'Level 3' }">
                 <div class="vip-wrap-inset">
                   <a href=""
                     ><div class="vip-icon">
@@ -79,7 +79,7 @@
                   />
                 </div>
               </div>
-              <div class="vip-item" :class="{active: vip.name == 'Level 4'}">
+              <div class="vip-item" :class="{ active: vip.name == 'Level 4' }">
                 <div class="vip-wrap-inset">
                   <a href=""
                     ><div class="vip-icon">
@@ -101,7 +101,7 @@
                   />
                 </div>
               </div>
-              <div class="vip-item" :class="{active: vip.name == 'Level 5'}">
+              <div class="vip-item" :class="{ active: vip.name == 'Level 5' }">
                 <div class="vip-wrap-inset">
                   <a href=""
                     ><div class="vip-icon">
@@ -117,7 +117,7 @@
                   />
                 </div>
               </div>
-              <div class="vip-item" :class="{active: vip.name == 'Level 6'}">
+              <div class="vip-item" :class="{ active: vip.name == 'Level 6' }">
                 <div class="vip-wrap-inset">
                   <a href=""
                     ><div class="vip-icon">
@@ -139,9 +139,7 @@
         <div class="container mb-4">
           <div class="banner-list">
             <div class="list-item">
-              <img
-                src="../assets/img/486f5d68fac4f5d1.jpg"
-              />
+              <img src="../assets/img/486f5d68fac4f5d1.jpg" />
               <div class="right">
                 <p class="title">Vịnh Hạ Long</p>
                 <p class="subtitle">
@@ -154,9 +152,7 @@
               </div>
             </div>
             <div class="list-item">
-              <img
-                src="../assets/img/93985c9deee79d51.jpg"
-              />
+              <img src="../assets/img/93985c9deee79d51.jpg" />
               <div class="right">
                 <p class="title">Hội An</p>
                 <p class="subtitle">
@@ -167,9 +163,7 @@
               </div>
             </div>
             <div class="list-item">
-              <img
-                src="../assets/img/3740631511d46098.jpg"
-              />
+              <img src="../assets/img/3740631511d46098.jpg" />
               <div class="right">
                 <p class="title">Sài Gòn</p>
                 <p class="subtitle">
@@ -183,9 +177,7 @@
               </div>
             </div>
             <div class="list-item">
-              <img
-                src="../assets/img/5d8f7d8945d11842.jpg"
-              />
+              <img src="../assets/img/5d8f7d8945d11842.jpg" />
               <div class="right">
                 <p class="title">Phú Quốc</p>
                 <p class="subtitle">
@@ -197,9 +189,7 @@
               </div>
             </div>
             <div class="list-item">
-              <img
-                src="../assets/img/b25c586e79f5bb15.jpg"
-              />
+              <img src="../assets/img/b25c586e79f5bb15.jpg" />
               <div class="right">
                 <p class="title">Đà Lạt</p>
                 <p class="subtitle">
@@ -212,9 +202,7 @@
               </div>
             </div>
             <div class="list-item">
-              <img
-                src="../assets/img/522d377ca561061c.jpg"
-              />
+              <img src="../assets/img/522d377ca561061c.jpg" />
               <div class="right">
                 <p class="title">Sapa</p>
                 <p class="subtitle">
@@ -241,7 +229,9 @@ export default {
   components: {},
   data() {
     return {
-      vip: {}
+      vip: {
+        name: 0,
+      },
     }
   },
   // mounted() {
@@ -254,7 +244,7 @@ export default {
     '$store.state.profile': {
       handler: function (val) {
         if (val) {
-          this.vip = this.$store.state.profile.vip;
+          this.vip = this.$store.state.profile.vip || { name: 0 }
         }
       },
       deep: true,
@@ -332,10 +322,11 @@ export default {
   }
   .vip-wrap .vip-list .active {
     background-color: #fff !important;
-    -webkit-box-shadow: 0.3rem 0.3rem 0.3rem 0 rgba(0, 0, 0, .16) !important;
+    -webkit-box-shadow: 0.3rem 0.3rem 0.3rem 0 rgba(0, 0, 0, 0.16) !important;
     box-shadow: 0.3rem 0.3rem 0.3rem #00000029 !important;
   }
-  .vip-wrap .vip-list .active .vip-name, .vip-wrap .vip-list .active .num {
+  .vip-wrap .vip-list .active .vip-name,
+  .vip-wrap .vip-list .active .num {
     color: #c62a1c;
     text-shadow: 2px 1px 2px #dddddd;
     font-weight: 700;
@@ -398,7 +389,7 @@ export default {
   }
   .swipper {
     img {
-      height: 250px;
+      height: 150px;
       margin: 0 10px;
       border-radius: 25px;
     }
