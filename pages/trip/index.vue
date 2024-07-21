@@ -198,10 +198,11 @@
             </div>
           </div>
           <div class="modal-footer">
-            <input type="hidden" id="oid" name="oid" value="UB2407191022585488" /><button type="submit"
+            <input type="hidden" id="oid" name="oid" value="UB2407191022585488" />
+            <a-button type="submit" :loading="loading"
               class="btn btn-primary btn2" @click="create()">
               Gửi
-            </button>
+            </a-button>
           </div>
         </div>
       </div>
@@ -231,6 +232,7 @@ export default {
       profile: null,
       vip: null,
       orderOfUser: null,
+      loading: false,
     }
   },
   async created() {
@@ -253,6 +255,7 @@ export default {
       this.indexItem = item
     },
     async create() {
+      this.loading = true;
       await tutorApi.sendTuor(this.orderId)
         .then((res) => {
           this.$message.success('Đánh giá hành trình thành công!')
@@ -264,6 +267,9 @@ export default {
           this.$message.error(err)
           return;
         })
+        .finally(() => {
+          this.loading = false;
+        });
     },
     async getProfile() {
       await volatilityApi

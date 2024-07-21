@@ -109,13 +109,14 @@
               id="oid"
               name="oid"
               value="UB2407191022585488"
-            /><button
+            /><a-button
+            :loading="loading"
             type="submit"
             class="btn btn-primary btn2"
             @click="create()"
           >
             Gửi
-          </button>
+          </a-button>
           </div>
         </div>
       </div>
@@ -145,6 +146,7 @@ export default {
       },
       domain: 'https://api.vietnamtour.pro/',
       indexItem: 1,
+      loading: false,
     }
   },
   created() {
@@ -191,7 +193,7 @@ export default {
       this.orderId = item._id
     },
     async create() {
-
+      this.loading = true;
       await tutorApi.sendTuor(this.orderId)
         .then((res) => {
           this.$message.success('Đánh giá hành trình thành công!')
@@ -202,6 +204,9 @@ export default {
           this.$message.error(err)
           return;
         })
+        .finally(() => {
+          this.loading = false
+        });
     }
   }
 }

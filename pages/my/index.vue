@@ -286,6 +286,7 @@ export default {
     logout() {
       this.$store.dispatch('loading/setModalLoading', true)
       this.$store.dispatch('profile/saveProfile', null)
+      this.$store.dispatch('profile/saveVip', null)
       Cookies.remove('access_token')
       Cookies.remove('refresh_token')
       Cookies.remove('user_id')
@@ -326,14 +327,22 @@ export default {
       },
       deep: true,
     },
+    '$store.state.profile.vip': {
+      handler: function(val) {
+        console.log("aaaaaaaaaaaaaaa");
+        this.vip = this.$store.state.profile.vip;
+      },
+      deep: true
+    }
   },
   mounted() {
-    this.getListByKey();
     if (this.$store.state.profile) {
+      console.log("vao dayyy");
       this.profile = this.$store.state.profile.profile
       this.vip = this.$store.state.profile.vip;
       // this.getListByKey()
       this.getOrderAnalytic()
+      this.getListByKey();
     }
   },
 }

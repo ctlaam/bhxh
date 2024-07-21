@@ -94,7 +94,7 @@
                   </div>
                 </div>
               </span>
-              <NuxtLink to="/wallet/withdraw?title=Rút tiền"
+              <NuxtLink :to="`/wallet/withdraw?title=Rút tiền&balance=${profileUser && profileUser.balance != null && profileUser.balance}`"
                         class="list-group-item list-group-item-action border-color">
                 <div class="row">
                   <div class="col-auto">
@@ -196,10 +196,6 @@ export default {
     },
   },
   filters: {
-    roundToTwoDecimalPlaces(num) {
-      if(!num) return 0;
-      return Math.round(num * 100) / 100;
-    },
     roundToTwoDecimalPlaces(num) {
       if(!num) return 0;
       return Math.round(num * 100) / 100;

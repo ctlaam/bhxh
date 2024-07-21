@@ -3,7 +3,7 @@
     <div class="main-container">
       <div class="container">
         <div class="card card-content">
-          <div class="alert "  :class="{'alert-warning': history.status === 'Pending','alert-success': history.status === 'Success'}" v-for="(history, index) in historys" :key="index">
+          <div class="alert "  :class="{'alert-warning': history.status === 'Pending','alert-success': history.status === 'Success', 'alert-danger': history.status === 'Reject'}" v-for="(history, index) in historys" :key="index">
             <div class="media">
               <div class="icon icon-40 bg-white text-success mr-2 rounded-circle">
                 <svg data-v-dfd304d2="" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
@@ -28,6 +28,10 @@
                 <br>
                 <small class="text-mute">Thời Gian
                   <b>{{history.created_at | formatTime}}</b>
+                </small>
+                <br>
+                <small class="text-mute" v-if="history.reject_reason">Lý do
+                  <b>{{history.reject_reason}}</b>
                 </small>
               </h6></div>
             </div>
@@ -57,7 +61,7 @@ export default {
       statusName: {
         'Pending': 'Đang chờ xử lý',
         'Success': 'Thành công',
-        'Failed': 'Thất bại',
+        'Reject': 'Từ chối',
       }
     }
   },

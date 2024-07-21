@@ -5,7 +5,7 @@
         <div class="card">
           <div class="card-header">
             <h6 class="subtitle mb-0 text-center text-success" style="font-size: 14px;">
-              Số dư tài khoản 99.00
+              Số dư tài khoản {{ blance | roundToTwoDecimalPlaces }}
             </h6>
           </div>
           <div class="card-body was-validated">
@@ -73,6 +73,7 @@ export default {
       currentPassword: null,
       password: null,
       confirmPassword: null,
+      blance: null
     }
   },
   beforeCreate() {
@@ -116,7 +117,17 @@ export default {
         callback();
       }
     },
-  }
+  },
+  created() {
+    this.blance = this.$route.query.balance;
+  },
+  filters: {
+    roundToTwoDecimalPlaces(num) {
+      if(!num) return 0;
+      return Math.round(num * 100) / 100;
+    }
+
+  },
 }
 </script>
 

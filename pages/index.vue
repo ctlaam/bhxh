@@ -230,23 +230,23 @@ export default {
   data() {
     return {
       vip: {
-        name: 0,
+        name: '',
         background_urls: []
       },
     }
   },
   mounted() {
-    if (this.$store.state.profile) {
+    if (this.$store.state.profile.vip) {
       this.vip = this.$store.state.profile.vip;
       console.log("this.vipp mounted:", this.vip)
     }
   },
   watch: {
-    '$store.state.profile.key': {
+    '$store.state.profile.vip': {
       handler: function (val) {
-        console.log("val:", val,'a');
+        console.log("val:", val,'a index');
         if (val) {
-          this.vip = this.$store.state.profile.vip || { name: 0 }
+          this.vip = this.$store.state.profile.vip || { name: '' }
         }
       },
       deep: true,
