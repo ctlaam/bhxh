@@ -252,6 +252,13 @@ export default {
       deep: true,
     },
   },
+  filters: {
+    roundToTwoDecimalPlaces(num) {
+      if(!num) return 0;
+      return Math.round(num * 100) / 100;
+    }
+
+  }
 }
 </script>
 <style scpoed lang="scss">

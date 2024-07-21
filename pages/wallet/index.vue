@@ -1,7 +1,7 @@
 <template>
   <div style="margin-top: 80px">
     <div class="container mt-3 mb-4 text-center">
-      <h2 class="text-white">{{profileUser && profileUser.balance}}</h2>
+      <h2 class="text-white">{{profileUser && profileUser.balance | roundToTwoDecimalPlaces}}</h2>
       <p class="text-white mb-4">Tổng Tài Sản</p>
     </div>
     <div class="container text-center overflow-hidden">
@@ -176,6 +176,13 @@ export default {
     profileUser() {
       return  this.$store.state.profile.profile;
     },
+  },
+  filters: {
+    roundToTwoDecimalPlaces(num) {
+      if(!num) return 0;
+      return Math.round(num * 100) / 100;
+    }
+
   }
 }
 </script>
