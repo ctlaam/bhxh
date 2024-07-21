@@ -235,15 +235,16 @@ export default {
       },
     }
   },
-  // mounted() {
-  //   if (this.$store.state.profile) {
-  //     this.vip = this.$store.state.profile.vip;
-  //     console.log("this.vipp mounted:", this.vip)
-  //   }
-  // },
+  mounted() {
+    if (this.$store.state.profile) {
+      this.vip = this.$store.state.profile.vip;
+      console.log("this.vipp mounted:", this.vip)
+    }
+  },
   watch: {
-    '$store.state.profile': {
+    '$store.state.profile.key': {
       handler: function (val) {
+        console.log("val:", val,'a');
         if (val) {
           this.vip = this.$store.state.profile.vip || { name: 0 }
         }

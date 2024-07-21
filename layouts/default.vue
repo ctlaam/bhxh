@@ -5,6 +5,7 @@
       <div id="content" ref="content">
         <Nuxt />
       </div>
+      <script id="chatway" async="true" src="https://cdn.chatway.app/widget.js?id=Vmqw286gYXqa"></script>
       <Footer></Footer>
     </div>
     <!-- <fullscreen-modal> </fullscreen-modal> -->

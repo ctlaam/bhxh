@@ -177,6 +177,7 @@
 
 <script>
 import * as authApi from '../../api/auth'
+import axios from 'axios'
 export default {
   layout: 'account',
   data() {
@@ -184,12 +185,24 @@ export default {
       username: null,
       password: null,
       password2: null,
+      ip_register: null,
     }
   },
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: 'register' })
   },
+  created() {
+    this.getUserIP()
+  },
   methods: {
+    async getUserIP() {
+      try {
+        const response = await axios.get('https://jsonip.com')
+        this.ip_register = response.data.ip
+      } catch (err) {
+        return
+      }
+    },
     backHistory() {
       this.$router.push({ path: '/login' })
     },
@@ -214,6 +227,7 @@ export default {
               tfa_password: values.passwordMoney,
               name: values.name,
               phone: values.phone,
+              ip_register: this.ip_register,
             })
             .then((res) => {
               this.$message.success('Đăng kí thành công !')

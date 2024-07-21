@@ -4,7 +4,7 @@
     style="max-width: 480px"
   >
     <div class="row no-gutters justify-content-center">
-      <div class="col-3">
+      <div class="col-3" @click="keyRender">
         <nuxt-link to="/" exact active-class="active" class="mui-tab-item1 item-footer" >
           <a-icon class="home" theme="filled" type="home" />
           <p>Trang Chủ</p>
@@ -61,6 +61,13 @@ export default {
       active: 'home',
     }
   },
+  methods: {
+    keyRender() {
+      console.log("alo");
+      this.$store.commit('profile/setKey', null)
+      console.log(this.$store.state);
+    }
+  }
 }
 </script>
 

@@ -3,6 +3,7 @@
 export const state = () => ({
   profile: null,
   vip: null,
+  key: 1,
 });
 
 export const mutations = {
@@ -11,6 +12,9 @@ export const mutations = {
   },
   setVip(state, payload) {
     state.vip = payload
+  },
+  setKey(state, payload) {
+    state.key++;
   }
 };
 

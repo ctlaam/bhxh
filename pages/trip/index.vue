@@ -2,21 +2,21 @@
   <div style="margin-top: 80px; margin-bottom: 80px">
     <div class="row w-100">
       <div class="col-6 mt-3 text-center">
-        <h5 class="text-white">0.00</h5>
+        <h5 class="text-white">{{ profile && profile.balance }}</h5>
         <p class="text-white mb-4 fz14">Tổng Tài Sản</p>
       </div>
       <div class="col-6 mt-3 text-center">
-        <h5 class="text-white">0</h5>
+        <h5 class="text-white">{{ orderOfUser && orderOfUser.total_commission_today }}</h5>
         <p class="text-white mb-4 fz14">Hoa Hồng Hôm Nay</p>
       </div>
     </div>
     <div class="row w-100">
       <div class="col-6 mt-3 text-center">
-        <h5 class="text-white">20</h5>
+        <h5 class="text-white">{{ vip && vip.order_quantity_per_day }}</h5>
         <p class="text-white mb-4 fz14">Hành Trình Hàng Ngày</p>
       </div>
       <div class="col-6 mt-3 text-center">
-        <h5 class="text-white">0</h5>
+        <h5 class="text-white">{{ profile  && profile.total_order_success || 0 }}</h5>
         <p class="text-white mb-4 fz14">Hành Trình Đã Đi</p>
       </div>
     </div>
@@ -311,6 +311,9 @@
 
 <script>
 import * as tutorApi from '../../api/tuor';
+import * as volatilityApi from '../../api/volatility.js'
+import * as orderApi from '../../api/order'
+
 import axios from "axios";
 export default {
   name: 'index',
@@ -325,19 +328,54 @@ export default {
       },
       domain: 'https://api.vietnamtour.pro/',
       orderId: null,
+      profile: null,
+      vip: null,
+      orderOfUser: null,
     }
+  },
+  async created() {
+    await volatilityApi
+      .getProfileUser()
+      .then(async (res) => {
+        this.profile = res.data
+        await volatilityApi.getListVips(this.profile.level).then((data) => {
+          this.vip = data.data
+        })
+      })
+      .catch((err) => {
+        console.log(this.$router.current?.name)
+        if (
+          err == 'Phiên đăng nhập đã hết hạn' &&
+          currentURL != 'https://vietnamtour.pro/' &&
+          currentURL != 'https://vietnamtour.pro/login/' &&
+          currentURL != 'https://vietnamtour.pro/login/signup/'
+        ) {
+          this.$router.push('/login')
+          return
+        }
+      })
+
+    await orderApi
+        .getOrderAnalytic()
+        .then((res) => {
+          this.orderOfUser = res.data
+          console.log('this.orderOfUser:', this.orderOfUser)
+        })
+        .catch((err) => {
+          this.$message.error(err)
+        })
   },
   methods: {
     async showModalTour() {
       await tutorApi.getTuor().then(async (res) => {
         this.trip = res.data.product;
         this.orderId = res.data._id;
+        this.showModal = true
       })
         .catch((err) => {
           this.$message.error(err)
           return;
       })
-      this.showModal = true
     },
     getIndexItem(item) {
       this.indexItem = item
@@ -354,6 +392,19 @@ export default {
         })
     }
   },
+  // watch: {
+  //   '$store.state.profile': {
+  //     handler: function (val) {
+  //       if (val) {
+  //         console.log("1")
+  //         this.profile = this.$store.state.profile.profile;
+  //         // this.vip = this.$store.state.profile.vip;
+  //         // this.getOrderAnalytic()
+  //       }
+  //     },
+  //     deep: true,
+  //   },
+  // }
 }
 </script>
 
