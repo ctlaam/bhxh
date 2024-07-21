@@ -23,7 +23,7 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <h5 class="mb-1">0</h5>
+                    <h5 class="mb-1">{{ orderOfUser && orderOfUser.total_reward_today | roundToTwoDecimalPlaces }}</h5>
                     <p class="text-secondary">Thu Nhập Hoa Hồng</p>
                   </div>
                   <div class="col-auto pl-0">
@@ -159,8 +159,15 @@
 </template>
 
 <script>
+import * as orderApi from '../../api/order'
+
 export default {
   name: "index",
+  data() {
+    return {
+      orderOfUser: null
+    }
+  },
   methods: {
     navigateToPage() {
       console.log('this.profileUser:', this.profileUser)
@@ -170,6 +177,17 @@ export default {
       }
 
       this.$router.push({ path: '/wallet/recharge' })
+    },
+    getOrderAnalytic() {
+      orderApi
+        .getOrderAnalytic()
+        .then((res) => {
+          this.orderOfUser = _.get(res, 'data', [])
+          console.log('this.orderOfUser:', this.orderOfUser)
+        })
+        .catch((err) => {
+          this.$message.error(err)
+        })
     },
   },
   computed: {
@@ -181,8 +199,15 @@ export default {
     roundToTwoDecimalPlaces(num) {
       if(!num) return 0;
       return Math.round(num * 100) / 100;
+    },
+    roundToTwoDecimalPlaces(num) {
+      if(!num) return 0;
+      return Math.round(num * 100) / 100;
     }
 
+  },
+  created() {
+    this.getOrderAnalytic();
   }
 }
 </script>
