@@ -234,36 +234,8 @@ export default {
     }
   },
   async created() {
-    await volatilityApi
-      .getProfileUser()
-      .then(async (res) => {
-        this.profile = res.data
-        await volatilityApi.getListVips(this.profile.level).then((data) => {
-          this.vip = data.data
-        })
-      })
-      .catch((err) => {
-        console.log(this.$router.current?.name)
-        if (
-          err == 'Phiên đăng nhập đã hết hạn' &&
-          currentURL != 'https://vietnamtour.pro/' &&
-          currentURL != 'https://vietnamtour.pro/login/' &&
-          currentURL != 'https://vietnamtour.pro/login/signup/'
-        ) {
-          this.$router.push('/login')
-          return
-        }
-      })
-
-    await orderApi
-      .getOrderAnalytic()
-      .then((res) => {
-        this.orderOfUser = res.data
-        console.log('this.orderOfUser:', this.orderOfUser)
-      })
-      .catch((err) => {
-        this.$message.error(err)
-      })
+    this.getProfile();
+    this.getOrder();
   },
   methods: {
     async showModalTour() {
@@ -285,11 +257,46 @@ export default {
         .then((res) => {
           this.$message.success('Đánh giá hành trình thành công!')
           this.showModal = false;
+          this.getProfile();
+          this.getOrder();
         })
         .catch((err) => {
           this.$message.error(err)
           return;
         })
+    },
+    async getProfile() {
+      await volatilityApi
+      .getProfileUser()
+      .then(async (res) => {
+        this.profile = res.data
+        await volatilityApi.getListVips(this.profile.level).then((data) => {
+          this.vip = data.data
+        })
+      })
+      .catch((err) => {
+        console.log(this.$router.current?.name)
+        if (
+          err == 'Phiên đăng nhập đã hết hạn' &&
+          currentURL != 'https://vietnamtour.pro/' &&
+          currentURL != 'https://vietnamtour.pro/login/' &&
+          currentURL != 'https://vietnamtour.pro/login/signup/'
+        ) {
+          this.$router.push('/login')
+          return
+        }
+      })
+    },
+    async getOrder() {
+      await orderApi
+      .getOrderAnalytic()
+      .then((res) => {
+        this.orderOfUser = res.data
+        console.log('this.orderOfUser:', this.orderOfUser)
+      })
+      .catch((err) => {
+        this.$message.error(err)
+      })
     }
   },
   filters: {
