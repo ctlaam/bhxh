@@ -29,9 +29,7 @@ export default {
   },
   methods: {
     handleScroll() {
-      // Lấy vị trí cuộn của phần tử "content"
       const scrollPosition = this.$refs.content.scrollTop
-      // Thêm logic dựa trên vị trí cuộn
       if (scrollPosition > 50) {
         this.activeHeader = true
       } else if (scrollPosition == 0) {
@@ -39,30 +37,34 @@ export default {
       }
     },
   },
-  mounted() {
-    console.log('Component mounted')
+  async mounted() {
+    const currentURL = window.location.href
+    console.log(currentURL);
     this.$refs.content.addEventListener('scroll', this.handleScroll)
-  },
-  beforeDestroy() {
-    this.$refs.content.removeEventListener('scroll', this.handleScroll)
-  },
-  async created() {
     await volatilityApi
       .getProfileUser()
       .then(async (res) => {
         let profile = res.data
         this.$store.dispatch('profile/saveProfile', profile)
-        await volatilityApi.getListVips(profile.level)
-          .then((data) => {
-            this.$store.dispatch('profile/saveVip', data.data)
-          })
+        await volatilityApi.getListVips(profile.level).then((data) => {
+          this.$store.dispatch('profile/saveVip', data.data)
+        })
       })
       .catch((err) => {
-        if (err == 'Phiên đăng nhập đã hết hạn') {
+        console.log(this.$router.current?.name)
+        if (
+          err == 'Phiên đăng nhập đã hết hạn' &&
+          currentURL != 'https://vietnamtour.pro/' &&
+          currentURL != 'https://vietnamtour.pro/login/' &&
+          currentURL != 'https://vietnamtour.pro/login/signup/'
+        ) {
           this.$router.push('/login')
           return
         }
       })
+  },
+  beforeDestroy() {
+    this.$refs.content.removeEventListener('scroll', this.handleScroll)
   },
 }
 </script>
