@@ -185,6 +185,7 @@ export default {
         })
     },
     async createTuor(item) {
+      if(item.status == "Success") return;
       this.showModal = true;
       this.trip = item.product;
       this.orderId = item._id
