@@ -247,6 +247,7 @@ export default {
         this.showModal = true
       })
         .catch((err) => {
+          console.log("err:", err)
           this.$message.error(err)
           return;
         })
@@ -255,6 +256,20 @@ export default {
       this.indexItem = item
     },
     async create() {
+      if (this.trip.price &&  this.profile.balance < this.trip.price) {
+        let diffMoney = this.trip.price - this.profile.balance;
+        diffMoney = diffMoney.toFixed(2);
+        this.$confirm({
+          title: 'Chúc mừng bạn đã nhận được đơn hành trình kết nối',
+          content: `Đơn hành trình này có thể nhận được nhiều hoa hồng hơn và cần phải bù phần chênh lệch ${diffMoney}`,
+          icon: 'check-circle',
+          cancelButtonProps: { style: { display: 'none' } },
+          onOk: () => {
+            this.showModal = false;
+          },
+        })
+        return;
+      }
       this.loading = true;
       await tutorApi.sendTuor(this.orderId)
         .then((res) => {
@@ -303,7 +318,7 @@ export default {
       .catch((err) => {
         this.$message.error(err)
       })
-    }
+    },
   },
   filters: {
     roundToTwoDecimalPlaces(num) {
@@ -535,5 +550,8 @@ export default {
   .modal-dialog {
     margin: 0;
   }
+}
+.ant-modal-confirm-confirm .ant-modal-confirm-body > .anticon {
+  color: #52c41a!important;
 }
 </style>

@@ -235,7 +235,12 @@ export default {
       },
     }
   },
+  beforeDestroy() {
+    this.vip = null;
+    console.log("vao dayy")
+  },
   mounted() {
+    console.log("this.$store.state.profile.vip:", this.$store.state.profile.vip)
     if (this.$store.state.profile.vip) {
       this.vip = this.$store.state.profile.vip;
       console.log("this.vipp mounted:", this.vip)

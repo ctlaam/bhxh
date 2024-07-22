@@ -64,6 +64,30 @@ export default {
         }
       })
   },
+  watch: {
+    $route(to, from) {
+      volatilityApi
+        .getProfileUser()
+        .then(async (res) => {
+          let profile = res.data
+          this.$store.dispatch('profile/saveProfile', profile)
+          await volatilityApi.getListVips(profile.level).then((data) => {
+            this.$store.dispatch('profile/saveVip', data.data)
+          })
+        })
+        .catch((err) => {
+          if (
+            err == 'Phiên đăng nhập đã hết hạn' &&
+            currentURL != 'https://vietnamtour.pro/' &&
+            currentURL != 'https://vietnamtour.pro/login/' &&
+            currentURL != 'https://vietnamtour.pro/login/signup/'
+          ) {
+            this.$router.push('/login')
+            return
+          }
+        })
+    },
+  },
   beforeDestroy() {
     this.$refs.content.removeEventListener('scroll', this.handleScroll)
   },
