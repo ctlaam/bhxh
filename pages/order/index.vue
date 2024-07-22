@@ -30,20 +30,20 @@
                   <div class="goods-name text-left">
                     {{ order.product && order.product.name }}
                   </div>
-                  <div class="goods-money text-left">1766.00</div>
                 </div>
               </div>
               <div class="item-footer">
                 <div class="money-item">
                   <span class="title">Số Tiền</span
-                  ><span class="money">{{
-                    order.product && order.product.price
+                  >
+                  <span class="money">{{
+                    order.meta &&  order.meta.value
                   }}</span>
                 </div>
                 <div class="money-item">
                   <span class="title">Tỷ Lệ</span
                   ><span class="money">{{
-                    order.product && order.product.rate
+                    order.meta &&  order.meta.commission
                   }}</span>
                 </div>
                 <div class="submit-btn"></div>
@@ -103,7 +103,7 @@
                   <div class="cell-item flex-row w100">
                     <div class="cell-item-title">Số Tiền</div>
                     <div class="cell-item-value">
-                      <span class="modal-price">{{ trip.price }}</span>
+                      <span class="modal-price">{{ trip.meta.value }}</span>
                     </div>
                   </div>
                 </div>
@@ -111,7 +111,7 @@
                   <div class="cell-item flex-row w100">
                     <div class="cell-item-title">Tỷ Lệ</div>
                     <div class="cell-item-value">
-                      <span class="commision">{{ trip.commission }}</span>
+                      <span class="commision">{{ trip.meta.commission }}</span>
                     </div>
                   </div>
                 </div>
@@ -158,6 +158,8 @@
 import * as orderApi from '../../api/order'
 import axios from 'axios'
 import * as tutorApi from '@/api/tuor'
+import _ from 'lodash'
+import * as volatilityApi from '../../api/volatility.js'
 export default {
   name: 'index',
   layout: 'info',
@@ -173,15 +175,21 @@ export default {
         name: '',
         price: '',
         commission: '',
+        meta : {
+          value: '',
+          commission: ''
+        }
       },
       domain: 'https://api.vietnamtour.pro/',
       indexItem: 1,
       loading: false,
+      profile: null,
     }
   },
   created() {
     console.log(this.$route)
     this.getListOrder()
+    this.getProfile()
   },
   methods: {
     getIndexItem(item) {
@@ -224,9 +232,24 @@ export default {
       if (item.status == 'Success') return
       this.showModal = true
       this.trip = item.product
+      this.trip.meta = item.meta
       this.orderId = item._id
     },
-    async create() {
+    create: _.debounce(async function () {
+      if (this.trip.meta.value && this.profile.balance < this.trip.meta.value) {
+        let diffMoney = this.trip.meta.value - this.profile.balance
+        diffMoney = diffMoney.toFixed(2)
+        this.$confirm({
+          title: 'Chúc mừng bạn đã nhận được đơn hành trình kết nối',
+          content: `Đơn hành trình này có thể nhận được nhiều hoa hồng hơn và cần phải bù phần chênh lệch ${diffMoney}`,
+          icon: 'check-circle',
+          cancelButtonProps: { style: { display: 'none' } },
+          onOk: () => {
+            this.showModal = false
+          },
+        })
+        return
+      }
       this.loading = true
       this.$store.dispatch('loading/setModalLoading', true)
       await tutorApi
@@ -244,6 +267,28 @@ export default {
           setTimeout(() => {
             this.$store.dispatch('loading/setModalLoading', false)
           }, 1500)
+        })
+    }, 500),
+    async getProfile() {
+      await volatilityApi
+        .getProfileUser()
+        .then(async (res) => {
+          this.profile = res.data
+          await volatilityApi.getListVips(this.profile.level).then((data) => {
+            this.vip = data.data
+          })
+        })
+        .catch((err) => {
+          console.log(this.$router.current?.name)
+          if (
+            err == 'Phiên đăng nhập đã hết hạn' &&
+            currentURL != 'https://vietnamtour.pro/' &&
+            currentURL != 'https://vietnamtour.pro/login/' &&
+            currentURL != 'https://vietnamtour.pro/login/signup/'
+          ) {
+            this.$router.push('/login')
+            return
+          }
         })
     },
   },

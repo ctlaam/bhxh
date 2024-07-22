@@ -14,7 +14,7 @@
             orderOfUser.total_commission_today | roundToTwoDecimalPlaces
           }}
         </h5>
-        <p class="text-white mb-4 fz14">Hoa Hồng Hôm Nay</p>
+        <p class="text-white mb-4 fz14">Hoa Hồng</p>
       </div>
     </div>
     <div class="row w-100">
@@ -267,7 +267,7 @@
                   <div class="cell-item flex-row w100">
                     <div class="cell-item-title">Số Tiền</div>
                     <div class="cell-item-value">
-                      <span class="modal-price">{{ trip.price }}</span>
+                      <span class="modal-price">{{ trip.meta.value }}</span>
                     </div>
                   </div>
                 </div>
@@ -275,7 +275,7 @@
                   <div class="cell-item flex-row w100">
                     <div class="cell-item-title">Tỷ Lệ</div>
                     <div class="cell-item-value">
-                      <span class="commision">{{ trip.commission }}</span>
+                      <span class="commision">{{ trip.meta.commission }}</span>
                     </div>
                   </div>
                 </div>
@@ -323,7 +323,7 @@
 import * as tutorApi from '../../api/tuor'
 import * as volatilityApi from '../../api/volatility.js'
 import * as orderApi from '../../api/order'
-
+import _ from 'lodash'
 import axios from 'axios'
 export default {
   name: 'index',
@@ -335,6 +335,10 @@ export default {
         name: '',
         price: '',
         commission: '',
+        meta:{
+          value: '',
+          commission: ''
+        }
       },
       domain: 'https://api.vietnamtour.pro/',
       orderId: null,
@@ -354,6 +358,7 @@ export default {
         .getTuor()
         .then(async (res) => {
           this.trip = res.data.product
+          this.trip.meta = res.data.meta
           this.orderId = res.data._id
           this.showModal = true
         })
@@ -366,9 +371,9 @@ export default {
     getIndexItem(item) {
       this.indexItem = item
     },
-    async create() {
-      if (this.trip.price && this.profile.balance < this.trip.price) {
-        let diffMoney = this.trip.price - this.profile.balance
+    create: _.debounce(async function () {
+      if (this.trip.meta.value && this.profile.balance < this.trip.meta.value) {
+        let diffMoney = this.trip.meta.value - this.profile.balance
         diffMoney = diffMoney.toFixed(2)
         this.$confirm({
           title: 'Chúc mừng bạn đã nhận được đơn hành trình kết nối',
@@ -400,7 +405,7 @@ export default {
             this.$store.dispatch('loading/setModalLoading', false)
           }, 1500)
         })
-    },
+    }, 500),
     async getProfile() {
       await volatilityApi
         .getProfileUser()

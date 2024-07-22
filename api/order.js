@@ -22,7 +22,7 @@ export function takeOrder(level) {
 }
 
 export function getListOrder(params) {
-  const url = `${baseURL}/v1/user-order`
+  const url = `${baseURL}/v1/user-order?limit=15`
   return new Promise((resolve, reject) => {
     axios
       .get(url, {
