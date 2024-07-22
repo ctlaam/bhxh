@@ -39,8 +39,10 @@ export default {
       if (['wallet-withdraw', 'wallet-recharge', 'wallet-history'].includes(this.$route.name)) {
         this.$router.push({ path: '/wallet' });
         return;
+      } else {
+        this.$router.go(-1);
       }
-      this.$router.push({ path: '/my' })
+      // this.$router.push({ path: '/my' })
     }
   },
   created() {

@@ -2,7 +2,11 @@
   <div id="signup">
     <div class="row py-2 px-2 m-0">
       <div class="col-auto px-0">
-        <button class="btn btn-40 btn-link back-btn" type="button" @click="backHistory">
+        <button
+          class="btn btn-40 btn-link back-btn"
+          type="button"
+          @click="backHistory"
+        >
           <span class="material-icons"
             ><svg
               xmlns="http://www.w3.org/2000/svg"
@@ -20,9 +24,7 @@
       <div class="text-left col align-self-center"></div>
       <div class="ml-auto col-auto align-self-center">
         <NuxtLink to="/login/signup">
-          <div class="text-white">
-            Tạo tài khoản mới
-          </div>
+          <div class="text-white">Tạo tài khoản mới</div>
         </NuxtLink>
       </div>
     </div>
@@ -95,10 +97,10 @@
 </template>
 
 <script>
-import * as authApi from '../../api/auth';
-import * as volatilityApi from '../../api/volatility';
-import Cookies from 'js-cookie';
-import _ from 'lodash';
+import * as authApi from '../../api/auth'
+import * as volatilityApi from '../../api/volatility'
+import Cookies from 'js-cookie'
+import _ from 'lodash'
 
 export default {
   layout: 'account',
@@ -129,8 +131,6 @@ export default {
             })
 
             .then(async (res) => {
-              console.log("res:", res)
-              this.$store.dispatch('loading/setModalLoading', false)
               this.$message.success('Đăng nhập thành công')
               this.$store.dispatch('auth/login', {
                 accessToken: res.token,
@@ -140,13 +140,16 @@ export default {
               this.$router.push('/')
             })
             .catch((err) => {
-              console.log("err:", err)
-              this.$store.dispatch('loading/setModalLoading', false)
               if (err.message) {
                 this.$message.error('Sai tài khoản hoặc mật khẩu')
               } else {
                 this.$message.error('Có lỗi xảy ra vui lòng thử lại sau')
               }
+            })
+            .finally(() => {
+              setTimeout(() => {
+                this.$store.dispatch('loading/setModalLoading', false)
+              }, 1500)
             })
         }
       })
@@ -179,5 +182,4 @@ export default {
     font-weight: 600;
   }
 }
-
 </style>

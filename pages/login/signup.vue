@@ -2,7 +2,11 @@
   <div id="signup">
     <div class="row py-2 px-2 m-0">
       <div class="col-auto px-0">
-        <button class="btn btn-40 btn-link back-btn" @click="backHistory" type="button">
+        <button
+          class="btn btn-40 btn-link back-btn"
+          @click="backHistory"
+          type="button"
+        >
           <span class="material-icons"
             ><svg
               xmlns="http://www.w3.org/2000/svg"
@@ -217,7 +221,7 @@ export default {
     handleSubmit(e) {
       e.preventDefault()
       this.form.validateFieldsAndScroll((err, values) => {
-        console.log("value:", values)
+        console.log('value:', values)
         if (!err) {
           authApi
             .signUp({
@@ -240,7 +244,11 @@ export default {
                 this.$message.error('Đăng kí thất bại !')
               }
             })
-          console.log('Received values of form: ', values)
+            .finally(() => {
+              setTimeout(() => {
+                this.$store.dispatch('loading/setModalLoading', false)
+              }, 1500)
+            })
         }
       })
     },

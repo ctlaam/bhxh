@@ -5,10 +5,14 @@
       <div id="content" ref="content">
         <Nuxt />
       </div>
-      <script id="chatway" async="true" src="https://cdn.chatway.app/widget.js?id=Vmqw286gYXqa"></script>
+      <script
+        id="chatway"
+        async="true"
+        src="https://cdn.chatway.app/widget.js?id=Vmqw286gYXqa"
+      ></script>
       <Footer></Footer>
     </div>
-    <!-- <fullscreen-modal> </fullscreen-modal> -->
+    <FullScreenModal> </FullScreenModal>
     <div class="modal"></div>
   </div>
 </template>
@@ -16,12 +20,13 @@
 <script>
 import * as volatilityApi from '../api/volatility.js'
 import Footer from '../components/apps/footer.vue'
+import FullScreenModal from '../components/apps/FullScreenModal.vue'
 import Header from '../components/apps/header.vue'
-
 export default {
   components: {
     Footer,
     Header,
+    FullScreenModal,
   },
   data() {
     return {
@@ -39,8 +44,8 @@ export default {
     },
   },
   async mounted() {
+    this.$store.dispatch('loading/setModalLoading', true)
     const currentURL = window.location.href
-    console.log(currentURL);
     this.$refs.content.addEventListener('scroll', this.handleScroll)
     await volatilityApi
       .getProfileUser()
@@ -60,9 +65,12 @@ export default {
           currentURL != 'https://vietnamtour.pro/login/signup/'
         ) {
           this.$router.push('/login')
-          return
         }
       })
+      setTimeout(() => {
+        this.$store.dispatch('loading/setModalLoading', false)
+      }, 1500)
+
   },
   watch: {
     $route(to, from) {

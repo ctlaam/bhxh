@@ -10,7 +10,7 @@
       </div>
       <Footer></Footer>
     </div>
-    <fullscreen-modal> </fullscreen-modal>
+    <FullScreenModal> </FullScreenModal>
     <div class="modal"></div>
   </div>
 </template>
@@ -18,6 +18,7 @@
 <script>
 import Footer from '../components/apps/footer.vue'
 import Header from '../components/apps/headerInfo'
+import FullScreenModal from '../components/apps/FullScreenModal.vue'
 
 export default {
   name: "info",
@@ -29,6 +30,7 @@ export default {
   components: {
     Header,
     Footer,
+    FullScreenModal
   },
   methods: {
     handleScroll() {
