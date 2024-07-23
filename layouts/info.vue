@@ -3,14 +3,21 @@
     <div class="main-content">
       <Header :activeHeader="activeHeader"></Header>
       <div id="content" ref="content">
-        <div class="container mb-4 text-center text-white" style="margin-top: 80px">
+        <div
+          class="container mb-4 text-center text-white"
+          style="margin-top: 80px"
+        >
           <Nuxt />
         </div>
-
       </div>
       <Footer></Footer>
     </div>
     <FullScreenModal> </FullScreenModal>
+    <script
+      id="chatway"
+      async="true"
+      src="https://cdn.chatway.app/widget.js?id=RyXcUgtmEQpi"
+    ></script>
     <div class="modal"></div>
   </div>
 </template>
@@ -21,7 +28,7 @@ import Header from '../components/apps/headerInfo'
 import FullScreenModal from '../components/apps/FullScreenModal.vue'
 
 export default {
-  name: "info",
+  name: 'info',
   data() {
     return {
       activeHeader: false,
@@ -30,7 +37,7 @@ export default {
   components: {
     Header,
     Footer,
-    FullScreenModal
+    FullScreenModal,
   },
   methods: {
     handleScroll() {
@@ -48,10 +55,8 @@ export default {
   },
   mounted() {
     this.$refs.content.addEventListener('scroll', this.handleScroll)
-  }
+  },
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

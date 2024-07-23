@@ -8,7 +8,7 @@
       <script
         id="chatway"
         async="true"
-        src="https://cdn.chatway.app/widget.js?id=Vmqw286gYXqa"
+        src="https://cdn.chatway.app/widget.js?id=RyXcUgtmEQpi"
       ></script>
       <Footer></Footer>
     </div>
@@ -67,10 +67,9 @@ export default {
           this.$router.push('/login')
         }
       })
-      setTimeout(() => {
-        this.$store.dispatch('loading/setModalLoading', false)
-      }, 1500)
-
+    setTimeout(() => {
+      this.$store.dispatch('loading/setModalLoading', false)
+    }, 1500)
   },
   watch: {
     $route(to, from) {

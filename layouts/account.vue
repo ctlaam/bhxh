@@ -2,6 +2,11 @@
   <div class="account-content">
     <Nuxt />
     <!-- <fullscreen-modal> </fullscreen-modal> -->
+    <script
+      id="chatway"
+      async="true"
+      src="https://cdn.chatway.app/widget.js?id=RyXcUgtmEQpi"
+    ></script>
   </div>
 </template>
 <script>
