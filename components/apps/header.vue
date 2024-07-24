@@ -91,7 +91,6 @@ export default {
 }
 
 .material-icons {
-  font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
   font-size: 24px;

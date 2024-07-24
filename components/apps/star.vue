@@ -115,7 +115,6 @@
                                               margin: 0;
                                               color: #60666d;
                                               font-size: 50px;
-                                              font-family: sans-serif;
                                               line-height: 20px;
                                               text-align: left;
                                             "
@@ -237,7 +236,7 @@
                                                             target="_blank"
                                                             lang="x-star-number"
                                                             style="
-                                                              font-family: sans-serif;
+                                                              
                                                               color: #aeaeae;
                                                               font-size: 14px;
                                                               line-height: 14px;
@@ -319,7 +318,7 @@
                                                             target="_blank"
                                                             lang="x-star-number"
                                                             style="
-                                                              font-family: sans-serif;
+                                                              
                                                               color: #aeaeae;
                                                               font-size: 14px;
                                                               line-height: 14px;
@@ -401,7 +400,7 @@
                                                             target="_blank"
                                                             lang="x-star-number"
                                                             style="
-                                                              font-family: sans-serif;
+                                                              
                                                               color: #aeaeae;
                                                               font-size: 14px;
                                                               line-height: 14px;
@@ -483,7 +482,7 @@
                                                             target="_blank"
                                                             lang="x-star-number"
                                                             style="
-                                                              font-family: sans-serif;
+                                                              
                                                               color: #aeaeae;
                                                               font-size: 14px;
                                                               line-height: 14px;
@@ -565,7 +564,7 @@
                                                             target="_blank"
                                                             lang="x-star-number"
                                                             style="
-                                                              font-family: sans-serif;
+                                                              
                                                               color: #aeaeae;
                                                               font-size: 14px;
                                                               line-height: 14px;

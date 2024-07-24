@@ -4,11 +4,6 @@
       <h2 class="text-white">{{profileUser && profileUser.balance | roundToTwoDecimalPlaces}}</h2>
       <p class="text-white mb-4">Tổng Tài Sản</p>
     </div>
-    <div class="container text-center overflow-hidden">
-      <div id="chart-container">
-        <canvas id="mixedchartjs"></canvas>
-      </div>
-    </div>
     <div class="main-container">
       <div class="container">
         <div class="row mb-3">
