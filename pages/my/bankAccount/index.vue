@@ -104,6 +104,106 @@ export default {
         {
           name: 'Agribank',
           full_name: 'Ngân hàng Agribank',
+        },
+        {
+          name: 'MB',
+          full_name: 'Ngân hàng Quân Đội',
+        },
+        {
+          name: 'Sacombank',
+          full_name: 'Ngân hàng Sài Gòn Thương Tín',
+        },
+        {
+          name: 'ACB',
+          full_name: 'Ngân hàng Á Châu',
+        },
+        {
+          name: 'VPBank',
+          full_name: 'Ngân hàng Việt Nam Thịnh Vượng',
+        },
+        {
+          name: 'HDBank',
+          full_name: 'Ngân hàng Phát triển TP.HCM',
+        },
+        {
+          name: 'MSB',
+          full_name: 'Ngân hàng Hàng Hải Việt Nam',
+        },
+        {
+          name: 'SHB',
+          full_name: 'Ngân hàng Sài Gòn - Hà Nội',
+        },
+        {
+          name: 'VIB',
+          full_name: 'Ngân hàng Quốc tế Việt Nam',
+        },
+        {
+          name: 'TPBank',
+          full_name: 'Ngân hàng Tiên Phong',
+        },
+        {
+          name: 'LienVietPostBank',
+          full_name: 'Ngân hàng Bưu điện Liên Việt',
+        },
+        {
+          name: 'SeABank',
+          full_name: 'Ngân hàng Đông Nam Á',
+        },
+        {
+          name: 'OCB',
+          full_name: 'Ngân hàng Phương Đông',
+        },
+        {
+          name: 'SCB',
+          full_name: 'Ngân hàng Sài Gòn',
+        },
+        {
+          name: 'PVcomBank',
+          full_name: 'Ngân hàng Đại chúng Việt Nam',
+        },
+        {
+          name: 'Nam A Bank',
+          full_name: 'Ngân hàng Nam Á',
+        },
+        {
+          name: 'Eximbank',
+          full_name: 'Ngân hàng Xuất Nhập Khẩu Việt Nam',
+        },
+        {
+          name: 'ABBANK',
+          full_name: 'Ngân hàng An Bình',
+        },
+        {
+          name: 'Bac A Bank',
+          full_name: 'Ngân hàng Bắc Á',
+        },
+        {
+          name: 'PGBank',
+          full_name: 'Ngân hàng Xăng dầu Petrolimex',
+        },
+        {
+          name: 'Saigonbank',
+          full_name: 'Ngân hàng Sài Gòn Công Thương',
+        },
+        {
+          name: 'VietABank',
+          full_name: 'Ngân hàng Việt Á',
+        },
+        {
+          name: 'CBBank',
+          full_name: 'Ngân hàng Xây dựng',
+        },
+        {
+          name: 'VietBank',
+          full_name: 'Ngân hàng Việt Nam Thương Tín',
+        },
+        {
+          name: 'Kienlongbank',
+          full_name: 'Ngân hàng Kiên Long',
+        },
+        {
+          name: 'BaoVietBank',
+          full_name: 'Ngân hàng Bảo Việt',
         }
         // Add more banks as needed
       ]
