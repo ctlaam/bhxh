@@ -296,8 +296,42 @@
                 </li>
               </ul>
             </div>
+            <a-form
+              :form="form"
+              :label-col="{ span: 5 }"
+              :wrapper-col="{ span: 12 }"
+              @submit="handleSubmit"
+            >
+              <a-form-item label="Nhập đánh giá hành trình">
+                <a-input
+                  v-decorator="[
+                    'note',
+                    {
+                      rules: [
+                        {
+                          required: true,
+                          message: 'Vui lòng nhập đánh giá tour!',
+                        },
+                      ],
+                    },
+                  ]"
+                />
+              </a-form-item>
+              <a-form-item>
+                <div class="modal-footer">
+                  <a-button
+                    html-type="submit"
+                    :loading="loading"
+                    type="submit"
+                    class="btn btn-primary btn2"
+                  >
+                    Gửi
+                  </a-button>
+                </div>
+              </a-form-item>
+            </a-form>
           </div>
-          <div class="modal-footer">
+          <!-- <div class="modal-footer">
             <input
               type="hidden"
               id="oid"
@@ -312,7 +346,7 @@
             >
               Gửi
             </a-button>
-          </div>
+          </div> -->
         </div>
       </div>
     </a-modal>
@@ -335,10 +369,10 @@ export default {
         name: '',
         price: '',
         commission: '',
-        meta:{
+        meta: {
           value: '',
-          commission: ''
-        }
+          commission: '',
+        },
       },
       domain: 'https://api.vietnamtour.pro/',
       orderId: null,
@@ -346,6 +380,8 @@ export default {
       vip: null,
       orderOfUser: null,
       loading: false,
+      formLayout: 'horizontal',
+      form: this.$form.createForm(this, { name: 'coordinated' }),
     }
   },
   async created() {
@@ -353,6 +389,14 @@ export default {
     this.getOrder()
   },
   methods: {
+    handleSubmit(e) {
+      e.preventDefault()
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          this.create()
+        }
+      })
+    },
     async showModalTour() {
       await tutorApi
         .getTuor()
@@ -403,7 +447,7 @@ export default {
           this.loading = false
           setTimeout(() => {
             this.$store.dispatch('loading/setModalLoading', false)
-          }, 1500)
+          }, 2500)
         })
     }, 500),
     async getProfile() {
@@ -461,7 +505,14 @@ export default {
   // }
 }
 </script>
-
+<style lang="scss">
+.modal-give-tour input#coordinated_note {
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 10px;
+  width: 100%;
+}
+</style>
 <style scoped lang="scss">
 @import '~/assets/scss/my.scss';
 @import '~/assets/animate/animate.min.css';

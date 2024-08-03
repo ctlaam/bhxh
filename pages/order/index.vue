@@ -34,16 +34,15 @@
               </div>
               <div class="item-footer">
                 <div class="money-item">
-                  <span class="title">Số Tiền</span
-                  >
+                  <span class="title">Số Tiền</span>
                   <span class="money">{{
-                    order.meta &&  order.meta.value
+                    order.meta && order.meta.value
                   }}</span>
                 </div>
                 <div class="money-item">
                   <span class="title">Tỷ Lệ</span
                   ><span class="money">{{
-                    order.meta &&  order.meta.commission
+                    order.meta && order.meta.commission
                   }}</span>
                 </div>
                 <div class="submit-btn"></div>
@@ -132,21 +131,40 @@
                 </li>
               </ul>
             </div>
-          </div>
-          <div class="modal-footer">
-            <input
-              type="hidden"
-              id="oid"
-              name="oid"
-              value="UB2407191022585488"
-            /><a-button
-              :loading="loading"
-              type="submit"
-              class="btn btn-primary btn2"
-              @click="create()"
+            <a-form
+              :form="form"
+              :label-col="{ span: 5 }"
+              :wrapper-col="{ span: 12 }"
+              @submit="handleSubmit"
             >
-              Gửi
-            </a-button>
+              <a-form-item label="Nhập đánh giá hành trình">
+                <a-input
+                  v-decorator="[
+                    'note',
+                    {
+                      rules: [
+                        {
+                          required: true,
+                          message: 'Vui lòng nhập đánh giá tour!',
+                        },
+                      ],
+                    },
+                  ]"
+                />
+              </a-form-item>
+              <a-form-item>
+                <div class="modal-footer">
+                  <a-button
+                    html-type="submit"
+                    :loading="loading"
+                    type="submit"
+                    class="btn btn-primary btn2"
+                  >
+                    Gửi
+                  </a-button>
+                </div>
+              </a-form-item>
+            </a-form>
           </div>
         </div>
       </div>
@@ -175,15 +193,17 @@ export default {
         name: '',
         price: '',
         commission: '',
-        meta : {
+        meta: {
           value: '',
-          commission: ''
-        }
+          commission: '',
+        },
       },
       domain: 'https://api.vietnamtour.pro/',
       indexItem: 1,
       loading: false,
       profile: null,
+      formLayout: 'horizontal',
+      form: this.$form.createForm(this, { name: 'coordinated' }),
     }
   },
   created() {
@@ -228,6 +248,14 @@ export default {
           this.$message.error(err)
         })
     },
+    handleSubmit(e) {
+      e.preventDefault()
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          this.create()
+        }
+      })
+    },
     async createTuor(item) {
       if (item.status == 'Success') return
       this.showModal = true
@@ -266,7 +294,7 @@ export default {
           this.loading = false
           setTimeout(() => {
             this.$store.dispatch('loading/setModalLoading', false)
-          }, 1500)
+          }, 2500)
         })
     }, 500),
     async getProfile() {
@@ -294,7 +322,14 @@ export default {
   },
 }
 </script>
-
+<style lang="scss">
+.modal-give-tour input#coordinated_note {
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 10px;
+  width: 100%;
+}
+</style>
 <style scoped lang="scss">
 @import '~/assets/scss/my.scss';
 
