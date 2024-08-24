@@ -1,5 +1,5 @@
 <template>
-  <div id="signup">
+  <div id="signup" style="height: 100vh;">
     <div class="row py-2 px-2 m-0">
       <div class="col-auto px-0">
         <button
@@ -28,8 +28,15 @@
         </NuxtLink>
       </div>
     </div>
-    <div class="container h-100 text-white">
-      <div class="row h-100">
+    <div
+      class="container text-white"
+      style="
+        overflow-y: auto;
+        height: 100%;
+        padding-bottom: 25px;
+      "
+    >
+      <div class="row">
         <div class="col-12 align-self-center mb-4">
           <div class="row justify-content-center">
             <div class="col">
