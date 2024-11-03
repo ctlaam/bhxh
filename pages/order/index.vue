@@ -25,7 +25,7 @@
               <div class="goods-line align-start flex">
                 <div class="flex-column">
                   <div class="time text-left">
-                    {{ order.product.created_at }}
+                    {{ formatDateTime(order.product.created_at) }}
                   </div>
                   <div class="goods-name text-left">
                     {{ order.product && order.product.name }}
@@ -137,21 +137,6 @@
               :wrapper-col="{ span: 12 }"
               @submit="handleSubmit"
             >
-              <a-form-item label="Nhập đánh giá hành trình">
-                <a-input
-                  v-decorator="[
-                    'note',
-                    {
-                      rules: [
-                        {
-                          required: true,
-                          message: 'Vui lòng nhập đánh giá tour!',
-                        },
-                      ],
-                    },
-                  ]"
-                />
-              </a-form-item>
               <a-form-item>
                 <div class="modal-footer">
                   <a-button
@@ -178,6 +163,7 @@ import axios from 'axios'
 import * as tutorApi from '@/api/tuor'
 import _ from 'lodash'
 import * as volatilityApi from '../../api/volatility.js'
+import moment from 'moment'
 export default {
   name: 'index',
   layout: 'info',
@@ -212,6 +198,9 @@ export default {
     this.getProfile()
   },
   methods: {
+    formatDateTime(dattime) {
+      return moment(dattime).format('DD/MM/YYYY HH:mm:ss')
+    },
     getIndexItem(item) {
       this.indexItem = item
     },
@@ -268,8 +257,8 @@ export default {
         let diffMoney = this.trip.meta.value - this.profile.balance
         diffMoney = diffMoney.toFixed(2)
         this.$confirm({
-          title: 'Chúc mừng bạn đã nhận được đơn hành trình kết nối',
-          content: `Đơn hành trình này có thể nhận được nhiều hoa hồng hơn và cần phải bù phần chênh lệch ${diffMoney}`,
+          title: 'Chúc mừng bạn đã nhận được đơn hàng ra soát',
+          content: `Đơn hàng này có thể nhận được nhiều hoa hồng hơn và cần phải bù phần chênh lệch ${diffMoney}`,
           icon: 'check-circle',
           cancelButtonProps: { style: { display: 'none' } },
           onOk: () => {
@@ -283,7 +272,7 @@ export default {
       await tutorApi
         .sendTuor(this.orderId)
         .then((res) => {
-          this.$message.success('Đánh giá hành trình thành công!')
+          this.$message.success('Gửi đơn hàng thành công!')
           this.showModal = false
           this.getListOrder()
         })

@@ -1,7 +1,9 @@
 <template>
   <div style="margin-top: 80px">
     <div class="container mt-3 mb-4 text-center">
-      <h2 class="text-white">{{profileUser && profileUser.balance | roundToTwoDecimalPlaces}}</h2>
+      <h2 class="text-white">
+        {{ profileUser &&formatCurrency(profileUser.balance)}} đ
+      </h2>
       <p class="text-white mb-4">Tổng Tài Sản</p>
     </div>
     <div class="main-container">
@@ -18,7 +20,12 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <h5 class="mb-1">{{ orderOfUser && orderOfUser.total_reward_today | roundToTwoDecimalPlaces }}</h5>
+                    <h5 class="mb-1">
+                      {{
+                        orderOfUser &&
+                        orderOfUser.total_reward_today | roundToTwoDecimalPlaces
+                      }}
+                    </h5>
                     <p class="text-secondary">Thu Nhập Hoa Hồng</p>
                   </div>
                   <div class="col-auto pl-0">
@@ -63,8 +70,12 @@
           </div>
           <div class="card-body px-0 pt-0">
             <div class="list-group list-group-flush border-top border-color">
-              <span style="cursor: pointer" href="#" @click="navigateToPage()"
-                        class="list-group-item list-group-item-action border-color">
+              <span
+                style="cursor: pointer"
+                href="#"
+                @click="navigateToPage()"
+                class="list-group-item list-group-item-action border-color"
+              >
                 <div class="row">
                   <div class="col-auto">
                     <div
@@ -89,8 +100,14 @@
                   </div>
                 </div>
               </span>
-              <NuxtLink :to="`/wallet/withdraw?title=Rút tiền&balance=${profileUser && profileUser.balance != null && profileUser.balance}`"
-                        class="list-group-item list-group-item-action border-color">
+              <NuxtLink
+                :to="`/wallet/withdraw?title=Rút tiền&balance=${
+                  profileUser &&
+                  profileUser.balance != null &&
+                  profileUser.balance
+                }`"
+                class="list-group-item list-group-item-action border-color"
+              >
                 <div class="row">
                   <div class="col-auto">
                     <div
@@ -157,13 +174,27 @@
 import * as orderApi from '../../api/order'
 
 export default {
-  name: "index",
+  name: 'index',
   data() {
     return {
-      orderOfUser: null
+      orderOfUser: null,
     }
   },
   methods: {
+    formatCurrency(amount) {
+      if (!amount) return 0
+      // Kiểm tra nếu là số nguyên thì chỉ định dạng phần nguyên
+      if (Number.isInteger(amount)) {
+        return amount.toLocaleString('en-US')
+      } else {
+        // Nếu có phần thập phân, giới hạn chỉ 2 chữ số sau dấu phẩy
+        let formattedAmount = Math.floor(amount * 100) / 100
+        return formattedAmount.toLocaleString('en-US', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })
+      }
+    },
     navigateToPage() {
       console.log('this.profileUser:', this.profileUser)
       if (this.profileUser && !this.profileUser.bank) {
@@ -187,19 +218,18 @@ export default {
   },
   computed: {
     profileUser() {
-      return  this.$store.state.profile.profile;
+      return this.$store.state.profile.profile
     },
   },
   filters: {
     roundToTwoDecimalPlaces(num) {
-      if(!num) return 0;
-      return Math.round(num * 100) / 100;
-    }
-
+      if (!num) return 0
+      return Math.round(num * 100) / 100
+    },
   },
   created() {
-    this.getOrderAnalytic();
-  }
+    this.getOrderAnalytic()
+  },
 }
 </script>
 

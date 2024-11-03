@@ -1,8 +1,8 @@
 <!-- components/FullscreenModal.vue -->
 <template>
   <div v-if="loading" class="fullscreen-loading">
-    <img src="~/assets/logo-7992.jpg" width="150px" alt="" />
-    <div class="my-4" style="color: #1890ff">Đang tải</div>
+    <img src="~/assets/crescentmall.png" width="150px" alt="" />
+    <div class="my-4" style="color: #ddbc2a">Đang tải</div>
     <div class="snippet" data-title="dot-flashing">
       <div class="stage">
         <div class="dot-flashing"></div>
@@ -28,7 +28,7 @@ export default {
   created() {
     setTimeout(() => {
       this.handleCancel()
-    }, 3000)
+    }, 1000)
   },
   methods: {
     handleCancel() {
@@ -58,18 +58,19 @@ export default {
  * Dot Flashing
  * ==============================================
  */
- .dot-flashing {
+.dot-flashing {
   position: relative;
   width: 10px;
   height: 10px;
   border-radius: 5px;
-  background-color: #1890ff;
-  color: #1890ff;
+  background-color: #ddbc2a;
+  color: #ddbc2a;
   animation: dot-flashing 0.5s infinite linear alternate;
   animation-delay: 0.25s;
 }
-.dot-flashing::before, .dot-flashing::after {
-  content: "";
+.dot-flashing::before,
+.dot-flashing::after {
+  content: '';
   display: inline-block;
   position: absolute;
   top: 0;
@@ -79,8 +80,8 @@ export default {
   width: 10px;
   height: 10px;
   border-radius: 5px;
-  background-color: #1890ff;
-  color: #1890ff;
+  background-color: #ddbc2a;
+  color: #ddbc2a;
   animation: dot-flashing 0.5s infinite alternate;
   animation-delay: 0s;
 }
@@ -89,17 +90,18 @@ export default {
   width: 10px;
   height: 10px;
   border-radius: 5px;
-  background-color: #1890ff;
-  color: #1890ff;
+  background-color: #ddbc2a;
+  color: #ddbc2a;
   animation: dot-flashing 0.5s infinite alternate;
   animation-delay: 0.5s;
 }
 
 @keyframes dot-flashing {
   0% {
-    background-color: #1890ff;
+    background-color: #ddbc2a;
   }
-  50%, 100% {
+  50%,
+  100% {
     background-color: rgba(94, 161, 255, 0.2);
   }
 }

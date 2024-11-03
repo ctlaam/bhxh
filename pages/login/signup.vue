@@ -1,5 +1,5 @@
 <template>
-  <div id="signup" style="height: 100vh;">
+  <div id="signup" style="height: 100vh">
     <div class="row py-2 px-2 m-0">
       <div class="col-auto px-0">
         <button
@@ -13,7 +13,7 @@
               height="24px"
               viewBox="0 -960 960 960"
               width="24px"
-              fill="#fff"
+              fill="#ffffff"
             >
               <path
                 d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"
@@ -24,17 +24,13 @@
       <div class="text-left col align-self-center"></div>
       <div class="ml-auto col-auto align-self-center">
         <NuxtLink to="/login">
-          <div class="text-white">Đã có tài khoản, đăng nhập</div>
+          <div class="" style="color: #ffffff">Đã có tài khoản, đăng nhập</div>
         </NuxtLink>
       </div>
     </div>
     <div
       class="container text-white"
-      style="
-        overflow-y: auto;
-        height: 100%;
-        padding-bottom: 25px;
-      "
+      style="overflow-y: auto; height: 100%; padding-bottom: 25px"
     >
       <div class="row">
         <div class="col-12 align-self-center mb-4">
@@ -42,9 +38,9 @@
             <div class="col">
               <div class="d-flex align-items-center justify-content-center">
                 <img
-                  src="../../assets/logo-7992.jpg"
+                  src="../../assets/crescentmall.png"
                   class="center-block mt-5 mb-2"
-                  style="width: 100%; border-radius: 2rem; max-width: 500px"
+                  style="width: 100%; max-width: 150px"
                 />
               </div>
               <h6 class="font-weight-normal mb-5 text-center">

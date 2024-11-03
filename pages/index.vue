@@ -24,195 +24,162 @@
         </div>
       </div>
       <div class="main-container">
-        <div class="container mb-4">
-          <div class="vip-wrap">
-            <div class="tab">
-              <div class="tabItem activeItem">Membership Level</div>
-              <div class="tabItem">Partners</div>
-            </div>
-            <div class="vip-list">
-              <div class="vip-item" :class="{ active: vip.name == 'Level 1' }">
-                <div class="vip-wrap-inset">
-                  <a href=""
-                    ><div class="vip-icon">
-                      <img src="../assets/img/1.png" alt="" /></div
-                  ></a>
-                  <div class="vip-name flex-auto">Level1</div>
-                  <div class="num ml10">20%</div>
-                </div>
-                <div class="status">
-                  <img
-                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAoCAYAAAACJPERAAAAAXNSR0IArs4c6QAAAsJJREFUWEftlz9oFFEQxr/Z5IiBCCkMaKegYCMENMGATUBIse/d3sGRYCEYbAQbRQsDkVMQDNikCMTuUkQIEVnI2z0Um4BNCkWLiI1gBEGLKxTCEdjsjjxJjs1m73Y35x+E2/Z9M7/3ZmbfzCOk+MrlcvfQ0NAYgBKAcwBOA+hm5u8A1onoOREtmqb5OYU7UJLIcZwxZp4jopMJ2m1mXgAwJaWstdK2hCqlHhLRnaSNRda/ACgIId40s2sKdRznEYDbGYG/5My8yczn8/n8+zj7WKhSaoKIliIG2wAeB0HwJJ/Pr+m15eXlvp6enkJXV9ctAIMR/Ua9Xj8zPj6+GQXvg1YqlUMDAwOfABwNib/5vi8ty3odt3NdaMPDw2Vmng6vE9E90zTvJ0Jd172uCyck3PI8b6RYLL5LCrXruvPMfG1Xp6u7Vqsdm5yc3Nqzmagjx3FeAbgQMpyRUk4lAfW6bdv9uVzuQzhKRFQyTfNZEtTT/+CuyPf9U5ZlfUwD1Rql1DwRNU4LYFYIcbMp1Lbt47lcTuezUYVSysNpgVq3srJyxTCMSshmSQhxKTUUwIYQ4kSb0FUhxGgHqqtvT0474W1VWDHVu7+Qdn7oq0TUx8z9AG6EbxTDMGazVG8QBINEVAjZbBCRbnm6EawJIV6Q4zgvAVzM4rhNrdBQbtNJVvO5fwFd6ECb5omZdceZY+YfhmGcBaA7SqMrpUhw5vCu1+v1kfAIopQqEdHTFLBdSTao7/uXLctajGn8b2NmpGb7yAZl5lEp5WrUm1LKjlwIrQ6eGfpASnk37LHJIPf7oAD0gFUSQrjaqx5Be3t7K3oO+mM53XHcmCZiLvc07Gzh7UDTxDSk6YS3ZcD0602/QfUk0EdER/5GeDMy9skPlNP/F/o18gBu9yRJ9tNUrVYngiDQY2b45Z1keND1Vc/zij8B/KWP4xaca+gAAAAASUVORK5CYII="
-                    width="12"
-                  />
-                </div>
-              </div>
-              <div class="vip-item" :class="{ active: vip.name == 'Level 2' }">
-                <div class="vip-wrap-inset">
-                  <a href=""
-                    ><div class="vip-icon">
-                      <img src="../assets/img/2.png" alt="" /></div
-                  ></a>
-                  <div class="vip-name flex-auto">Level2</div>
-                  <div class="num ml10">20%</div>
-                </div>
-                <div class="status" style="display: ">
-                  <img
-                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAoCAYAAAACJPERAAAAAXNSR0IArs4c6QAAAsJJREFUWEftlz9oFFEQxr/Z5IiBCCkMaKegYCMENMGATUBIse/d3sGRYCEYbAQbRQsDkVMQDNikCMTuUkQIEVnI2z0Um4BNCkWLiI1gBEGLKxTCEdjsjjxJjs1m73Y35x+E2/Z9M7/3ZmbfzCOk+MrlcvfQ0NAYgBKAcwBOA+hm5u8A1onoOREtmqb5OYU7UJLIcZwxZp4jopMJ2m1mXgAwJaWstdK2hCqlHhLRnaSNRda/ACgIId40s2sKdRznEYDbGYG/5My8yczn8/n8+zj7WKhSaoKIliIG2wAeB0HwJJ/Pr+m15eXlvp6enkJXV9ctAIMR/Ua9Xj8zPj6+GQXvg1YqlUMDAwOfABwNib/5vi8ty3odt3NdaMPDw2Vmng6vE9E90zTvJ0Jd172uCyck3PI8b6RYLL5LCrXruvPMfG1Xp6u7Vqsdm5yc3Nqzmagjx3FeAbgQMpyRUk4lAfW6bdv9uVzuQzhKRFQyTfNZEtTT/+CuyPf9U5ZlfUwD1Rql1DwRNU4LYFYIcbMp1Lbt47lcTuezUYVSysNpgVq3srJyxTCMSshmSQhxKTUUwIYQ4kSb0FUhxGgHqqtvT0474W1VWDHVu7+Qdn7oq0TUx8z9AG6EbxTDMGazVG8QBINEVAjZbBCRbnm6EawJIV6Q4zgvAVzM4rhNrdBQbtNJVvO5fwFd6ECb5omZdceZY+YfhmGcBaA7SqMrpUhw5vCu1+v1kfAIopQqEdHTFLBdSTao7/uXLctajGn8b2NmpGb7yAZl5lEp5WrUm1LKjlwIrQ6eGfpASnk37LHJIPf7oAD0gFUSQrjaqx5Be3t7K3oO+mM53XHcmCZiLvc07Gzh7UDTxDSk6YS3ZcD0602/QfUk0EdER/5GeDMy9skPlNP/F/o18gBu9yRJ9tNUrVYngiDQY2b45Z1keND1Vc/zij8B/KWP4xaca+gAAAAASUVORK5CYII="
-                    width="12"
-                  />
-                </div>
-              </div>
-              <div class="vip-item" :class="{ active: vip.name == 'Level 3' }">
-                <div class="vip-wrap-inset">
-                  <a href=""
-                    ><div class="vip-icon">
-                      <img src="../assets/img/3.png" alt="" /></div
-                  ></a>
-                  <div class="vip-name flex-auto">Level3</div>
-                  <div class="num ml10">20%</div>
-                </div>
-                <div class="status" style="display: ">
-                  <img
-                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAoCAYAAAACJPERAAAAAXNSR0IArs4c6QAAAsJJREFUWEftlz9oFFEQxr/Z5IiBCCkMaKegYCMENMGATUBIse/d3sGRYCEYbAQbRQsDkVMQDNikCMTuUkQIEVnI2z0Um4BNCkWLiI1gBEGLKxTCEdjsjjxJjs1m73Y35x+E2/Z9M7/3ZmbfzCOk+MrlcvfQ0NAYgBKAcwBOA+hm5u8A1onoOREtmqb5OYU7UJLIcZwxZp4jopMJ2m1mXgAwJaWstdK2hCqlHhLRnaSNRda/ACgIId40s2sKdRznEYDbGYG/5My8yczn8/n8+zj7WKhSaoKIliIG2wAeB0HwJJ/Pr+m15eXlvp6enkJXV9ctAIMR/Ua9Xj8zPj6+GQXvg1YqlUMDAwOfABwNib/5vi8ty3odt3NdaMPDw2Vmng6vE9E90zTvJ0Jd172uCyck3PI8b6RYLL5LCrXruvPMfG1Xp6u7Vqsdm5yc3Nqzmagjx3FeAbgQMpyRUk4lAfW6bdv9uVzuQzhKRFQyTfNZEtTT/+CuyPf9U5ZlfUwD1Rql1DwRNU4LYFYIcbMp1Lbt47lcTuezUYVSysNpgVq3srJyxTCMSshmSQhxKTUUwIYQ4kSb0FUhxGgHqqtvT0474W1VWDHVu7+Qdn7oq0TUx8z9AG6EbxTDMGazVG8QBINEVAjZbBCRbnm6EawJIV6Q4zgvAVzM4rhNrdBQbtNJVvO5fwFd6ECb5omZdceZY+YfhmGcBaA7SqMrpUhw5vCu1+v1kfAIopQqEdHTFLBdSTao7/uXLctajGn8b2NmpGb7yAZl5lEp5WrUm1LKjlwIrQ6eGfpASnk37LHJIPf7oAD0gFUSQrjaqx5Be3t7K3oO+mM53XHcmCZiLvc07Gzh7UDTxDSk6YS3ZcD0602/QfUk0EdER/5GeDMy9skPlNP/F/o18gBu9yRJ9tNUrVYngiDQY2b45Z1keND1Vc/zij8B/KWP4xaca+gAAAAASUVORK5CYII="
-                    width="12"
-                  />
-                </div>
-              </div>
-              <div class="vip-item" :class="{ active: vip.name == 'Level 4' }">
-                <div class="vip-wrap-inset">
-                  <a href=""
-                    ><div class="vip-icon">
-                      <img src="../assets/img/4.png" alt="" /></div
-                  ></a>
-                  <div class="vip-name flex-auto">Level4</div>
-                  <div class="num ml10">30%</div>
-                </div>
-                <div class="status">
-                  <img
-                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAoCAYAAAACJPERAAAAAXNSR0IArs4c6QAAAsJJREFUWEftlz9oFFEQxr/Z5IiBCCkMaKegYCMENMGATUBIse/d3sGRYCEYbAQbRQsDkVMQDNikCMTuUkQIEVnI2z0Um4BNCkWLiI1gBEGLKxTCEdjsjjxJjs1m73Y35x+E2/Z9M7/3ZmbfzCOk+MrlcvfQ0NAYgBKAcwBOA+hm5u8A1onoOREtmqb5OYU7UJLIcZwxZp4jopMJ2m1mXgAwJaWstdK2hCqlHhLRnaSNRda/ACgIId40s2sKdRznEYDbGYG/5My8yczn8/n8+zj7WKhSaoKIliIG2wAeB0HwJJ/Pr+m15eXlvp6enkJXV9ctAIMR/Ua9Xj8zPj6+GQXvg1YqlUMDAwOfABwNib/5vi8ty3odt3NdaMPDw2Vmng6vE9E90zTvJ0Jd172uCyck3PI8b6RYLL5LCrXruvPMfG1Xp6u7Vqsdm5yc3Nqzmagjx3FeAbgQMpyRUk4lAfW6bdv9uVzuQzhKRFQyTfNZEtTT/+CuyPf9U5ZlfUwD1Rql1DwRNU4LYFYIcbMp1Lbt47lcTuezUYVSysNpgVq3srJyxTCMSshmSQhxKTUUwIYQ4kSb0FUhxGgHqqtvT0474W1VWDHVu7+Qdn7oq0TUx8z9AG6EbxTDMGazVG8QBINEVAjZbBCRbnm6EawJIV6Q4zgvAVzM4rhNrdBQbtNJVvO5fwFd6ECb5omZdceZY+YfhmGcBaA7SqMrpUhw5vCu1+v1kfAIopQqEdHTFLBdSTao7/uXLctajGn8b2NmpGb7yAZl5lEp5WrUm1LKjlwIrQ6eGfpASnk37LHJIPf7oAD0gFUSQrjaqx5Be3t7K3oO+mM53XHcmCZiLvc07Gzh7UDTxDSk6YS3ZcD0602/QfUk0EdER/5GeDMy9skPlNP/F/o18gBu9yRJ9tNUrVYngiDQY2b45Z1keND1Vc/zij8B/KWP4xaca+gAAAAASUVORK5CYII="
-                    width="12"
-                  />
-                </div>
-                <div class="status" style="display: none">
-                  <img
-                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAoCAYAAAACJPERAAAAAXNSR0IArs4c6QAAAsJJREFUWEftlz9oFFEQxr/Z5IiBCCkMaKegYCMENMGATUBIse/d3sGRYCEYbAQbRQsDkVMQDNikCMTuUkQIEVnI2z0Um4BNCkWLiI1gBEGLKxTCEdjsjjxJjs1m73Y35x+E2/Z9M7/3ZmbfzCOk+MrlcvfQ0NAYgBKAcwBOA+hm5u8A1onoOREtmqb5OYU7UJLIcZwxZp4jopMJ2m1mXgAwJaWstdK2hCqlHhLRnaSNRda/ACgIId40s2sKdRznEYDbGYG/5My8yczn8/n8+zj7WKhSaoKIliIG2wAeB0HwJJ/Pr+m15eXlvp6enkJXV9ctAIMR/Ua9Xj8zPj6+GQXvg1YqlUMDAwOfABwNib/5vi8ty3odt3NdaMPDw2Vmng6vE9E90zTvJ0Jd172uCyck3PI8b6RYLL5LCrXruvPMfG1Xp6u7Vqsdm5yc3Nqzmagjx3FeAbgQMpyRUk4lAfW6bdv9uVzuQzhKRFQyTfNZEtTT/+CuyPf9U5ZlfUwD1Rql1DwRNU4LYFYIcbMp1Lbt47lcTuezUYVSysNpgVq3srJyxTCMSshmSQhxKTUUwIYQ4kSb0FUhxGgHqqtvT0474W1VWDHVu7+Qdn7oq0TUx8z9AG6EbxTDMGazVG8QBINEVAjZbBCRbnm6EawJIV6Q4zgvAVzM4rhNrdBQbtNJVvO5fwFd6ECb5omZdceZY+YfhmGcBaA7SqMrpUhw5vCu1+v1kfAIopQqEdHTFLBdSTao7/uXLctajGn8b2NmpGb7yAZl5lEp5WrUm1LKjlwIrQ6eGfpASnk37LHJIPf7oAD0gFUSQrjaqx5Be3t7K3oO+mM53XHcmCZiLvc07Gzh7UDTxDSk6YS3ZcD0602/QfUk0EdER/5GeDMy9skPlNP/F/o18gBu9yRJ9tNUrVYngiDQY2b45Z1keND1Vc/zij8B/KWP4xaca+gAAAAASUVORK5CYII="
-                    width="12"
-                  />
-                </div>
-              </div>
-              <div class="vip-item" :class="{ active: vip.name == 'Level 5' }">
-                <div class="vip-wrap-inset">
-                  <a href=""
-                    ><div class="vip-icon">
-                      <img src="../assets/img/5.png" alt="" /></div
-                  ></a>
-                  <div class="vip-name flex-auto">Level5</div>
-                  <div class="num ml10">30%</div>
-                </div>
-                <div class="status" style="display: ">
-                  <img
-                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAoCAYAAAACJPERAAAAAXNSR0IArs4c6QAAAsJJREFUWEftlz9oFFEQxr/Z5IiBCCkMaKegYCMENMGATUBIse/d3sGRYCEYbAQbRQsDkVMQDNikCMTuUkQIEVnI2z0Um4BNCkWLiI1gBEGLKxTCEdjsjjxJjs1m73Y35x+E2/Z9M7/3ZmbfzCOk+MrlcvfQ0NAYgBKAcwBOA+hm5u8A1onoOREtmqb5OYU7UJLIcZwxZp4jopMJ2m1mXgAwJaWstdK2hCqlHhLRnaSNRda/ACgIId40s2sKdRznEYDbGYG/5My8yczn8/n8+zj7WKhSaoKIliIG2wAeB0HwJJ/Pr+m15eXlvp6enkJXV9ctAIMR/Ua9Xj8zPj6+GQXvg1YqlUMDAwOfABwNib/5vi8ty3odt3NdaMPDw2Vmng6vE9E90zTvJ0Jd172uCyck3PI8b6RYLL5LCrXruvPMfG1Xp6u7Vqsdm5yc3Nqzmagjx3FeAbgQMpyRUk4lAfW6bdv9uVzuQzhKRFQyTfNZEtTT/+CuyPf9U5ZlfUwD1Rql1DwRNU4LYFYIcbMp1Lbt47lcTuezUYVSysNpgVq3srJyxTCMSshmSQhxKTUUwIYQ4kSb0FUhxGgHqqtvT0474W1VWDHVu7+Qdn7oq0TUx8z9AG6EbxTDMGazVG8QBINEVAjZbBCRbnm6EawJIV6Q4zgvAVzM4rhNrdBQbtNJVvO5fwFd6ECb5omZdceZY+YfhmGcBaA7SqMrpUhw5vCu1+v1kfAIopQqEdHTFLBdSTao7/uXLctajGn8b2NmpGb7yAZl5lEp5WrUm1LKjlwIrQ6eGfpASnk37LHJIPf7oAD0gFUSQrjaqx5Be3t7K3oO+mM53XHcmCZiLvc07Gzh7UDTxDSk6YS3ZcD0602/QfUk0EdER/5GeDMy9skPlNP/F/o18gBu9yRJ9tNUrVYngiDQY2b45Z1keND1Vc/zij8B/KWP4xaca+gAAAAASUVORK5CYII="
-                    width="12"
-                  />
-                </div>
-              </div>
-              <div class="vip-item" :class="{ active: vip.name == 'Level 6' }">
-                <div class="vip-wrap-inset">
-                  <a href=""
-                    ><div class="vip-icon">
-                      <img src="../assets/img/6.png" alt="" /></div
-                  ></a>
-                  <div class="vip-name flex-auto">Level6</div>
-                  <div class="num ml10">40%</div>
-                </div>
-                <div class="status" style="display: ">
-                  <img
-                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAoCAYAAAACJPERAAAAAXNSR0IArs4c6QAAAsJJREFUWEftlz9oFFEQxr/Z5IiBCCkMaKegYCMENMGATUBIse/d3sGRYCEYbAQbRQsDkVMQDNikCMTuUkQIEVnI2z0Um4BNCkWLiI1gBEGLKxTCEdjsjjxJjs1m73Y35x+E2/Z9M7/3ZmbfzCOk+MrlcvfQ0NAYgBKAcwBOA+hm5u8A1onoOREtmqb5OYU7UJLIcZwxZp4jopMJ2m1mXgAwJaWstdK2hCqlHhLRnaSNRda/ACgIId40s2sKdRznEYDbGYG/5My8yczn8/n8+zj7WKhSaoKIliIG2wAeB0HwJJ/Pr+m15eXlvp6enkJXV9ctAIMR/Ua9Xj8zPj6+GQXvg1YqlUMDAwOfABwNib/5vi8ty3odt3NdaMPDw2Vmng6vE9E90zTvJ0Jd172uCyck3PI8b6RYLL5LCrXruvPMfG1Xp6u7Vqsdm5yc3Nqzmagjx3FeAbgQMpyRUk4lAfW6bdv9uVzuQzhKRFQyTfNZEtTT/+CuyPf9U5ZlfUwD1Rql1DwRNU4LYFYIcbMp1Lbt47lcTuezUYVSysNpgVq3srJyxTCMSshmSQhxKTUUwIYQ4kSb0FUhxGgHqqtvT0474W1VWDHVu7+Qdn7oq0TUx8z9AG6EbxTDMGazVG8QBINEVAjZbBCRbnm6EawJIV6Q4zgvAVzM4rhNrdBQbtNJVvO5fwFd6ECb5omZdceZY+YfhmGcBaA7SqMrpUhw5vCu1+v1kfAIopQqEdHTFLBdSTao7/uXLctajGn8b2NmpGb7yAZl5lEp5WrUm1LKjlwIrQ6eGfpASnk37LHJIPf7oAD0gFUSQrjaqx5Be3t7K3oO+mM53XHcmCZiLvc07Gzh7UDTxDSk6YS3ZcD0602/QfUk0EdER/5GeDMy9skPlNP/F/o18gBu9yRJ9tNUrVYngiDQY2b45Z1keND1Vc/zij8B/KWP4xaca+gAAAAASUVORK5CYII="
-                    width="12"
-                  />
-                </div>
-              </div>
-            </div>
+        <div class="row">
+          <div class="col-1 ml-2"></div>
+          <div class="card col ml-2">
+            <svg
+              fill="#02108c"
+              height="24px"
+              width="24px"
+              version="1.1"
+              id="Capa_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 220 220"
+              xml:space="preserve"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M220,98.865c0-12.728-10.355-23.083-23.083-23.083s-23.083,10.355-23.083,23.083c0,5.79,2.148,11.084,5.681,15.14 l-23.862,21.89L125.22,73.002l17.787-20.892l-32.882-38.623L77.244,52.111l16.995,19.962l-30.216,63.464l-23.527-21.544 c3.528-4.055,5.671-9.344,5.671-15.128c0-12.728-10.355-23.083-23.083-23.083C10.355,75.782,0,86.137,0,98.865 c0,11.794,8.895,21.545,20.328,22.913l7.073,84.735H192.6l7.073-84.735C211.105,120.41,220,110.659,220,98.865z"
+                ></path>
+              </g>
+            </svg>
+            <span>Nâng cấp</span>
           </div>
+          <div class="card col ml-2">
+            <svg
+              width="24px"
+              height="24px"
+              viewBox="0 0 24 24"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-labelledby="dolarIconTitle"
+              stroke="#02108c"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              fill="none"
+              color="#000000"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <title id="dolarIconTitle">Dolar</title>
+                <path
+                  d="M12 4L12 6M12 18L12 20M15.5 8C15.1666667 6.66666667 14 6 12 6 9 6 8.5 7.95652174 8.5 9 8.5 13.140327 15.5 10.9649412 15.5 15 15.5 16.0434783 15 18 12 18 10 18 8.83333333 17.3333333 8.5 16"
+                ></path>
+              </g>
+            </svg>
+            <span>Nạp ngay</span>
+          </div>
+          <div class="card col">
+            <svg
+              width="24px"
+              height="24px"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              stroke="#02108c"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M3 21.0001H21M4 18.0001H20M6 18.0001V13.0001M10 18.0001V13.0001M14 18.0001V13.0001M18 18.0001V13.0001M12 7.00695L12.0074 7.00022M21 10.0001L14.126 3.88986C13.3737 3.2212 12.9976 2.88688 12.5732 2.75991C12.1992 2.64806 11.8008 2.64806 11.4268 2.75991C11.0024 2.88688 10.6263 3.2212 9.87404 3.88986L3 10.0001H21Z"
+                  stroke="#02108c"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </g>
+            </svg>
+            <span>Rút nhanh</span>
+          </div>
+          <div class="col-1"></div>
+        </div>
+        <div class="container mb-4">
+          <div class="task-header">Sảnh nhiệm vụ</div>
         </div>
         <div class="container mb-4">
           <div class="banner-list">
             <div class="list-item">
-              <img src="../assets/img/486f5d68fac4f5d1.jpg" />
-              <div class="right">
-                <p class="title">Vịnh Hạ Long</p>
-                <p class="subtitle">
-                  Vịnh Hạ Long được Unesco nhiều lần công nhận là Di sản thiên
-                  nhiên của Thế giới với hàng nghìn hòn đảo được làm nên bởi tạo
-                  hoá kỳ vĩ và sống động. Vịnh Hạ Long có phong cảnh tuyệt đẹp
-                  nên nơi đây là một điểm du lịch rất hấp dẫn với du khách trong
-                  nước và quốc tế.
-                </p>
+              <div class="title">Thành viên SLIVER</div>
+              <div class="discount">3%</div>
+              <div class="categories">
+                <span>Thời trang</span> | <span>Phụ kiện</span> |
+                <span>Điện thoại</span>
+              </div>
+              <div class="product-image">
+                <img src="../assets/index/image1.jpg" alt="Sản phẩm" />
               </div>
             </div>
             <div class="list-item">
-              <img src="../assets/img/93985c9deee79d51.jpg" />
-              <div class="right">
-                <p class="title">Hội An</p>
-                <p class="subtitle">
-                  Phố cổ Hội An là một đô thị cổ nằm ở hạ lưu sông Thu Bồn,
-                  thuộc vùng đồng bằng ven biển tỉnh Quảng Nam, Việt Nam, cách
-                  thành phố Đà Nẵng khoảng 30 km về phía Nam.
-                </p>
+              <div class="title">Thành viên SLIVER</div>
+              <div class="discount">3%</div>
+              <div class="categories">
+                <span>Thời trang</span> | <span>Phụ kiện</span> |
+                <span>Điện thoại</span>
+              </div>
+              <div class="product-image">
+                <img src="../assets/index/image1.jpg" alt="Sản phẩm" />
               </div>
             </div>
             <div class="list-item">
-              <img src="../assets/img/3740631511d46098.jpg" />
-              <div class="right">
-                <p class="title">Sài Gòn</p>
-                <p class="subtitle">
-                  Nhà thờ Đức Bà là một điểm check-in không thể bỏ lỡ khi đến
-                  TP. Hồ Chí Minh. Với kiến trúc cổ của Pháp cùng không gian
-                  sang trọng từ bên ngoài đến bên trong thánh đường, địa điểm
-                  này được coi là công trình nhà thờ Công giáo có quy mô lớn
-                  nhất Việt Nam và cũng là một trong những biểu tượng của Sài
-                  Gòn.
-                </p>
+              <div class="title">Thành viên SLIVER</div>
+              <div class="discount">3%</div>
+              <div class="categories">
+                <span>Thời trang</span> | <span>Phụ kiện</span> |
+                <span>Điện thoại</span>
+              </div>
+              <div class="product-image">
+                <img src="../assets/index/image1.jpg" alt="Sản phẩm" />
               </div>
             </div>
             <div class="list-item">
-              <img src="../assets/img/5d8f7d8945d11842.jpg" />
-              <div class="right">
-                <p class="title">Phú Quốc</p>
-                <p class="subtitle">
-                  Phú Quốc là một thành phố đảo trực thuộc tỉnh Kiên Giang, Việt
-                  Nam. Đảo Phú Quốc cùng các đảo nhỏ lân cận và quần đảo Thổ Chu
-                  hợp lại tạo thành Thành phố Phú Quốc ở vịnh Thái Lan, đây là
-                  thành phố đảo đầu tiên được thành lập của Việt Nam.
-                </p>
+              <div class="title">Thành viên SLIVER</div>
+              <div class="discount">3%</div>
+              <div class="categories">
+                <span>Thời trang</span> | <span>Phụ kiện</span> |
+                <span>Điện thoại</span>
+              </div>
+              <div class="product-image">
+                <img src="../assets/index/image1.jpg" alt="Sản phẩm" />
               </div>
             </div>
             <div class="list-item">
-              <img src="../assets/img/b25c586e79f5bb15.jpg" />
-              <div class="right">
-                <p class="title">Đà Lạt</p>
-                <p class="subtitle">
-                  Thành phố ngàn hoa – Đà Lạt chính là địa điểm được rất nhiều
-                  du khách quan tâm. Nơi đây nổi tiếng với khí hậu ôn hòa, dễ
-                  chịu, cảnh sắc thiên nhiên thơ mộng, lãng mạn, nhiều khu nghỉ
-                  dưỡng, vui chơi. Đà Lạt cũng chính là điểm đến mơ ước của các
-                  tín đồ mê du lịch, của cả du khách trong và ngoài nước
-                </p>
+              <div class="title">Thành viên SLIVER</div>
+              <div class="discount">3%</div>
+              <div class="categories">
+                <span>Thời trang</span> | <span>Phụ kiện</span> |
+                <span>Điện thoại</span>
+              </div>
+              <div class="product-image">
+                <img src="../assets/index/image1.jpg" alt="Sản phẩm" />
               </div>
             </div>
             <div class="list-item">
-              <img src="../assets/img/522d377ca561061c.jpg" />
-              <div class="right">
-                <p class="title">Sapa</p>
-                <p class="subtitle">
-                  Sa Pa là một huyện vùng cao của tỉnh Lào Cai, nằm ở phía Tây
-                  Bắc của Việt Nam, thị trấn Sa Pa ở độ cao 1.600 mét so với mực
-                  nước biển, cách thành phố Lào Cai 38 km và 376 km tính từ Hà
-                  Nội. Ngoài con đường chính từ thành phố Lào Cai, để tới SaPa
-                  còn một tuyến giao thông khác, quốc lộ 4D nối từ xã Bình Lư,
-                  Lai Châu.
-                </p>
+              <div class="title">Thành viên SLIVER</div>
+              <div class="discount">3%</div>
+              <div class="categories">
+                <span>Thời trang</span> | <span>Phụ kiện</span> |
+                <span>Điện thoại</span>
+              </div>
+              <div class="product-image">
+                <img src="../assets/index/image1.jpg" alt="Sản phẩm" />
               </div>
             </div>
           </div>
@@ -231,25 +198,25 @@ export default {
     return {
       vip: {
         name: '',
-        background_urls: []
+        background_urls: [],
       },
     }
   },
   beforeDestroy() {
-    this.vip = null;
-    console.log("vao dayy")
+    this.vip = null
+    console.log('vao dayy')
   },
   mounted() {
-    console.log("this.$store.state.profile.vip:", this.$store.state.profile.vip)
+    console.log('this.$store.state.profile.vip:', this.$store.state.profile.vip)
     if (this.$store.state.profile.vip) {
-      this.vip = this.$store.state.profile.vip;
-      console.log("this.vipp mounted:", this.vip)
+      this.vip = this.$store.state.profile.vip
+      console.log('this.vipp mounted:', this.vip)
     }
   },
   watch: {
     '$store.state.profile.vip': {
       handler: function (val) {
-        console.log("val:", val,'a index');
+        console.log('val:', val, 'a index')
         if (val) {
           this.vip = this.$store.state.profile.vip || { name: '' }
         }
@@ -259,11 +226,10 @@ export default {
   },
   filters: {
     roundToTwoDecimalPlaces(num) {
-      if(!num) return 0;
-      return Math.round(num * 100) / 100;
-    }
-
-  }
+      if (!num) return 0
+      return Math.round(num * 100) / 100
+    },
+  },
 }
 </script>
 <style scpoed lang="scss">
@@ -277,6 +243,35 @@ export default {
     border-radius: 20px;
     padding-top: 15px;
     padding-bottom: 15px;
+    .card {
+      width: 100px;
+      height: 100px;
+      margin-left: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+    .task-header {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      font-size: 16px;
+      color: #333;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin: 0 auto;
+    }
+    .task-header::before {
+      content: '';
+      width: 4px;
+      height: 20px;
+      background-color: #2c5fd8; /* Màu xanh cho thanh bên */
+      margin-right: 10px;
+      border-radius: 2px;
+    }
   }
   .vip-wrap .tab {
     background: #e8e8e8;
@@ -438,7 +433,6 @@ export default {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
-    display: flex;
     -webkit-box-align: center;
     -webkit-align-items: center;
     -ms-flex-align: center;
@@ -446,7 +440,40 @@ export default {
     border: 1px solid #e8e8e8;
     border-radius: 10px;
     padding: 5px;
+    width: 100%;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    .title {
+      font-size: 18px !important;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+    .discount {
+      font-size: 16px;
+      color: #2ecc71; /* Màu xanh cho phần trăm giảm giá */
+      margin-bottom: 10px;
+    }
+    .categories {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 15px;
+    }
+    .categories span {
+      margin-right: 5px;
+    }
+    .product-image {
+      border-radius: 5px;
+      overflow: hidden;
+      display: inline-block;
+      height: 200px;
+      width: 100%;
+    }
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
   .banner-list .list-item img {
     display: block;
@@ -465,7 +492,7 @@ export default {
     flex: 1;
   }
   .banner-list .list-item .title {
-    color: #2d2926;
+    color: #ffffff;
     font-weight: bolder;
     font-size: 0.9rem;
     display: block;

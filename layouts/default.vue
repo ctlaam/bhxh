@@ -5,14 +5,9 @@
       <div id="content" ref="content">
         <Nuxt />
       </div>
-      <script
-        id="chatway"
-        async="true"
-        src="https://cdn.chatway.app/widget.js?id=RyXcUgtmEQpi"
-      ></script>
       <Footer></Footer>
     </div>
-    <FullScreenModal> </FullScreenModal>
+    <!-- <FullScreenModal> </FullScreenModal> -->
     <div class="modal"></div>
   </div>
 </template>
@@ -130,7 +125,7 @@ export default {
     border-radius: 10px;
     background: #888888;
   }
-  background: url('~/assets/beach-phone.webp') no-repeat;
+  background: url('~/assets/psk-slayer-Uqjtsc2z8pI-unsplash.jpg') no-repeat;
   height: 100vh;
 }
 #content div::-webkit-scrollbar {

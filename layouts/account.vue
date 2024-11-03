@@ -2,11 +2,7 @@
   <div class="account-content">
     <Nuxt />
     <!-- <fullscreen-modal> </fullscreen-modal> -->
-    <script
-      id="chatway"
-      async="true"
-      src="https://cdn.chatway.app/widget.js?id=RyXcUgtmEQpi"
-    ></script>
+
   </div>
 </template>
 <script>
@@ -26,7 +22,7 @@ export default {
   transition: all 0.7s, z-index 0s;
   overflow-x: auto;
   overflow-y: hidden;
-  background: url(../assets/beach-phone.webp) no-repeat center center fixed;
+  background: url(../assets/crescent-mall-quan-7-1712070085.jpg) no-repeat center center fixed;
   background-size: cover;
 }
 </style>

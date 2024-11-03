@@ -13,7 +13,7 @@
               height="24px"
               viewBox="0 -960 960 960"
               width="24px"
-              fill="#fff"
+              fill="#ffffff"
             >
               <path
                 d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"
@@ -24,7 +24,7 @@
       <div class="text-left col align-self-center"></div>
       <div class="ml-auto col-auto align-self-center">
         <NuxtLink to="/login/signup">
-          <div class="text-white">Tạo tài khoản mới</div>
+          <div class="" style="color: #ffffff">Tạo tài khoản mới</div>
         </NuxtLink>
       </div>
     </div>
@@ -35,9 +35,9 @@
             <div class="col">
               <div class="d-flex align-items-center justify-content-center">
                 <img
-                  src="../../assets/logo-7992.jpg"
+                  src="../../assets/crescentmall.png"
                   class="center-block mt-5 mb-2"
-                  style="width: 100%; border-radius: 2rem; max-width: 500px"
+                  style="width: 100%; max-width: 150px"
                 />
               </div>
               <h6 class="font-weight-normal mb-5 text-center">

@@ -1,32 +1,31 @@
 <template>
   <div style="margin-top: 80px; margin-bottom: 80px">
-    <div class="row w-100">
+    <div class="row w-100" style="color: #ffffff">
       <div class="col-6 mt-3 text-center">
-        <h5 class="text-white">
-          {{ profile && profile.balance | roundToTwoDecimalPlaces }}
+        <h5 class="">
+          {{ profile && formatCurrency(profile.balance) }}đ
         </h5>
-        <p class="text-white mb-4 fz14">Tổng Tài Sản</p>
+        <p class="mb-4 fz14">Tổng Tài Sản</p>
       </div>
       <div class="col-6 mt-3 text-center">
-        <h5 class="text-white">
+        <h5 class="">
           {{
-            orderOfUser &&
-            orderOfUser.total_commission_today | roundToTwoDecimalPlaces
+            orderOfUser && formatCurrency(orderOfUser.total_commission_today)
           }}
         </h5>
-        <p class="text-white mb-4 fz14">Hoa Hồng</p>
+        <p class="mb-4 fz14">Hoa Hồng</p>
       </div>
     </div>
     <div class="row w-100">
-      <div class="col-6 mt-3 text-center">
-        <h5 class="text-white">{{ vip && vip.order_quantity_per_day }}</h5>
-        <p class="text-white mb-4 fz14">Hành Trình Hàng Ngày</p>
+      <div class="text-white col-6 mt-3 text-center">
+        <h5 class="">{{ vip && vip.order_quantity_per_day }}</h5>
+        <p class="text-white mb-4 fz14">Đơn hàng hàng ngày</p>
       </div>
-      <div class="col-6 mt-3 text-center">
-        <h5 class="text-white">
+      <div class="text-white col-6 mt-3 text-center">
+        <h5 class="">
           {{ (profile && profile.total_order_success) || 0 }}
         </h5>
-        <p class="text-white mb-4 fz14">Hành Trình Đã Đi</p>
+        <p class="mb-4 fz14">Đơn hàng đã nhận</p>
       </div>
     </div>
     <div class="main-container w-100">
@@ -105,7 +104,7 @@
             id="addtohome"
             @click="showModalTour"
           >
-            Tour Hành Trình
+            Bắt đầu
           </button>
           <style>
             .btn-default[disabled] {
@@ -123,115 +122,10 @@
             color: #212529;
           "
         >
-          Explore Tours
+          Khám phá các gói thành viên
         </div>
-        <div class="hotels" data-v-91fdc248="">
-          <div class="hotel-item" data-v-91fdc248="">
-            <img
-              src="~/assets/hotels/486f5d68fac4f5d1.jpg"
-              alt=""
-              class="left"
-              data-v-91fdc248=""
-            />
-            <div class="right" data-v-91fdc248="">
-              <div class="title" data-v-91fdc248="">Vịnh Hạ Long</div>
-              <div class="subtitle" data-v-91fdc248="">
-                Vịnh Hạ Long được Unesco nhiều lần công nhận là Di sản thiên
-                nhiên của Thế giới với hàng nghìn hòn đảo được làm nên bởi tạo
-                hoá kỳ vĩ và sống động. Vịnh Hạ Long có phong cảnh tuyệt đẹp nên
-                nơi đây là một điểm du lịch rất hấp dẫn với du khách trong nước
-                và quốc tế.
-              </div>
-            </div>
-          </div>
-          <div class="hotel-item" data-v-91fdc248="">
-            <img
-              src="~/assets/hotels/93985c9deee79d51.jpg"
-              alt=""
-              class="left"
-              data-v-91fdc248=""
-            />
-            <div class="right" data-v-91fdc248="">
-              <div class="title" data-v-91fdc248="">Hội An</div>
-              <div class="subtitle" data-v-91fdc248="">
-                Phố cổ Hội An là một đô thị cổ nằm ở hạ lưu sông Thu Bồn, thuộc
-                vùng đồng bằng ven biển tỉnh Quảng Nam, Việt Nam, cách thành phố
-                Đà Nẵng khoảng 30 km về phía Nam.
-              </div>
-            </div>
-          </div>
-          <div class="hotel-item" data-v-91fdc248="">
-            <img
-              src="~/assets/hotels/3740631511d46098.jpg"
-              alt=""
-              class="left"
-              data-v-91fdc248=""
-            />
-            <div class="right" data-v-91fdc248="">
-              <div class="title" data-v-91fdc248="">Sài Gòn</div>
-              <div class="subtitle" data-v-91fdc248="">
-                Nhà thờ Đức Bà là một điểm check-in không thể bỏ lỡ khi đến TP.
-                Hồ Chí Minh. Với kiến trúc cổ của Pháp cùng không gian sang
-                trọng từ bên ngoài đến bên trong thánh đường, địa điểm này được
-                coi là công trình nhà thờ Công giáo có quy mô lớn nhất Việt Nam
-                và cũng là một trong những biểu tượng của Sài Gòn.
-              </div>
-            </div>
-          </div>
-          <div class="hotel-item" data-v-91fdc248="">
-            <img
-              src="~/assets/hotels/5d8f7d8945d11842.jpg"
-              alt=""
-              class="left"
-              data-v-91fdc248=""
-            />
-            <div class="right" data-v-91fdc248="">
-              <div class="title" data-v-91fdc248="">Phú Quốc</div>
-              <div class="subtitle" data-v-91fdc248="">
-                Phú Quốc là một thành phố đảo trực thuộc tỉnh Kiên Giang, Việt
-                Nam. Đảo Phú Quốc cùng các đảo nhỏ lân cận và quần đảo Thổ Chu
-                hợp lại tạo thành Thành phố Phú Quốc ở vịnh Thái Lan, đây là
-                thành phố đảo đầu tiên được thành lập của Việt Nam.
-              </div>
-            </div>
-          </div>
-          <div class="hotel-item" data-v-91fdc248="">
-            <img
-              src="~/assets/hotels/b25c586e79f5bb15.jpg"
-              alt=""
-              class="left"
-              data-v-91fdc248=""
-            />
-            <div class="right" data-v-91fdc248="">
-              <div class="title" data-v-91fdc248="">Đà Lạt</div>
-              <div class="subtitle" data-v-91fdc248="">
-                Thành phố ngàn hoa – Đà Lạt chính là địa điểm được rất nhiều du
-                khách quan tâm. Nơi đây nổi tiếng với khí hậu ôn hòa, dễ chịu,
-                cảnh sắc thiên nhiên thơ mộng, lãng mạn, nhiều khu nghỉ dưỡng,
-                vui chơi. Đà Lạt cũng chính là điểm đến mơ ước của các tín đồ mê
-                du lịch, của cả du khách trong và ngoài nước
-              </div>
-            </div>
-          </div>
-          <div class="hotel-item" data-v-91fdc248="">
-            <img
-              src="~/assets/hotels/522d377ca561061c.jpg"
-              alt=""
-              class="left"
-              data-v-91fdc248=""
-            />
-            <div class="right" data-v-91fdc248="">
-              <div class="title" data-v-91fdc248="">Sapa</div>
-              <div class="subtitle" data-v-91fdc248="">
-                Sa Pa là một huyện vùng cao của tỉnh Lào Cai, nằm ở phía Tây Bắc
-                của Việt Nam, thị trấn Sa Pa ở độ cao 1.600 mét so với mực nước
-                biển, cách thành phố Lào Cai 38 km và 376 km tính từ Hà Nội.
-                Ngoài con đường chính từ thành phố Lào Cai, để tới SaPa còn một
-                tuyến giao thông khác, quốc lộ 4D nối từ xã Bình Lư, Lai Châu.
-              </div>
-            </div>
-          </div>
-        </div>
+        <img class="mb-4" src="../../assets/khampha.jpg" width="100%" alt="" />
+        <!-- <img src="../../assets/imagetour.webp" width="100%" alt=""> -->
       </div>
     </div>
     <a-modal
@@ -302,21 +196,6 @@
               :wrapper-col="{ span: 12 }"
               @submit="handleSubmit"
             >
-              <a-form-item label="Nhập đánh giá hành trình">
-                <a-input
-                  v-decorator="[
-                    'note',
-                    {
-                      rules: [
-                        {
-                          required: true,
-                          message: 'Vui lòng nhập đánh giá tour!',
-                        },
-                      ],
-                    },
-                  ]"
-                />
-              </a-form-item>
               <a-form-item>
                 <div class="modal-footer">
                   <a-button
@@ -389,6 +268,20 @@ export default {
     this.getOrder()
   },
   methods: {
+    formatCurrency(amount) {
+      if (!amount) return 0
+      // Kiểm tra nếu là số nguyên thì chỉ định dạng phần nguyên
+      if (Number.isInteger(amount)) {
+        return amount.toLocaleString('en-US')
+      } else {
+        // Nếu có phần thập phân, giới hạn chỉ 2 chữ số sau dấu phẩy
+        let formattedAmount = Math.floor(amount * 100) / 100
+        return formattedAmount.toLocaleString('en-US', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })
+      }
+    },
     handleSubmit(e) {
       e.preventDefault()
       this.form.validateFields((err, values) => {
@@ -420,8 +313,8 @@ export default {
         let diffMoney = this.trip.meta.value - this.profile.balance
         diffMoney = diffMoney.toFixed(2)
         this.$confirm({
-          title: 'Chúc mừng bạn đã nhận được đơn hành trình kết nối',
-          content: `Đơn hành trình này có thể nhận được nhiều hoa hồng hơn và cần phải bù phần chênh lệch ${diffMoney}`,
+          title: 'Chúc mừng bạn đã nhận được đơn hàng rà soát!',
+          content: `Đơn hàng này có thể nhận được nhiều hoa hồng hơn và cần phải bù phần chênh lệch ${diffMoney}`,
           icon: 'check-circle',
           cancelButtonProps: { style: { display: 'none' } },
           onOk: () => {
@@ -435,7 +328,7 @@ export default {
       await tutorApi
         .sendTuor(this.orderId)
         .then((res) => {
-          this.$message.success('Đánh giá hành trình thành công!')
+          this.$message.success('Gửi đơn hàng thành công!')
           this.showModal = false
           this.getProfile()
           this.getOrder()

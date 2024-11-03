@@ -4,38 +4,66 @@
     style="max-width: 480px"
   >
     <div class="row no-gutters justify-content-center">
-      <div class="col-3" @click="keyRender">
-        <nuxt-link to="/" exact active-class="active" class="mui-tab-item1 item-footer" >
+      <div class="col" @click="keyRender">
+        <nuxt-link
+          to="/"
+          exact
+          active-class="active"
+          class="mui-tab-item1 item-footer"
+        >
           <a-icon class="home" theme="filled" type="home" />
           <p>Trang Chủ</p>
         </nuxt-link>
       </div>
-      <div class="col-3">
-        <NuxtLink to="/trip" exact active-class="active" class="mui-tab-item1">
+      <div class="col">
+        <NuxtLink
+          to="/order?title=Lịch sử"
+          exact
+          active-class="active"
+          class="mui-tab-item1"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            enable-background="new 0 0 24 24"
-            height="24"
-            viewBox="0 0 24 24"
-            width="24"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+            fill="#909090"
           >
-            <rect fill="none" height="24" width="24" />
             <path
-              fill="#999999"
-              d="M19.3,16.9c0.4-0.7,0.7-1.5,0.7-2.4c0-2.5-2-4.5-4.5-4.5S11,12,11,14.5s2,4.5,4.5,4.5c0.9,0,1.7-0.3,2.4-0.7l3.2,3.2 l1.4-1.4L19.3,16.9z M15.5,17c-1.4,0-2.5-1.1-2.5-2.5s1.1-2.5,2.5-2.5s2.5,1.1,2.5,2.5S16.9,17,15.5,17z M12,20v2 C6.48,22,2,17.52,2,12C2,6.48,6.48,2,12,2c4.84,0,8.87,3.44,9.8,8h-2.07c-0.64-2.46-2.4-4.47-4.73-5.41V5c0,1.1-0.9,2-2,2h-2v2 c0,0.55-0.45,1-1,1H8v2h2v3H9l-4.79-4.79C4.08,10.79,4,11.38,4,12C4,16.41,7.59,20,12,20z"
+              d="M480-120q-138 0-240.5-91.5T122-440h82q14 104 92.5 172T480-200q117 0 198.5-81.5T760-480q0-117-81.5-198.5T480-760q-69 0-129 32t-101 88h110v80H120v-240h80v94q51-64 124.5-99T480-840q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-480q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-120Zm112-192L440-464v-216h80v184l128 128-56 56Z"
             />
           </svg>
-          <p>Tour</p>
+          <p>Lịch sử</p>
         </NuxtLink>
       </div>
-      <div class="col-3">
-        <nuxt-link to="/wallet" exact active-class="active" class="mui-tab-item1">
+      <div class="col">
+        <NuxtLink to="/trip" exact active-class="active" class="mui-tab-item1">
+          <img
+            src="../../assets/crescentmall.png"
+            alt=""
+            width="40px"
+            style="border-radius: 50%; border: 1px solid #eee; padding: 5px"
+          />
+        </NuxtLink>
+      </div>
+      <div class="col">
+        <nuxt-link
+          to="/wallet"
+          exact
+          active-class="active"
+          class="mui-tab-item1"
+        >
           <a-icon class="home" theme="filled" type="wallet" />
           <p>Ví Tiền</p>
         </nuxt-link>
       </div>
-      <div class="col-3">
-        <NuxtLink to="/my" exact active-class="active" class="mui-tab-item1 item-footer">
+      <div class="col">
+        <NuxtLink
+          to="/my"
+          exact
+          active-class="active"
+          class="mui-tab-item1 item-footer"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24px"
@@ -63,15 +91,23 @@ export default {
   },
   methods: {
     keyRender() {
-      console.log("alo");
+      console.log('alo')
       this.$store.commit('profile/setKey', null)
-      console.log(this.$store.state);
-    }
-  }
+      console.log(this.$store.state)
+    },
+  },
 }
 </script>
 
 <style lang="css">
+.row .col {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+  margin-top: var(--bs-gutter-y);
+}
 .main.has-footer {
   padding-bottom: 85px;
 }
