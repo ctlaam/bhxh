@@ -124,7 +124,7 @@
         >
           Khám phá các gói thành viên
         </div>
-        <img class="mb-4" src="../../assets/khampha.jpg" width="100%" alt="" />
+        <img class="mb-4" src="../../assets/index/banner.jpg" width="100%" alt="" />
         <!-- <img src="../../assets/imagetour.webp" width="100%" alt=""> -->
       </div>
     </div>

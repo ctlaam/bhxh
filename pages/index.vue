@@ -157,7 +157,7 @@
                 <span>Điện thoại</span>
               </div>
               <div class="product-image">
-                <img src="../assets/index/macbook.png" alt="Sản phẩm"/>
+                <img src="../assets/index/macbook.png" style="object-fit: contain" alt="Sản phẩm"/>
               </div>
             </div>
             <div class="list-item">
@@ -168,7 +168,7 @@
                 <span>Điện thoại</span>
               </div>
               <div class="product-image">
-                <img src="../assets/index/tv.webp" alt="Sản phẩm"/>
+                <img src="../assets/index/tv.webp" style="object-fit: contain" alt="Sản phẩm"/>
               </div>
             </div>
           </div>
