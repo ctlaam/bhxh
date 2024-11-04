@@ -217,7 +217,7 @@ export default {
           commission: '',
         },
       },
-      domain: 'https://soatdontienich.online/',
+      domain: 'https://api.soatdontienich.online/',
       orderId: null,
       profile: null,
       vip: null,

@@ -13,7 +13,7 @@
               height="24px"
               viewBox="0 -960 960 960"
               width="24px"
-              fill="#ffffff"
+              fill="#212529"
             >
               <path
                 d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z"
@@ -33,7 +33,7 @@
     <div class="container h-100 text-white">
       <div class="row h-100">
         <div class="col-12 align-self-center mb-4">
-          <div class="row justify-content-center">
+          <div class="row justify-content-center m-2">
             <div class="col">
               <div class="d-flex align-items-center justify-content-center">
                 <img
