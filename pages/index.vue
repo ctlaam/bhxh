@@ -9,22 +9,22 @@
             class="img-gen-v-slider marquee2"
           >
             <div class="d-flex list-image-left">
-              <img src="../assets/swiper/beach1.jpg" alt="" /><img
-                src="../assets/swiper/beach2.jpg"
-                alt=""
-              /><img src="../assets/swiper/beach3.jpg" alt="" /><img
-                src="../assets/swiper/beach4.jpg"
-                alt=""
-              /><img src="../assets/swiper/beach5.jpg" alt="" /><img
-                src="../assets/swiper/beach6.jpg"
-                alt=""
-              /><img src="../assets/swiper/beach7.jpg" alt="" />
+              <img src="../assets/swiper/beach1.jpg" alt=""/><img
+              src="../assets/swiper/beach2.jpg"
+              alt=""
+            /><img src="../assets/swiper/beach3.jpg" alt=""/><img
+              src="../assets/swiper/beach4.jpg"
+              alt=""
+            /><img src="../assets/swiper/beach5.jpg" alt=""/><img
+              src="../assets/swiper/beach6.jpg"
+              alt=""
+            /><img src="../assets/swiper/beach7.jpg" alt=""/>
             </div>
           </marquee>
         </div>
       </div>
       <div class="main-container">
-        <div class="row">
+        <div class="row" style="width: 100%">
           <div class="col-1 ml-2"></div>
           <div class="card col ml-2">
             <svg
@@ -80,7 +80,7 @@
                 ></path>
               </g>
             </svg>
-            <span>Nạp ngay</span>
+            <span @click="redirectPath">Nạp ngay</span>
           </div>
           <div class="card col">
             <svg
@@ -107,7 +107,7 @@
                 ></path>
               </g>
             </svg>
-            <span>Rút nhanh</span>
+            <span @click="rutnhanh">Rút nhanh</span>
           </div>
           <div class="col-1"></div>
         </div>
@@ -124,62 +124,51 @@
                 <span>Điện thoại</span>
               </div>
               <div class="product-image">
-                <img src="../assets/index/image1.jpg" alt="Sản phẩm" />
+                <img src="../assets/index/tainghe.webp" alt="Sản phẩm"/>
               </div>
             </div>
             <div class="list-item">
-              <div class="title">Thành viên SLIVER</div>
-              <div class="discount">3%</div>
+              <div class="title">Thành viên GOLD</div>
+              <div class="discount">4%</div>
               <div class="categories">
                 <span>Thời trang</span> | <span>Phụ kiện</span> |
                 <span>Điện thoại</span>
               </div>
               <div class="product-image">
-                <img src="../assets/index/image1.jpg" alt="Sản phẩm" />
+                <img src="../assets/index/tuixach.webp" style="object-fit: contain" alt="Sản phẩm"/>
               </div>
             </div>
             <div class="list-item">
-              <div class="title">Thành viên SLIVER</div>
-              <div class="discount">3%</div>
+              <div class="title">Thành viên Platinum</div>
+              <div class="discount">6%</div>
               <div class="categories">
                 <span>Thời trang</span> | <span>Phụ kiện</span> |
                 <span>Điện thoại</span>
               </div>
               <div class="product-image">
-                <img src="../assets/index/image1.jpg" alt="Sản phẩm" />
+                <img src="../assets/index/iphone.webp" style="object-fit: contain" alt="Sản phẩm"/>
               </div>
             </div>
             <div class="list-item">
-              <div class="title">Thành viên SLIVER</div>
-              <div class="discount">3%</div>
+              <div class="title">Thành viên Sapphire</div>
+              <div class="discount">7%</div>
               <div class="categories">
                 <span>Thời trang</span> | <span>Phụ kiện</span> |
                 <span>Điện thoại</span>
               </div>
               <div class="product-image">
-                <img src="../assets/index/image1.jpg" alt="Sản phẩm" />
+                <img src="../assets/index/macbook.png" alt="Sản phẩm"/>
               </div>
             </div>
             <div class="list-item">
-              <div class="title">Thành viên SLIVER</div>
-              <div class="discount">3%</div>
+              <div class="title">Thành viên Diamon</div>
+              <div class="discount">10%</div>
               <div class="categories">
                 <span>Thời trang</span> | <span>Phụ kiện</span> |
                 <span>Điện thoại</span>
               </div>
               <div class="product-image">
-                <img src="../assets/index/image1.jpg" alt="Sản phẩm" />
-              </div>
-            </div>
-            <div class="list-item">
-              <div class="title">Thành viên SLIVER</div>
-              <div class="discount">3%</div>
-              <div class="categories">
-                <span>Thời trang</span> | <span>Phụ kiện</span> |
-                <span>Điện thoại</span>
-              </div>
-              <div class="product-image">
-                <img src="../assets/index/image1.jpg" alt="Sản phẩm" />
+                <img src="../assets/index/tv.webp" alt="Sản phẩm"/>
               </div>
             </div>
           </div>
@@ -191,6 +180,8 @@
 <!-- End of LiveChat code -->
 
 <script>
+import {mapState} from "vuex";
+
 export default {
   name: 'IndexPage',
   components: {},
@@ -208,17 +199,36 @@ export default {
   },
   mounted() {
     console.log('this.$store.state.profile.vip:', this.$store.state.profile.vip)
+    console.log('this.$store.state.profile.vip:', this.$store.state.profile)
     if (this.$store.state.profile.vip) {
       this.vip = this.$store.state.profile.vip
       console.log('this.vipp mounted:', this.vip)
     }
+  },
+  methods: {
+    redirectPath() {
+      const hasBank = this.$store.state?.profile?.profile?.bank
+      if (hasBank) {
+        this.$router.push('/recharge')
+      } else {
+        this.$router.push('/my/bankAccount')
+      }
+    },
+    rutnhanh() {
+      const hasBank = this.$store.state?.profile?.profile?.bank;
+      if (hasBank) {
+        this.$router.push('/wallet/withdraw')
+      } else {
+        this.$router.push('/my/bankAccount')
+      }
+    },
   },
   watch: {
     '$store.state.profile.vip': {
       handler: function (val) {
         console.log('val:', val, 'a index')
         if (val) {
-          this.vip = this.$store.state.profile.vip || { name: '' }
+          this.vip = this.$store.state.profile.vip || {name: ''}
         }
       },
       deep: true,
@@ -230,6 +240,16 @@ export default {
       return Math.round(num * 100) / 100
     },
   },
+  computed: {
+    computed: {
+      ...mapState({
+        user: (state) => state.profile.profile,
+        bank: (state) => state.profile.profile.bank,
+        isLogin: (state) => state.auth.isAuthenticated,
+      }),
+
+    }
+  }
 }
 </script>
 <style scpoed lang="scss">
@@ -238,11 +258,13 @@ export default {
 } */
 #index-page {
   margin-top: 80px;
+
   .main .main-container {
     background-color: #ffffff;
     border-radius: 20px;
     padding-top: 15px;
     padding-bottom: 15px;
+
     .card {
       width: 100px;
       height: 100px;
@@ -253,6 +275,7 @@ export default {
       margin-bottom: 20px;
       box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     }
+
     .task-header {
       display: flex;
       align-items: center;
@@ -264,6 +287,7 @@ export default {
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       margin: 0 auto;
     }
+
     .task-header::before {
       content: '';
       width: 4px;
@@ -273,6 +297,7 @@ export default {
       border-radius: 2px;
     }
   }
+
   .vip-wrap .tab {
     background: #e8e8e8;
     -webkit-box-shadow: 0 0.04rem 0.06667rem 0 rgba(0, 0, 0, 0.11);
@@ -287,6 +312,7 @@ export default {
     display: flex;
     border-radius: 1.25rem;
   }
+
   .vip-wrap .vip-list {
     margin-top: 0.53333rem;
     padding: 0.13333rem;
@@ -307,6 +333,7 @@ export default {
     background-size: cover;
     border-radius: 10px;
   }
+
   .vip-wrap .tab .tabItem {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
@@ -329,20 +356,24 @@ export default {
     cursor: pointer;
     color: #939393;
   }
+
   .vip-wrap .vip-list .active {
     background-color: #fff !important;
     -webkit-box-shadow: 0.3rem 0.3rem 0.3rem 0 rgba(0, 0, 0, 0.16) !important;
     box-shadow: 0.3rem 0.3rem 0.3rem #00000029 !important;
   }
+
   .vip-wrap .vip-list .active .vip-name,
   .vip-wrap .vip-list .active .num {
     color: #c62a1c;
     text-shadow: 2px 1px 2px #dddddd;
     font-weight: 700;
   }
+
   .vip-wrap .vip-list .active .status {
     display: none;
   }
+
   .vip-wrap .vip-list .vip-item {
     -webkit-flex-basis: 32%;
     -ms-flex-preferred-size: 32%;
@@ -356,6 +387,7 @@ export default {
     text-align: center;
     margin-bottom: 0.4rem;
   }
+
   .vip-wrap .vip-list .vip-wrap-inset,
   .vip-wrap .vip-list .partner-item {
     -webkit-box-align: center;
@@ -380,12 +412,14 @@ export default {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
+
   .vip-wrap .vip-list .num {
     color: #fff;
     font-weight: 600;
     font-size: 0.9rem;
     text-shadow: 2px 1px 2px #000000;
   }
+
   .header {
     padding: 10px 15px;
     position: fixed;
@@ -396,6 +430,7 @@ export default {
     background: transparent;
     border-radius: 0;
   }
+
   .swipper {
     img {
       height: 150px;
@@ -403,13 +438,16 @@ export default {
       border-radius: 25px;
     }
   }
+
   .vip-wrap .vip-list .vip-icon img {
     width: 100px;
   }
+
   .vip-wrap .tab .activeItem {
     background: #ffffff;
     border-radius: 1.25rem;
   }
+
   .banner-list {
     width: 100%;
     margin: 0.53333rem 0;
@@ -425,6 +463,7 @@ export default {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
+
   .banner-list .list-item {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -439,9 +478,10 @@ export default {
     align-items: center;
     border: 1px solid #e8e8e8;
     border-radius: 10px;
-    padding: 5px;
+    padding: 5px 10px;
     width: 100%;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
     .title {
       font-size: 18px !important;
       font-weight: bold;
@@ -449,19 +489,23 @@ export default {
       margin-bottom: 5px;
       text-transform: uppercase;
     }
+
     .discount {
       font-size: 16px;
       color: #2ecc71; /* Màu xanh cho phần trăm giảm giá */
       margin-bottom: 10px;
     }
+
     .categories {
       font-size: 14px;
       color: #666;
       margin-bottom: 15px;
     }
+
     .categories span {
       margin-right: 5px;
     }
+
     .product-image {
       border-radius: 5px;
       overflow: hidden;
@@ -469,18 +513,21 @@ export default {
       height: 200px;
       width: 100%;
     }
+
     .product-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
   }
+
   .banner-list .list-item img {
     display: block;
     width: 100px;
     height: 100px;
     object-fit: cover;
   }
+
   .banner-list .list-item .right {
     overflow: hidden;
     padding: 0.5rem;
@@ -491,8 +538,8 @@ export default {
     -ms-flex: 1;
     flex: 1;
   }
+
   .banner-list .list-item .title {
-    color: #ffffff;
     font-weight: bolder;
     font-size: 0.9rem;
     display: block;
@@ -503,6 +550,7 @@ export default {
     text-overflow: ellipsis;
     margin-bottom: 0.2rem;
   }
+
   .banner-list .list-item .subtitle {
     color: #8b8b8b;
     margin-top: 0.1rem;

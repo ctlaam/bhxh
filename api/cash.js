@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = process.env.BASE_URL ?? 'https://api.vietnamtour.pro/api'
+const baseURL = process.env.BASE_URL ?? 'https://api.soatdontienich.online/api'
 
 export function getLogCash(params) {
     let type = 'CashIn';

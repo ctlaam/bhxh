@@ -24,7 +24,9 @@
       <div class="text-left col align-self-center"></div>
       <div class="ml-auto col-auto align-self-center">
         <NuxtLink to="/login/signup">
-          <div class="" style="color: #ffffff">Tạo tài khoản mới</div>
+          <a-button type="primary">
+            <span style="color: #ffffff">Tạo tài khoản mới</span>
+          </a-button>
         </NuxtLink>
       </div>
     </div>

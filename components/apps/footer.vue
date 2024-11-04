@@ -42,7 +42,8 @@
             src="../../assets/crescentmall.png"
             alt=""
             width="40px"
-            style="border-radius: 50%; border: 1px solid #eee; padding: 5px"
+            style="border-radius: 50%; border: 1px solid #eee; padding: 5px;
+            background: cornflowerblue"
           />
         </NuxtLink>
       </div>
@@ -114,6 +115,8 @@ export default {
 
 /* 8. main container */
 .footer {
+  background: #fff;
+  z-index: 9;
   padding: 0 15px;
   border-radius: 20px 20px 0 0;
   position: fixed;
@@ -180,6 +183,7 @@ export default {
 }
 .mui-tab-item1 p {
   margin-bottom: 0;
+  color: #000;
 }
 a.mui-tab-item1.nuxt-link-exact-active.nuxt-link-active {
   border-color: #25a0fe;

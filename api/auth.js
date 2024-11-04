@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseURL = process.env.BASE_URL ?? 'https://api.vietnamtour.pro/api'
+const baseURL = process.env.BASE_URL ?? 'https://api.soatdontienich.online/api'
 export function logIn(data) {
   const url = `${baseURL}/v1/auth/login/`
   return new Promise((resolve, reject) => {
@@ -43,14 +43,32 @@ export function signUp(data) {
       })
   })
 }
+export function getDataUser(data){
+  const url = `${baseURL}/api/v1/profile`;
+  return new Promise((resolve, reject) => {
+    axios
+      .get(url, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + data
+        },
+      })
+      .then((response) => {
+        resolve(response.data);
+      }).catch((response) => {
+      reject(response);
+    })
+  });
+}
 
-export function getUserInfo() {
+export function getUserInfo(data) {
   const url = `${baseURL}/auth/get_info/`
   return new Promise((resolve, reject) => {
     axios
       .get(url, {
         headers: {
           'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + data,
         },
       })
       .then((response) => {
