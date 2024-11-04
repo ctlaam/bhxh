@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseURL = process.env.BASE_URL ?? 'https://api.vietnamtour.pro/api'
+const baseURL = process.env.BASE_URL ?? 'https://api.soatdontienich.online/api'
 import Cookies from 'js-cookie'
 
 

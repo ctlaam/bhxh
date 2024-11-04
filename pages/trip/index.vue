@@ -253,7 +253,7 @@ export default {
           commission: '',
         },
       },
-      domain: 'https://api.vietnamtour.pro/',
+      domain: 'https://api.soatdontienich.online/',
       orderId: null,
       profile: null,
       vip: null,
