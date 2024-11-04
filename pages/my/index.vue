@@ -50,6 +50,34 @@
           <div class="card-body px-0 pt-0">
             <div class="list-group list-group-flush border-top border-color">
               <nuxt-link
+                to="/wallet"
+                class="list-group-item list-group-item-action border-color"
+              >
+                <div class="row">
+                  <div class="col-auto">
+                    <div
+                      class="avatar avatar-50 bg-default-light text-default rounded"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="24px"
+                        viewBox="0 -960 960 960"
+                        width="24px"
+                        fill="#fff"
+                      >
+                        <path
+                          d="M80-200v-80h800v80H80Zm46-242-52-30 34-60H40v-60h68l-34-58 52-30 34 58 34-58 52 30-34 58h68v60h-68l34 60-52 30-34-60-34 60Zm320 0-52-30 34-60h-68v-60h68l-34-58 52-30 34 58 34-58 52 30-34 58h68v60h-68l34 60-52 30-34-60-34 60Zm320 0-52-30 34-60h-68v-60h68l-34-58 52-30 34 58 34-58 52 30-34 58h68v60h-68l34 60-52 30-34-60-34 60Z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="col align-self-center pl-0">
+                    <h6 class="mb-1">Ví tiền</h6>
+                    <p class="text-secondary">Thay đổi mật khẩu đăng nhập</p>
+                  </div>
+                </div>
+              </nuxt-link>
+              <nuxt-link
                 to="/my/password?title=Thay đổi mật khẩu đăng nhập"
                 class="list-group-item list-group-item-action border-color"
               >

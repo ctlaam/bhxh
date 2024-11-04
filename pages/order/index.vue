@@ -74,82 +74,71 @@
       :closable="false"
       :width="400"
       :footer="null"
-      class="modal-give-tour"
+      :class="['modal-give-tour', {'premium-modal': isPremium}]"
     >
       <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content" style="max-width: 100%">
-          <div class="modal-header">
-            <div style="width: 100%; height: 100%">
-              <img
-                style="object-fit: cover"
-                width="100%"
-                height="100%"
-                :src="domain + trip.image"
-                alt=""
-                crossorigin="anonymous"
-              />
-            </div>
-            <div class="goods-wrap">
-              <div class="text">
-                <img
-                  src="data:image/png;base64,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"
-                  alt=""
-                />
-                <p class="goods_name">{{ trip.name }}</p>
-              </div>
-              <div class="goods">
-                <div class="goods-cell flex-center">
-                  <div class="cell-item flex-row w100">
-                    <div class="cell-item-title">Số Tiền</div>
-                    <div class="cell-item-value">
-                      <span class="modal-price">{{ trip.meta.value }}</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="goods-cell flex-center">
-                  <div class="cell-item flex-row w100">
-                    <div class="cell-item-title">Tỷ Lệ</div>
-                    <div class="cell-item-value">
-                      <span class="commision">{{ trip.meta.commission }}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <div class="modal-body">
-            <div class="flex rate-box">
-              <span>Đánh Giá Bây Giờ</span>
-              <ul>
-                <li
-                  @click="getIndexItem(item)"
-                  v-for="item in 5"
-                  :key="item"
-                  :class="{ light: indexItem >= item }"
-                >
-                  <a>{{ item }}</a>
-                </li>
-              </ul>
-            </div>
-            <a-form
-              :form="form"
-              :label-col="{ span: 5 }"
-              :wrapper-col="{ span: 12 }"
-              @submit="handleSubmit"
-            >
-              <a-form-item>
-                <div class="modal-footer">
-                  <a-button
-                    html-type="submit"
-                    :loading="loading"
-                    type="submit"
-                    class="btn btn-primary btn2"
-                  >
-                    Gửi
-                  </a-button>
+            <a-card class="order-success-card">
+              <div class="premium-badge" v-if="trip.is_premium">
+                <a-icon type="crown" /> Premium
+              </div>
+              <!-- Header -->
+              <div class="success-header">
+                Chúc mừng nhập phân phối thành công
+              </div>
+
+              <!-- Order Info -->
+              <div class="order-info">
+                <div class="time-and-id">
+                  <span>Thời gian nhập phân phối: {{trip.created_at | formatTime}}</span>
+                  <div>
+                    <span>Mã SP: {{trip._id | getSpCode}}</span>
+                    <a-icon type="qrcode" />
+                  </div>
                 </div>
-              </a-form-item>
-            </a-form>
+
+                <!-- Product -->
+                <div class="product-info">
+                  <img :src="domain + trip.image" alt="LG Washing Machine" crossorigin="anonymous" />
+                  <div class="product-details">
+                    <p class="product-name">{{trip.name}}</p>
+                    <p class="model" style="text-transform: uppercase">{{trip._id | getSpCode}}</p>
+                    <p class="price">{{ trip.meta.value }}</p>
+                  </div>
+                </div>
+                <!--                <a-alert-->
+                <!--                  message="Số dư không đủ!"-->
+                <!--                  type="warning"-->
+                <!--                  class="error-message"-->
+                <!--                />-->
+                <div class="price-details">
+                  <div class="price-row">
+                    <span>Tổng tiền phân phối</span>
+                    <span>{{ trip.meta.value | formatVND }} VNĐ</span>
+                  </div>
+                  <div class="price-row">
+                    <span>Hoa hồng:</span>
+                    <span>{{ trip.meta.commission * trip.meta.value | formatVND }} VNĐ</span>
+                  </div>
+                  <div class="price-row total">
+                    <span>Tổng doanh thu</span>
+                    <span>{{ trip.meta.value + trip.meta.commission * trip.meta.value | formatVND}} VNĐ</span>
+                  </div>
+                </div>
+
+                <!-- Submit Button -->
+                <a-button type="primary" block class="submit-btn" @click="handleSubmit">
+                  Gửi đơn hàng
+                </a-button>
+                <div v-if="isLoading" class="loading-overlay">
+                  <div class="loading-container">
+                    <a-spin size="large" />
+                    <div class="loading-text">Đang gửi đơn hàng...</div>
+                  </div>
+                </div>
+              </div>
+            </a-card>
           </div>
         </div>
       </div>
@@ -190,6 +179,8 @@ export default {
       profile: null,
       formLayout: 'horizontal',
       form: this.$form.createForm(this, { name: 'coordinated' }),
+      isPremium: false,
+      isLoading: false
     }
   },
   created() {
@@ -198,6 +189,21 @@ export default {
     this.getProfile()
   },
   methods: {
+    async handleSubmit() {
+      if (this.isLoading) return; // Prevent double click
+
+      this.isLoading = true;
+
+      try {
+        await new Promise(resolve => setTimeout(resolve, 5000)); // Delay 5s
+        await this.create();
+      } catch (error) {
+        // Xử lý lỗi nếu cần
+        console.error(error);
+      } finally {
+        this.isLoading = false;
+      }
+    },
     formatDateTime(dattime) {
       return moment(dattime).format('DD/MM/YYYY HH:mm:ss')
     },
@@ -237,38 +243,31 @@ export default {
           this.$message.error(err)
         })
     },
-    handleSubmit(e) {
-      e.preventDefault()
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          this.create()
-        }
-      })
-    },
     async createTuor(item) {
       if (item.status == 'Success') return
       this.showModal = true
       this.trip = item.product
       this.trip.meta = item.meta
-      this.orderId = item._id
+      this.orderId = item._id;
+      this.isPremium = item.is_premium;
     },
     create: _.debounce(async function () {
       if (this.trip.meta.value && this.profile.balance < this.trip.meta.value) {
         let diffMoney = this.trip.meta.value - this.profile.balance
         diffMoney = diffMoney.toFixed(2)
-        this.$confirm({
-          title: 'Chúc mừng bạn đã nhận được đơn hàng ra soát',
-          content: `Đơn hàng này có thể nhận được nhiều hoa hồng hơn và cần phải bù phần chênh lệch ${diffMoney}`,
-          icon: 'check-circle',
-          cancelButtonProps: { style: { display: 'none' } },
-          onOk: () => {
-            this.showModal = false
+        this.$notification.success({
+          message: 'Đơn Hàng Premium',
+          description: 'CHÚC MỪNG BẠN ĐÃ MAY MẮN NHẬN ĐƯỢC ĐƠN HÀNG THƯỞNG TỪ HỆ THỐNG',
+          style: {
+            background: 'linear-gradient(45deg, #FFD700, #FFA500)',
+            border: 'none',
           },
-        })
+          class: 'premium-notification',
+          duration: 3,
+        });
         return
       }
       this.loading = true
-      this.$store.dispatch('loading/setModalLoading', true)
       await tutorApi
         .sendTuor(this.orderId)
         .then((res) => {
@@ -282,7 +281,6 @@ export default {
         .finally(() => {
           this.loading = false
           setTimeout(() => {
-            this.$store.dispatch('loading/setModalLoading', false)
           }, 2500)
         })
     }, 500),
@@ -487,6 +485,123 @@ export default {
     padding: 75px 10px 10px 10px;
     min-height: 100vh;
     width: 100%;
+  }
+}
+</style>
+<style lang="scss" scoped>
+.modal-give-tour {
+  &.premium-modal {
+    .success-header {
+      background: linear-gradient(45deg, #FFD700, #FFA500) !important;
+      color: #fff;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg,
+          rgba(255,255,255,0.2) 25%,
+          transparent 25%,
+          transparent 50%,
+          rgba(255,255,255,0.2) 50%,
+          rgba(255,255,255,0.2) 75%,
+          transparent 75%);
+        background-size: 20px 20px;
+        animation: shine 2s linear infinite;
+      }
+    }
+
+    .order-success-card {
+      border: 2px solid #FFD700;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.15);
+    }
+
+    .price-details {
+      background: linear-gradient(45deg, rgba(255,215,0,0.1), rgba(255,165,0,0.1));
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,215,0,0.2);
+    }
+
+    .submit-btn {
+      background: linear-gradient(45deg, #FFD700, #FFA500) !important;
+      border: none !important;
+      font-weight: 600;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+
+    /* Thêm icon premium */
+    .premium-badge {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #FFD700;
+      padding: 5px 10px;
+      border-radius: 20px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(255,215,0,0.3);
+      z-index: 1;
+    }
+  }
+}
+
+/* Animation cho premium effects */
+@keyframes shine {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 0;
+  }
+}
+
+/* Style cho notification */
+.premium-notification {
+  position: fixed !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  margin-left: 0 !important;
+
+  .ant-notification-notice-message {
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .ant-notification-notice-description {
+    color: #fff;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .ant-notification-notice-close {
+    color: #fff;
+  }
+
+  /* Thêm icon check */
+  .ant-notification-notice-icon {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 8px;
+  }
+}
+
+/* Ẩn notification container mặc định */
+.ant-notification {
+  &.ant-notification-topRight,
+  &.ant-notification-topLeft {
+    display: none;
   }
 }
 </style>

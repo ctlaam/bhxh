@@ -22,13 +22,13 @@ export default {
   computed: {
     loading() {
       // Đọc giá trị modalLoading từ Vuex store (Sử dụng getter modalLoading)
-      return this.$store.getters['loading/modalLoading']
+      return
     },
   },
   created() {
     setTimeout(() => {
       this.handleCancel()
-    }, 1000)
+    }, 300)
   },
   methods: {
     handleCancel() {

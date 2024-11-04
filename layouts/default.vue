@@ -137,7 +137,7 @@ export default {
   scrollbar-width: none; /* Ẩn thanh cuộn */
   overflow-y: auto;
   height: 900px;
-  padding-bottom: 50px;
+  padding-bottom: 70px;
 }
 
 #content {

@@ -13,11 +13,7 @@
       <Footer></Footer>
     </div>
     <FullScreenModal> </FullScreenModal>
-    <script
-      id="chatway"
-      async="true"
-      src="https://cdn.chatway.app/widget.js?id=RyXcUgtmEQpi"
-    ></script>
+    <script id="chatway" async="true" src="https://cdn.chatway.app/widget.js?id=hverUGGnQJOV"></script>
     <div class="modal"></div>
   </div>
 </template>

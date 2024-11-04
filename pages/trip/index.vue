@@ -5,7 +5,7 @@
         <h5 class="">
           {{ profile && formatCurrency(profile.balance) }}đ
         </h5>
-        <p class="mb-4 fz14">Tổng Tài Sản</p>
+        <p class="mb-4 fz14">Số dư tài khoản</p>
       </div>
       <div class="col-6 mt-3 text-center">
         <h5 class="">
@@ -19,7 +19,7 @@
     <div class="row w-100">
       <div class="text-white col-6 mt-3 text-center">
         <h5 class="">{{ vip && vip.order_quantity_per_day }}</h5>
-        <p class="text-white mb-4 fz14">Đơn hàng hàng ngày</p>
+        <p class="text-white mb-4 fz14">Số đơn hàng ngày</p>
       </div>
       <div class="text-white col-6 mt-3 text-center">
         <h5 class="">
@@ -35,48 +35,30 @@
           class="d-flex align-items-center mb-2 animate-area-0 animated slideOutLeft infinite"
         >
           <img
-            src="~/assets/trips/8d4eb2242bdc6c89.jpg"
+            src="~/assets/trips/s1.webp"
             class="border-radius-1 dashboard-product-image me-2"
           />
           <img
-            src="~/assets/trips/f9f8a5ee7c8e297b.jpg"
+            src="~/assets/trips/s2.webp"
             class="border-radius-1 dashboard-product-image me-2"
           />
           <img
-            src="~/assets/trips/b882993b95877f40.jpg"
+            src="~/assets/trips/s3.webp"
             class="border-radius-1 dashboard-product-image me-2"
           /><img
-            src="~/assets/trips/314c90afcc377d26.jpg"
+            src="~/assets/trips/s4.webp"
             class="border-radius-1 dashboard-product-image me-2"
           /><img
-            src="~/assets/trips/7632eb27e143f06f.jpg"
+            src="~/assets/trips/s5.webp"
             class="border-radius-1 dashboard-product-image me-2"
           /><img
-            src="~/assets/trips/c2b309c08fb91240.jpg"
+            src="~/assets/trips/s6.webp"
             class="border-radius-1 dashboard-product-image me-2"
           /><img
-            src="~/assets/trips/712ab7ee3dceb7c1.jpg"
+            src="~/assets/trips/s7.webp"
             class="border-radius-1 dashboard-product-image me-2"
           /><img
-            src="~/assets/trips/e26a108d537a2e28.jpg"
-            class="border-radius-1 dashboard-product-image me-2"
-          /><img
-            src="~/assets/trips/7c453bbbe50f1b22.jpg"
-            class="border-radius-1 dashboard-product-image me-2"
-          /><img
-            src="~/assets/trips/2282a6ab28b2951c.jpg"
-            class="border-radius-1 dashboard-product-image me-2"
-          /><img
-            src="~/assets/trips/151ac364b0bd6381.jpg"
-            class="border-radius-1 dashboard-product-image me-2"
-          /><img
-            src="~/assets/trips/5cbfe07073e0bb48.jpg"
-            class="border-radius-1 dashboard-product-image me-2"
-          /><img
-            src="~/assets/trips/3411546ffa2763bf.jpg"
-            class="border-radius-1 dashboard-product-image me-2"
-          /><img
-            src="~/assets/trips/6b710f89313c3364.jpg"
+            src="~/assets/trips/s8.webp"
             class="border-radius-1 dashboard-product-image me-2"
           />
         </div>
@@ -133,12 +115,15 @@
       :closable="false"
       :width="400"
       :footer="null"
-      class="modal-give-tour"
+      :class="['modal-give-tour', {'premium-modal': isPremium}]"
     >
       <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content" style="max-width: 100%">
           <div class="modal-body">
             <a-card class="order-success-card">
+              <div class="premium-badge" v-if="trip.is_premium">
+                <a-icon type="crown" /> Premium
+              </div>
               <!-- Header -->
               <div class="success-header">
                 Chúc mừng nhập phân phối thành công
@@ -147,9 +132,9 @@
               <!-- Order Info -->
               <div class="order-info">
                 <div class="time-and-id">
-                  <span>Thời gian nhập phân phối: 20:05:58</span>
+                  <span>Thời gian nhập phân phối: {{trip.created_at | formatTime}}</span>
                   <div>
-                    <span>Mã SP: 61546</span>
+                    <span>Mã SP: {{trip._id | getSpCode}}</span>
                     <a-icon type="qrcode" />
                   </div>
                 </div>
@@ -159,7 +144,7 @@
                   <img :src="domain + trip.image" alt="LG Washing Machine" crossorigin="anonymous" />
                   <div class="product-details">
                     <p class="product-name">{{trip.name}}</p>
-                    <p class="model">FV1412S3B</p>
+                    <p class="model" style="text-transform: uppercase">{{trip._id | getSpCode}}</p>
                     <p class="price">{{ trip.meta.value }}</p>
                   </div>
                 </div>
@@ -171,28 +156,35 @@
                 <div class="price-details">
                   <div class="price-row">
                     <span>Tổng tiền phân phối</span>
-                    <span>{{ trip.meta.value }}</span>
+                    <span>{{ trip.meta.value | formatVND }} VNĐ</span>
                   </div>
                   <div class="price-row">
                     <span>Hoa hồng:</span>
-                    <span>{{ trip.meta.commission * trip.meta.value }}</span>
+                    <span>{{ trip.meta.commission * trip.meta.value | formatVND }} VNĐ</span>
                   </div>
                   <div class="price-row total">
                     <span>Tổng doanh thu</span>
-                    <span>{{ trip.meta.value + trip.meta.commission * trip.meta.value}}</span>
+                    <span>{{ trip.meta.value + trip.meta.commission * trip.meta.value | formatVND}} VNĐ</span>
                   </div>
                 </div>
 
                 <!-- Submit Button -->
-                <a-button type="primary" block class="submit-btn">
-                  Gửi phân phối
+                <a-button type="primary" block class="submit-btn" @click="handleSubmit">
+                  Gửi đơn hàng
                 </a-button>
+                <div v-if="isLoading" class="loading-overlay">
+                  <div class="loading-container">
+                    <a-spin size="large" />
+                    <div class="loading-text">Đang gửi đơn hàng...</div>
+                  </div>
+                </div>
               </div>
             </a-card>
           </div>
         </div>
       </div>
     </a-modal>
+<!--    <FullScreenModal/>-->
   </div>
 </template>
 
@@ -202,8 +194,14 @@ import * as volatilityApi from '../../api/volatility.js'
 import * as orderApi from '../../api/order'
 import _ from 'lodash'
 import axios from 'axios'
+import moment from 'moment';
+// import FullScreenModal from '../../components/apps/FullScreenModal'
+
 export default {
   name: 'index',
+  components: {
+    // FullScreenModal
+  },
   data() {
     return {
       showModal: false,
@@ -225,6 +223,8 @@ export default {
       loading: false,
       formLayout: 'horizontal',
       form: this.$form.createForm(this, { name: 'coordinated' }),
+      isLoading: false,
+      isPremium: false,
     }
   },
   async created() {
@@ -246,14 +246,6 @@ export default {
         })
       }
     },
-    handleSubmit(e) {
-      e.preventDefault()
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          this.create()
-        }
-      })
-    },
     async showModalTour() {
       await tutorApi
         .getTuor()
@@ -261,7 +253,21 @@ export default {
           this.trip = res.data.product
           this.trip.meta = res.data.meta
           this.orderId = res.data._id
-          this.showModal = true
+          this.showModal = true;
+          this.isPremium = res.data.is_premium;
+          if (res.data.is_premium) {
+            // Show notification
+            this.$notification.success({
+              message: 'Đơn Hàng Premium',
+              description: 'CHÚC MỪNG BẠN ĐÃ MAY MẮN NHẬN ĐƯỢC ĐƠN HÀNG THƯỞNG TỪ HỆ THỐNG',
+              style: {
+                background: 'linear-gradient(45deg, #FFD700, #FFA500)',
+                border: 'none',
+              },
+              class: 'premium-notification',
+              duration: 3,
+            });
+          }
         })
         .catch((err) => {
           console.log('err:', err)
@@ -272,13 +278,27 @@ export default {
     getIndexItem(item) {
       this.indexItem = item
     },
+    async handleSubmit() {
+      if (this.isLoading) return; // Prevent double click
+
+      this.isLoading = true;
+
+      try {
+        await new Promise(resolve => setTimeout(resolve, 5000)); // Delay 5s
+        await this.create();
+      } catch (error) {
+        // Xử lý lỗi nếu cần
+        console.error(error);
+      } finally {
+        this.isLoading = false;
+      }
+    },
     create: _.debounce(async function () {
       if (this.trip.meta.value && this.profile.balance < this.trip.meta.value) {
         let diffMoney = this.trip.meta.value - this.profile.balance
         diffMoney = diffMoney.toFixed(2)
         this.$confirm({
-          title: 'Chúc mừng bạn đã nhận được đơn hàng rà soát!',
-          content: `Đơn hàng này có thể nhận được nhiều hoa hồng hơn và cần phải bù phần chênh lệch ${diffMoney}`,
+          title: 'Chúc mừng bạn đã nhận được đơn thưởng từ hệ thống!',
           icon: 'check-circle',
           cancelButtonProps: { style: { display: 'none' } },
           onOk: () => {
@@ -346,6 +366,18 @@ export default {
       if (!num) return 0
       return Math.round(num * 100) / 100
     },
+    formatTime(value) {
+      if (!value) return '';
+      return moment(value).format('HH:mm:ss')
+    },
+    formatVND(value) {
+      if (!value) return ''
+        return value.toLocaleString('vi-VN')
+    },
+    getSpCode(value) {
+      if (!value) return '';
+      return value.substring(0, 5)
+    }
   },
   // watch: {
   //   '$store.state.profile': {
@@ -621,7 +653,9 @@ export default {
 .product-details {
   flex: 1;
 }
-
+.product-details p {
+  margin-bottom: 0;
+}
 .product-name {
   font-weight: 500;
   margin-bottom: 4px;
@@ -664,5 +698,252 @@ export default {
   background-color: #fa8c16;
   border-color: #fa8c16;
   opacity: 0.9;
+}
+
+
+</style>
+<style lang="scss">
+/* ... các style khác giữ nguyên ... */
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7); /* Tăng độ tối của overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(5px); /* Thêm hiệu ứng blur cho nền */
+  animation: fadeIn 0.3s ease-out; /* Animation khi hiện overlay */
+}
+
+.loading-container {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 32px 48px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  animation: slideUp 0.3s ease-out; /* Animation cho container */
+  max-width: 90%;
+
+  /* Tạo viền gradient */
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #fa8c16, #1890ff);
+    z-index: -1;
+    border-radius: 18px;
+    opacity: 0.5;
+  }
+}
+
+.loading-text {
+  margin-top: 24px;
+  font-size: 16px;
+  font-weight: 500;
+  background: linear-gradient(45deg, #fa8c16, #1890ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: pulse 2s infinite; /* Thêm hiệu ứng pulse cho text */
+}
+
+/* Custom style cho Ant Design Spin */
+.loading-container .ant-spin {
+  .ant-spin-dot-item {
+    background-color: #fa8c16; /* Màu chủ đạo của app */
+  }
+
+  /* Tăng kích thước của spin icon */
+  &.ant-spin-lg .ant-spin-dot {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Animation definitions */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .loading-container {
+    padding: 24px 32px;
+  }
+
+  .loading-text {
+    font-size: 14px;
+  }
+
+  .loading-container .ant-spin-lg .ant-spin-dot {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Ngăn scroll khi loading hiện */
+body.loading {
+  overflow: hidden;
+
+  /* Thêm smooth transition cho scroll bar */
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+}
+</style>
+
+<style lang="scss" scoped>
+.modal-give-tour {
+&.premium-modal {
+.success-header {
+  background: linear-gradient(45deg, #FFD700, #FFA500) !important;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+
+&::after {
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background: linear-gradient(45deg,
+   rgba(255,255,255,0.2) 25%,
+   transparent 25%,
+   transparent 50%,
+   rgba(255,255,255,0.2) 50%,
+   rgba(255,255,255,0.2) 75%,
+   transparent 75%);
+   background-size: 20px 20px;
+   animation: shine 2s linear infinite;
+ }
+}
+
+.order-success-card {
+  border: 2px solid #FFD700;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.15);
+}
+
+.price-details {
+  background: linear-gradient(45deg, rgba(255,215,0,0.1), rgba(255,165,0,0.1));
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,215,0,0.2);
+}
+
+.submit-btn {
+  background: linear-gradient(45deg, #FFD700, #FFA500) !important;
+  border: none !important;
+  font-weight: 600;
+
+&:hover {
+   opacity: 0.9;
+ }
+}
+
+/* Thêm icon premium */
+.premium-badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #FFD700;
+  padding: 5px 10px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(255,215,0,0.3);
+  z-index: 1;
+}
+}
+}
+
+/* Animation cho premium effects */
+@keyframes shine {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 0;
+  }
+}
+
+/* Style cho notification */
+.premium-notification {
+  position: fixed !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  margin-left: 0 !important;
+
+  .ant-notification-notice-message {
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .ant-notification-notice-description {
+    color: #fff;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .ant-notification-notice-close {
+    color: #fff;
+  }
+
+  /* Thêm icon check */
+  .ant-notification-notice-icon {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 8px;
+  }
+}
+
+/* Ẩn notification container mặc định */
+.ant-notification {
+  &.ant-notification-topRight,
+  &.ant-notification-topLeft {
+    display: none;
+  }
 }
 </style>

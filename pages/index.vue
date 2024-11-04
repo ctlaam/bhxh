@@ -3,24 +3,29 @@
     <main class="flex-shrink-0 main has-footer">
       <div class="head-top">
         <div class="swipper">
-          <marquee
-            direction="left"
-            scrollamount="7"
-            class="img-gen-v-slider marquee2"
-          >
-            <div class="d-flex list-image-left">
-              <img src="../assets/swiper/beach1.jpg" alt=""/><img
-              src="../assets/swiper/beach2.jpg"
-              alt=""
-            /><img src="../assets/swiper/beach3.jpg" alt=""/><img
-              src="../assets/swiper/beach4.jpg"
-              alt=""
-            /><img src="../assets/swiper/beach5.jpg" alt=""/><img
-              src="../assets/swiper/beach6.jpg"
-              alt=""
-            /><img src="../assets/swiper/beach7.jpg" alt=""/>
+          <div class="scroll-container">
+            <div class="scroll-content">
+              <div class="image-list">
+                <img src="../assets/sp1.webp" alt="" />
+                <img src="../assets/sp2.webp" alt="" />
+                <img src="../assets/sp3.webp" alt="" />
+                <img src="../assets/sp4.webp" alt="" />
+                <img src="../assets/sp6.webp" alt="" />
+                <img src="../assets/sp7.webp" alt="" />
+                <img src="../assets/sp8.webp" alt="" />
+              </div>
+              <!-- Clone để tạo hiệu ứng infinite scroll -->
+              <div class="image-list">
+                <img src="../assets/sp1.webp" alt="" />
+                <img src="../assets/sp2.webp" alt="" />
+                <img src="../assets/sp3.webp" alt="" />
+                <img src="../assets/sp4.webp" alt="" />
+                <img src="../assets/sp6.webp" alt="" />
+                <img src="../assets/sp7.webp" alt="" />
+                <img src="../assets/sp8.webp" alt="" />
+              </div>
             </div>
-          </marquee>
+          </div>
         </div>
       </div>
       <div class="main-container">
@@ -117,7 +122,7 @@
         <div class="container mb-4">
           <div class="banner-list">
             <div class="list-item">
-              <div class="title">Thành viên SLIVER</div>
+              <div class="title">gói thành Thành viên SLIVER</div>
               <div class="discount">3%</div>
               <div class="categories">
                 <span>Thời trang</span> | <span>Phụ kiện</span> |
@@ -128,7 +133,7 @@
               </div>
             </div>
             <div class="list-item">
-              <div class="title">Thành viên GOLD</div>
+              <div class="title">gói thành Thành viên GOLD</div>
               <div class="discount">4%</div>
               <div class="categories">
                 <span>Thời trang</span> | <span>Phụ kiện</span> |
@@ -139,7 +144,7 @@
               </div>
             </div>
             <div class="list-item">
-              <div class="title">Thành viên Platinum</div>
+              <div class="title">gói thành Thành viên Platinum</div>
               <div class="discount">6%</div>
               <div class="categories">
                 <span>Thời trang</span> | <span>Phụ kiện</span> |
@@ -150,7 +155,7 @@
               </div>
             </div>
             <div class="list-item">
-              <div class="title">Thành viên Sapphire</div>
+              <div class="title">gói thành Thành viên Sapphire</div>
               <div class="discount">7%</div>
               <div class="categories">
                 <span>Thời trang</span> | <span>Phụ kiện</span> |
@@ -161,7 +166,7 @@
               </div>
             </div>
             <div class="list-item">
-              <div class="title">Thành viên Diamon</div>
+              <div class="title">gói thành Thành viên Diamon</div>
               <div class="discount">10%</div>
               <div class="categories">
                 <span>Thời trang</span> | <span>Phụ kiện</span> |
@@ -562,6 +567,59 @@ export default {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+  }
+}
+
+
+
+.scroll-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.scroll-content {
+  display: flex;
+  animation: scroll 20s linear infinite;
+  /* Sử dụng transform để tận dụng GPU acceleration */
+  will-change: transform;
+}
+
+.image-list {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.image-list img {
+  height: 200px; /* Điều chỉnh theo nhu cầu */
+  width: auto;
+  margin-right: 10px;
+  /* Tối ưu rendering */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Tạm dừng animation khi user hover */
+.scroll-container:hover .scroll-content {
+  animation-play-state: paused;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --scroll-speed: 3s; /* Tốc độ trên mobile */
+  }
+
+  .image-list img {
+    height: 150px;
   }
 }
 </style>

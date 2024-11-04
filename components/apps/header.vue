@@ -28,7 +28,7 @@
             </svg>
             Thông báo
           </div>
-          <div class="button">
+          <div class="button" @click="chamsockhachhang">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="24px"
@@ -59,6 +59,12 @@ export default {
     }
   },
   methods: {
+    chamsockhachhang(){
+      let chat = document.querySelector(".launcher-icon.launcher-minimize-icon");
+      if (chat) {
+        chat.click();
+      }
+    },
     handleScroll() {
       // Get the scroll position
       const scrollPosition =
