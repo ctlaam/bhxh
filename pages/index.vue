@@ -122,7 +122,7 @@
         <div class="container mb-4">
           <div class="banner-list">
             <div class="list-item">
-              <div class="title">gói thành Thành viên SLIVER</div>
+              <div class="title">gói thành viên SLIVER</div>
               <div class="discount">3%</div>
               <div class="categories">
                 <span>Thời trang</span> | <span>Phụ kiện</span> |
@@ -133,7 +133,7 @@
               </div>
             </div>
             <div class="list-item">
-              <div class="title">gói thành Thành viên GOLD</div>
+              <div class="title">gói thành viên GOLD</div>
               <div class="discount">4%</div>
               <div class="categories">
                 <span>Thời trang</span> | <span>Phụ kiện</span> |
@@ -144,7 +144,7 @@
               </div>
             </div>
             <div class="list-item">
-              <div class="title">gói thành Thành viên Platinum</div>
+              <div class="title">gói thành viên Platinum</div>
               <div class="discount">6%</div>
               <div class="categories">
                 <span>Thời trang</span> | <span>Phụ kiện</span> |
@@ -155,7 +155,7 @@
               </div>
             </div>
             <div class="list-item">
-              <div class="title">gói thành Thành viên Sapphire</div>
+              <div class="title">gói thành viên Sapphire</div>
               <div class="discount">7%</div>
               <div class="categories">
                 <span>Thời trang</span> | <span>Phụ kiện</span> |
@@ -166,7 +166,7 @@
               </div>
             </div>
             <div class="list-item">
-              <div class="title">gói thành Thành viên Diamon</div>
+              <div class="title">gói thành viên Diamon</div>
               <div class="discount">10%</div>
               <div class="categories">
                 <span>Thời trang</span> | <span>Phụ kiện</span> |

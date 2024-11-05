@@ -1,6 +1,6 @@
 <template>
   <div
-    class="footer col-md-offset-4 col-lg-offset-4col-xl-offset-4"
+    class="footer col-md-offset-4 col-lg-offset-4 col-xl-offset-4"
     style="max-width: 480px"
   >
     <div class="row no-gutters justify-content-center">
@@ -36,18 +36,18 @@
           <p>Lịch sử</p>
         </NuxtLink>
       </div>
-      <div class="col">
-        <NuxtLink to="/trip" exact active-class="active" class="mui-tab-item1">
+      <div class="col center-button-wrapper">
+        <NuxtLink to="/trip" exact active-class="active" class="mui-tab-item1 floating-button">
+          <div class="button-effects"></div>
           <img
             src="../../assets/crescentmall.png"
             alt=""
             width="40px"
-            style="border-radius: 50%; border: 1px solid #eee; padding: 5px;
-            background: cornflowerblue"
+            class="center-icon"
           />
         </NuxtLink>
       </div>
-      <div class="col" >
+      <div class="col">
         <NuxtLink
           to="#"
           @click.native.prevent="chamsockhachhang"
@@ -76,8 +76,8 @@
               d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"
             />
           </svg>
-          <p>Tài khoản</p></NuxtLink
-        >
+          <p>Tài khoản</p>
+        </NuxtLink>
       </div>
     </div>
   </div>
@@ -115,11 +115,11 @@ export default {
   padding-left: 0;
   margin-top: var(--bs-gutter-y);
 }
+
 .main.has-footer {
   padding-bottom: 85px;
 }
 
-/* 8. main container */
 .footer {
   background: #fff;
   z-index: 9;
@@ -127,19 +127,110 @@ export default {
   border-radius: 20px 20px 0 0;
   position: fixed;
   bottom: -1px;
-  /*left: 0;*/
   width: 100%;
   z-index: 99;
   background: rgba(255, 255, 255, 0.98);
   box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.15);
-  -webkit-box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.15);
-  -ms-box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.15);
-  /*
-    -webkit-backdrop-filter: saturate(125%) blur(10px);
-    -moz-backdrop-filter: saturate(125%) blur(10px);
-    -ms-backdrop-filter: saturate(125%) blur(10px);
-    backdrop-filter: saturate(125%) blur(10px);*/
+}
+
+.center-button-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.floating-button {
+  position: absolute !important;
+  bottom: 10px;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+  border: none!important;
+}
+
+.floating-button:hover {
+  transform: translateY(-25px);
+}
+
+.button-effects {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.center-icon {
+  border-radius: 50%;
+  padding: 8px;
+  background: linear-gradient(145deg, #4494ff, #25a0fe);
+  box-shadow: 0 4px 15px rgba(37, 160, 254, 0.3);
+  border: 2px solid #ffffff;
+  width: 50px !important;
+  height: 50px !important;
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+/* Enhanced active state styles */
+.floating-button.active .center-icon {
+  animation: activeScale 0.3s forwards, activePulse 1.5s infinite;
+  background: linear-gradient(145deg, #25a0fe, #0066ff);
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 20px rgba(37, 160, 254, 0.5);
+}
+
+.floating-button.active .button-effects {
+  animation: ripple 1.5s linear infinite;
+}
+
+@keyframes activeScale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes activePulse {
+  0% {
+    box-shadow: 0 0 20px rgba(37, 160, 254, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(37, 160, 254, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(37, 160, 254, 0.5);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 160, 254, 0.4),
+    0 0 0 1px rgba(37, 160, 254, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 15px rgba(37, 160, 254, 0),
+    0 0 0 20px rgba(37, 160, 254, 0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 4px 15px rgba(37, 160, 254, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba(37, 160, 254, 0.5);
+  }
+  100% {
+    box-shadow: 0 4px 15px rgba(37, 160, 254, 0.3);
+  }
 }
 
 .footer a:not(.btn) {
@@ -176,21 +267,15 @@ export default {
   color: #25a0fe;
 }
 
-.footer.no-bg-shadow {
-  background: none;
-  box-shadow: none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  -ms-box-shadow: none;
-}
-
 .home {
   font-size: 20px;
 }
+
 .mui-tab-item1 p {
   margin-bottom: 0;
   color: #000;
 }
+
 a.mui-tab-item1.nuxt-link-exact-active.nuxt-link-active {
   border-color: #25a0fe;
   color: #25a0fe;

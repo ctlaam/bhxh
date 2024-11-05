@@ -39,7 +39,7 @@
                 <a-select
                   mode="bank"
                   style="width: 100%"
-                  placeholder="Chọn phương thức nạp tiền"
+                  placeholder="Ngân hàng"
                   v-decorator="[
                     'bankName',
                     {

@@ -34,8 +34,9 @@
         <div
           class="d-flex align-items-center mb-2 animate-area-0 animated slideOutLeft infinite"
         >
+
           <img
-            src="~/assets/trips/s1.webp"
+            src="~/assets/trips/mayanh.webp"
             class="border-radius-1 dashboard-product-image me-2"
           />
           <img
@@ -59,6 +60,18 @@
             class="border-radius-1 dashboard-product-image me-2"
           /><img
             src="~/assets/trips/s8.webp"
+            class="border-radius-1 dashboard-product-image me-2"
+          />
+          <img
+            src="~/assets/trips/ps5.webp"
+            class="border-radius-1 dashboard-product-image me-2"
+          />
+          <img
+            src="~/assets/trips/tainghe.webp"
+            class="border-radius-1 dashboard-product-image me-2"
+          />
+          <img
+            src="~/assets/trips/samsung.webp"
             class="border-radius-1 dashboard-product-image me-2"
           />
         </div>
@@ -106,7 +119,7 @@
         >
           Khám phá các gói thành viên
         </div>
-        <img class="mb-4" src="../../assets/index/banner.jpg" width="100%" alt="" />
+        <img class="mb-4" src="../../assets/index/banner2.jpg" width="100%" alt="" />
         <!-- <img src="../../assets/imagetour.webp" width="100%" alt=""> -->
       </div>
     </div>
