@@ -160,11 +160,11 @@
                   </div>
                   <div class="price-row">
                     <span>Hoa hồng:</span>
-                    <span>{{ trip.meta.commission * trip.meta.value | formatVND }} VNĐ</span>
+                    <span>{{ (trip.meta.commission /100) * trip.meta.value | formatVND }} VNĐ</span>
                   </div>
                   <div class="price-row total">
                     <span>Tổng doanh thu</span>
-                    <span>{{ trip.meta.value + trip.meta.commission * trip.meta.value | formatVND}} VNĐ</span>
+                    <span>{{ trip.meta.value + ((trip.meta.commission / 100) * trip.meta.value) | formatVND}} VNĐ</span>
                   </div>
                 </div>
 
