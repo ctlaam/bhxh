@@ -36,14 +36,14 @@
                 <div class="money-item">
                   <span class="title">Số Tiền</span>
                   <span class="money">{{
-                    order.meta && order.meta.value
+                      (order.meta && order.meta.value) | formatVND
                   }}</span>
                 </div>
                 <div class="money-item">
-                  <span class="title">Tỷ Lệ</span
+                  <span class="title">Hoa hồng</span
                   ><span class="money">{{
-                    order.meta && order.meta.commission
-                  }}</span>
+                    (order.meta && order.meta.commission)
+                  }}%</span>
                 </div>
                 <div class="submit-btn"></div>
               </div>
@@ -257,7 +257,7 @@ export default {
         diffMoney = diffMoney.toFixed(2)
         this.$notification.success({
           message: 'Đơn Hàng Premium',
-          description: 'CHÚC MỪNG BẠN ĐÃ MAY MẮN NHẬN ĐƯỢC ĐƠN HÀNG THƯỞNG TỪ HỆ THỐNG',
+          description: 'Vui lòng nạp thêm tiền để xử lý đơn hoặc liên hệ chăm sóc khách hàng!',
           style: {
             background: 'linear-gradient(45deg, #FFD700, #FFA500)',
             border: 'none',
@@ -293,18 +293,7 @@ export default {
             this.vip = data.data
           })
         })
-        .catch((err) => {
-          console.log(this.$router.current?.name)
-          if (
-            err == 'Phiên đăng nhập đã hết hạn' &&
-            currentURL != 'https://vietnamtour.pro/' &&
-            currentURL != 'https://vietnamtour.pro/login/' &&
-            currentURL != 'https://vietnamtour.pro/login/signup/'
-          ) {
-            this.$router.push('/login')
-            return
-          }
-        })
+
     },
   },
 }

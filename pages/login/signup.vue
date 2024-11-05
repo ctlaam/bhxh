@@ -49,6 +49,22 @@
               <a-form :form="form" @submit="handleSubmit">
                 <a-form-item>
                   <a-input
+                    placeholder="Tên ID"
+                    v-decorator="[
+                      'name',
+                      {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Tên không được để trống!',
+                          },
+                        ],
+                      },
+                    ]"
+                  />
+                </a-form-item>
+                  <a-form-item>
+                  <a-input
                     placeholder="Số điện thoại"
                     v-decorator="[
                       'phone',
@@ -57,22 +73,6 @@
                           {
                             required: true,
                             message: 'Số điện thoại không được để trống!',
-                          },
-                        ],
-                      },
-                    ]"
-                  />
-                </a-form-item>
-                <a-form-item>
-                  <a-input
-                    placeholder="Tên"
-                    v-decorator="[
-                      'name',
-                      {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Tên không được để trống!',
                           },
                         ],
                       },

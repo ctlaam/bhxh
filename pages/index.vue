@@ -121,59 +121,15 @@
         </div>
         <div class="container mb-4">
           <div class="banner-list">
-            <div class="list-item">
-              <div class="title">gói thành viên SLIVER</div>
-              <div class="discount">3%</div>
+            <div class="list-item" v-for="(level, index) in levels" :key="index">
+              <div class="title">{{level.name}}</div>
+              <div class="discount">{{level.commission_percent}}%</div>
               <div class="categories">
                 <span>Thời trang</span> | <span>Phụ kiện</span> |
                 <span>Điện thoại</span>
               </div>
               <div class="product-image">
-                <img src="../assets/index/tainghe.webp" alt="Sản phẩm"/>
-              </div>
-            </div>
-            <div class="list-item">
-              <div class="title">gói thành viên GOLD</div>
-              <div class="discount">4%</div>
-              <div class="categories">
-                <span>Thời trang</span> | <span>Phụ kiện</span> |
-                <span>Điện thoại</span>
-              </div>
-              <div class="product-image">
-                <img src="../assets/index/tuixach.webp" style="object-fit: contain" alt="Sản phẩm"/>
-              </div>
-            </div>
-            <div class="list-item">
-              <div class="title">gói thành viên Platinum</div>
-              <div class="discount">6%</div>
-              <div class="categories">
-                <span>Thời trang</span> | <span>Phụ kiện</span> |
-                <span>Điện thoại</span>
-              </div>
-              <div class="product-image">
-                <img src="../assets/index/iphone.webp" style="object-fit: contain" alt="Sản phẩm"/>
-              </div>
-            </div>
-            <div class="list-item">
-              <div class="title">gói thành viên Sapphire</div>
-              <div class="discount">7%</div>
-              <div class="categories">
-                <span>Thời trang</span> | <span>Phụ kiện</span> |
-                <span>Điện thoại</span>
-              </div>
-              <div class="product-image">
-                <img src="../assets/index/macbook.png" style="object-fit: contain" alt="Sản phẩm"/>
-              </div>
-            </div>
-            <div class="list-item">
-              <div class="title">gói thành viên Diamon</div>
-              <div class="discount">10%</div>
-              <div class="categories">
-                <span>Thời trang</span> | <span>Phụ kiện</span> |
-                <span>Điện thoại</span>
-              </div>
-              <div class="product-image">
-                <img src="../assets/index/tv.webp" style="object-fit: contain" alt="Sản phẩm"/>
+                <img v-if="level.background_urls.length" :src="domain + level.background_urls[0]" alt="Sản phẩm" crossorigin="anonymous" style="object-fit: contain" />
               </div>
             </div>
           </div>
@@ -185,7 +141,10 @@
 <!-- End of LiveChat code -->
 
 <script>
+import * as volatilityApi from '../api/volatility'
+
 import {mapState} from "vuex";
+import {getListLevel} from "../api/volatility";
 
 export default {
   name: 'IndexPage',
@@ -196,6 +155,8 @@ export default {
         name: '',
         background_urls: [],
       },
+      levels: null,
+      domain: 'https://api.soatdontienich.online/',
     }
   },
   beforeDestroy() {
@@ -203,14 +164,18 @@ export default {
     console.log('vao dayy')
   },
   mounted() {
-    console.log('this.$store.state.profile.vip:', this.$store.state.profile.vip)
-    console.log('this.$store.state.profile.vip:', this.$store.state.profile)
     if (this.$store.state.profile.vip) {
       this.vip = this.$store.state.profile.vip
-      console.log('this.vipp mounted:', this.vip)
     }
+    this.getLevel();
   },
   methods: {
+    async getLevel() {
+      volatilityApi.getListLevel()
+        .then((data) => {
+          this.levels = data.data;
+        })
+    },
     redirectPath() {
       const hasBank = this.$store.state?.profile?.profile?.bank
       if (hasBank) {

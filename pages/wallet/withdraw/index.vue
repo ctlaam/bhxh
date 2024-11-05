@@ -5,7 +5,7 @@
         <div class="card">
           <div class="card-header">
             <h6 class="subtitle mb-0 text-center text-success" style="font-size: 14px;">
-              Số dư tài khoản {{ blance | roundToTwoDecimalPlaces }}
+              Số dư tài khoản {{ blance | roundToTwoDecimalPlaces }} VNĐ
             </h6>
           </div>
           <div class="card-body was-validated">
@@ -73,7 +73,8 @@ export default {
       currentPassword: null,
       password: null,
       confirmPassword: null,
-      blance: null
+      blance: null,
+      profile: {},
     }
   },
   beforeCreate() {
@@ -117,14 +118,25 @@ export default {
         callback();
       }
     },
+    async getProfile() {
+      await volatilityApi
+        .getProfileUser()
+        .then(async (res) => {
+          this.profile = res.data;
+          this.blance = this.profile.balance;
+          await volatilityApi.getListVips(this.profile.level).then((data) => {
+            this.vip = data.data
+          })
+        })
+    },
   },
   created() {
-    this.blance = this.$route.query.balance;
+    this.getProfile()
   },
   filters: {
     roundToTwoDecimalPlaces(num) {
       if(!num) return 0;
-      return Math.round(num * 100) / 100;
+      return (Math.round(num * 100) / 100).toLocaleString();
     }
 
   },

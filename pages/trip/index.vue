@@ -145,7 +145,7 @@
               <!-- Order Info -->
               <div class="order-info">
                 <div class="time-and-id">
-                  <span>Thời gian nhập phân phối: {{trip.created_at | formatTime}}</span>
+                  <span>Thời gian nhập phân phối: {{createdAt | formatTime}}</span>
                   <div>
                     <span>Mã SP: {{trip._id | getSpCode}}</span>
                     <a-icon type="qrcode" />
@@ -238,6 +238,7 @@ export default {
       form: this.$form.createForm(this, { name: 'coordinated' }),
       isLoading: false,
       isPremium: false,
+      createdAt: null,
     }
   },
   async created() {
@@ -267,6 +268,7 @@ export default {
           this.trip.meta = res.data.meta
           this.orderId = res.data._id
           this.showModal = true;
+          this.createdAt = res.data.created_at
           this.isPremium = res.data.is_premium;
           if (res.data.is_premium) {
             // Show notification
@@ -311,7 +313,7 @@ export default {
         let diffMoney = this.trip.meta.value - this.profile.balance
         diffMoney = diffMoney.toFixed(2)
         this.$confirm({
-          title: 'Chúc mừng bạn đã nhận được đơn thưởng từ hệ thống!',
+          title: 'Vui lòng nạp thêm tiền để xử lý đơn hoặc liên hệ chăm sóc khách hàng!',
           icon: 'check-circle',
           cancelButtonProps: { style: { display: 'none' } },
           onOk: () => {
@@ -349,18 +351,6 @@ export default {
             this.vip = data.data
           })
         })
-        .catch((err) => {
-          console.log(this.$router.current?.name)
-          if (
-            err == 'Phiên đăng nhập đã hết hạn' &&
-            currentURL != 'https://vietnamtour.pro/' &&
-            currentURL != 'https://vietnamtour.pro/login/' &&
-            currentURL != 'https://vietnamtour.pro/login/signup/'
-          ) {
-            this.$router.push('/login')
-            return
-          }
-        })
     },
     async getOrder() {
       await orderApi
@@ -381,7 +371,8 @@ export default {
     },
     formatTime(value) {
       if (!value) return '';
-      return moment(value).format('HH:mm:ss')
+      const utcTime = moment(value)
+      return moment(value).format('DD/MM/YYYY HH:mm:ss')
     },
     formatVND(value) {
       if (!value) return ''

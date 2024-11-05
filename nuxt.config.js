@@ -89,6 +89,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/antd-ui',
+    '@/plugins/formatMoney',
     { src: '@/plugins/vclickoutside', ssr: false },
   ],
 
@@ -119,7 +120,7 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   server: {
-    host: '0.0.0.0', // hoặc là địa chỉ IP cụ thể của bạn
+    // host: '0.0.0.0', // hoặc là địa chỉ IP cụ thể của bạn
     port: 3000 // hoặc port mà bạn muốn
   },
 }

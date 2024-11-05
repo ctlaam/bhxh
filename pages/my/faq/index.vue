@@ -25,7 +25,7 @@
               </div>
             </div>
           </div>
-          <div class="card-body">
+          <div class="card-body" style="padding-bottom: 35px;">
             <p class="text-secondary"></p>
 
             <p>
@@ -77,15 +77,7 @@
               đổi tùy thuộc vào điều kiện của từng đơn hàng.
             </p>
 
-            <p><strong>3. Chương trình Giới thiệu và Nhận Hoa hồng</strong></p>
-
-            <p>
-              • Bạn có thể tham gia chương trình giới thiệu thành viên mới và
-              nhận thêm hoa hồng từ các thành viên bạn đã giới thiệu. Hoa hồng
-              sẽ được tính dựa trên % giá trị đơn hàng đã rà soát thành công.
-            </p>
-
-            <p><strong>4. Thời gian Rà soát Đơn hàng</strong></p>
+            <p><strong>3. Thời gian Rà soát Đơn hàng</strong></p>
 
             <p>
               • Giờ hoạt động của nền tảng là từ 10:00 đến 22:00 hàng ngày. Vui

@@ -51,17 +51,6 @@ export default {
           this.$store.dispatch('profile/saveVip', data.data)
         })
       })
-      .catch((err) => {
-        console.log(this.$router.current?.name)
-        if (
-          err == 'Phiên đăng nhập đã hết hạn' &&
-          currentURL != 'https://vietnamtour.pro/' &&
-          currentURL != 'https://vietnamtour.pro/login/' &&
-          currentURL != 'https://vietnamtour.pro/login/signup/'
-        ) {
-          this.$router.push('/login')
-        }
-      })
     setTimeout(() => {
       this.$store.dispatch('loading/setModalLoading', false)
     }, 1500)
