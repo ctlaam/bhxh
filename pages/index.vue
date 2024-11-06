@@ -30,7 +30,7 @@
       </div>
       <div class="main-container">
         <div class="row" style="width: 100%">
-          <div class="col-1 ml-2"></div>
+          <div class="col-1" style="margin-left: 12px;"></div>
           <div class="card col ml-2">
             <svg
               fill="#02108c"

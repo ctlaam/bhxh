@@ -309,19 +309,6 @@ export default {
       }
     },
     create: _.debounce(async function () {
-      if (this.trip.meta.value && this.profile.balance < this.trip.meta.value) {
-        let diffMoney = this.trip.meta.value - this.profile.balance
-        diffMoney = diffMoney.toFixed(2)
-        this.$confirm({
-          title: 'Số dư ko đủ. Bạn vui lòng liên hệ CSKH để được hỗ trợ.Xin cảm ơn!',
-          icon: 'check-circle',
-          cancelButtonProps: { style: { display: 'none' } },
-          onOk: () => {
-            this.showModal = false
-          },
-        })
-        return
-      }
       this.loading = true
       this.$store.dispatch('loading/setModalLoading', true)
       await tutorApi
@@ -333,6 +320,17 @@ export default {
           this.getOrder()
         })
         .catch((err) => {
+          if (err == 'Số dư không đủ. Bạn vui lòng liên hệ CSKH để được hỗ trợ. Xin cảm ơn!') {
+            this.$confirm({
+              title: err,
+              icon: 'check-circle',
+              cancelButtonProps: { style: { display: 'none' } },
+              onOk: () => {
+                this.showModal = false
+              },
+            })
+            return;
+          }
           this.$message.error(err)
         })
         .finally(() => {
