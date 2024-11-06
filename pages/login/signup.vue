@@ -23,7 +23,7 @@
       </div>
       <div class="text-left col align-self-center"></div>
       <div class="ml-auto col-auto align-self-center">
-        <NuxtLink to="/my/rules">
+        <NuxtLink to="/login">
           <a-button type="primary">
             <span style="color: #ffffff">Đã có tài khoản, đăng nhập</span>
           </a-button>
@@ -159,7 +159,7 @@
                 </div>
                 <div class="row">
                   <div class="col align-self-center pl-0 ml-3">
-                    <NuxtLink to="/terms">
+                    <NuxtLink to="/my/rules">
                       <h6 class="mb-1 text-white" style="margin-left: 10px;">
                         Xem điều khoản & điều kiện
                       </h6>

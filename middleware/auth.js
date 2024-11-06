@@ -10,8 +10,7 @@ export default async function ({ store, redirect, route }) {
     })
   }
   let isAuthenticated = store.state.auth.isAuthenticated
-  console.log(route.path);
-  if (!(route.path === '/login/' || route.path === '/login/signup' || route.path === '/login/signup/' || route.path === '/')) {
+  if (!(route.path === '/login/' || route.path === '/login' || route.path === '/login/signup' || route.path === '/login/signup/' || route.path === '/')) {
     await authApi.getDataUser(accessToken).then(async (response) => {
       await store.dispatch('profile/saveProfile', response.data)
     }).catch((error) => {
@@ -23,7 +22,7 @@ export default async function ({ store, redirect, route }) {
   }
   // Nếu trạng thái isAuthenticated là false và route khác /auth và /auth/login
   if (
-    !isAuthenticated && route.path !== '/login/' && !route.path.includes('/my/rules') && !route.path.includes('rule') && route.path !== '/'
+    !isAuthenticated && route.path !== '/login/' && !route.path.includes('/my/rules') && !route.path === '/login/signup' && !route.path.includes('/login/signup/') && route.path !== '/'
   ) {
     // Chuyển hướng đến /auth/signup
     return redirect('/login/')
