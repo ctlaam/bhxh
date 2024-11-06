@@ -24,7 +24,9 @@
       <div class="text-left col align-self-center"></div>
       <div class="ml-auto col-auto align-self-center">
         <NuxtLink to="/login">
-          <div class="" style="color: #212529">Đã có tài khoản, đăng nhập</div>
+          <a-button type="primary">
+            <span style="color: #ffffff">Đã có tài khoản, đăng nhập</span>
+          </a-button>
         </NuxtLink>
       </div>
     </div>
@@ -49,7 +51,7 @@
               <a-form :form="form" @submit="handleSubmit">
                 <a-form-item>
                   <a-input
-                    placeholder="Tên ID"
+                    placeholder="Tên ID đăng nhập"
                     v-decorator="[
                       'name',
                       {
@@ -63,7 +65,7 @@
                     ]"
                   />
                 </a-form-item>
-                  <a-form-item>
+                <a-form-item>
                   <a-input
                     placeholder="Số điện thoại"
                     v-decorator="[
@@ -158,7 +160,7 @@
                 <div class="row">
                   <div class="col align-self-center pl-0 ml-3">
                     <NuxtLink to="/terms">
-                      <h6 class="mb-1 text-white">
+                      <h6 class="mb-1 text-white" style="margin-left: 10px;">
                         Xem điều khoản & điều kiện
                       </h6>
                     </NuxtLink>
@@ -228,7 +230,7 @@ export default {
         if (!err) {
           authApi
             .signUp({
-              identifier: values.phone,
+              identifier: values.name,
               password: values.password,
               reference_code: values.inviteCode,
               tfa_password: values.passwordMoney,

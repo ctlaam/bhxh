@@ -48,7 +48,7 @@
               <a-form :form="form" @submit="handleSubmit">
                 <a-form-item>
                   <a-input
-                    placeholder="Tên / Số điện thoại"
+                    placeholder="Tên ID đăng nhập / Số điện thoại"
                     v-decorator="[
                       'username',
                       {
