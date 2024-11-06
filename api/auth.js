@@ -39,7 +39,7 @@ export function signUp(data) {
         }
       })
       .catch((response) => {
-        reject(response.response.status)
+        reject(response)
       })
   })
 }

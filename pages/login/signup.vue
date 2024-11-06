@@ -160,7 +160,7 @@
                 <div class="row">
                   <div class="col align-self-center pl-0 ml-3">
                     <NuxtLink to="/my/rules">
-                      <h6 class="mb-1 text-white" style="margin-left: 10px;">
+                      <h6 class="mb-1 text-white" style="margin-left: 10px">
                         Xem điều khoản & điều kiện
                       </h6>
                     </NuxtLink>
@@ -242,8 +242,8 @@ export default {
               this.$router.push('/login')
             })
             .catch((err) => {
-              if (err.response && err.response.status === 400) {
-                this.$message.error('Email đã tồn tại !')
+              if(err.response?.data?.message){
+                this.$message.error(err.response.data.message)
               } else {
                 this.$message.error('Đăng kí thất bại !')
               }
