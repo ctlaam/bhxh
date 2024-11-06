@@ -10,7 +10,7 @@
       <div class="col-6 mt-3 text-center">
         <h5 class="">
           {{
-            orderOfUser && formatCurrency(orderOfUser.total_commission_today)
+            orderOfUser && formatCurrency(profile.order_commission)
           }}
         </h5>
         <p class="mb-4 fz14">Hoa Hồng</p>
