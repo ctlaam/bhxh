@@ -25,7 +25,7 @@
               <div class="goods-line align-start flex">
                 <div class="flex-column">
                   <div class="time text-left">
-                    {{ formatDateTime(order.product.created_at) }}
+                    {{ formatDateTime(order.created_at) }}
                   </div>
                   <div class="goods-name text-left">
                     {{ order.product && order.product.name }}
