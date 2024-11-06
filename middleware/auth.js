@@ -10,7 +10,8 @@ export default async function ({ store, redirect, route }) {
     })
   }
   let isAuthenticated = store.state.auth.isAuthenticated
-  if (!(route.path === '/login/' || route.path === '/signup/' || route.path === '/')) {
+  console.log(route.path);
+  if (!(route.path === '/login/' || route.path === '/login/signup' || route.path === '/login/signup/' || route.path === '/')) {
     await authApi.getDataUser(accessToken).then(async (response) => {
       await store.dispatch('profile/saveProfile', response.data)
     }).catch((error) => {

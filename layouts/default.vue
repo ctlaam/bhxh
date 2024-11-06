@@ -68,15 +68,7 @@ export default {
           })
         })
         .catch((err) => {
-          if (
-            err == 'Phiên đăng nhập đã hết hạn' &&
-            currentURL != 'https://vietnamtour.pro/' &&
-            currentURL != 'https://vietnamtour.pro/login/' &&
-            currentURL != 'https://vietnamtour.pro/login/signup/'
-          ) {
-            this.$router.push('/login')
-            return
-          }
+          console.log(err)
         })
     },
   },
