@@ -98,9 +98,7 @@ export default {
       }
     },
     keyRender() {
-      console.log('alo')
       this.$store.commit('profile/setKey', null)
-      console.log(this.$store.state)
     },
   },
 }

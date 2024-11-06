@@ -4,7 +4,6 @@ const baseURL = process.env.BASE_URL ?? 'https://api.soatdontienich.online/api'
 
 export function getLogCash(params) {
     let type = 'CashIn';
-    console.log("getLogCash parrams:", params);
     let url = `${baseURL}/v1/user-transaction`
     if (params.type == 'CashOut') {
         type = 'CashOut'

@@ -337,7 +337,6 @@ export default {
         .getOrderAnalytic()
         .then((res) => {
           this.orderOfUser = _.get(res, 'data', [])
-          console.log('this.orderOfUser:', this.orderOfUser)
         })
         .catch((err) => {
           this.$message.error(err)
@@ -348,7 +347,6 @@ export default {
     '$store.state.profile': {
       handler: function (val) {
         if (val) {
-          console.log('1')
           this.profile = this.$store.state.profile.profile
           this.vip = this.$store.state.profile.vip
           // this.getListByKey()
@@ -359,7 +357,6 @@ export default {
     },
     '$store.state.profile.vip': {
       handler: function (val) {
-        console.log('aaaaaaaaaaaaaaa')
         this.vip = this.$store.state.profile.vip
       },
       deep: true,
@@ -367,7 +364,6 @@ export default {
   },
   mounted() {
     if (this.$store.state.profile) {
-      console.log('vao dayyy')
       this.profile = this.$store.state.profile.profile
       this.vip = this.$store.state.profile.vip
       // this.getListByKey()

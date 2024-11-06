@@ -20,11 +20,9 @@ export const mutations = {
 
 export const actions = {
   async saveProfile({ commit }, profile) {
-    console.log("profile:", profile);
     commit('setProfile', profile);
   },
   async saveVip({ commit }, payload) {
-    console.log("save vip:", payload);
     commit('setVip', payload);
   }
 };

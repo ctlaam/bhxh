@@ -161,7 +161,6 @@ export default {
   },
   beforeDestroy() {
     this.vip = null
-    console.log('vao dayy')
   },
   mounted() {
     if (this.$store.state.profile.vip) {
@@ -196,7 +195,6 @@ export default {
   watch: {
     '$store.state.profile.vip': {
       handler: function (val) {
-        console.log('val:', val, 'a index')
         if (val) {
           this.vip = this.$store.state.profile.vip || {name: ''}
         }

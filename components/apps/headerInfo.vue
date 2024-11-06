@@ -35,7 +35,6 @@ export default {
   },
   methods: {
     previousPage() {
-      console.log("this.router", this.$route)
       if (['wallet-withdraw', 'wallet-recharge', 'wallet-history'].includes(this.$route.name)) {
         this.$router.push({ path: '/wallet' });
         return;
@@ -47,7 +46,6 @@ export default {
   },
   created() {
     this.title = this.$route.query.title
-    console.log(this.$route.query.title, 'a')
   }
 }
 </script>

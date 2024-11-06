@@ -44,7 +44,7 @@ export function signUp(data) {
   })
 }
 export function getDataUser(data){
-  const url = `${baseURL}/api/v1/profile`;
+  const url = `${baseURL}/v1/profile`;
   return new Promise((resolve, reject) => {
     axios
       .get(url, {

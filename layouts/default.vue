@@ -9,6 +9,7 @@
     </div>
     <!-- <FullScreenModal> </FullScreenModal> -->
     <div class="modal"></div>
+    <script id="chatway" async="true" src="https://cdn.chatway.app/widget.js?id=hverUGGnQJOV"></script>
   </div>
 </template>
 
@@ -42,15 +43,15 @@ export default {
     this.$store.dispatch('loading/setModalLoading', true)
     const currentURL = window.location.href
     this.$refs.content.addEventListener('scroll', this.handleScroll)
-    await volatilityApi
-      .getProfileUser()
-      .then(async (res) => {
-        let profile = res.data
-        this.$store.dispatch('profile/saveProfile', profile)
-        await volatilityApi.getListVips(profile.level).then((data) => {
-          this.$store.dispatch('profile/saveVip', data.data)
-        })
-      })
+    // await volatilityApi
+    //   .getProfileUser()
+    //   .then(async (res) => {
+    //     let profile = res.data
+    //     this.$store.dispatch('profile/saveProfile', profile)
+    //     await volatilityApi.getListVips(profile.level).then((data) => {
+    //       this.$store.dispatch('profile/saveVip', data.data)
+    //     })
+    //   })
     setTimeout(() => {
       this.$store.dispatch('loading/setModalLoading', false)
     }, 1500)

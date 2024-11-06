@@ -196,7 +196,6 @@ export default {
       }
     },
     navigateToPage() {
-      console.log('this.profileUser:', this.profileUser)
       if (this.profileUser && !this.profileUser.bank) {
         this.$router.push({ path: '/my/bankAccount' })
         return
@@ -209,7 +208,6 @@ export default {
         .getOrderAnalytic()
         .then((res) => {
           this.orderOfUser = _.get(res, 'data', [])
-          console.log('this.orderOfUser:', this.orderOfUser)
         })
         .catch((err) => {
           this.$message.error(err)

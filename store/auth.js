@@ -20,6 +20,9 @@ export const mutations = {
 
 export const actions = {
   login({ commit }, { accessToken }) {
+    if (!accessToken) {
+      return
+    }
     // Set authentication status and tokens
     commit('setAuthentication', true)
     commit('setTokens', { accessToken })

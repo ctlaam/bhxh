@@ -69,10 +69,8 @@ export default {
       // Get the scroll position
       const scrollPosition =
         window.scrollY || document.documentElement.scrollTop
-      console.log('Scroll position:', scrollPosition)
       // You can add your logic here based on the scroll position
       if (scrollPosition > 100) {
-        console.log('Scrolled more than 100 pixels', scrollPosition)
         // Do something when scrolled more than 100 pixels
       }
     },

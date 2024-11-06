@@ -23,7 +23,7 @@
       </div>
       <div class="text-left col align-self-center"></div>
       <div class="ml-auto col-auto align-self-center">
-        <NuxtLink to="/login">
+        <NuxtLink to="/my/rules">
           <a-button type="primary">
             <span style="color: #ffffff">Đã có tài khoản, đăng nhập</span>
           </a-button>
@@ -226,7 +226,6 @@ export default {
     handleSubmit(e) {
       e.preventDefault()
       this.form.validateFieldsAndScroll((err, values) => {
-        console.log('value:', values)
         if (!err) {
           authApi
             .signUp({

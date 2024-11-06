@@ -13,7 +13,11 @@
       <Footer></Footer>
     </div>
     <FullScreenModal> </FullScreenModal>
-    <script id="chatway" async="true" src="https://cdn.chatway.app/widget.js?id=hverUGGnQJOV"></script>
+    <script
+      id="chatway"
+      async="true"
+      src="https://cdn.chatway.app/widget.js?id=hverUGGnQJOV"
+    ></script>
     <div class="modal"></div>
   </div>
 </template>
@@ -39,7 +43,6 @@ export default {
     handleScroll() {
       // Lấy vị trí cuộn của phần tử "content"
       const scrollPosition = this.$refs.content.scrollTop
-      console.log('Scroll position:', scrollPosition)
 
       // Thêm logic dựa trên vị trí cuộn
       if (scrollPosition > 50) {
