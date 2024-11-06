@@ -313,7 +313,7 @@ export default {
         let diffMoney = this.trip.meta.value - this.profile.balance
         diffMoney = diffMoney.toFixed(2)
         this.$confirm({
-          title: 'Vui lòng nạp thêm tiền để xử lý đơn hoặc liên hệ chăm sóc khách hàng!',
+          title: 'Số dư ko đủ. Bạn vui lòng liên hệ CSKH để được hỗ trợ.Xin cảm ơn!',
           icon: 'check-circle',
           cancelButtonProps: { style: { display: 'none' } },
           onOk: () => {

@@ -85,9 +85,9 @@
                 ></path>
               </g>
             </svg>
-            <span @click="redirectPath">Nạp ngay</span>
+            <span >Nạp ngay</span>
           </div>
-          <div class="card col">
+          <div class="card col" @click="rutnhanh">
             <svg
               width="24px"
               height="24px"
@@ -112,7 +112,7 @@
                 ></path>
               </g>
             </svg>
-            <span @click="rutnhanh">Rút nhanh</span>
+            <span >Rút nhanh</span>
           </div>
           <div class="col-1"></div>
         </div>
@@ -121,15 +121,25 @@
         </div>
         <div class="container mb-4">
           <div class="banner-list">
-            <div class="list-item" v-for="(level, index) in levels" :key="index">
-              <div class="title">{{level.name}}</div>
-              <div class="discount">{{level.commission_percent}}%</div>
+            <div
+              class="list-item"
+              v-for="(level, index) in levels"
+              :key="index"
+            >
+              <div class="title">{{ level.name }}</div>
+              <div class="discount">{{ level.commission_percent }}%</div>
               <div class="categories">
                 <span>Thời trang</span> | <span>Phụ kiện</span> |
                 <span>Điện thoại</span>
               </div>
               <div class="product-image">
-                <img v-if="level.background_urls.length" :src="domain + level.background_urls[0]" alt="Sản phẩm" crossorigin="anonymous" style="object-fit: contain" />
+                <img
+                  v-if="level.background_urls.length"
+                  :src="domain + level.background_urls[0]"
+                  alt="Sản phẩm"
+                  crossorigin="anonymous"
+                  style="object-fit: contain"
+                />
               </div>
             </div>
           </div>
@@ -143,8 +153,8 @@
 <script>
 import * as volatilityApi from '../api/volatility'
 
-import {mapState} from "vuex";
-import {getListLevel} from "../api/volatility";
+import { mapState } from 'vuex'
+import { getListLevel } from '../api/volatility'
 
 export default {
   name: 'IndexPage',
@@ -166,14 +176,13 @@ export default {
     if (this.$store.state.profile.vip) {
       this.vip = this.$store.state.profile.vip
     }
-    this.getLevel();
+    this.getLevel()
   },
   methods: {
     async getLevel() {
-      volatilityApi.getListLevel()
-        .then((data) => {
-          this.levels = data.data;
-        })
+      volatilityApi.getListLevel().then((data) => {
+        this.levels = data.data
+      })
     },
     redirectPath() {
       const hasBank = this.$store.state?.profile?.profile?.bank
@@ -184,7 +193,7 @@ export default {
       }
     },
     rutnhanh() {
-      const hasBank = this.$store.state?.profile?.profile?.bank;
+      const hasBank = this.$store.state.profile?.profile?.bank
       if (hasBank) {
         this.$router.push('/wallet/withdraw')
       } else {
@@ -196,7 +205,7 @@ export default {
     '$store.state.profile.vip': {
       handler: function (val) {
         if (val) {
-          this.vip = this.$store.state.profile.vip || {name: ''}
+          this.vip = this.$store.state.profile.vip || { name: '' }
         }
       },
       deep: true,
@@ -215,9 +224,8 @@ export default {
         bank: (state) => state.profile.profile.bank,
         isLogin: (state) => state.auth.isAuthenticated,
       }),
-
-    }
-  }
+    },
+  },
 }
 </script>
 <style scpoed lang="scss">
@@ -532,8 +540,6 @@ export default {
     -webkit-box-orient: vertical;
   }
 }
-
-
 
 .scroll-container {
   width: 100%;

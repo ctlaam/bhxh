@@ -173,14 +173,14 @@ export default {
 }
 
 /* Enhanced active state styles */
-.floating-button.active .center-icon {
+.floating-button .center-icon {
   animation: activeScale 0.3s forwards, activePulse 1.5s infinite;
   background: linear-gradient(145deg, #25a0fe, #0066ff);
   border: 3px solid #ffffff;
   box-shadow: 0 0 20px rgba(37, 160, 254, 0.5);
 }
 
-.floating-button.active .button-effects {
+.floating-button .button-effects {
   animation: ripple 1.5s linear infinite;
 }
 

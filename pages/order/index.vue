@@ -257,7 +257,7 @@ export default {
         diffMoney = diffMoney.toFixed(2)
         this.$notification.success({
           message: 'Đơn Hàng Premium',
-          description: 'Vui lòng nạp thêm tiền để xử lý đơn hoặc liên hệ chăm sóc khách hàng!',
+          description: 'Số dư ko đủ. Bạn vui lòng liên hệ CSKH để được hỗ trợ.Xin cảm ơn!',
           style: {
             background: 'linear-gradient(45deg, #FFD700, #FFA500)',
             border: 'none',
