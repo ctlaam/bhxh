@@ -134,34 +134,6 @@
                   </div>
                 </div>
               </NuxtLink>
-              <NuxtLink
-                to="/wallet/history?title=Lịch sử rút tiền"
-                class="list-group-item list-group-item-action border-color"
-              >
-                <div class="row">
-                  <div class="col-auto">
-                    <div
-                      class="avatar avatar-50 bg-default-light text-default rounded"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24px"
-                        viewBox="0 -960 960 960"
-                        width="24px"
-                        fill="#fff"
-                      >
-                        <path
-                          d="M280-160 80-360l200-200 56 57-103 103h287v80H233l103 103-56 57Zm400-240-56-57 103-103H440v-80h287L624-743l56-57 200 200-200 200Z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="col align-self-center pl-0">
-                    <h6 class="mb-1">Lịch Sử Rút Tiền</h6>
-                    <p class="text-secondary">Xem Lịch Sử Rút Tiền</p>
-                  </div>
-                </div>
-              </NuxtLink>
             </div>
           </div>
         </div>

@@ -42,8 +42,8 @@
                 <div class="money-item">
                   <span class="title">Hoa hồng</span
                   ><span class="money">{{
-                    (order.meta && order.meta.commission)
-                  }}%</span>
+                    ((order.meta && order.meta.commission) / 100 * order.meta.value) | formatVND
+                  }}</span>
                 </div>
                 <div class="submit-btn"></div>
               </div>

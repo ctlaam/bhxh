@@ -69,7 +69,6 @@ export default {
     this.form = this.$form.createForm(this, {name: 'login'})
   },
   created() {
-    this.getHistory()
   },
   methods: {
     async getHistory() {
