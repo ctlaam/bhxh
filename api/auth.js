@@ -43,7 +43,7 @@ export function signUp(data) {
       })
   })
 }
-export function getDataUser(data){
+export async function getDataUser(data) {
   const url = `${baseURL}/v1/profile`;
   return new Promise((resolve, reject) => {
     axios
@@ -56,8 +56,8 @@ export function getDataUser(data){
       .then((response) => {
         resolve(response.data);
       }).catch((response) => {
-      reject(response);
-    })
+        reject(response);
+      })
   });
 }
 

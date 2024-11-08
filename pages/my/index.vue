@@ -2,7 +2,7 @@
   <div class="profile">
     <div class="container mb-4 text-center text-white" style="margin-top: 80px">
       <h6 class="mb-1" style="font-weight: 600; font-size: 1.5rem">
-        {{ profile?.name }}
+        {{ profile?.identifier }}
       </h6>
       <img
         v-if="vip && vip.background_urls.length"
