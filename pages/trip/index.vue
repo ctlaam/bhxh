@@ -2,12 +2,16 @@
   <div style="margin-top: 80px; margin-bottom: 80px">
     <div class="row w-100" style="color: #ffffff">
       <div class="col-6 mt-3 text-center">
-        <h5 class="">{{ profile && formatCurrency(profile.balance) }}đ</h5>
+        <h5 class="">
+          {{ profile && profile.balance | formatVND}} VNĐ
+        </h5>
         <p class="mb-4 fz14">Số dư tài khoản</p>
       </div>
       <div class="col-6 mt-3 text-center">
         <h5 class="">
-          {{ profile && formatCurrency(profile.order_commission) }}
+          {{
+            profile && profile.order_commission |formatVND
+          }} VNĐ
         </h5>
         <p class="mb-4 fz14">Hoa Hồng</p>
       </div>
@@ -30,6 +34,7 @@
         <div
           class="d-flex align-items-center mb-2 animate-area-0 animated slideOutLeft infinite"
         >
+
           <img
             src="~/assets/trips/mayanh.webp"
             class="border-radius-1 dashboard-product-image me-2"
@@ -114,12 +119,7 @@
         >
           Khám phá các gói thành viên
         </div>
-        <img
-          class="mb-4"
-          src="../../assets/index/banner2.jpg"
-          width="100%"
-          alt=""
-        />
+        <img class="mb-4" src="../../assets/index/banner2.jpg" width="100%" alt="" />
         <!-- <img src="../../assets/imagetour.webp" width="100%" alt=""> -->
       </div>
     </div>
@@ -128,7 +128,7 @@
       :closable="false"
       :width="400"
       :footer="null"
-      :class="['modal-give-tour', { 'premium-modal': isPremium }]"
+      :class="['modal-give-tour', {'premium-modal': isPremium}]"
     >
       <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content" style="max-width: 100%">
@@ -145,36 +145,27 @@
               <!-- Order Info -->
               <div class="order-info">
                 <div class="time-and-id">
-                  <span
-                    >Thời gian nhập phân phối:
-                    {{ createdAt | formatTime }}</span
-                  >
+                  <span>Thời gian nhập phân phối: {{createdAt | formatTime}}</span>
                   <div>
-                    <span>Mã SP: {{ trip._id | getSpCode }}</span>
+                    <span>Mã SP: {{trip._id | getSpCode}}</span>
                     <a-icon type="qrcode" />
                   </div>
                 </div>
 
                 <!-- Product -->
                 <div class="product-info">
-                  <img
-                    :src="domain + trip.image"
-                    alt="LG Washing Machine"
-                    crossorigin="anonymous"
-                  />
+                  <img :src="domain + trip.image" alt="LG Washing Machine" crossorigin="anonymous" />
                   <div class="product-details">
-                    <p class="product-name">{{ trip.name }}</p>
-                    <p class="model" style="text-transform: uppercase">
-                      {{ trip._id | getSpCode }}
-                    </p>
+                    <p class="product-name">{{trip.name}}</p>
+                    <p class="model" style="text-transform: uppercase">{{trip._id | getSpCode}}</p>
                     <p class="price">{{ trip.meta.value }}</p>
                   </div>
                 </div>
-                <!--                <a-alert-->
-                <!--                  message="Số dư không đủ!"-->
-                <!--                  type="warning"-->
-                <!--                  class="error-message"-->
-                <!--                />-->
+<!--                <a-alert-->
+<!--                  message="Số dư không đủ!"-->
+<!--                  type="warning"-->
+<!--                  class="error-message"-->
+<!--                />-->
                 <div class="price-details">
                   <div class="price-row">
                     <span>Tổng tiền phân phối</span>
@@ -182,34 +173,16 @@
                   </div>
                   <div class="price-row">
                     <span>Hoa hồng:</span>
-                    <span
-                      >{{
-                        ((trip.meta.commission / 100) * trip.meta.value)
-                          | formatVND
-                      }}
-                      VNĐ</span
-                    >
+                    <span>{{ (trip.meta.commission /100) * trip.meta.value | formatVND }} VNĐ</span>
                   </div>
                   <div class="price-row total">
                     <span>Tổng doanh thu</span>
-                    <span
-                      >{{
-                        (trip.meta.value +
-                          (trip.meta.commission / 100) * trip.meta.value)
-                          | formatVND
-                      }}
-                      VNĐ</span
-                    >
+                    <span>{{ trip.meta.value + ((trip.meta.commission / 100) * trip.meta.value) | formatVND}} VNĐ</span>
                   </div>
                 </div>
 
                 <!-- Submit Button -->
-                <a-button
-                  type="primary"
-                  block
-                  class="submit-btn"
-                  @click="handleSubmit"
-                >
+                <a-button type="primary" block class="submit-btn" @click="handleSubmit">
                   Gửi đơn hàng
                 </a-button>
                 <div v-if="isLoading" class="loading-overlay">
@@ -224,7 +197,7 @@
         </div>
       </div>
     </a-modal>
-    <!--    <FullScreenModal/>-->
+<!--    <FullScreenModal/>-->
   </div>
 </template>
 
@@ -234,7 +207,7 @@ import * as volatilityApi from '../../api/volatility.js'
 import * as orderApi from '../../api/order'
 import _ from 'lodash'
 import axios from 'axios'
-import moment from 'moment'
+import moment from 'moment';
 // import FullScreenModal from '../../components/apps/FullScreenModal'
 
 export default {
@@ -294,22 +267,21 @@ export default {
           this.trip = res.data.product
           this.trip.meta = res.data.meta
           this.orderId = res.data._id
-          this.showModal = true
+          this.showModal = true;
           this.createdAt = res.data.created_at
-          this.isPremium = res.data.is_premium
+          this.isPremium = res.data.is_premium;
           if (res.data.is_premium) {
             // Show notification
             this.$notification.success({
               message: 'Đơn Hàng Premium',
-              description:
-                'CHÚC MỪNG BẠN ĐÃ MAY MẮN NHẬN ĐƯỢC ĐƠN HÀNG THƯỞNG TỪ HỆ THỐNG',
+              description: 'CHÚC MỪNG BẠN ĐÃ MAY MẮN NHẬN ĐƯỢC ĐƠN HÀNG THƯỞNG TỪ HỆ THỐNG',
               style: {
                 background: 'linear-gradient(45deg, #FFD700, #FFA500)',
                 border: 'none',
               },
               class: 'premium-notification',
               duration: 3,
-            })
+            });
           }
         })
         .catch((err) => {
@@ -322,18 +294,18 @@ export default {
       this.indexItem = item
     },
     async handleSubmit() {
-      if (this.isLoading) return // Prevent double click
+      if (this.isLoading) return; // Prevent double click
 
-      this.isLoading = true
+      this.isLoading = true;
 
       try {
-        await new Promise((resolve) => setTimeout(resolve, 5000)) // Delay 5s
-        await this.create()
+        await new Promise(resolve => setTimeout(resolve, 5000)); // Delay 5s
+        await this.create();
       } catch (error) {
         // Xử lý lỗi nếu cần
-        console.error(error)
+        console.error(error);
       } finally {
-        this.isLoading = false
+        this.isLoading = false;
       }
     },
     create: _.debounce(async function () {
@@ -348,10 +320,7 @@ export default {
           this.getOrder()
         })
         .catch((err) => {
-          if (
-            err ==
-            'Số dư không đủ. Bạn vui lòng liên hệ CSKH để được hỗ trợ. Xin cảm ơn!'
-          ) {
+          if (err == 'Số dư không đủ. Bạn vui lòng liên hệ CSKH để được hỗ trợ. Xin cảm ơn!') {
             this.$confirm({
               title: err,
               icon: 'check-circle',
@@ -360,7 +329,7 @@ export default {
                 this.showModal = false
               },
             })
-            return
+            return;
           }
           this.$message.error(err)
         })
@@ -372,13 +341,14 @@ export default {
         })
     }, 500),
     async getProfile() {
-      await volatilityApi.getProfileUser().then(async (res) => {
-        await this.$store.dispatch('profile/saveProfile', res.data)
-        this.profile = res.data
-        await volatilityApi.getListVips(this.profile.level).then((data) => {
-          this.vip = data.data
+      await volatilityApi
+        .getProfileUser()
+        .then(async (res) => {
+          this.profile = res.data
+          await volatilityApi.getListVips(this.profile.level).then((data) => {
+            this.vip = data.data
+          })
         })
-      })
     },
     async getOrder() {
       await orderApi
@@ -398,18 +368,18 @@ export default {
       return Math.round(num * 100) / 100
     },
     formatTime(value) {
-      if (!value) return ''
+      if (!value) return '';
       const utcTime = moment(value)
       return moment(value).format('DD/MM/YYYY HH:mm:ss')
     },
     formatVND(value) {
       if (!value) return ''
-      return value.toLocaleString('vi-VN')
+        return value.toLocaleString('vi-VN')
     },
     getSpCode(value) {
-      if (!value) return ''
+      if (!value) return '';
       return value.substring(0, 5)
-    },
+    }
   },
   // watch: {
   //   '$store.state.profile': {
@@ -647,6 +617,7 @@ export default {
   color: #52c41a !important;
 }
 
+
 .order-success-card {
   max-width: 500px;
   margin: 0 auto;
@@ -730,6 +701,8 @@ export default {
   border-color: #fa8c16;
   opacity: 0.9;
 }
+
+
 </style>
 <style lang="scss">
 /* ... các style khác giữ nguyên ... */
@@ -861,76 +834,70 @@ body.loading {
 
 <style lang="scss" scoped>
 .modal-give-tour {
-  &.premium-modal {
-    .success-header {
-      background: linear-gradient(45deg, #ffd700, #ffa500) !important;
-      color: #fff;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-      position: relative;
-      overflow: hidden;
+&.premium-modal {
+.success-header {
+  background: linear-gradient(45deg, #FFD700, #FFA500) !important;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
 
-      &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(
-          45deg,
-          rgba(255, 255, 255, 0.2) 25%,
-          transparent 25%,
-          transparent 50%,
-          rgba(255, 255, 255, 0.2) 50%,
-          rgba(255, 255, 255, 0.2) 75%,
-          transparent 75%
-        );
-        background-size: 20px 20px;
-        animation: shine 2s linear infinite;
-      }
-    }
+&::after {
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background: linear-gradient(45deg,
+   rgba(255,255,255,0.2) 25%,
+   transparent 25%,
+   transparent 50%,
+   rgba(255,255,255,0.2) 50%,
+   rgba(255,255,255,0.2) 75%,
+   transparent 75%);
+   background-size: 20px 20px;
+   animation: shine 2s linear infinite;
+ }
+}
 
-    .order-success-card {
-      border: 2px solid #ffd700;
-      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.15);
-    }
+.order-success-card {
+  border: 2px solid #FFD700;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.15);
+}
 
-    .price-details {
-      background: linear-gradient(
-        45deg,
-        rgba(255, 215, 0, 0.1),
-        rgba(255, 165, 0, 0.1)
-      );
-      padding: 15px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 215, 0, 0.2);
-    }
+.price-details {
+  background: linear-gradient(45deg, rgba(255,215,0,0.1), rgba(255,165,0,0.1));
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,215,0,0.2);
+}
 
-    .submit-btn {
-      background: linear-gradient(45deg, #ffd700, #ffa500) !important;
-      border: none !important;
-      font-weight: 600;
+.submit-btn {
+  background: linear-gradient(45deg, #FFD700, #FFA500) !important;
+  border: none !important;
+  font-weight: 600;
 
-      &:hover {
-        opacity: 0.9;
-      }
-    }
+&:hover {
+   opacity: 0.9;
+ }
+}
 
-    /* Thêm icon premium */
-    .premium-badge {
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      background: #ffd700;
-      padding: 5px 10px;
-      border-radius: 20px;
-      color: #fff;
-      font-size: 12px;
-      font-weight: bold;
-      box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
-      z-index: 1;
-    }
-  }
+/* Thêm icon premium */
+.premium-badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #FFD700;
+  padding: 5px 10px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(255,215,0,0.3);
+  z-index: 1;
+}
+}
 }
 
 /* Animation cho premium effects */
