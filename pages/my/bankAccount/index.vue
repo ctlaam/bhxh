@@ -90,6 +90,10 @@ export default {
           full_name: 'Ngân hàng Vietcombank',
         },
         {
+          name: 'DongA Bank',
+          full_name: 'Ngân hàng Đông Á',
+        },
+        {
           name: 'VietinBank',
           full_name: 'Ngân hàng VietinBank',
         },
