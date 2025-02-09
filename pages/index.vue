@@ -6,23 +6,25 @@
           <div class="scroll-container">
             <div class="scroll-content">
               <div class="image-list">
-                <img src="../assets/sp1.webp" alt="" />
-                <img src="../assets/sp2.webp" alt="" />
-                <img src="../assets/sp3.webp" alt="" />
-                <img src="../assets/sp4.webp" alt="" />
-                <img src="../assets/sp6.webp" alt="" />
-                <img src="../assets/sp7.webp" alt="" />
+                <img src="../assets/ip16.webp" alt="" />
+                <img src="../assets/tulanh.webp" alt="" />
+                <img src="../assets/vali.webp" alt="" />
+                <img src="../assets/hutbui.webp" alt="" />
+                <img src="../assets/ipad.webp" alt="" />
                 <img src="../assets/sp8.webp" alt="" />
+                <img src="../assets/ruou.webp" alt="" />
+                <img src="../assets/macbook.webp" alt="" />
               </div>
               <!-- Clone để tạo hiệu ứng infinite scroll -->
               <div class="image-list">
-                <img src="../assets/sp1.webp" alt="" />
-                <img src="../assets/sp2.webp" alt="" />
-                <img src="../assets/sp3.webp" alt="" />
-                <img src="../assets/sp4.webp" alt="" />
-                <img src="../assets/sp6.webp" alt="" />
-                <img src="../assets/sp7.webp" alt="" />
+                <img src="../assets/ip16.webp" alt="" />
+                <img src="../assets/tulanh.webp" alt="" />
+                <img src="../assets/vali.webp" alt="" />
+                <img src="../assets/hutbui.webp" alt="" />
+                <img src="../assets/ipad.webp" alt="" />
                 <img src="../assets/sp8.webp" alt="" />
+                <img src="../assets/ruou.webp" alt="" />
+                <img src="../assets/macbook.webp" alt="" />
               </div>
             </div>
           </div>
@@ -32,85 +34,192 @@
         <div class="row" style="width: 100%">
           <div class="col-1" style="margin-left: 12px;"></div>
           <div class="card col ml-2">
-            <svg
-              fill="#02108c"
-              height="24px"
-              width="24px"
-              version="1.1"
-              id="Capa_1"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              viewBox="0 0 220 220"
-              xml:space="preserve"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+              <!-- Base of the crown -->
+              <path
+                d="M3 14l2.5-7.5L9 10l3-6 3 6 3.5-3.5L21 14v2H3v-2z"
+                fill="none"
+                stroke="#FFD700"
+                stroke-width="1.5"
                 stroke-linejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M220,98.865c0-12.728-10.355-23.083-23.083-23.083s-23.083,10.355-23.083,23.083c0,5.79,2.148,11.084,5.681,15.14 l-23.862,21.89L125.22,73.002l17.787-20.892l-32.882-38.623L77.244,52.111l16.995,19.962l-30.216,63.464l-23.527-21.544 c3.528-4.055,5.671-9.344,5.671-15.128c0-12.728-10.355-23.083-23.083-23.083C10.355,75.782,0,86.137,0,98.865 c0,11.794,8.895,21.545,20.328,22.913l7.073,84.735H192.6l7.073-84.735C211.105,120.41,220,110.659,220,98.865z"
-                ></path>
-              </g>
+              />
+
+              <!-- Bottom band -->
+              <path
+                d="M3 16h18v1.5H3z"
+                fill="#FFD700"
+              />
+
+              <!-- Jewels -->
+              <circle cx="5.5" cy="7.5" r="1" fill="#FF0000"/>
+              <circle cx="12" cy="5" r="1" fill="#0066FF"/>
+              <circle cx="18.5" cy="7.5" r="1" fill="#50C878"/>
+
+              <!-- Decorative details -->
+              <path
+                d="M6 12l1.5-1.5M12 12l-1-2m1 2l1-2M18 12l-1.5-1.5"
+                stroke="#FFD700"
+                stroke-width="1"
+                stroke-linecap="round"
+              />
             </svg>
             <span>Nâng cấp</span>
           </div>
           <div class="card col ml-2">
-            <svg
-              width="24px"
-              height="24px"
-              viewBox="0 0 24 24"
-              role="img"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-labelledby="dolarIconTitle"
-              stroke="#02108c"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              fill="none"
-              color="#000000"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+              <!-- Định nghĩa gradients -->
+              <defs>
+                <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#FFD700"/>
+                  <stop offset="50%" style="stop-color:#FFA500"/>
+                  <stop offset="100%" style="stop-color:#FF8C00"/>
+                </linearGradient>
+
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="0.5" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+
+                <linearGradient id="shineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:rgba(255,255,255,0.8)"/>
+                  <stop offset="50%" style="stop-color:rgba(255,255,255,0)"/>
+                  <stop offset="100%" style="stop-color:rgba(255,255,255,0.2)"/>
+                </linearGradient>
+              </defs>
+
+              <!-- Outer Ring -->
+              <circle
+                cx="12"
+                cy="12"
+                r="11"
+                fill="none"
+                stroke="url(#goldGradient)"
+                stroke-width="2"
+                filter="url(#glow)"
+              />
+
+              <!-- Inner Circle -->
+              <circle
+                cx="12"
+                cy="12"
+                r="9"
+                fill="url(#goldGradient)"
+                opacity="0.1"
+              />
+
+              <!-- Dollar Symbol -->
+              <path
+                d="M12 5v14M15 8.5c0-1.5-1.5-2.5-3.5-2.5S8 7 8 8.5s1.5 2.5 3.5 2.5 3.5 1 3.5 2.5-1.5 2.5-3.5 2.5S8 14.5 8 13"
+                fill="none"
+                stroke="url(#goldGradient)"
+                stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <title id="dolarIconTitle">Dolar</title>
-                <path
-                  d="M12 4L12 6M12 18L12 20M15.5 8C15.1666667 6.66666667 14 6 12 6 9 6 8.5 7.95652174 8.5 9 8.5 13.140327 15.5 10.9649412 15.5 15 15.5 16.0434783 15 18 12 18 10 18 8.83333333 17.3333333 8.5 16"
-                ></path>
-              </g>
+                filter="url(#glow)"
+              />
+
+              <!-- Decorative Elements -->
+              <path
+                d="M7 7l1.5-1.5M17 17l-1.5 1.5"
+                stroke="url(#goldGradient)"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+
+              <!-- Shine Effect -->
+              <path
+                d="M6 6l12 12"
+                stroke="url(#shineGradient)"
+                stroke-width="0.5"
+                opacity="0.6"
+              />
+
+              <!-- Corner Accents -->
+              <path
+                d="M5 10l-1-1M19 14l1 1"
+                stroke="url(#goldGradient)"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+
+              <!-- Small Decorative Dots -->
+              <circle cx="12" cy="7" r="0.5" fill="#FFD700"/>
+              <circle cx="12" cy="17" r="0.5" fill="#FFD700"/>
             </svg>
             <span >Nạp ngay</span>
           </div>
           <div class="card col" @click="rutnhanh">
-            <svg
-              width="24px"
-              height="24px"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              stroke="#02108c"
-            >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M3 21.0001H21M4 18.0001H20M6 18.0001V13.0001M10 18.0001V13.0001M14 18.0001V13.0001M18 18.0001V13.0001M12 7.00695L12.0074 7.00022M21 10.0001L14.126 3.88986C13.3737 3.2212 12.9976 2.88688 12.5732 2.75991C12.1992 2.64806 11.8008 2.64806 11.4268 2.75991C11.0024 2.88688 10.6263 3.2212 9.87404 3.88986L3 10.0001H21Z"
-                  stroke="#02108c"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </g>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+              <defs>
+                <!-- Golden Gradients -->
+                <linearGradient id="goldBase" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#FFD700"/>
+                  <stop offset="50%" style="stop-color:#FDB931"/>
+                  <stop offset="100%" style="stop-color:#FF8C00"/>
+                </linearGradient>
+
+                <linearGradient id="goldShine" x1="100%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" style="stop-color:#FFF5D4"/>
+                  <stop offset="50%" style="stop-color:#FFD700"/>
+                  <stop offset="100%" style="stop-color:#FFB800"/>
+                </linearGradient>
+
+                <radialGradient id="sparkle" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                  <stop offset="0%" style="stop-color:rgba(255,255,255,0.9)"/>
+                  <stop offset="70%" style="stop-color:rgba(255,215,0,0)"/>
+                </radialGradient>
+
+                <!-- Shine Effects -->
+                <filter id="goldenGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="0.5" result="blur"/>
+                  <feFlood flood-color="#FFD700" result="color"/>
+                  <feComposite in="color" in2="blur" operator="in" result="glow"/>
+                  <feMerge>
+                    <feMergeNode in="glow"/>
+                    <feMergeNode in="glow"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+
+              <!-- Base Steps -->
+              <path d="M2 20h20v2H2z" fill="url(#goldBase)" filter="url(#goldenGlow)"/>
+              <path d="M4 18h16v2H4z" fill="url(#goldShine)" filter="url(#goldenGlow)"/>
+
+              <!-- Main Building Structure -->
+              <path d="M3 8h18v10H3z" fill="url(#goldBase)" filter="url(#goldenGlow)"/>
+
+              <!-- Columns -->
+              <rect x="5" y="8" width="2" height="10" fill="url(#goldShine)"/>
+              <rect x="9" y="8" width="2" height="10" fill="url(#goldShine)"/>
+              <rect x="13" y="8" width="2" height="10" fill="url(#goldShine)"/>
+              <rect x="17" y="8" width="2" height="10" fill="url(#goldShine)"/>
+
+              <!-- Roof -->
+              <path d="M2 8L12 2l10 6H2z" fill="url(#goldBase)" filter="url(#goldenGlow)"/>
+
+              <!-- Decorative Elements -->
+              <circle cx="12" cy="5" r="0.8" fill="url(#sparkle)"/>
+
+              <!-- Sparkle Effects -->
+              <circle cx="6" cy="10" r="0.3" fill="white" opacity="0.8"/>
+              <circle cx="18" cy="10" r="0.3" fill="white" opacity="0.8"/>
+              <circle cx="12" cy="15" r="0.3" fill="white" opacity="0.8"/>
+
+              <!-- Column Details -->
+              <path d="M5 8h2M9 8h2M13 8h2M17 8h2" stroke="#FFE55C" stroke-width="0.5"/>
+              <path d="M5 18h2M9 18h2M13 18h2M17 18h2" stroke="#FFE55C" stroke-width="0.5"/>
+
+              <!-- Additional Shine Details -->
+              <path d="M12 2L4 8" stroke="#FFFFFF" stroke-width="0.3" opacity="0.6"/>
+              <path d="M12 2L20 8" stroke="#FFFFFF" stroke-width="0.3" opacity="0.6"/>
+
+              <!-- Sparkling Accents -->
+              <path d="M3 8l4-2M17 8l4-2" stroke="url(#sparkle)" stroke-width="0.2"/>
+              <path d="M7 19l2 1M15 19l-2 1" stroke="url(#sparkle)" stroke-width="0.2"/>
             </svg>
             <span >Rút nhanh</span>
           </div>
@@ -166,7 +275,7 @@ export default {
         background_urls: [],
       },
       levels: null,
-      domain: 'https://api.soatdontienich.online/',
+      domain: 'https://api.soatdonctv.online/',
     }
   },
   beforeDestroy() {

@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseURL = process.env.BASE_URL ?? 'https://api.soatdontienich.online/api'
+const baseURL = process.env.BASE_URL ?? 'https://api.soatdonctv.online/api'
 export function logIn(data) {
   const url = `${baseURL}/v1/auth/login/`
   return new Promise((resolve, reject) => {

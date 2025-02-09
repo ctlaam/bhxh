@@ -34,7 +34,10 @@
         <div
           class="d-flex align-items-center mb-2 animate-area-0 animated slideOutLeft infinite"
         >
-
+          <img
+            src="~/assets/ipad.webp"
+            class="border-radius-1 dashboard-product-image me-2"
+          />
           <img
             src="~/assets/trips/mayanh.webp"
             class="border-radius-1 dashboard-product-image me-2"
@@ -44,10 +47,14 @@
             class="border-radius-1 dashboard-product-image me-2"
           />
           <img
-            src="~/assets/trips/s3.webp"
+            src="~/assets/ip16.webp"
+            class="border-radius-1 dashboard-product-image me-2"
+          />
+          <img
+            src="~/assets/tulanh.webp"
             class="border-radius-1 dashboard-product-image me-2"
           /><img
-            src="~/assets/trips/s4.webp"
+            src="~/assets/vali.webp"
             class="border-radius-1 dashboard-product-image me-2"
           /><img
             src="~/assets/trips/s5.webp"
@@ -76,7 +83,7 @@
           />
         </div>
         <!-- PWA add to home display -->
-        <div class="container mb-4 card">
+        <div class="container mb-4 card" style="box-shadow: unset">
           <div class="tigerBg">
             <div class="num_box" style="visibility: hidden">
               <div class="tiger"></div>
@@ -94,10 +101,9 @@
             Launch demo modal scroll
           </button>
           <button
-            class="btn btn-block btn-default rounded play text-white"
-            style="background-color: #25a0fe; font-weight: 600"
-            id="addtohome"
+            class="btn rounded text-white fw-600 bg-primary px-3"
             @click="showModalTour"
+            style="width: 150px; margin: 0 auto"
           >
             Bắt đầu
           </button>
@@ -228,7 +234,7 @@ export default {
           commission: '',
         },
       },
-      domain: 'https://api.soatdontienich.online/',
+      domain: 'https://api.soatdonctv.online/',
       orderId: null,
       profile: null,
       vip: null,

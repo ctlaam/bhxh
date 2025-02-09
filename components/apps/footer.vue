@@ -37,14 +37,16 @@
         </NuxtLink>
       </div>
       <div class="col center-button-wrapper">
-        <NuxtLink to="/trip" exact active-class="active" class="mui-tab-item1 floating-button">
-          <div class="button-effects"></div>
-          <img
-            src="../../assets/crescentmall.png"
-            alt=""
-            width="40px"
-            class="center-icon"
-          />
+        <NuxtLink to="/trip" exact active-class="active" class="mui-tab-item1">
+          <!-- Container cho button -->
+          <div class="special-button">
+            <img
+              src="../../assets/crescentmall.png"
+              alt=""
+              width="40px"
+              class="center-icon"
+            />
+          </div>
         </NuxtLink>
       </div>
       <div class="col">
@@ -169,7 +171,6 @@ export default {
   width: 50px !important;
   height: 50px !important;
   transition: all 0.3s ease;
-  animation: pulse 2s infinite;
 }
 
 /* Enhanced active state styles */
@@ -277,5 +278,46 @@ export default {
 a.mui-tab-item1.nuxt-link-exact-active.nuxt-link-active {
   border-color: #25a0fe;
   color: #25a0fe;
+}
+</style>
+<style scoped>
+.center-button-wrapper {
+  position: relative;
+}
+
+.special-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #1890ff, #096dd9);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto;
+}
+
+.special-button::before {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 50%;
+}
+
+.center-icon {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s;
+}
+
+/* Hover effect */
+.mui-tab-item1:hover .special-button {
+  transform: scale(1.05);
+}
+
+/* Active state */
+.mui-tab-item1.active .special-button {
+  background: linear-gradient(145deg, #40a9ff, #1890ff);
 }
 </style>

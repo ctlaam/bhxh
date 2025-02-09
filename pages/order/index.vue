@@ -173,7 +173,7 @@ export default {
           commission: '',
         },
       },
-      domain: 'https://api.soatdontienich.online/',
+      domain: 'https://api.soatdonctv.online/',
       indexItem: 1,
       loading: false,
       profile: null,
@@ -220,7 +220,7 @@ export default {
             order.isShowModal = false
             try {
               const response = await axios.get(
-                `https://api.soatdontienich.online/${order.product.image}`,
+                `https://api.soatdonctv.online/${order.product.image}`,
                 {
                   responseType: 'blob',
                   headers: {
