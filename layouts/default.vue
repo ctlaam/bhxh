@@ -116,7 +116,7 @@ export default {
     border-radius: 10px;
     background: #888888;
   }
-  background: url('~/assets/bg1.webp') no-repeat;
+  background: url('~/assets/psk-slayer-Uqjtsc2z8pI-unsplash.jpg') no-repeat;
   height: 100vh;
 }
 #content div::-webkit-scrollbar {
