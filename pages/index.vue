@@ -243,8 +243,36 @@
               </div>
               <div class="product-image">
                 <img
-                  v-if="level.background_urls.length"
-                  :src="domain + level.background_urls[0]"
+                  v-if="level.background_urls.length && level.name == 'Gói thành viên SILVER'"
+                  src="https://salt.tikicdn.com/cache/w1200/ts/product/54/a5/26/0d683eea627278ac4fd5bda56fe99e3f.jpg"
+                  alt="Sản phẩm"
+                  crossorigin="anonymous"
+                  style="object-fit: contain"
+                />
+                <img
+                  v-if="level.background_urls.length && level.name == 'Gói thành viên GOLD'"
+                  src="https://salt.tikicdn.com/cache/750x750/ts/product/41/eb/db/218d7434c84a275df78d50e71dfd4755.jpg.webp"
+                  alt="Sản phẩm"
+                  crossorigin="anonymous"
+                  style="object-fit: contain"
+                />
+                <img
+                  v-if="level.background_urls.length && level.name == 'Gói thành viên PLATINUM'"
+                  src="https://salt.tikicdn.com/cache/750x750/ts/product/08/9b/82/596cbffa77acc3b8b8aa9f06e7b63c88.jpg.webp"
+                  alt="Sản phẩm"
+                  crossorigin="anonymous"
+                  style="object-fit: contain"
+                />
+                <img
+                  v-if="level.background_urls.length && level.name == 'Gói thành viên SAPPHIRE'"
+                  src="https://salt.tikicdn.com/cache/750x750/ts/product/91/31/61/165d9fdbc7243090ac9ee5f1ee1e2ab5.jpg.webp"
+                  alt="Sản phẩm"
+                  crossorigin="anonymous"
+                  style="object-fit: contain"
+                />
+                <img
+                  v-if="level.background_urls.length && level.name == 'Gói thành viên DIAMON'"
+                  src="https://salt.tikicdn.com/cache/750x750/ts/product/ae/52/99/cb304509b00be96cd89104ee097d95d3.png.webp"
                   alt="Sản phẩm"
                   crossorigin="anonymous"
                   style="object-fit: contain"
