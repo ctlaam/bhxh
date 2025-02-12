@@ -285,7 +285,6 @@
     </main>
   </div>
 </template>
-<!-- End of LiveChat code -->
 
 <script>
 import * as volatilityApi from '../api/volatility'
