@@ -80,61 +80,57 @@
         <div class="modal-content" style="max-width: 100%">
           <div class="modal-body">
             <a-card class="order-success-card">
-              <div class="premium-badge" v-if="trip.is_premium">
+              <div class="premium-badge" v-if="trip.is_premium" style="color: #000">
                 <a-icon type="crown" /> Premium
               </div>
               <!-- Header -->
-              <div class="success-header">
+              <div class="success-header" style="color: #000">
                 Chúc mừng nhập phân phối thành công
               </div>
 
               <!-- Order Info -->
-              <div class="order-info">
-                <div class="time-and-id">
-                  <span>Thời gian nhập phân phối: {{trip.created_at | formatTime}}</span>
-                  <div>
-                    <span>Mã SP: {{trip._id | getSpCode}}</span>
+              <div class="order-info" style="color: #000">
+                <div class="time-and-id" style="color: #000">
+                  <span style="color: #000">Thời gian nhập phân phối: {{trip.created_at | formatTime}}</span>
+                  <div style="color: #000">
+                    <span style="color: #000">Mã SP: {{trip._id | getSpCode}}</span>
                     <a-icon type="qrcode" />
                   </div>
                 </div>
 
                 <!-- Product -->
-                <div class="product-info">
+                <div class="product-info" style="color: #000">
                   <img :src="domain + trip.image" alt="LG Washing Machine" crossorigin="anonymous" />
-                  <div class="product-details">
-                    <p class="product-name">{{trip.name}}</p>
-                    <p class="model" style="text-transform: uppercase">{{trip._id | getSpCode}}</p>
-                    <p class="price">{{ trip.meta.value }}</p>
+                  <div class="product-details" style="color: #000">
+                    <p class="product-name" style="color: #000">{{trip.name}}</p>
+                    <p class="model" style="color: #000; text-transform: uppercase">{{trip._id | getSpCode}}</p>
+                    <p class="price" style="color: #000">{{ trip.meta.value }}</p>
                   </div>
                 </div>
-                <!--                <a-alert-->
-                <!--                  message="Số dư không đủ!"-->
-                <!--                  type="warning"-->
-                <!--                  class="error-message"-->
-                <!--                />-->
-                <div class="price-details">
-                  <div class="price-row">
-                    <span>Tổng tiền phân phối</span>
-                    <span>{{ trip.meta.value | formatVND }} VNĐ</span>
+
+                <div class="price-details" style="color: #000">
+                  <div class="price-row" style="color: #000">
+                    <span style="color: #000">Tổng tiền phân phối</span>
+                    <span style="color: #000">{{ trip.meta.value | formatVND }} VNĐ</span>
                   </div>
-                  <div class="price-row">
-                    <span>Hoa hồng:</span>
-                    <span>{{ trip.meta.commission * trip.meta.value | formatVND }} VNĐ</span>
+                  <div class="price-row" style="color: #000">
+                    <span style="color: #000">Hoa hồng:</span>
+                    <span style="color: #000">{{ trip.meta.commission * trip.meta.value | formatVND }} VNĐ</span>
                   </div>
-                  <div class="price-row total">
-                    <span>Tổng doanh thu</span>
-                    <span>{{ trip.meta.value + trip.meta.commission * trip.meta.value | formatVND}} VNĐ</span>
+                  <div class="price-row total" style="color: #000">
+                    <span style="color: #000">Tổng doanh thu</span>
+                    <span style="color: #000">{{ trip.meta.value + trip.meta.commission * trip.meta.value | formatVND}} VNĐ</span>
                   </div>
                 </div>
 
                 <!-- Submit Button -->
-                <a-button type="primary" block class="submit-btn" @click="handleSubmit">
+                <a-button type="primary" block class="submit-btn" @click="handleSubmit" style="color: #000">
                   Gửi đơn hàng
                 </a-button>
                 <div v-if="isLoading" class="loading-overlay">
-                  <div class="loading-container">
+                  <div class="loading-container" style="color: #000">
                     <a-spin size="large" />
-                    <div class="loading-text">Đang gửi đơn hàng...</div>
+                    <div class="loading-text" style="color: #000">Đang gửi đơn hàng...</div>
                   </div>
                 </div>
               </div>
