@@ -244,7 +244,7 @@
               <div class="product-image">
                 <img
                   v-if="level.background_urls.length && level.name == 'Gói thành viên SILVER'"
-                  src="https://salt.tikicdn.com/cache/w1200/ts/product/54/a5/26/0d683eea627278ac4fd5bda56fe99e3f.jpg"
+                  src="https://salt.tikicdn.com/cache/750x750/ts/product/45/6d/33/30b447d7c06f9d9fe9290cd108e4419a.jpeg.webp"
                   alt="Sản phẩm"
                   crossorigin="anonymous"
                   style="object-fit: contain"
