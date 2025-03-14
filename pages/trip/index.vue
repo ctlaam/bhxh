@@ -375,8 +375,11 @@ export default {
       return moment(value).format('DD/MM/YYYY HH:mm:ss')
     },
     formatVND(value) {
-      if (!value) return ''
-        return value.toLocaleString('vi-VN')
+      if (!value) return '';
+      // Làm tròn số về dạng số nguyên
+      const roundedValue = Math.round(value);
+      // Định dạng theo tiêu chuẩn tiền tệ Việt Nam
+      return roundedValue.toLocaleString('vi-VN');
     },
     getSpCode(value) {
       if (!value) return '';
