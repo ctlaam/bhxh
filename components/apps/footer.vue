@@ -37,7 +37,10 @@
         </NuxtLink>
       </div>
       <div class="col center-button-wrapper">
-        <a href="/trip" class="mui-tab-item1 floating-button"
+        <a
+          style="position: absolute; transform: translateY(-20px)"
+          href="/trip"
+          class="mui-tab-item1 floating-button"
           ><div class="button-effects"></div>
           <img
             src="../../assets/logobutton.png"
@@ -45,7 +48,18 @@
             width="40px"
             class="center-icon"
             style="object-fit: contain; background: red"
-        /></a>
+          />
+        </a>
+        <span
+          style="
+            font-size: 13px;
+            color: black;
+            position: absolute;
+            bottom: 0;
+            transform: translateY(-50%);
+          "
+          >Lấy đơn</span
+        >
       </div>
       <div class="col">
         <NuxtLink
@@ -226,12 +240,10 @@ ripple {
 
 @keyframes ripple {
   0% {
-    box-shadow: 0 0 0 0 rgba(250, 10, 50, 0.4),
-      0 0 0 1px rgba(250, 10, 50, 0.4),
+    box-shadow: 0 0 0 0 rgba(250, 10, 50, 0.4), 0 0 0 1px rgba(250, 10, 50, 0.4);
   }
   100% {
-    box-shadow: 0 0 0 15px rgba(37, 160, 254, 0),
-      0 0 0 20px rgba(253, 8, 8, 0);
+    box-shadow: 0 0 0 15px rgba(37, 160, 254, 0), 0 0 0 20px rgba(253, 8, 8, 0);
   }
 }
 
@@ -339,7 +351,7 @@ a.mui-tab-item1.nuxt-link-exact-active.nuxt-link-active {
 .floating-button {
   bottom: 10px;
   transition: all 0.3s ease;
-  border: none!important;
+  border: none !important;
 }
 
 .floating-button:hover {
@@ -407,12 +419,10 @@ a.mui-tab-item1.nuxt-link-exact-active.nuxt-link-active {
 
 @keyframes ripple {
   0% {
-    box-shadow: 0 0 0 0 rgba(255, 37, 37, 0.4),
-    0 0 0 1px rgba(255, 37, 37, 0.4);
+    box-shadow: 0 0 0 0 rgba(255, 37, 37, 0.4), 0 0 0 1px rgba(255, 37, 37, 0.4);
   }
   100% {
-    box-shadow: 0 0 0 15px rgba(255, 37, 37, 0),
-    0 0 0 20px rgba(255, 37, 37, 0);
+    box-shadow: 0 0 0 15px rgba(255, 37, 37, 0), 0 0 0 20px rgba(255, 37, 37, 0);
   }
 }
 

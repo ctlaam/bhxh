@@ -2,7 +2,11 @@
   <div class="account-content">
     <Nuxt />
     <!-- <fullscreen-modal> </fullscreen-modal> -->
-    <script id="chatway" async="true" src="https://cdn.chatway.app/widget.js?id=ccDOAoV7M2zs"></script>
+    <script
+      id="chatway"
+      async="true"
+      src="https://cdn.chatway.app/widget.js?id=ccDOAoV7M2zs"
+    ></script>
   </div>
 </template>
 <script>
@@ -16,14 +20,13 @@ export default {
 
 <style scoped>
 .account-content {
-  width: 100vw;
-  height: 100vh;
+  background: url(../assets/THEME-APP.png) no-repeat 50% fixed;;
+  background-size: cover;
   cursor: pointer;
-  transition: all 0.7s, z-index 0s;
+  height: 100vh;
   overflow-x: auto;
   overflow-y: hidden;
-  background: url(../assets/THEME-APP.png) no-repeat
-    center center fixed;
-  background-size: cover;
+  transition: all 0.7s, z-index 0s;
+  width: 100vw;
 }
 </style>

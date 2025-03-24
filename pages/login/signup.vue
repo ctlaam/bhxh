@@ -38,13 +38,10 @@
         <div class="col-12 align-self-center mb-4">
           <div class="row justify-content-center m-2">
             <div class="col">
-              <div class="d-flex align-items-center justify-content-center">
-                <img
-                  src="../../assets/logoviettelpost.png"
-                  class="center-block mt-5 mb-2"
-                  style="width: 100%; max-width: 150px"
-                />
-              </div>
+              <div
+                style="margin-bottom: 200px"
+                class="d-flex align-items-center justify-content-center"
+              ></div>
               <h6 class="font-weight-normal mb-5 text-center">
                 <b><!--SaigonToursit--></b>
               </h6>
@@ -242,7 +239,7 @@ export default {
               this.$router.push('/login')
             })
             .catch((err) => {
-              if(err.response?.data?.message){
+              if (err.response?.data?.message) {
                 this.$message.error(err.response.data.message)
               } else {
                 this.$message.error('Đăng kí thất bại !')
