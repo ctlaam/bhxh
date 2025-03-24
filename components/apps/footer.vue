@@ -37,17 +37,15 @@
         </NuxtLink>
       </div>
       <div class="col center-button-wrapper">
-        <NuxtLink to="/trip" exact active-class="active" class="mui-tab-item1">
-          <!-- Container cho button -->
-          <div class="special-button">
-            <img
-              src="../../assets/crescentmall.png"
-              alt=""
-              width="40px"
-              class="center-icon"
-            />
-          </div>
-        </NuxtLink>
+        <a href="/trip" class="mui-tab-item1 floating-button"
+          ><div class="button-effects"></div>
+          <img
+            src="../../assets/logobutton.png"
+            alt=""
+            width="40px"
+            class="center-icon"
+            style="object-fit: contain; background: red"
+        /></a>
       </div>
       <div class="col">
         <NuxtLink
@@ -93,10 +91,10 @@ export default {
     }
   },
   methods: {
-    chamsockhachhang($event){
-      let chat = document.querySelector(".launcher-icon.launcher-minimize-icon");
+    chamsockhachhang($event) {
+      let chat = document.querySelector('.launcher-icon.launcher-minimize-icon')
       if (chat) {
-        chat.click();
+        chat.click()
       }
     },
     keyRender() {
@@ -107,6 +105,26 @@ export default {
 </script>
 
 <style lang="css">
+.floating-button {
+  border: none !important;
+  bottom: 10px;
+  position: absolute !important;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+}
+.floating-button .button-effects {
+  animation: ripple 1.5s linear infinite;
+}
+ripple {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 160, 254, 0.4),
+      0 0 0 1px rgba(37, 160, 254, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 15px rgba(37, 160, 254, 0),
+      0 0 0 20px rgba(37, 160, 254, 0);
+  }
+}
 .row .col {
   flex-shrink: 0;
   width: 100%;
@@ -144,7 +162,7 @@ export default {
   bottom: 10px;
   transform: translateY(-20px);
   transition: all 0.3s ease;
-  border: none!important;
+  border: none !important;
 }
 
 .floating-button:hover {
@@ -163,10 +181,11 @@ export default {
 }
 
 .center-icon {
+  object-fit: contain;
   border-radius: 50%;
   padding: 8px;
-  background: linear-gradient(145deg, #4494ff, #25a0fe);
-  box-shadow: 0 4px 15px rgba(37, 160, 254, 0.3);
+  background: linear-gradient(145deg, #fd2c2c, #ed1b2f);
+  box-shadow: 0 4px 15px rgba(245, 27, 27, 0.836);
   border: 2px solid #ffffff;
   width: 50px !important;
   height: 50px !important;
@@ -176,7 +195,7 @@ export default {
 /* Enhanced active state styles */
 .floating-button .center-icon {
   animation: activeScale 0.3s forwards, activePulse 1.5s infinite;
-  background: linear-gradient(145deg, #25a0fe, #0066ff);
+  background: linear-gradient(145deg, #ed1b2f, #0066ff);
   border: 3px solid #ffffff;
   box-shadow: 0 0 20px rgba(37, 160, 254, 0.5);
 }
@@ -211,12 +230,10 @@ export default {
 
 @keyframes ripple {
   0% {
-    box-shadow: 0 0 0 0 rgba(37, 160, 254, 0.4),
-    0 0 0 1px rgba(37, 160, 254, 0.4);
+    box-shadow: 0 0 0 0 rgba(250, 10, 50, 0.4), 0 0 0 1px rgba(250, 10, 50, 0.4);
   }
   100% {
-    box-shadow: 0 0 0 15px rgba(37, 160, 254, 0),
-    0 0 0 20px rgba(37, 160, 254, 0);
+    box-shadow: 0 0 0 15px rgba(37, 160, 254, 0), 0 0 0 20px rgba(253, 8, 8, 0);
   }
 }
 
@@ -257,13 +274,13 @@ export default {
 }
 
 .footer a:not(.btn).active {
-  color: #25a0fe;
-  border-color: #25a0fe;
+  color: #ed1b2f;
+  border-color: #ed1b2f;
 }
 
 .footer a:not(.btn).active i,
 .footer a:not(.btn).active span {
-  color: #25a0fe;
+  color: #ed1b2f;
 }
 
 .home {
@@ -276,8 +293,8 @@ export default {
 }
 
 a.mui-tab-item1.nuxt-link-exact-active.nuxt-link-active {
-  border-color: #25a0fe;
-  color: #25a0fe;
+  border-color: #ed1b2f;
+  color: #ed1b2f;
 }
 </style>
 <style scoped>
@@ -289,7 +306,7 @@ a.mui-tab-item1.nuxt-link-exact-active.nuxt-link-active {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(145deg, #1890ff, #096dd9);
+  background: linear-gradient(145deg, #f84a4a, #fd2c2c);
   border-radius: 50%;
   width: 44px;
   height: 44px;
@@ -319,5 +336,97 @@ a.mui-tab-item1.nuxt-link-exact-active.nuxt-link-active {
 /* Active state */
 .mui-tab-item1.active .special-button {
   background: linear-gradient(145deg, #40a9ff, #1890ff);
+}
+
+.floating-button {
+  position: absolute !important;
+  bottom: 10px;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+  border: none !important;
+}
+
+.floating-button:hover {
+  transform: translateY(-25px);
+}
+
+.button-effects {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.center-icon {
+  border-radius: 50%;
+  padding: 8px;
+  background: linear-gradient(145deg, #4494ff, #25a0fe);
+  box-shadow: 0 4px 15px rgba(37, 160, 254, 0.3);
+  border: 2px solid #ffffff;
+  width: 50px !important;
+  height: 50px !important;
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+/* Enhanced active state styles */
+.floating-button .center-icon {
+  animation: activeScale 0.3s forwards, activePulse 1.5s infinite;
+  background: linear-gradient(145deg, #25a0fe, #0066ff);
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 20px rgba(37, 160, 254, 0.5);
+}
+
+.floating-button .button-effects {
+  animation: ripple 1.5s linear infinite;
+}
+
+@keyframes activeScale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes activePulse {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 37, 37, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 37, 37, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 37, 37, 0.5);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 37, 37, 0.4), 0 0 0 1px rgba(255, 37, 37, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 15px rgba(255, 37, 37, 0), 0 0 0 20px rgba(255, 37, 37, 0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 4px 15px rgba(255, 37, 37, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba(255, 37, 37, 0.5);
+  }
+  100% {
+    box-shadow: 0 4px 15px rgba(255, 37, 37, 0.3);
+  }
 }
 </style>

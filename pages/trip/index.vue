@@ -109,7 +109,7 @@
           </button>
           <style>
             .btn-default[disabled] {
-              background-color: #25a0fe !important;
+              background-color: #ED1B2F !important;
               color: #ffffff;
             }
           </style>

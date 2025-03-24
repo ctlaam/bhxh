@@ -2,39 +2,24 @@
   <div id="index-page">
     <main class="flex-shrink-0 main has-footer">
       <div class="head-top">
-        <div class="swipper">
-          <div class="scroll-container">
-            <div class="scroll-content">
-              <div class="image-list">
-                <img src="../assets/ip16.webp" alt="" />
-                <img src="../assets/tulanh.webp" alt="" />
-                <img src="../assets/vali.webp" alt="" />
-                <img src="../assets/hutbui.webp" alt="" />
-                <img src="../assets/ipad.webp" alt="" />
-                <img src="../assets/sp8.webp" alt="" />
-                <img src="../assets/ruou.webp" alt="" />
-                <img src="../assets/macbook.webp" alt="" />
-              </div>
-              <!-- Clone để tạo hiệu ứng infinite scroll -->
-              <div class="image-list">
-                <img src="../assets/ip16.webp" alt="" />
-                <img src="../assets/tulanh.webp" alt="" />
-                <img src="../assets/vali.webp" alt="" />
-                <img src="../assets/hutbui.webp" alt="" />
-                <img src="../assets/ipad.webp" alt="" />
-                <img src="../assets/sp8.webp" alt="" />
-                <img src="../assets/ruou.webp" alt="" />
-                <img src="../assets/macbook.webp" alt="" />
-              </div>
-            </div>
-          </div>
+        <div class="banner-header">
+          <img
+            style="width: 100%;transform: scale(1.2);"
+            src="../assets/index/banner-header.jpg"
+            alt=""
+          />
         </div>
       </div>
       <div class="main-container">
         <div class="row" style="width: 100%">
-          <div class="col-1" style="margin-left: 12px;"></div>
+          <div class="col-1" style="margin-left: 12px"></div>
           <div class="card col ml-2">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
               <!-- Base of the crown -->
               <path
                 d="M3 14l2.5-7.5L9 10l3-6 3 6 3.5-3.5L21 14v2H3v-2z"
@@ -45,15 +30,12 @@
               />
 
               <!-- Bottom band -->
-              <path
-                d="M3 16h18v1.5H3z"
-                fill="#FFD700"
-              />
+              <path d="M3 16h18v1.5H3z" fill="#FFD700" />
 
               <!-- Jewels -->
-              <circle cx="5.5" cy="7.5" r="1" fill="#FF0000"/>
-              <circle cx="12" cy="5" r="1" fill="#0066FF"/>
-              <circle cx="18.5" cy="7.5" r="1" fill="#50C878"/>
+              <circle cx="5.5" cy="7.5" r="1" fill="#FF0000" />
+              <circle cx="12" cy="5" r="1" fill="#0066FF" />
+              <circle cx="18.5" cy="7.5" r="1" fill="#50C878" />
 
               <!-- Decorative details -->
               <path
@@ -66,27 +48,53 @@
             <span>Nâng cấp</span>
           </div>
           <div class="card col ml-2">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
               <!-- Định nghĩa gradients -->
               <defs>
-                <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style="stop-color:#FFD700"/>
-                  <stop offset="50%" style="stop-color:#FFA500"/>
-                  <stop offset="100%" style="stop-color:#FF8C00"/>
+                <linearGradient
+                  id="goldGradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" style="stop-color: #ffd700" />
+                  <stop offset="50%" style="stop-color: #ffa500" />
+                  <stop offset="100%" style="stop-color: #ff8c00" />
                 </linearGradient>
 
                 <filter id="glow">
-                  <feGaussianBlur stdDeviation="0.5" result="coloredBlur"/>
+                  <feGaussianBlur stdDeviation="0.5" result="coloredBlur" />
                   <feMerge>
-                    <feMergeNode in="coloredBlur"/>
-                    <feMergeNode in="SourceGraphic"/>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
                   </feMerge>
                 </filter>
 
-                <linearGradient id="shineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style="stop-color:rgba(255,255,255,0.8)"/>
-                  <stop offset="50%" style="stop-color:rgba(255,255,255,0)"/>
-                  <stop offset="100%" style="stop-color:rgba(255,255,255,0.2)"/>
+                <linearGradient
+                  id="shineGradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop
+                    offset="0%"
+                    style="stop-color: rgba(255, 255, 255, 0.8)"
+                  />
+                  <stop
+                    offset="50%"
+                    style="stop-color: rgba(255, 255, 255, 0)"
+                  />
+                  <stop
+                    offset="100%"
+                    style="stop-color: rgba(255, 255, 255, 0.2)"
+                  />
                 </linearGradient>
               </defs>
 
@@ -146,87 +154,194 @@
               />
 
               <!-- Small Decorative Dots -->
-              <circle cx="12" cy="7" r="0.5" fill="#FFD700"/>
-              <circle cx="12" cy="17" r="0.5" fill="#FFD700"/>
+              <circle cx="12" cy="7" r="0.5" fill="#FFD700" />
+              <circle cx="12" cy="17" r="0.5" fill="#FFD700" />
             </svg>
-            <span >Nạp ngay</span>
+            <span>Nạp ngay</span>
           </div>
           <div class="card col" @click="rutnhanh">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
               <defs>
                 <!-- Golden Gradients -->
-                <linearGradient id="goldBase" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style="stop-color:#FFD700"/>
-                  <stop offset="50%" style="stop-color:#FDB931"/>
-                  <stop offset="100%" style="stop-color:#FF8C00"/>
+                <linearGradient
+                  id="goldBase"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" style="stop-color: #ffd700" />
+                  <stop offset="50%" style="stop-color: #fdb931" />
+                  <stop offset="100%" style="stop-color: #ff8c00" />
                 </linearGradient>
 
-                <linearGradient id="goldShine" x1="100%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" style="stop-color:#FFF5D4"/>
-                  <stop offset="50%" style="stop-color:#FFD700"/>
-                  <stop offset="100%" style="stop-color:#FFB800"/>
+                <linearGradient
+                  id="goldShine"
+                  x1="100%"
+                  y1="0%"
+                  x2="0%"
+                  y2="100%"
+                >
+                  <stop offset="0%" style="stop-color: #fff5d4" />
+                  <stop offset="50%" style="stop-color: #ffd700" />
+                  <stop offset="100%" style="stop-color: #ffb800" />
                 </linearGradient>
 
-                <radialGradient id="sparkle" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                  <stop offset="0%" style="stop-color:rgba(255,255,255,0.9)"/>
-                  <stop offset="70%" style="stop-color:rgba(255,215,0,0)"/>
+                <radialGradient
+                  id="sparkle"
+                  cx="50%"
+                  cy="50%"
+                  r="50%"
+                  fx="50%"
+                  fy="50%"
+                >
+                  <stop
+                    offset="0%"
+                    style="stop-color: rgba(255, 255, 255, 0.9)"
+                  />
+                  <stop offset="70%" style="stop-color: rgba(255, 215, 0, 0)" />
                 </radialGradient>
 
                 <!-- Shine Effects -->
-                <filter id="goldenGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="0.5" result="blur"/>
-                  <feFlood flood-color="#FFD700" result="color"/>
-                  <feComposite in="color" in2="blur" operator="in" result="glow"/>
+                <filter
+                  id="goldenGlow"
+                  x="-20%"
+                  y="-20%"
+                  width="140%"
+                  height="140%"
+                >
+                  <feGaussianBlur stdDeviation="0.5" result="blur" />
+                  <feFlood flood-color="#FFD700" result="color" />
+                  <feComposite
+                    in="color"
+                    in2="blur"
+                    operator="in"
+                    result="glow"
+                  />
                   <feMerge>
-                    <feMergeNode in="glow"/>
-                    <feMergeNode in="glow"/>
-                    <feMergeNode in="SourceGraphic"/>
+                    <feMergeNode in="glow" />
+                    <feMergeNode in="glow" />
+                    <feMergeNode in="SourceGraphic" />
                   </feMerge>
                 </filter>
               </defs>
 
               <!-- Base Steps -->
-              <path d="M2 20h20v2H2z" fill="url(#goldBase)" filter="url(#goldenGlow)"/>
-              <path d="M4 18h16v2H4z" fill="url(#goldShine)" filter="url(#goldenGlow)"/>
+              <path
+                d="M2 20h20v2H2z"
+                fill="url(#goldBase)"
+                filter="url(#goldenGlow)"
+              />
+              <path
+                d="M4 18h16v2H4z"
+                fill="url(#goldShine)"
+                filter="url(#goldenGlow)"
+              />
 
               <!-- Main Building Structure -->
-              <path d="M3 8h18v10H3z" fill="url(#goldBase)" filter="url(#goldenGlow)"/>
+              <path
+                d="M3 8h18v10H3z"
+                fill="url(#goldBase)"
+                filter="url(#goldenGlow)"
+              />
 
               <!-- Columns -->
-              <rect x="5" y="8" width="2" height="10" fill="url(#goldShine)"/>
-              <rect x="9" y="8" width="2" height="10" fill="url(#goldShine)"/>
-              <rect x="13" y="8" width="2" height="10" fill="url(#goldShine)"/>
-              <rect x="17" y="8" width="2" height="10" fill="url(#goldShine)"/>
+              <rect x="5" y="8" width="2" height="10" fill="url(#goldShine)" />
+              <rect x="9" y="8" width="2" height="10" fill="url(#goldShine)" />
+              <rect x="13" y="8" width="2" height="10" fill="url(#goldShine)" />
+              <rect x="17" y="8" width="2" height="10" fill="url(#goldShine)" />
 
               <!-- Roof -->
-              <path d="M2 8L12 2l10 6H2z" fill="url(#goldBase)" filter="url(#goldenGlow)"/>
+              <path
+                d="M2 8L12 2l10 6H2z"
+                fill="url(#goldBase)"
+                filter="url(#goldenGlow)"
+              />
 
               <!-- Decorative Elements -->
-              <circle cx="12" cy="5" r="0.8" fill="url(#sparkle)"/>
+              <circle cx="12" cy="5" r="0.8" fill="url(#sparkle)" />
 
               <!-- Sparkle Effects -->
-              <circle cx="6" cy="10" r="0.3" fill="white" opacity="0.8"/>
-              <circle cx="18" cy="10" r="0.3" fill="white" opacity="0.8"/>
-              <circle cx="12" cy="15" r="0.3" fill="white" opacity="0.8"/>
+              <circle cx="6" cy="10" r="0.3" fill="white" opacity="0.8" />
+              <circle cx="18" cy="10" r="0.3" fill="white" opacity="0.8" />
+              <circle cx="12" cy="15" r="0.3" fill="white" opacity="0.8" />
 
               <!-- Column Details -->
-              <path d="M5 8h2M9 8h2M13 8h2M17 8h2" stroke="#FFE55C" stroke-width="0.5"/>
-              <path d="M5 18h2M9 18h2M13 18h2M17 18h2" stroke="#FFE55C" stroke-width="0.5"/>
+              <path
+                d="M5 8h2M9 8h2M13 8h2M17 8h2"
+                stroke="#FFE55C"
+                stroke-width="0.5"
+              />
+              <path
+                d="M5 18h2M9 18h2M13 18h2M17 18h2"
+                stroke="#FFE55C"
+                stroke-width="0.5"
+              />
 
               <!-- Additional Shine Details -->
-              <path d="M12 2L4 8" stroke="#FFFFFF" stroke-width="0.3" opacity="0.6"/>
-              <path d="M12 2L20 8" stroke="#FFFFFF" stroke-width="0.3" opacity="0.6"/>
+              <path
+                d="M12 2L4 8"
+                stroke="#FFFFFF"
+                stroke-width="0.3"
+                opacity="0.6"
+              />
+              <path
+                d="M12 2L20 8"
+                stroke="#FFFFFF"
+                stroke-width="0.3"
+                opacity="0.6"
+              />
 
               <!-- Sparkling Accents -->
-              <path d="M3 8l4-2M17 8l4-2" stroke="url(#sparkle)" stroke-width="0.2"/>
-              <path d="M7 19l2 1M15 19l-2 1" stroke="url(#sparkle)" stroke-width="0.2"/>
+              <path
+                d="M3 8l4-2M17 8l4-2"
+                stroke="url(#sparkle)"
+                stroke-width="0.2"
+              />
+              <path
+                d="M7 19l2 1M15 19l-2 1"
+                stroke="url(#sparkle)"
+                stroke-width="0.2"
+              />
             </svg>
-            <span >Rút nhanh</span>
+            <span>Rút nhanh</span>
           </div>
           <div class="col-1"></div>
         </div>
         <div class="container mb-4">
           <div class="task-header">Sảnh nhiệm vụ</div>
+        </div>
+        <div class="swipper" style="padding: 0 12px">
+          <div class="scroll-container">
+            <div class="scroll-content">
+              <div class="image-list">
+                <img src="../assets/ip16.webp" alt="" />
+                <img src="../assets/tulanh.webp" alt="" />
+                <img src="../assets/vali.webp" alt="" />
+                <img src="../assets/hutbui.webp" alt="" />
+                <img src="../assets/ipad.webp" alt="" />
+                <img src="../assets/sp8.webp" alt="" />
+                <img src="../assets/ruou.webp" alt="" />
+                <img src="../assets/macbook.webp" alt="" />
+              </div>
+              <!-- Clone để tạo hiệu ứng infinite scroll -->
+              <div class="image-list">
+                <img src="../assets/ip16.webp" alt="" />
+                <img src="../assets/tulanh.webp" alt="" />
+                <img src="../assets/vali.webp" alt="" />
+                <img src="../assets/hutbui.webp" alt="" />
+                <img src="../assets/ipad.webp" alt="" />
+                <img src="../assets/sp8.webp" alt="" />
+                <img src="../assets/ruou.webp" alt="" />
+                <img src="../assets/macbook.webp" alt="" />
+              </div>
+            </div>
+          </div>
         </div>
         <div class="container mb-4">
           <div class="banner-list">
@@ -243,35 +358,50 @@
               </div>
               <div class="product-image">
                 <img
-                  v-if="level.background_urls.length && level.name == 'Gói thành viên SILVER'"
+                  v-if="
+                    level.background_urls.length &&
+                    level.name == 'Gói thành viên SILVER'
+                  "
                   src="https://salt.tikicdn.com/cache/750x750/ts/product/45/6d/33/30b447d7c06f9d9fe9290cd108e4419a.jpeg.webp"
                   alt="Sản phẩm"
                   crossorigin="anonymous"
                   style="object-fit: contain"
                 />
                 <img
-                  v-if="level.background_urls.length && level.name == 'Gói thành viên GOLD'"
+                  v-if="
+                    level.background_urls.length &&
+                    level.name == 'Gói thành viên GOLD'
+                  "
                   src="https://salt.tikicdn.com/cache/750x750/ts/product/41/eb/db/218d7434c84a275df78d50e71dfd4755.jpg.webp"
                   alt="Sản phẩm"
                   crossorigin="anonymous"
                   style="object-fit: contain"
                 />
                 <img
-                  v-if="level.background_urls.length && level.name == 'Gói thành viên PLATINUM'"
+                  v-if="
+                    level.background_urls.length &&
+                    level.name == 'Gói thành viên PLATINUM'
+                  "
                   src="https://salt.tikicdn.com/cache/750x750/ts/product/08/9b/82/596cbffa77acc3b8b8aa9f06e7b63c88.jpg.webp"
                   alt="Sản phẩm"
                   crossorigin="anonymous"
                   style="object-fit: contain"
                 />
                 <img
-                  v-if="level.background_urls.length && level.name == 'Gói thành viên SAPPHIRE'"
+                  v-if="
+                    level.background_urls.length &&
+                    level.name == 'Gói thành viên SAPPHIRE'
+                  "
                   src="https://salt.tikicdn.com/cache/750x750/ts/product/91/31/61/165d9fdbc7243090ac9ee5f1ee1e2ab5.jpg.webp"
                   alt="Sản phẩm"
                   crossorigin="anonymous"
                   style="object-fit: contain"
                 />
                 <img
-                  v-if="level.background_urls.length && level.name == 'Gói thành viên DIAMON'"
+                  v-if="
+                    level.background_urls.length &&
+                    level.name == 'Gói thành viên DIAMON'
+                  "
                   src="https://salt.tikicdn.com/cache/750x750/ts/product/ae/52/99/cb304509b00be96cd89104ee097d95d3.png.webp"
                   alt="Sản phẩm"
                   crossorigin="anonymous"
@@ -369,7 +499,9 @@ export default {
   padding: 75px 10px 10px 10px;
 } */
 #index-page {
-  margin-top: 80px;
+  max-width: 100vw;
+  overflow: hidden;
+  margin-top: 60px;
 
   .main .main-container {
     background-color: #ffffff;

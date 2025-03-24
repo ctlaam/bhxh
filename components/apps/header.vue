@@ -8,7 +8,10 @@
       <div class="text-left col align-self-center">
         <a class="navbar-brand" href="#"
           ><h5 class="mb-0 ml-2">
-            <img src="~/assets/crescentmall.png" style="width: 40px;margin-left: 10px;" />
+            <img
+              src="~/assets/logoviettelpost.png"
+              style="width: 100px; margin-left: 10px"
+            />
           </h5>
         </a>
       </div>
@@ -59,10 +62,10 @@ export default {
     }
   },
   methods: {
-    chamsockhachhang(){
-      let chat = document.querySelector(".launcher-icon.launcher-minimize-icon");
+    chamsockhachhang() {
+      let chat = document.querySelector('.launcher-icon.launcher-minimize-icon')
       if (chat) {
-        chat.click();
+        chat.click()
       }
     },
     handleScroll() {
@@ -111,7 +114,13 @@ export default {
 }
 
 .header.active {
-  background: #25a0fe;
+  background: #fff;
+  .button {
+    color: #ed1b2f;
+    svg {
+      fill: #ed1b2f;
+    }
+  }
 }
 
 .material-icons {
