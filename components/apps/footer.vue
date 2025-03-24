@@ -108,8 +108,6 @@ export default {
 .floating-button {
   border: none !important;
   bottom: 10px;
-  position: absolute !important;
-  transform: translateY(-20px);
   transition: all 0.3s ease;
 }
 .floating-button .button-effects {
@@ -158,9 +156,7 @@ ripple {
 }
 
 .floating-button {
-  position: absolute !important;
   bottom: 10px;
-  transform: translateY(-20px);
   transition: all 0.3s ease;
   border: none !important;
 }
@@ -230,10 +226,12 @@ ripple {
 
 @keyframes ripple {
   0% {
-    box-shadow: 0 0 0 0 rgba(250, 10, 50, 0.4), 0 0 0 1px rgba(250, 10, 50, 0.4);
+    box-shadow: 0 0 0 0 rgba(250, 10, 50, 0.4),
+      0 0 0 1px rgba(250, 10, 50, 0.4),
   }
   100% {
-    box-shadow: 0 0 0 15px rgba(37, 160, 254, 0), 0 0 0 20px rgba(253, 8, 8, 0);
+    box-shadow: 0 0 0 15px rgba(37, 160, 254, 0),
+      0 0 0 20px rgba(253, 8, 8, 0);
   }
 }
 
@@ -339,11 +337,9 @@ a.mui-tab-item1.nuxt-link-exact-active.nuxt-link-active {
 }
 
 .floating-button {
-  position: absolute !important;
   bottom: 10px;
-  transform: translateY(-20px);
   transition: all 0.3s ease;
-  border: none !important;
+  border: none!important;
 }
 
 .floating-button:hover {
@@ -411,10 +407,12 @@ a.mui-tab-item1.nuxt-link-exact-active.nuxt-link-active {
 
 @keyframes ripple {
   0% {
-    box-shadow: 0 0 0 0 rgba(255, 37, 37, 0.4), 0 0 0 1px rgba(255, 37, 37, 0.4);
+    box-shadow: 0 0 0 0 rgba(255, 37, 37, 0.4),
+    0 0 0 1px rgba(255, 37, 37, 0.4);
   }
   100% {
-    box-shadow: 0 0 0 15px rgba(255, 37, 37, 0), 0 0 0 20px rgba(255, 37, 37, 0);
+    box-shadow: 0 0 0 15px rgba(255, 37, 37, 0),
+    0 0 0 20px rgba(255, 37, 37, 0);
   }
 }
 

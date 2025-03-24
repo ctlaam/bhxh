@@ -1,7 +1,7 @@
 <!-- components/FullscreenModal.vue -->
 <template>
   <div v-if="loading" class="fullscreen-loading">
-    <img src="~/assets/crescentmall.png" width="150px" alt="" />
+    <img src="~/assets/logoviettelpost.png" width="150px" alt="" />
     <div class="my-4" style="color: #ddbc2a">Đang tải</div>
     <div class="snippet" data-title="dot-flashing">
       <div class="stage">

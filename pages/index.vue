@@ -506,7 +506,7 @@ export default {
   .main .main-container {
     background-color: #ffffff;
     border-radius: 20px;
-    padding-top: 15px;
+    padding-top: 30px;
     padding-bottom: 15px;
 
     .card {

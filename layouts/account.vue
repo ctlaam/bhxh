@@ -22,7 +22,7 @@ export default {
   transition: all 0.7s, z-index 0s;
   overflow-x: auto;
   overflow-y: hidden;
-  background: url(../assets/crescent-mall-quan-7-1712070085.jpg) no-repeat
+  background: url(../assets/THEME-APP.png) no-repeat
     center center fixed;
   background-size: cover;
 }

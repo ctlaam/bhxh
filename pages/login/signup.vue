@@ -40,7 +40,7 @@
             <div class="col">
               <div class="d-flex align-items-center justify-content-center">
                 <img
-                  src="../../assets/crescentmall.png"
+                  src="../../assets/logoviettelpost.png"
                   class="center-block mt-5 mb-2"
                   style="width: 100%; max-width: 150px"
                 />
