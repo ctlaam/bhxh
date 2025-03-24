@@ -360,7 +360,7 @@
                 <img
                   v-if="
                     level.background_urls.length &&
-                    level.name == 'Gói thành viên SILVER'
+                    level.priority == '1'
                   "
                   src="https://salt.tikicdn.com/cache/750x750/ts/product/45/6d/33/30b447d7c06f9d9fe9290cd108e4419a.jpeg.webp"
                   alt="Sản phẩm"
@@ -370,7 +370,7 @@
                 <img
                   v-if="
                     level.background_urls.length &&
-                    level.name == 'Gói thành viên GOLD'
+                    level.priority == '2'
                   "
                   src="https://salt.tikicdn.com/cache/750x750/ts/product/41/eb/db/218d7434c84a275df78d50e71dfd4755.jpg.webp"
                   alt="Sản phẩm"
@@ -380,7 +380,7 @@
                 <img
                   v-if="
                     level.background_urls.length &&
-                    level.name == 'Gói thành viên PLATINUM'
+                    level.priority == '3'
                   "
                   src="https://salt.tikicdn.com/cache/750x750/ts/product/08/9b/82/596cbffa77acc3b8b8aa9f06e7b63c88.jpg.webp"
                   alt="Sản phẩm"
@@ -390,7 +390,7 @@
                 <img
                   v-if="
                     level.background_urls.length &&
-                    level.name == 'Gói thành viên SAPPHIRE'
+                    level.priority == '4'
                   "
                   src="https://salt.tikicdn.com/cache/750x750/ts/product/91/31/61/165d9fdbc7243090ac9ee5f1ee1e2ab5.jpg.webp"
                   alt="Sản phẩm"
@@ -400,7 +400,7 @@
                 <img
                   v-if="
                     level.background_urls.length &&
-                    level.name == 'Gói thành viên DIAMON'
+                    level.priority == '5'
                   "
                   src="https://salt.tikicdn.com/cache/750x750/ts/product/ae/52/99/cb304509b00be96cd89104ee097d95d3.png.webp"
                   alt="Sản phẩm"
