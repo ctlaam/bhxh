@@ -266,6 +266,10 @@ ripple {
   display: block;
   text-decoration: none;
   border-top: 4px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .footer a:not(.btn) i,
