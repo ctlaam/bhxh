@@ -9,7 +9,11 @@
     </div>
     <!-- <FullScreenModal> </FullScreenModal> -->
     <div class="modal"></div>
-    <script id="chatway" async="true" src="https://cdn.chatway.app/widget.js?id=ccDOAoV7M2zs"></script>
+    <script
+      id="chatway"
+      async="true"
+      src="https://cdn.chatway.app/widget.js?id=ccDOAoV7M2zs"
+    ></script>
   </div>
 </template>
 
@@ -107,7 +111,16 @@ export default {
     border-radius: 10px;
     background: #888888;
   }
-  background: url('~/assets/backgroundviettelpost.jpg') no-repeat;
+
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.4),
+      // Độ mờ 0.8, có thể điều chỉnh từ 0-1
+      rgba(255, 255, 255, 0.3)
+    ),
+    url('~/assets/backgroundviettelpost.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
   height: 100vh;
 }
 #content div::-webkit-scrollbar {
