@@ -36,7 +36,7 @@
 
             <p>
               2. Mỗi số điện thoại chỉ được sử dụng để đăng ký một tài khoản
-              khách hàng tại Viettel Post.
+              khách hàng tại Crescent Mall.
             </p>
 
             <p>
@@ -48,15 +48,15 @@
 
             <p>
               4. Vui lòng bảo mật thông tin tài khoản và không chia sẻ mật khẩu
-              với người khác. Viettel Post sẽ không chịu trách nhiệm cho bất kỳ
+              với người khác. Crescent Mall sẽ không chịu trách nhiệm cho bất kỳ
               mất mát nào gây ra do vi phạm bảo mật.
             </p>
 
             <p>
               5. Tất cả các sản phẩm và dịch vụ được cung cấp theo chính sách và
-              quy định của Viettel Post. Một khi đơn hàng đã được xác nhận và
-              thanh toán, không thể thay đổi, hủy bỏ hoặc hoàn trả trừ khi có lý
-              do hợp lệ theo quy định.
+              quy định của trung tâm thương mại. Một khi đơn hàng đã được xác
+              nhận và thanh toán, không thể thay đổi, hủy bỏ hoặc hoàn trả trừ
+              khi có lý do hợp lệ theo quy định.
             </p>
 
             <p>
@@ -70,7 +70,7 @@
             </p>
 
             <p>
-              8. Viettel Post không chịu trách nhiệm trong trường hợp địa chỉ
+              8. Crescent Mall không chịu trách nhiệm trong trường hợp địa chỉ
               giao hàng không chính xác được cung cấp bởi khách hàng.
             </p>
 
@@ -96,7 +96,7 @@
               Xin cảm ơn sự hợp tác của quý khách.
             </p>
 
-            <p>Bản quyền © 2023 Viettel Post. Đã đăng ký Bản quyền.</p>
+            <p>Bản quyền © 2023 Crescent Mall. Đã đăng ký Bản quyền.</p>
 
             <p>&nbsp;</p>
 
