@@ -105,24 +105,18 @@ export default {
   }
   &::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: #e5e5e5;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 10px;
     background: #888888;
   }
 
   background: linear-gradient(
-      rgba(255, 255, 255, 0.4),
-      // Độ mờ 0.8, có thể điều chỉnh từ 0-1
-      rgba(255, 255, 255, 0.3)
-    ),
-    url('~/assets/backgroundviettelpost.jpg') no-repeat;
-  background-size: cover;
-  background-position: center;
+    to bottom,
+    #d60000,
+    #ffffff
+  ); // Gradient từ đỏ sang trắng
   position: relative;
   height: 100vh;
 }
+
 #content div::-webkit-scrollbar {
   width: 0;
   height: 0;

@@ -1,6 +1,6 @@
 <template>
   <div style="margin-top: 80px; margin-bottom: 80px">
-    <div class="row w-100" style="color: red">
+    <div class="row w-100" style="color: #FFF">
       <div class="col-6 mt-3 text-center">
         <h5 class="">
           {{ profile && profile.balance | formatVND}} VNĐ
