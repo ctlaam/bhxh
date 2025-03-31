@@ -110,7 +110,7 @@ export default {
 
   background: linear-gradient(
     to bottom,
-    #d60000,
+    #ed1b2f,
     #ffffff
   ); // Gradient từ đỏ sang trắng
   position: relative;
