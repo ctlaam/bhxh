@@ -8,10 +8,7 @@
       <div class="text-left col align-self-center">
         <a class="navbar-brand" href="#"
           ><h5 class="mb-0 ml-2">
-            <img
-              src="~/assets/logoviettelpost.png"
-              style="width: 100px; margin-left: 10px"
-            />
+            <img :src="returnLogo()" style="width: 100px; margin-left: 10px" />
           </h5>
         </a>
       </div>
@@ -62,6 +59,9 @@ export default {
     }
   },
   methods: {
+    returnLogo(){
+      return this.activeHeader ? '/_nuxt/assets/logoviettelpost.png' : '/_nuxt/assets/logoviettelpost2.png'
+    },
     chamsockhachhang() {
       let chat = document.querySelector('.launcher-icon.launcher-minimize-icon')
       if (chat) {
