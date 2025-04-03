@@ -296,7 +296,12 @@ ripple {
 .home {
   font-size: 20px;
 }
-
+.mui-tab-item1{
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 .mui-tab-item1 p {
   margin-bottom: 0;
   color: #000;
