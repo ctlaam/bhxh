@@ -5,34 +5,40 @@
         <div class="card">
           <div class="card-header">
             <h6 class="subtitle mb-0 text-left">
-              <div class="avatar avatar-40 bg-primary-light text-primary rounded mr-2">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                     fill="#ED1B2F">
+              <div
+                class="avatar avatar-40 bg-primary-light text-primary rounded mr-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24px"
+                  viewBox="0 -960 960 960"
+                  width="24px"
+                  fill="#ED1B2F"
+                >
                   <path
-                    d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-320h640v-160H160v160Z"/>
+                    d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-320h640v-160H160v160Z"
+                  />
                 </svg>
               </div>
               Tài khoản ngân hàng
             </h6>
           </div>
           <div class="card-body was-validated">
-
             <a-form :form="form" @submit="handleSubmit">
               <a-form-item>
                 <a-input
                   placeholder="Tên tài khoản"
                   v-decorator="[
-                      'truthName',
-                      {
-                        rules: [
-                          {
-                            required: true,
-                            message:
-                              'Tên tài khoản không được để trống!',
-                          },
-                        ],
-                      },
-                    ]"
+                    'truthName',
+                    {
+                      rules: [
+                        {
+                          required: true,
+                          message: 'Tên tài khoản không được để trống!',
+                        },
+                      ],
+                    },
+                  ]"
                 />
               </a-form-item>
               <a-form-item>
@@ -52,18 +58,39 @@
                     },
                   ]"
                 >
-                  <a-select-option v-for="(item, index) in banks " :value="item.name" :key="index">
+                  <a-select-option
+                    v-for="(item, index) in banks"
+                    :value="item.name"
+                    :key="index"
+                  >
                     {{ item.name }}
                   </a-select-option>
                 </a-select>
               </a-form-item>
               <a-form-item>
-                <a-input type="text"
-                         v-decorator="['stk', { rules: [{ required: true, message: 'Số tài khoản không được để trống' }] }]"
-                         class="input-form-title" placeholder="Số tài khoản"/>
+                <a-input
+                  type="text"
+                  v-decorator="[
+                    'stk',
+                    {
+                      rules: [
+                        {
+                          required: true,
+                          message: 'Số tài khoản không được để trống',
+                        },
+                      ],
+                    },
+                  ]"
+                  class="input-form-title"
+                  placeholder="Số tài khoản"
+                />
               </a-form-item>
               <a-form-item>
-                <a-button class="btn-login w-100" type="primary " html-type="submit">
+                <a-button
+                  class="btn-login w-100"
+                  type="primary "
+                  html-type="submit"
+                >
                   Lưu
                 </a-button>
               </a-form-item>
@@ -78,7 +105,7 @@
 <script>
 import * as volatilityApi from '../../../api/volatility.js'
 export default {
-  name: "index",
+  name: 'index',
   layout: 'info',
   data() {
     return {
@@ -208,13 +235,62 @@ export default {
         {
           name: 'BaoVietBank',
           full_name: 'Ngân hàng Bảo Việt',
-        }
+        },
+        {
+          name: 'HSBC',
+          full_name: 'Ngân hàng TNHH một thành viên HSBC (Việt Nam)',
+        },
+        {
+          name: 'Standard Chartered',
+          full_name:
+            'Ngân hàng TNHH một thành viên Standard Chartered (Việt Nam)',
+        },
+        {
+          name: 'Shinhan Bank',
+          full_name: 'Ngân hàng TNHH MTV Shinhan Việt Nam',
+        },
+        {
+          name: 'Woori Bank',
+          full_name: 'Ngân hàng TNHH MTV Woori Bank Việt Nam',
+        },
+        {
+          name: 'Public Bank',
+          full_name: 'Ngân hàng TNHH MTV Public Bank Việt Nam',
+        },
+        {
+          name: 'UOB',
+          full_name: 'Ngân hàng UOB Việt Nam',
+        },
+        {
+          name: 'CIMB Bank',
+          full_name: 'Ngân hàng TNHH MTV CIMB Việt Nam',
+        },
+        {
+          name: 'Hong Leong Bank',
+          full_name: 'Ngân hàng Hong Leong Việt Nam',
+        },
+        {
+          name: 'Indovina Bank',
+          full_name: 'Ngân hàng Liên doanh Indovina',
+        },
+        {
+          name: 'VRB',
+          full_name: 'Ngân hàng Liên doanh Việt - Nga',
+        },
+        {
+          name: 'IBK',
+          full_name: 'Ngân hàng Công nghiệp Hàn Quốc (IBK) – Chi nhánh Hà Nội',
+        },
+        {
+          name: 'KEB Hana Bank',
+          full_name: 'Ngân hàng KEB Hana - Chi nhánh TP.HCM',
+        },
         // Add more banks as needed
-      ]
+      ],
     }
   },
   beforeCreate() {
-    this.form = this.$form.createForm(this, {name: 'login'})
+    this.form = this.$form.createForm(this, { name: 'login' })
   },
   created() {
     this.profile = this.$store.state.profile.profile
@@ -235,7 +311,7 @@ export default {
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
           this.$store.dispatch('loading/setModalLoading', true)
-          console.log("value:", values)
+          console.log('value:', values)
           volatilityApi
             .recharge({
               full_name: values.truthName,
@@ -261,12 +337,12 @@ export default {
     },
     compareToFirstPassword(rule, value, callback) {
       if (value && value != this.form.getFieldValue('password')) {
-        callback('Mật khẩu chưa khớp');
+        callback('Mật khẩu chưa khớp')
       } else {
-        callback();
+        callback()
       }
     },
-  }
+  },
 }
 </script>
 
@@ -281,15 +357,12 @@ input {
   border: 1px solid rgb(217, 217, 217);
   padding: 0 10px;
 }
-
 </style>
 
 <style lang="css">
 #info {
-
-.ant-form-explain {
-  text-align: left !important;
-}
-
+  .ant-form-explain {
+    text-align: left !important;
+  }
 }
 </style>
