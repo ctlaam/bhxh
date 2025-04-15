@@ -386,16 +386,7 @@ export default {
           this.$message.error(err)
         })
         .finally(() => {
-          this.loading = false;
-          this.trip = {
-            name: '',
-            price: '',
-            commission: '',
-            meta: {
-              value: '',
-              commission: '',
-            },
-          }
+          this.loading = false
           setTimeout(() => {
             this.$store.dispatch('loading/setModalLoading', false)
           }, 2500)
