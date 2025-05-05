@@ -359,50 +359,9 @@
               <div class="product-image">
                 <img
                   v-if="
-                    level.background_urls.length &&
-                    level.priority == '1'
+                    level.background_urls.length
                   "
-                  src="https://salt.tikicdn.com/cache/750x750/ts/product/45/6d/33/30b447d7c06f9d9fe9290cd108e4419a.jpeg.webp"
-                  alt="Sản phẩm"
-                  crossorigin="anonymous"
-                  style="object-fit: contain"
-                />
-                <img
-                  v-if="
-                    level.background_urls.length &&
-                    level.priority == '2'
-                  "
-                  src="https://salt.tikicdn.com/cache/750x750/ts/product/41/eb/db/218d7434c84a275df78d50e71dfd4755.jpg.webp"
-                  alt="Sản phẩm"
-                  crossorigin="anonymous"
-                  style="object-fit: contain"
-                />
-                <img
-                  v-if="
-                    level.background_urls.length &&
-                    level.priority == '3'
-                  "
-                  src="https://salt.tikicdn.com/cache/750x750/ts/product/08/9b/82/596cbffa77acc3b8b8aa9f06e7b63c88.jpg.webp"
-                  alt="Sản phẩm"
-                  crossorigin="anonymous"
-                  style="object-fit: contain"
-                />
-                <img
-                  v-if="
-                    level.background_urls.length &&
-                    level.priority == '4'
-                  "
-                  src="https://salt.tikicdn.com/cache/750x750/ts/product/91/31/61/165d9fdbc7243090ac9ee5f1ee1e2ab5.jpg.webp"
-                  alt="Sản phẩm"
-                  crossorigin="anonymous"
-                  style="object-fit: contain"
-                />
-                <img
-                  v-if="
-                    level.background_urls.length &&
-                    level.priority == '5'
-                  "
-                  src="https://salt.tikicdn.com/cache/750x750/ts/product/ae/52/99/cb304509b00be96cd89104ee097d95d3.png.webp"
+                  :src="domain+ level.background_urls[0]"
                   alt="Sản phẩm"
                   crossorigin="anonymous"
                   style="object-fit: contain"
@@ -432,13 +391,14 @@ export default {
         background_urls: [],
       },
       levels: null,
-      domain: 'https://api.soatdonctv.online/',
+      domain: null,
     }
   },
   beforeDestroy() {
     this.vip = null
   },
   mounted() {
+    this.domain = process.env.BASE_URL_IMAGE
     if (this.$store.state.profile.vip) {
       this.vip = this.$store.state.profile.vip
     }
