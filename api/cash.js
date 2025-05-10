@@ -3,11 +3,8 @@ import axios from 'axios'
 const baseURL = process.env.BASE_URL ?? 'https://api.soatdonctv.online/api'
 
 export function getLogCash(params) {
-    let type = 'CashIn';
+    let type = 'CashOut';
     let url = `${baseURL}/v1/user-transaction`
-    if (params.type == 'CashOut') {
-        type = 'CashOut'
-    }
     url = url + '?type=' + type
     return new Promise((resolve, reject) => {
         axios
