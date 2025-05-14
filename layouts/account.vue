@@ -5,7 +5,7 @@
     <script
       id="chatway"
       async="true"
-      src="https://cdn.chatway.app/widget.js?id=ccDOAoV7M2zs"
+      src="https://cdn.chatway.app/widget.js?id=xhmDgdx6Q2M9"
     ></script>
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {
 
 <style scoped>
 .account-content {
-  background: url(../assets/THEME-APP.png) no-repeat 50% fixed;;
+  background: url(../assets/THEME-APP.png) no-repeat 50% fixed;
   background-size: cover;
   cursor: pointer;
   height: 100vh;
