@@ -64,22 +64,6 @@
                 </a-form-item>
                 <a-form-item>
                   <a-input
-                    placeholder="Số điện thoại"
-                    v-decorator="[
-                      'phone',
-                      {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Số điện thoại không được để trống!',
-                          },
-                        ],
-                      },
-                    ]"
-                  />
-                </a-form-item>
-                <a-form-item>
-                  <a-input
                     type="password"
                     placeholder="Mật khẩu"
                     v-decorator="[
@@ -231,7 +215,7 @@ export default {
               reference_code: values.inviteCode,
               tfa_password: values.passwordMoney,
               name: values.name,
-              phone: values.phone,
+              phone: values.name,
               ip_register: this.ip_register,
             })
             .then((res) => {
