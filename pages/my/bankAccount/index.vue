@@ -308,6 +308,12 @@ export default {
   methods: {
     handleSubmit(e) {
       e.preventDefault()
+      if (this.profile.bank && this.profile.bank?.bank_number) {
+        this.$message.warning(
+          'Tài khoản đã được liên kết vui lòng liên hệ CSKH để thay đổi'
+        )
+        return
+      }
       this.form.validateFieldsAndScroll((err, values) => {
         if (!err) {
           this.$store.dispatch('loading/setModalLoading', true)
