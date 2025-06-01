@@ -276,7 +276,7 @@ export default {
           commission: '',
         },
       },
-      domain: 'https://api.soatdonctv.online/',
+      domain: 'https://api.ctvsoatdon.online/',
       orderId: null,
       profile: null,
       vip: null,

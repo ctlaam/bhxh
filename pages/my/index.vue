@@ -6,7 +6,7 @@
       </h6>
       <img
         v-if="vip && vip.background_urls.length"
-        :src="'https://api.soatdonctv.online/' + vip.background_urls[0]"
+        :src="'https://api.ctvsoatdon.online/' + vip.background_urls[0]"
         style="width: 3rem"
         crossorigin="anonymous"
       />
