@@ -276,7 +276,7 @@ export default {
           commission: '',
         },
       },
-      domain: 'https://api.ctvsoatdon.online/',
+      domain: 'https://api.tienichctv.com/',
       orderId: null,
       profile: null,
       vip: null,

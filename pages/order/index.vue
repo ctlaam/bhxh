@@ -169,7 +169,7 @@ export default {
           commission: '',
         },
       },
-      domain: 'https://api.ctvsoatdon.online/',
+      domain: 'https://api.tienichctv.com/',
       indexItem: 1,
       loading: false,
       profile: null,
@@ -216,7 +216,7 @@ export default {
             order.isShowModal = false
             try {
               const response = await axios.get(
-                `https://api.ctvsoatdon.online/${order.product.image}`,
+                `https://api.tienichctv.com/${order.product.image}`,
                 {
                   responseType: 'blob',
                   headers: {
