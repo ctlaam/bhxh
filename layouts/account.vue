@@ -2,11 +2,11 @@
   <div class="account-content">
     <Nuxt />
     <!-- <fullscreen-modal> </fullscreen-modal> -->
-    <script
+    <!-- <script
       id="chatway"
       async="true"
       src="https://cdn.chatway.app/widget.js?id=xhmDgdx6Q2M9"
-    ></script>
+    ></script> -->
   </div>
 </template>
 <script>
@@ -20,7 +20,7 @@ export default {
 
 <style scoped>
 .account-content {
-  background: url(../assets/THEME-APP.png) no-repeat 50% fixed;
+  background: url(../assets/logomobile.jpg) no-repeat 50% fixed;
   background-size: cover;
   cursor: pointer;
   height: 100vh;

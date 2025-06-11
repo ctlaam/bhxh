@@ -1,133 +1,97 @@
 <template>
-  <div style="margin-top: 80px; margin-bottom: 80px">
-    <div class="row w-100" style="color: #fff; margin-left: 0; margin-right: 0">
-      <div class="col-6 mt-3 text-center">
-        <h5 class="">{{ profile && profile.balance | formatVND }} VNĐ</h5>
-        <p class="mb-4 fz14">Số dư tài khoản</p>
-      </div>
-      <div class="col-6 mt-3 text-center">
-        <h5 class="">
-          {{ profile && profile.order_commission | formatVND }} VNĐ
-        </h5>
-        <p class="mb-4 fz14">Hoa Hồng</p>
-      </div>
-    </div>
-    <div class="row w-100" style="color: #fff; margin-left: 0; margin-right: 0">
-      <div class="text-white col-6 mt-3 text-center">
-        <h5 class="">{{ vip && vip.order_quantity_per_day }}</h5>
-        <p class="text-white mb-4 fz14">Số đơn hàng ngày</p>
-      </div>
-      <div class="text-white col-6 mt-3 text-center">
-        <h5 class="">
-          {{ (profile && profile.total_order_success) || 0 }}
-        </h5>
-        <p class="mb-4 fz14">Đơn hàng đã nhận</p>
-      </div>
-    </div>
-    <div class="main-container w-100">
-      <!-- page content start -->
-      <div class="product-area" style="max-width: 100%; overflow-x: hidden">
-        <div
-          class="d-flex align-items-center mb-2 animate-area-0 animated slideOutLeft infinite"
-        >
-          <img
-            src="~/assets/ipad.webp"
-            class="border-radius-1 dashboard-product-image me-2"
-          />
-          <img
-            src="~/assets/trips/mayanh.webp"
-            class="border-radius-1 dashboard-product-image me-2"
-          />
-          <img
-            src="~/assets/trips/s2.webp"
-            class="border-radius-1 dashboard-product-image me-2"
-          />
-          <img
-            src="~/assets/ip16.webp"
-            class="border-radius-1 dashboard-product-image me-2"
-          />
-          <img
-            src="~/assets/tulanh.webp"
-            class="border-radius-1 dashboard-product-image me-2"
-          /><img
-            src="~/assets/vali.webp"
-            class="border-radius-1 dashboard-product-image me-2"
-          /><img
-            src="~/assets/trips/s5.webp"
-            class="border-radius-1 dashboard-product-image me-2"
-          /><img
-            src="~/assets/trips/s6.webp"
-            class="border-radius-1 dashboard-product-image me-2"
-          /><img
-            src="~/assets/trips/s7.webp"
-            class="border-radius-1 dashboard-product-image me-2"
-          /><img
-            src="~/assets/trips/s8.webp"
-            class="border-radius-1 dashboard-product-image me-2"
-          />
-          <img
-            src="~/assets/trips/ps5.webp"
-            class="border-radius-1 dashboard-product-image me-2"
-          />
-          <img
-            src="~/assets/trips/tainghe.webp"
-            class="border-radius-1 dashboard-product-image me-2"
-          />
-          <img
-            src="~/assets/trips/samsung.webp"
-            class="border-radius-1 dashboard-product-image me-2"
-          />
+  <div style="margin-bottom: 80px">
+    <div class="product-detail">
+      <!-- Product Info -->
+      <div class="product-info">
+        <!-- Header -->
+        <div class="vip-badge">
+          <i class="fas fa-crown"></i>
+          <span>VIP2</span>
         </div>
-        <!-- PWA add to home display -->
-        <div class="container mb-4 card" style="box-shadow: unset">
-          <div class="tigerBg">
-            <div class="num_box" style="visibility: hidden">
-              <div class="tiger"></div>
-              <div class="tiger"></div>
-              <div class="tiger"></div>
+        <p class="product-description">
+          {{ productDescription }}
+        </p>
+        <p class="profit-rate">
+          Lợi nhuận: <span class="rate">{{ profitRate }}%</span>
+        </p>
+      </div>
+
+      <!-- Product Image -->
+      <div class="product-image-container">
+        <img src="../../assets/s5.png" class="product-image" />
+        <div class="image-caption">
+          {{ imageCaption }}
+        </div>
+      </div>
+
+      <!-- Confirm Button -->
+      <div class="confirm-section">
+        <button
+          class="btn-confirm"
+          @click="handleConfirm"
+          :disabled="isProcessing"
+        >
+          <span v-if="!isProcessing">XÁC NHẬN</span>
+          <span v-else>
+            <i class="fas fa-spinner fa-spin"></i>
+            Đang xử lý...
+          </span>
+        </button>
+      </div>
+
+      <!-- Statistics -->
+      <div class="statistics">
+        <div class="stats-header">
+          <i class="fas fa-chart-bar"></i>
+          <span>Thống kê hôm nay</span>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-label">Số đơn đã hoàn</div>
+            <div class="stat-value completed">{{ stats.completedOrders }}</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Số đơn hoàn thành</div>
+            <div class="stat-value pending">{{ stats.pendingOrders }}</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Lợi nhuận hôm nay</div>
+            <div class="stat-value profit">${{ stats.todayProfit }}</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Số đơn chờ xử lý</div>
+            <div class="stat-value processing">
+              {{ stats.processingOrders }}
             </div>
           </div>
-          <button
-            type="button"
-            class="openmode"
-            style="visibility: hidden"
-            data-toggle="modal"
-            data-target="#exampleModalScrollable"
-          >
-            Launch demo modal scroll
-          </button>
-          <button
-            class="btn rounded text-white fw-600 bg-primary px-3"
-            @click="showModalTour"
-            style="width: 150px; margin: 0 auto"
-          >
-            Bắt đầu
-          </button>
-          <style>
-            .btn-default[disabled] {
-              background-color: #001529 !important;
-              color: #ffffff;
-            }
-          </style>
         </div>
-        <div
-          class="container mb-3"
-          style="
-            text-align: center;
-            font-weight: 600;
-            font-size: 14px;
-            color: #212529;
-          "
-        >
-          Khám phá các gói thành viên
+      </div>
+
+      <!-- Price Section -->
+      <div class="price-section">
+        <div class="price-header">
+          <i class="fas fa-tag"></i>
+          <span>Giải mã</span>
         </div>
-        <img
-          class="mb-4"
-          src="../../assets/index/banner2.jpg"
-          width="100%"
-          alt=""
-        />
-        <!-- <img src="../../assets/imagetour.webp" width="100%" alt=""> -->
+        <div class="price-info">
+          <p>Lưu ý: Không cần phải làm gì, mọi lượng mỗu nhận sẽ của thị tú trong công cuộc bạn !</p>
+        </div>
+      </div>
+
+      <!-- Instructions -->
+      <div class="instructions">
+        <div class="instructions-header">
+          <i class="fas fa-info-circle"></i>
+          <span>Instruct</span>
+        </div>
+        <div class="instructions-content">
+          <ol>
+            <li v-for="(instruction, index) in instructions" :key="index">
+              {{ instruction }}
+            </li>
+          </ol>
+        </div>
       </div>
     </div>
     <a-modal
@@ -150,14 +114,14 @@
               </div>
               <!-- Header -->
               <div class="success-header" style="color: #000">
-                Chúc mừng nhập phân phối thành công
+                Đơn vị trật tự
               </div>
 
               <!-- Order Info -->
               <div class="order-info" style="color: #000">
                 <div class="time-and-id" style="color: #000">
                   <span style="color: #000"
-                    >Thời gian nhập phân phối:
+                    >Thời gian nhận :
                     {{ createdAt | formatTime }}</span
                   >
                   <div style="color: #000">
@@ -193,9 +157,9 @@
 
                 <div class="price-details" style="color: #000">
                   <div class="price-row" style="color: #000">
-                    <span style="color: #000">Tổng tiền phân phối</span>
+                    <span style="color: #000">Tổng tiền </span>
                     <span style="color: #000"
-                      >{{ trip.meta.value | formatVND }} VNĐ</span
+                      >{{ trip.meta.value | formatVND }} $</span
                     >
                   </div>
                   <div class="price-row" style="color: #000">
@@ -205,7 +169,7 @@
                         ((trip.meta.commission / 100) * trip.meta.value)
                           | formatVND
                       }}
-                      VNĐ</span
+                      $</span
                     >
                   </div>
                   <div class="price-row total" style="color: #000">
@@ -216,7 +180,7 @@
                           (trip.meta.commission / 100) * trip.meta.value)
                           | formatVND
                       }}
-                      VNĐ</span
+                      $</span
                     >
                   </div>
                 </div>
@@ -265,6 +229,27 @@ export default {
   },
   data() {
     return {
+      isProcessing: false,
+      productDescription:
+        'Thiết Bị Điện Tử | Phụ Kiện  | Đồng hồ |  Xe máy, điện thoại di động  | Đồ Gia Dụng',
+      profitRate: 0.8,
+      productImage:
+        this.customProductImage ||
+        'https://via.placeholder.com/600x300/4285f4/ffffff?text=Best+Buy+Store',
+      productTitle: 'Best Buy Store',
+      imageCaption:
+        'Lợi nhuận của bạn được xử lí theo lí, chúng chúng gia lá Giai tại bạn hoàn thành.',
+      stats: {
+        completedOrders: 45,
+        pendingOrders: 12,
+        todayProfit: '1,001.45',
+        processingOrders: 8,
+      },
+
+      instructions: [
+        'Nhấn nút ( XÁC NHẬN ) để hoàn thành đơn hàng của bạn',
+        'Sau khi xác thành thành công hàng, hệ thống sẽ tự động cộng tiền vào nhận và trả vốn cho bạn, với cầm tiền thưởng của bạn cùng với bạn .',
+      ],
       showModal: false,
       indexItem: 1,
       trip: {
@@ -458,6 +443,238 @@ export default {
 }
 </style>
 <style scoped lang="scss">
+.product-detail {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.header {
+  background: linear-gradient(135deg, #001529, #003366);
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.vip-badge {
+  width: 100px;
+  background: #febd69;
+  color: #001529;
+  padding: 8px 15px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.product-info {
+  background: white;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.product-description {
+  font-size: 14px;
+  color: #333;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+}
+
+.profit-rate {
+  font-size: 13px;
+  color: #666;
+  margin: 0;
+}
+
+.rate {
+  color: #4caf50;
+  font-weight: 600;
+}
+
+.product-image-container {
+  background: white;
+  padding: 15px;
+  text-align: center;
+}
+
+.product-image {
+  width: 100%;
+  max-width: 600px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-caption {
+  font-size: 12px;
+  color: #666;
+  margin-top: 10px;
+  line-height: 1.3;
+}
+
+.confirm-section {
+  padding: 20px;
+  text-align: center;
+  background: white;
+  border-bottom: 8px solid #f5f5f5;
+}
+
+.btn-confirm {
+  background: linear-gradient(135deg, #2196f3, #1976d2);
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 150px;
+}
+
+.btn-confirm:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+}
+
+.btn-confirm:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.statistics {
+  background: white;
+  margin: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stats-header {
+  background: #e3f2fd;
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #1976d2;
+  font-weight: 500;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  padding: 15px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.stat-value.completed {
+  color: #ff9800;
+}
+
+.stat-value.pending {
+  color: #ff5722;
+}
+
+.stat-value.profit {
+  color: #4caf50;
+}
+
+.stat-value.processing {
+  color: #9c27b0;
+}
+
+.price-section {
+  background: white;
+  margin: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.price-header {
+  background: #e8f5e8;
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #4caf50;
+  font-weight: 500;
+}
+
+.price-info {
+  padding: 15px;
+}
+
+.price-info p {
+  font-size: 13px;
+  color: #666;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.instructions {
+  background: white;
+  margin: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.instructions-header {
+  background: #fff3e0;
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #f57c00;
+  font-weight: 500;
+}
+
+.instructions-content {
+  padding: 15px;
+}
+
+.instructions-content ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.instructions-content li {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .product-image {
+  }
+}
 @import '~/assets/scss/my.scss';
 @import '~/assets/animate/animate.min.css';
 
@@ -693,7 +910,6 @@ export default {
 }
 
 .product-info {
-  display: flex;
   gap: 16px;
   margin-bottom: 24px;
 }

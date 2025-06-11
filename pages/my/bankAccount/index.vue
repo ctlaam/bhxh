@@ -1,6 +1,6 @@
 <template>
   <div id="info">
-    <div class="main-container">
+    <div class="main-container" style="margin-top: 80px;">
       <div class="container">
         <div class="card">
           <div class="card-header">
@@ -365,7 +365,7 @@ input {
 }
 </style>
 
-<style lang="css">
+<style lang="scss">
 #info {
   .ant-form-explain {
     text-align: left !important;

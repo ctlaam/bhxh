@@ -1,6 +1,6 @@
 <template>
   <div id="info">
-    <div class="main-container">
+    <div class="main-container" style="margin-top: 80px;">
       <div class="container">
         <div class="card card-content">
           <div class="alert "  :class="{'alert-warning': history.status === 'Pending','alert-success': history.status === 'Success', 'alert-danger': history.status === 'Reject'}" v-for="(history, index) in historys" :key="index">

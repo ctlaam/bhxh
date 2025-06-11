@@ -81,7 +81,7 @@ export default {
 }
 
 .header.active {
-  background: #fff;
+  background: #001529;
   .button {
     color: #001529;
     svg {

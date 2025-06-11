@@ -1,5 +1,5 @@
 <template>
-  <div id="info">
+  <div id="info" style="margin-top: 80px;">
     <div class="main-container">
       <div class="container">
         <div class="card">

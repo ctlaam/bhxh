@@ -1,60 +1,68 @@
 <template>
-  <div id="info">
+  <div id="info" style="margin-top: 80px">
     <div class="main-container">
       <div class="container">
-        <div class="card">
-          <div class="card-header">
-            <h6 class="subtitle mb-0 text-center text-success" style="font-size: 14px;">
-              Số dư tài khoản {{ blance | roundToTwoDecimalPlaces }} VNĐ
-            </h6>
-          </div>
-          <div class="card-body was-validated">
-
-            <a-form :form="form" @submit="handleSubmit">
-              <a-form-item>
-                <a-input
-                  placeholder="Số tiền rút"
-                  v-decorator="[
-                      'amount',
+        <div class="card-header">
+          <h6
+            class="subtitle mb-0 text-center text-success"
+            style="font-size: 14px"
+          >
+            Số dư tài khoản {{ blance | roundToTwoDecimalPlaces }} $
+          </h6>
+        </div>
+        <div class="card-body was-validated">
+          <a-form :form="form" @submit="handleSubmit">
+            <a-form-item>
+              <a-input
+                placeholder="Số tiền rút"
+                v-decorator="[
+                  'amount',
+                  {
+                    rules: [
                       {
-                        rules: [
-                          {
-                            required: true,
-                            message:
-                              'Số tiền rút không được để trống!',
-                          },
-                        ],
+                        required: true,
+                        message: 'Số tiền rút không được để trống!',
                       },
-                    ]"
-                />
-              </a-form-item>
-              <a-form-item>
-                <a-input
-                  type="password"
-                  placeholder="Mật khẩu rút tiền"
-                  v-decorator="[
-                      'tfa_password',
+                    ],
+                  },
+                ]"
+              />
+            </a-form-item>
+            <a-form-item>
+              <a-input
+                type="password"
+                placeholder="Mật khẩu rút tiền"
+                v-decorator="[
+                  'tfa_password',
+                  {
+                    rules: [
                       {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Mật khẩu rút tiền không được để trống!',
-                          },
-                        ],
+                        required: true,
+                        message: 'Mật khẩu rút tiền không được để trống!',
                       },
-                    ]"
-                />
-              </a-form-item>
+                    ],
+                  },
+                ]"
+              />
+            </a-form-item>
 
-              <a-form-item>
-                <a-button class="btn-login w-100 text-white" type="danger " html-type="submit">
-                  Gửi
-                </a-button>
-              </a-form-item>
-            </a-form>
-            <div class="card"><div class="card-body text-center"><p><strong>&nbsp; Lưu ý</strong></p>
+            <a-form-item>
+              <a-button
+                class="btn-login w-100 text-white"
+                type="danger "
+                html-type="submit"
+              >
+                Gửi
+              </a-button>
+            </a-form-item>
+          </a-form>
+          <div style="color: #212529" class="card-body text-center">
+            <p><strong>&nbsp; Lưu ý</strong></p>
 
-              <p class="warning-text">*Nếu bạn gặp sự cố khi rút tiền, bạn có thể liên hệ với dịch vụ CSKH của chúng tôi*</p></div></div>
+            <p class="warning-text">
+              *Nếu bạn gặp sự cố khi rút tiền, bạn có thể liên hệ với dịch vụ
+              CSKH của chúng tôi*
+            </p>
           </div>
         </div>
       </div>
@@ -63,9 +71,9 @@
 </template>
 
 <script>
-import * as volatilityApi from "../../../api/volatility";
+import * as volatilityApi from '../../../api/volatility'
 export default {
-  name: "index",
+  name: 'index',
   layout: 'info',
   meta: 'Thay đổi mật khẩu',
   data() {
@@ -94,11 +102,11 @@ export default {
               type: 'CashOut',
             })
             .then((res) => {
-              this.$message.success('Gửi yêu cầu thành công');
-              this.$router.push('/wallet');
+              this.$message.success('Gửi yêu cầu thành công')
+              this.$router.push('/wallet')
             })
             .catch((err) => {
-              console.log("err:", err)
+              console.log('err:', err)
               if (err.message) {
                 this.$message.error('Sai tài khoản hoặc mật khẩu')
               } else {
@@ -106,28 +114,26 @@ export default {
               }
             })
             .finally(() => {
-              this.$store.dispatch('loading/setModalLoading', false);
-            });
+              this.$store.dispatch('loading/setModalLoading', false)
+            })
         }
       })
     },
     compareToFirstPassword(rule, value, callback) {
       if (value && value != this.form.getFieldValue('password')) {
-        callback('Mật khẩu chưa khớp');
+        callback('Mật khẩu chưa khớp')
       } else {
-        callback();
+        callback()
       }
     },
     async getProfile() {
-      await volatilityApi
-        .getProfileUser()
-        .then(async (res) => {
-          this.profile = res.data;
-          this.blance = this.profile.balance;
-          await volatilityApi.getListVips(this.profile.level).then((data) => {
-            this.vip = data.data
-          })
+      await volatilityApi.getProfileUser().then(async (res) => {
+        this.profile = res.data
+        this.blance = this.profile.balance
+        await volatilityApi.getListVips(this.profile.level).then((data) => {
+          this.vip = data.data
         })
+      })
     },
   },
   created() {
@@ -135,10 +141,9 @@ export default {
   },
   filters: {
     roundToTwoDecimalPlaces(num) {
-      if(!num) return 0;
-      return (Math.round(num * 100) / 100).toLocaleString();
-    }
-
+      if (!num) return 0
+      return (Math.round(num * 100) / 100).toLocaleString()
+    },
   },
 }
 </script>
@@ -152,21 +157,20 @@ input {
   border: 1px solid rgb(217, 217, 217);
   padding: 0 10px;
 }
-
 </style>
 
 <style lang="css">
 #info {
-.ant-form-explain {
-  text-align: left!important;
-}
-.ant-btn span {
-  display: block;
-  line-height: 1px;
-}
-.warning-text {
-  font-size: 14px;
-  color: #212529;
-}
+  .ant-form-explain {
+    text-align: left !important;
+  }
+  .ant-btn span {
+    display: block;
+    line-height: 1px;
+  }
+  .warning-text {
+    font-size: 14px;
+    color: #212529;
+  }
 }
 </style>

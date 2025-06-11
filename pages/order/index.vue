@@ -1,5 +1,20 @@
 <template>
   <div style="margin-top: 80px">
+    <div class="sc-jrQzAO kPsTlX mb-4" style="text-align: left">
+      <div class="title" style="font-size: 20px;">Lịch sử đơn hàng</div>
+      <span>Dữ liệu được cung cấp bởi trang chính thức</span>
+    </div>
+    <div class="row mb-4">
+      <div
+        v-for="(tab, index) in tabs"
+        :key="index"
+        class="col-3 tab-item"
+        :class="{ active: activeTab === index }"
+        @click="setActiveTab(index)"
+      >
+        {{ tab.label }}
+      </div>
+    </div>
     <div class="main-container">
       <div class="container">
         <div class="item-wrap">
@@ -36,13 +51,15 @@
                 <div class="money-item">
                   <span class="title">Số Tiền</span>
                   <span class="money">{{
-                      (order.meta && order.meta.value) | formatVND
+                    (order.meta && order.meta.value) | formatVND
                   }}</span>
                 </div>
                 <div class="money-item">
                   <span class="title">Hoa hồng</span
                   ><span class="money">{{
-                    ((order.meta && order.meta.commission) / 100 * order.meta.value) | formatVND
+                    (((order.meta && order.meta.commission) / 100) *
+                      order.meta.value)
+                      | formatVND
                   }}</span>
                 </div>
                 <div class="submit-btn"></div>
@@ -74,63 +91,106 @@
       :closable="false"
       :width="400"
       :footer="null"
-      :class="['modal-give-tour', {'premium-modal': isPremium}]"
+      :class="['modal-give-tour', { 'premium-modal': isPremium }]"
     >
       <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content" style="max-width: 100%">
           <div class="modal-body">
             <a-card class="order-success-card">
-              <div class="premium-badge" v-if="trip.is_premium" style="color: #000">
+              <div
+                class="premium-badge"
+                v-if="trip.is_premium"
+                style="color: #000"
+              >
                 <a-icon type="crown" /> Premium
               </div>
               <!-- Header -->
               <div class="success-header" style="color: #000">
-                Chúc mừng nhập phân phối thành công
+                Đơn vị trật tự
               </div>
 
               <!-- Order Info -->
               <div class="order-info" style="color: #000">
                 <div class="time-and-id" style="color: #000">
-                  <span style="color: #000">Thời gian nhập phân phối: {{trip.created_at | formatTime}}</span>
+                  <span style="color: #000"
+                    >Thời gian nhận: {{ trip.created_at | formatTime }}</span
+                  >
                   <div style="color: #000">
-                    <span style="color: #000">Mã SP: {{trip._id | getSpCode}}</span>
+                    <span style="color: #000"
+                      >Mã SP: {{ trip._id | getSpCode }}</span
+                    >
                     <a-icon type="qrcode" />
                   </div>
                 </div>
 
                 <!-- Product -->
                 <div class="product-info" style="color: #000">
-                  <img :src="domain + trip.image" alt="LG Washing Machine" crossorigin="anonymous" />
+                  <img
+                    :src="domain + trip.image"
+                    alt="LG Washing Machine"
+                    crossorigin="anonymous"
+                  />
                   <div class="product-details" style="color: #000">
-                    <p class="product-name" style="color: #000">{{trip.name}}</p>
-                    <p class="model" style="color: #000; text-transform: uppercase">{{trip._id | getSpCode}}</p>
-                    <p class="price" style="color: #000">{{ trip.meta.value }}</p>
+                    <p class="product-name" style="color: #000">
+                      {{ trip.name }}
+                    </p>
+                    <p
+                      class="model"
+                      style="color: #000; text-transform: uppercase"
+                    >
+                      {{ trip._id | getSpCode }}
+                    </p>
+                    <p class="price" style="color: #000">
+                      {{ trip.meta.value }}
+                    </p>
                   </div>
                 </div>
 
                 <div class="price-details" style="color: #000">
                   <div class="price-row" style="color: #000">
-                    <span style="color: #000">Tổng tiền phân phối</span>
-                    <span style="color: #000">{{ trip.meta.value | formatVND }} VNĐ</span>
+                    <span style="color: #000">Tổng tiền </span>
+                    <span style="color: #000"
+                      >{{ trip.meta.value | formatVND }} $</span
+                    >
                   </div>
                   <div class="price-row" style="color: #000">
                     <span style="color: #000">Hoa hồng:</span>
-                    <span style="color: #000">{{ trip.meta.commission * trip.meta.value | formatVND }} VNĐ</span>
+                    <span style="color: #000"
+                      >{{
+                        (trip.meta.commission * trip.meta.value) | formatVND
+                      }}
+                      $</span
+                    >
                   </div>
                   <div class="price-row total" style="color: #000">
                     <span style="color: #000">Tổng doanh thu</span>
-                    <span style="color: #000">{{ trip.meta.value + trip.meta.commission * trip.meta.value | formatVND}} VNĐ</span>
+                    <span style="color: #000"
+                      >{{
+                        (trip.meta.value +
+                          trip.meta.commission * trip.meta.value)
+                          | formatVND
+                      }}
+                      $</span
+                    >
                   </div>
                 </div>
 
                 <!-- Submit Button -->
-                <a-button type="primary" block class="submit-btn" @click="handleSubmit" style="color: #000">
+                <a-button
+                  type="primary"
+                  block
+                  class="submit-btn"
+                  @click="handleSubmit"
+                  style="color: #000"
+                >
                   Gửi đơn hàng
                 </a-button>
                 <div v-if="isLoading" class="loading-overlay">
                   <div class="loading-container" style="color: #000">
                     <a-spin size="large" />
-                    <div class="loading-text" style="color: #000">Đang gửi đơn hàng...</div>
+                    <div class="loading-text" style="color: #000">
+                      Đang gửi đơn hàng...
+                    </div>
                   </div>
                 </div>
               </div>
@@ -154,6 +214,13 @@ export default {
   layout: 'info',
   data() {
     return {
+      activeTab: 0, // Tab actif par défaut (Tất cả)
+      tabs: [
+        { label: 'Tất cả', value: 'all' },
+        { label: 'Đang xử lý', value: 'processing' },
+        { label: 'Chờ hoàn thành', value: 'pending' },
+        { label: 'Đã hoàn thành', value: 'completed' },
+      ],
       listOrder: [],
       statusName: {
         Pending: 'Đang chờ xử lý',
@@ -176,7 +243,7 @@ export default {
       formLayout: 'horizontal',
       form: this.$form.createForm(this, { name: 'coordinated' }),
       isPremium: false,
-      isLoading: false
+      isLoading: false,
     }
   },
   created() {
@@ -185,19 +252,28 @@ export default {
     this.getProfile()
   },
   methods: {
-    async handleSubmit() {
-      if (this.isLoading) return; // Prevent double click
+    setActiveTab(index) {
+      this.activeTab = index
 
-      this.isLoading = true;
+      // Émettre l'événement pour le composant parent
+      this.$emit('tab-changed', {
+        index: index,
+        tab: this.tabs[index],
+      })
+    },
+    async handleSubmit() {
+      if (this.isLoading) return // Prevent double click
+
+      this.isLoading = true
 
       try {
-        await new Promise(resolve => setTimeout(resolve, 5000)); // Delay 5s
-        await this.create();
+        await new Promise((resolve) => setTimeout(resolve, 5000)) // Delay 5s
+        await this.create()
       } catch (error) {
         // Xử lý lỗi nếu cần
-        console.error(error);
+        console.error(error)
       } finally {
-        this.isLoading = false;
+        this.isLoading = false
       }
     },
     formatDateTime(dattime) {
@@ -244,8 +320,8 @@ export default {
       this.showModal = true
       this.trip = item.product
       this.trip.meta = item.meta
-      this.orderId = item._id;
-      this.isPremium = item.is_premium;
+      this.orderId = item._id
+      this.isPremium = item.is_premium
     },
     create: _.debounce(async function () {
       this.loading = true
@@ -257,7 +333,10 @@ export default {
           this.getListOrder()
         })
         .catch((err) => {
-          if (err == 'Số dư không đủ. Bạn vui lòng liên hệ CSKH để được hỗ trợ. Xin cảm ơn!') {
+          if (
+            err ==
+            'Số dư không đủ. Bạn vui lòng liên hệ CSKH để được hỗ trợ. Xin cảm ơn!'
+          ) {
             this.$confirm({
               title: err,
               icon: 'check-circle',
@@ -266,31 +345,63 @@ export default {
                 this.showModal = false
               },
             })
-            return;
+            return
           }
           this.$message.error(err)
         })
         .finally(() => {
           this.loading = false
-          setTimeout(() => {
-          }, 2500)
+          setTimeout(() => {}, 2500)
         })
     }, 500),
     async getProfile() {
-      await volatilityApi
-        .getProfileUser()
-        .then(async (res) => {
-          this.profile = res.data
-          await volatilityApi.getListVips(this.profile.level).then((data) => {
-            this.vip = data.data
-          })
+      await volatilityApi.getProfileUser().then(async (res) => {
+        this.profile = res.data
+        await volatilityApi.getListVips(this.profile.level).then((data) => {
+          this.vip = data.data
         })
-
+      })
     },
   },
 }
 </script>
 <style lang="scss">
+.tab-item {
+  padding: 12px 8px;
+  cursor: pointer;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  user-select: none;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-item:hover {
+  color: #febd69;
+  opacity: 0.8;
+}
+
+.tab-item.active {
+  color: #febd69;
+  border-bottom-color: #febd69;
+}
+
+.tab-content {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  color: white;
+}
+
+/* Version responsive */
+@media (max-width: 768px) {
+  .tab-item {
+    font-size: 14px;
+    padding: 0;
+  }
+}
 .modal-give-tour input#coordinated_note {
   border: 1px solid #d9d9d9;
   border-radius: 4px;
@@ -473,9 +584,9 @@ export default {
 .modal-give-tour {
   &.premium-modal {
     .success-header {
-      background: linear-gradient(45deg, #FFD700, #FFA500) !important;
+      background: linear-gradient(45deg, #ffd700, #ffa500) !important;
       color: #fff;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
       position: relative;
       overflow: hidden;
 
@@ -486,32 +597,38 @@ export default {
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(45deg,
-          rgba(255,255,255,0.2) 25%,
+        background: linear-gradient(
+          45deg,
+          rgba(255, 255, 255, 0.2) 25%,
           transparent 25%,
           transparent 50%,
-          rgba(255,255,255,0.2) 50%,
-          rgba(255,255,255,0.2) 75%,
-          transparent 75%);
+          rgba(255, 255, 255, 0.2) 50%,
+          rgba(255, 255, 255, 0.2) 75%,
+          transparent 75%
+        );
         background-size: 20px 20px;
         animation: shine 2s linear infinite;
       }
     }
 
     .order-success-card {
-      border: 2px solid #FFD700;
+      border: 2px solid #ffd700;
       box-shadow: 0 4px 15px rgba(255, 215, 0, 0.15);
     }
 
     .price-details {
-      background: linear-gradient(45deg, rgba(255,215,0,0.1), rgba(255,165,0,0.1));
+      background: linear-gradient(
+        45deg,
+        rgba(255, 215, 0, 0.1),
+        rgba(255, 165, 0, 0.1)
+      );
       padding: 15px;
       border-radius: 8px;
-      border: 1px solid rgba(255,215,0,0.2);
+      border: 1px solid rgba(255, 215, 0, 0.2);
     }
 
     .submit-btn {
-      background: linear-gradient(45deg, #FFD700, #FFA500) !important;
+      background: linear-gradient(45deg, #ffd700, #ffa500) !important;
       border: none !important;
       font-weight: 600;
 
@@ -525,13 +642,13 @@ export default {
       position: absolute;
       top: -10px;
       right: -10px;
-      background: #FFD700;
+      background: #ffd700;
       padding: 5px 10px;
       border-radius: 20px;
       color: #fff;
       font-size: 12px;
       font-weight: bold;
-      box-shadow: 0 2px 8px rgba(255,215,0,0.3);
+      box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
       z-index: 1;
     }
   }

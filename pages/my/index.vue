@@ -1,305 +1,109 @@
 <template>
-  <div class="profile">
-    <div class="container mb-4 text-center text-white" style="margin-top: 80px">
-      <h6 class="mb-1" style="font-weight: 600; font-size: 1.5rem">
-        {{ profile?.identifier }}
-      </h6>
-      <img
-        v-if="vip && vip.background_urls.length"
-        :src="'https://api.soatdonctv.online/' + vip.background_urls[0]"
-        style="width: 3rem"
-        crossorigin="anonymous"
-      />
-      <span class="iconfont" style="font-weight: 600">{{ vip?.name }}</span>
-    </div>
-    <div class="main-container">
-      <div class="container mb-4">
-        <div class="row">
-          <div class="col-12 col-md-12">
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <h6 class="mb-1">
-                      Đơn hàng hôm nay
-                      <span class="text-success float-right"
-                        >{{ (profile && profile.total_order_success) || 0 }}/{{
-                          vip && vip.order_quantity_per_day
-                        }}</span
-                      >
-                    </h6>
-                  </div>
-                </div>
-                <a-progress
-                  :percent="
-                    (profile &&
-                      profile.total_order_success /
-                        (vip && vip.order_quantity_per_day)) * 100
-                  "
-                  status="active"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+  <div class="profile-container">
+    <!-- Header với thông tin user -->
+    <div class="profile-header">
+      <div class="avatar">
+        <i class="fas fa-user"></i>
       </div>
-      <!--<div class="container mb-4">--><!--</div>-->
-      <div class="container">
-        <div class="card">
-          <div class="card-header"><h6 class="mb-0">Thiết Lập Cá Nhân</h6></div>
-          <div class="card-body px-0 pt-0">
-            <div class="list-group list-group-flush border-top border-color">
-              <nuxt-link
-                to="/wallet"
-                class="list-group-item list-group-item-action border-color"
-              >
-                <div class="row">
-                  <div class="col-auto">
-                    <div
-                      class="avatar avatar-50 bg-default-light text-default rounded"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24px"
-                        viewBox="0 -960 960 960"
-                        width="24px"
-                        fill="#fff"
-                      >
-                        <path
-                          d="M80-200v-80h800v80H80Zm46-242-52-30 34-60H40v-60h68l-34-58 52-30 34 58 34-58 52 30-34 58h68v60h-68l34 60-52 30-34-60-34 60Zm320 0-52-30 34-60h-68v-60h68l-34-58 52-30 34 58 34-58 52 30-34 58h68v60h-68l34 60-52 30-34-60-34 60Zm320 0-52-30 34-60h-68v-60h68l-34-58 52-30 34 58 34-58 52 30-34 58h68v60h-68l34 60-52 30-34-60-34 60Z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="col align-self-center pl-0">
-                    <h6 class="mb-1">Ví tiền</h6>
-                    <p class="text-secondary">Thay đổi mật khẩu đăng nhập</p>
-                  </div>
-                </div>
-              </nuxt-link>
-              <nuxt-link
-                to="/my/password?title=Thay đổi mật khẩu đăng nhập"
-                class="list-group-item list-group-item-action border-color"
-              >
-                <div class="row">
-                  <div class="col-auto">
-                    <div
-                      class="avatar avatar-50 bg-default-light text-default rounded"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24px"
-                        viewBox="0 -960 960 960"
-                        width="24px"
-                        fill="#fff"
-                      >
-                        <path
-                          d="M80-200v-80h800v80H80Zm46-242-52-30 34-60H40v-60h68l-34-58 52-30 34 58 34-58 52 30-34 58h68v60h-68l34 60-52 30-34-60-34 60Zm320 0-52-30 34-60h-68v-60h68l-34-58 52-30 34 58 34-58 52 30-34 58h68v60h-68l34 60-52 30-34-60-34 60Zm320 0-52-30 34-60h-68v-60h68l-34-58 52-30 34 58 34-58 52 30-34 58h68v60h-68l34 60-52 30-34-60-34 60Z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="col align-self-center pl-0">
-                    <h6 class="mb-1">Mật khẩu đăng nhập</h6>
-                    <p class="text-secondary">Thay đổi mật khẩu đăng nhập</p>
-                  </div>
-                </div>
-              </nuxt-link>
-              <nuxt-link
-                to="/my/withdrawalpassword?title=Thay đổi mật tài khoản"
-                class="list-group-item list-group-item-action border-color"
-              >
-                <div class="row">
-                  <div class="col-auto">
-                    <div
-                      class="avatar avatar-50 bg-default-light text-default rounded"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24px"
-                        viewBox="0 -960 960 960"
-                        width="24px"
-                        fill="#fff"
-                      >
-                        <path
-                          d="M480-80q-139-35-229.5-159.5T160-516v-244l320-120 320 120v244q0 152-90.5 276.5T480-80Zm0-84q97-30 162-118.5T718-480H480v-315l-240 90v207q0 7 2 18h238v316Z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="col align-self-center pl-0">
-                    <h6 class="mb-1">Mật Khẩu Rút Tiền</h6>
-                    <p class="text-secondary">Thay đổi mật khẩu tài khoản</p>
-                  </div>
-                </div>
-              </nuxt-link>
-              <NuxtLink
-                to="/my/Bankaccount?title=Tài khoản ngân hàng"
-                class="list-group-item list-group-item-action border-color"
-              >
-                <div class="row">
-                  <div class="col-auto">
-                    <div
-                      class="avatar avatar-50 bg-default-light text-default rounded"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24px"
-                        viewBox="0 -960 960 960"
-                        width="24px"
-                        fill="#fff"
-                      >
-                        <path
-                          d="M880-720v480q0 33-23.5 56.5T800-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720Zm-720 80h640v-80H160v80Zm0 160v240h640v-240H160Zm0 240v-480 480Z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="col align-self-center pl-0">
-                    <h6 class="mb-1">Tài Khoản Ngân Hàng</h6>
-                    <p class="text-secondary">Sửa Thông Tin Tài Khoản</p>
-                  </div>
-                </div>
-              </NuxtLink>
-              <NuxtLink
-                to="/my/lichsuruttien"
-                class="list-group-item list-group-item-action border-color"
-              >
-                <div class="row">
-                  <div class="col-auto">
-                    <div
-                      class="avatar avatar-50 bg-default-light text-default rounded"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24px"
-                        viewBox="0 -960 960 960"
-                        width="24px"
-                        fill="#FFFFFF"
-                      >
-                        <path
-                          d="M320-280q17 0 28.5-11.5T360-320q0-17-11.5-28.5T320-360q-17 0-28.5 11.5T280-320q0 17 11.5 28.5T320-280Zm0-160q17 0 28.5-11.5T360-480q0-17-11.5-28.5T320-520q-17 0-28.5 11.5T280-480q0 17 11.5 28.5T320-440Zm0-160q17 0 28.5-11.5T360-640q0-17-11.5-28.5T320-680q-17 0-28.5 11.5T280-640q0 17 11.5 28.5T320-600Zm120 320h240v-80H440v80Zm0-160h240v-80H440v80Zm0-160h240v-80H440v80ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="col align-self-center pl-0">
-                    <h6 class="mb-1">Lịch sử rút tiền</h6>
-                    <p class="text-secondary">Lịch sử rút tiền</p>
-                  </div>
-                </div>
-              </NuxtLink>
-              <NuxtLink
-                to="/my/rules?title=Điều khoản và điều kiện"
-                class="list-group-item list-group-item-action border-color"
-              >
-                <div class="row">
-                  <div class="col-auto">
-                    <div
-                      class="avatar avatar-50 bg-default-light text-default rounded"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24px"
-                        viewBox="0 -960 960 960"
-                        width="24px"
-                        fill="#fff"
-                      >
-                        <path
-                          d="M160-120v-80h480v80H160Zm226-194L160-540l84-86 228 226-86 86Zm254-254L414-796l86-84 226 226-86 86Zm184 408L302-682l56-56 522 522-56 56Z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="col align-self-center pl-0">
-                    <h6 class="mb-1">Điều khoản và điều kiện</h6>
-                    <p class="text-secondary">Điều khoản và điều kiện</p>
-                  </div>
-                </div>
-              </NuxtLink>
-              <NuxtLink
-                to="/my/faq?title=Câu hỏi thường gặp"
-                class="list-group-item list-group-item-action border-color"
-              >
-                <div class="row">
-                  <div class="col-auto">
-                    <div
-                      class="avatar avatar-50 bg-default-light text-default rounded"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24px"
-                        viewBox="0 -960 960 960"
-                        width="24px"
-                        fill="#fff"
-                      >
-                        <path
-                          d="M560-360q17 0 29.5-12.5T602-402q0-17-12.5-29.5T560-444q-17 0-29.5 12.5T518-402q0 17 12.5 29.5T560-360Zm-30-128h60q0-29 6-42.5t28-35.5q30-30 40-48.5t10-43.5q0-45-31.5-73.5T560-760q-41 0-71.5 23T446-676l54 22q9-25 24.5-37.5T560-704q24 0 39 13.5t15 36.5q0 14-8 26.5T578-596q-33 29-40.5 45.5T530-488ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="col align-self-center pl-0">
-                    <h6 class="mb-1">Câu hỏi thường gặp</h6>
-                    <p class="text-secondary">Câu hỏi thường gặp</p>
-                  </div>
-                </div>
-              </NuxtLink>
-              <NuxtLink
-                to="/my/about?title=Về chúng tôi"
-                class="list-group-item list-group-item-action border-color"
-              >
-                <div class="row">
-                  <div class="col-auto">
-                    <div
-                      class="avatar avatar-50 bg-default-light text-default rounded"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24px"
-                        viewBox="0 -960 960 960"
-                        width="24px"
-                        fill="#fff"
-                      >
-                        <path
-                          d="M40-160v-160q0-34 23.5-57t56.5-23h131q20 0 38 10t29 27q29 39 71.5 61t90.5 22q49 0 91.5-22t70.5-61q13-17 30.5-27t36.5-10h131q34 0 57 23t23 57v160H640v-91q-35 25-75.5 38T480-200q-43 0-84-13.5T320-252v92H40Zm440-160q-38 0-72-17.5T351-386q-17-25-42.5-39.5T253-440q22-37 93-58.5T480-520q63 0 134 21.5t93 58.5q-29 0-55 14.5T609-386q-22 32-56 49t-73 17ZM160-440q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T280-560q0 50-34.5 85T160-440Zm640 0q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T920-560q0 50-34.5 85T800-440ZM480-560q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T600-680q0 50-34.5 85T480-560Z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="col align-self-center pl-0">
-                    <h6 class="mb-1">Về chúng tôi</h6>
-                    <p class="text-secondary">Về chúng tôi</p>
-                  </div>
-                </div>
-              </NuxtLink>
-              <div class="list-group-item list-group-item-action border-color">
-                <div class="row">
-                  <div class="col-auto">
-                    <div
-                      class="avatar avatar-50 bg-danger-light text-danger rounded"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24px"
-                        viewBox="0 -960 960 960"
-                        width="24px"
-                        fill="#dc3545"
-                      >
-                        <path
-                          d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-84 31.5-156.5T197-763l56 56q-44 44-68.5 102T160-480q0 134 93 227t227 93q134 0 227-93t93-227q0-67-24.5-125T707-707l56-56q54 54 85.5 126.5T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-40-360v-440h80v440h-80Z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="col align-self-center pl-0" @click="logout">
-                    <h6 class="mb-1">Đăng Xuất</h6>
-                    <p class="text-secondary">Thoát Khỏi Hệ Thống</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="user-info">
+        <div class="user-name">{{ user.name }}</div>
+        <div class="user-phone">Số điện thoại: {{ user.phone }}</div>
+        <div class="user-balance">Số dư: {{ user.balance }}</div>
+        <div class="user-code">Mã mời: {{ user.code }}</div>
+      </div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="action-buttons">
+      <button class="btn btn-deposit" @click="chamsockhachhang">
+        Nạp tiền
+      </button>
+      <button class="btn btn-withdraw" @click="navigateTo('/wallet/withdraw')">
+        Rút tiền
+      </button>
+    </div>
+
+    <!-- Thông tin cá nhân -->
+    <div class="menu-section">
+      <div class="section-header">Thông tin cá nhân</div>
+      <div class="menu-item" @click="navigateTo('/my/bankAccount')">
+        <i class="fas fa-credit-card menu-icon"></i>
+        <span class="menu-text">Thẻ ngân hàng</span>
+        <i class="fas fa-chevron-right menu-arrow"></i>
+      </div>
+      <div class="menu-item" @click="navigateTo('/my/member-rank')">
+        <i class="fas fa-star menu-icon"></i>
+        <span class="menu-text">Cấp bậc hội viên</span>
+        <i class="fas fa-chevron-right menu-arrow"></i>
+      </div>
+      <div class="menu-item" @click="navigateTo('/my/delivery-address')">
+        <i class="fas fa-map-marker-alt menu-icon"></i>
+        <span class="menu-text">Địa chỉ nhận hàng</span>
+        <i class="fas fa-chevron-right menu-arrow"></i>
+      </div>
+    </div>
+
+    <!-- Lịch sử đơn hàng -->
+    <div class="menu-section">
+      <div class="section-header">Lịch sử đơn hàng</div>
+      <div class="menu-item" @click="navigateTo('/order')">
+        <i class="fas fa-file-alt menu-icon"></i>
+        <span class="menu-text">Lịch sử đơn hàng</span>
+        <i class="fas fa-chevron-right menu-arrow"></i>
+      </div>
+      <div class="menu-item" @click="navigateTo('/trip')">
+        <i class="fas fa-shopping-cart menu-icon"></i>
+        <span class="menu-text">XÁC NHẬN săn đơn</span>
+        <i class="fas fa-chevron-right menu-arrow"></i>
+      </div>
+      <!-- <div class="menu-item" @click="navigateTo('/my-group')">
+        <i class="fas fa-users menu-icon"></i>
+        <span class="menu-text">Nhóm của tôi</span>
+        <i class="fas fa-chevron-right menu-arrow"></i>
+      </div> -->
+    </div>
+
+    <!-- Cá nhân -->
+    <div class="menu-section">
+      <div class="section-header">Cá nhân</div>
+      <div class="menu-item" @click="navigateTo('/wallet/history')">
+        <i class="fas fa-history menu-icon"></i>
+        <span class="menu-text">Lịch sử giao dịch</span>
+        <i class="fas fa-chevron-right menu-arrow"></i>
+      </div>
+      <div class="menu-item" @click="navigateTo('/my/password')">
+        <i class="fas fa-lock menu-icon"></i>
+        <span class="menu-text">Mật khẩu tài khoản</span>
+        <i class="fas fa-chevron-right menu-arrow"></i>
+      </div>
+      <div class="menu-item" @click="navigateTo('/my/withdrawalPassword')">
+        <i class="fas fa-key menu-icon"></i>
+        <span class="menu-text">Mật khẩu vốn</span>
+        <i class="fas fa-chevron-right menu-arrow"></i>
+      </div>
+    </div>
+    <div class="menu-section">
+      <div class="section-header">Liên hệ chăm sóc khách hàng</div>
+      <div class="menu-items">
+        <div class="menu-item" @click="chamsockhachhang">
+          <i class="fas menu-icon fa-headset"></i>
+          <span class="menu-text">Trung tâm chăm sóc khách hàng</span>
+          <i class="fas menu-icon fa-chevron-right arrow"></i>
+        </div>
+        <div class="menu-item" @click="navigateTo('/my/about')">
+          <i class="fas menu-icon fa-comment-dots"></i>
+          <span class="menu-text">Ý kiến phản hồi</span>
+          <i class="fas menu-icon fa-chevron-right arrow"></i>
+        </div>
+        <!-- <div class="menu-item" @click="navigateTo('language')">
+          <i class="fas menu-icon fa-globe"></i>
+          <span class="menu-text">Thay đổi ngôn ngữ</span>
+          <i class="fas menu-icon fa-chevron-right arrow"></i>
+        </div> -->
+        <div class="menu-item logout" @click="handleLogout">
+          <i class="fas menu-icon fa-sign-out-alt"></i>
+          <span class="menu-text">Đăng xuất</span>
+          <i class="fas menu-icon fa-chevron-right arrow"></i>
         </div>
       </div>
     </div>
@@ -316,6 +120,12 @@ export default {
   name: 'index',
   data() {
     return {
+      user: {
+        name: 'TRẦN VĂN HÙNG',
+        phone: '088673****',
+        balance: '$1,000.05',
+        code: '740278',
+      },
       vip: {
         name: '',
         background_urls: [''],
@@ -330,9 +140,11 @@ export default {
     }
   },
   methods: {
+    navigateTo(page) {
+      this.$router.replace(`${page}`)
+    },
     chamsockhachhang() {
-      // open chat telegram https://t.me/CSKH_VIETNAM_TOUR
-      window.open('https://t.me/CSKH_VIETNAM_TOUR', '_blank')
+      //  Xử lý show chatway
     },
     logout() {
       this.$store.dispatch('loading/setModalLoading', true)
@@ -396,6 +208,182 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.profile-container {
+  background-color: white;
+  min-height: 100vh;
+  margin-bottom: 100px;
+}
+
+.profile-header {
+  background-color: #e8e8e8;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  background-color: #ccc;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #888;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-name {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.user-phone {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.user-balance {
+  font-size: 16px;
+  font-weight: 600;
+  color: #22c55e;
+  margin-bottom: 3px;
+}
+
+.user-code {
+  font-size: 12px;
+  color: #888;
+}
+
+.action-buttons {
+  background-color: #e8e8e8;
+  padding: 15px 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  flex: 1;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-deposit {
+  background-color: #d1d5db;
+  color: #374151;
+}
+
+.btn-deposit:hover {
+  background-color: #9ca3af;
+}
+
+.btn-withdraw {
+  background-color: #d1d5db;
+  color: #374151;
+}
+
+.btn-withdraw:hover {
+  background-color: #9ca3af;
+}
+
+.menu-section {
+  margin-top: 1px;
+}
+
+.section-header {
+  background-color: #d1d5db;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.menu-item {
+  background-color: white;
+  padding: 15px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.menu-item:hover {
+  background-color: #f9fafb;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-icon {
+  width: 20px;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.menu-text {
+  flex: 1;
+  font-size: 15px;
+  color: #374151;
+}
+
+.menu-arrow {
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+.special-text {
+  color: #ef4444;
+  font-weight: 600;
+}
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 100px;
+  justify-content: center;
+}
+
+.btn-deposit {
+  background: linear-gradient(135deg, #4caf50, #45a049);
+  color: white;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+}
+
+.btn-withdraw {
+  background: rgb(243, 104, 104) !important;
+  color: #ff5722;
+  border: 2px solid #ff5722;
+  box-shadow: 0 2px 8px rgba(255, 87, 34, 0.2);
+}
 @import '~/assets/scss/my.scss';
 </style>
 <style lang="css">

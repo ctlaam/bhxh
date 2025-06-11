@@ -9,11 +9,11 @@
     </div>
     <!-- <FullScreenModal> </FullScreenModal> -->
     <div class="modal"></div>
-    <script
+    <!-- <script
       id="chatway"
       async="true"
       src="https://cdn.chatway.app/widget.js?id=xhmDgdx6Q2M9"
-    ></script>
+    ></script> -->
   </div>
 </template>
 
@@ -94,6 +94,8 @@ export default {
   overflow-x: hidden;
 }
 #content {
+  max-width: 100vw;
+  overflow-x: hidden;
   overflow-y: auto;
   &::-webkit-scrollbar {
     width: 6px;

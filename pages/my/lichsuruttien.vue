@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top: 80px">
+  <div style="">
     <div class="container mt-3 mb-4 text-center">
       <h2 class="text-white">Lịch sử rút tiền</h2>
     </div>

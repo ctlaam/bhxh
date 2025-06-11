@@ -43,11 +43,11 @@
           class="mui-tab-item1 floating-button"
           ><div class="button-effects"></div>
           <img
-            src="../../assets/logobutton.png"
+            src="../../assets/img/logo_web.png"
             alt=""
-            width="40px"
+            width="60px"
             class="center-icon"
-            style="object-fit: contain; background: red"
+            style="object-fit: contain; background: #001529"
           />
         </a>
         <span
@@ -58,7 +58,7 @@
             bottom: 0;
             transform: translateY(-50%);
           "
-          >Lấy đơn</span
+          >Kiện hàng</span
         >
       </div>
       <div class="col">
@@ -296,7 +296,7 @@ ripple {
 .home {
   font-size: 20px;
 }
-.mui-tab-item1{
+.mui-tab-item1 {
   display: flex !important;
   align-items: center;
   justify-content: center;
@@ -412,34 +412,36 @@ a.mui-tab-item1.nuxt-link-exact-active.nuxt-link-active {
 
 @keyframes activePulse {
   0% {
-    box-shadow: 0 0 20px rgba(255, 37, 37, 0.5);
+    box-shadow: 0 0 20px rgba(16, 46, 71, 0.3);
   }
   50% {
-    box-shadow: 0 0 30px rgba(255, 37, 37, 0.8);
+    box-shadow: 0 0 30px rgba(16, 46, 71, 0.5);
   }
   100% {
-    box-shadow: 0 0 20px rgba(255, 37, 37, 0.5);
+    box-shadow: 0 0 20px rgba(16, 46, 71, 0.3);
   }
 }
 
 @keyframes ripple {
   0% {
-    box-shadow: 0 0 0 0 rgba(255, 37, 37, 0.4), 0 0 0 1px rgba(255, 37, 37, 0.4);
+    box-shadow: 0 0 0 0 rgba(16, 46, 71, 0.4),
+      0 0 0 1px rgba(16, 46, 71, 0.4);
   }
   100% {
-    box-shadow: 0 0 0 15px rgba(255, 37, 37, 0), 0 0 0 20px rgba(255, 37, 37, 0);
+    box-shadow: 0 0 0 15px rgba(16, 46, 71, 0),
+      0 0 0 20px rgba(16, 46, 71, 0);
   }
 }
 
 @keyframes pulse {
   0% {
-    box-shadow: 0 4px 15px rgba(255, 37, 37, 0.3);
+    box-shadow: 0 4px 15px rgba(16, 46, 71, 0.3);
   }
   50% {
-    box-shadow: 0 4px 25px rgba(255, 37, 37, 0.5);
+    box-shadow: 0 4px 25px rgba(16, 46, 71, 0.5);
   }
   100% {
-    box-shadow: 0 4px 15px rgba(255, 37, 37, 0.3);
+    box-shadow: 0 4px 15px rgba(16, 46, 71, 0.3);
   }
 }
 </style>

@@ -34,9 +34,16 @@
       <div class="row h-100">
         <div class="col-12 align-self-center mb-4">
           <div class="row justify-content-center m-2">
-            <div class="col">
-              <div style="margin-bottom: 200px;" class="d-flex align-items-center justify-content-center">
-                
+            <div class="card">
+              <div
+                class="d-flex align-items-center justify-content-center mt-4"
+              >
+                <img
+                  src="../../assets/img/logo_web.png"
+                  alt="logo mt-4"
+                  class="img-fluid"
+                  style="width: 200px"
+                />
               </div>
               <h6 class="font-weight-normal mb-5 text-center">
                 <b><!--SaigonToursit--></b>

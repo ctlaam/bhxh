@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="text-left col align-self-center"><a class="navbar-brand" href="#">
-        <h6 class="mb-0" style="font-size: 20px;">{{title}}</h6>
+        <h6 class="mb-0" style="font-size: 20px;"></h6>
       </a>
       </div>
       <div class="ml-auto col-auto">

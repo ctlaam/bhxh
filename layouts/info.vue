@@ -5,7 +5,7 @@
       <div id="content" ref="content">
         <div
           class="container mb-4 text-center text-white"
-          style="margin-top: 80px"
+          style=""
         >
           <Nuxt />
         </div>
@@ -13,11 +13,11 @@
       <Footer></Footer>
     </div>
     <FullScreenModal> </FullScreenModal>
-    <script
+    <!-- <script
       id="chatway"
       async="true"
       src="https://cdn.chatway.app/widget.js?id=xhmDgdx6Q2M9"
-    ></script>
+    ></script> -->
     <div class="modal"></div>
   </div>
 </template>

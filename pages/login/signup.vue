@@ -37,15 +37,37 @@
       <div class="row">
         <div class="col-12 align-self-center mb-4">
           <div class="row justify-content-center m-2">
-            <div class="col">
+            <div class="card">
               <div
-                style="margin-bottom: 200px"
-                class="d-flex align-items-center justify-content-center"
-              ></div>
+                class="d-flex align-items-center justify-content-center mt-4"
+              >
+                <img
+                  src="../../assets/img/logo_web.png"
+                  alt="logo mt-4"
+                  class="img-fluid"
+                  style="width: 200px"
+                />
+              </div>
               <h6 class="font-weight-normal mb-5 text-center">
                 <b><!--SaigonToursit--></b>
               </h6>
               <a-form :form="form" @submit="handleSubmit">
+                <a-form-item>
+                  <a-input
+                    placeholder="Họ và tên"
+                    v-decorator="[
+                      'name',
+                      {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Họ và tên không được để trống!',
+                          },
+                        ],
+                      },
+                    ]"
+                  />
+                </a-form-item>
                 <a-form-item>
                   <a-input
                     placeholder="Tên ID đăng nhập"
@@ -56,6 +78,22 @@
                           {
                             required: true,
                             message: 'Tên không được để trống!',
+                          },
+                        ],
+                      },
+                    ]"
+                  />
+                </a-form-item>
+                 <a-form-item>
+                  <a-input
+                    placeholder="Số điện thoại"
+                    v-decorator="[
+                      'phone',
+                      {
+                        rules: [
+                          {
+                            required: true,
+                            message: 'Số điện thoại không được để trống!',
                           },
                         ],
                       },
@@ -131,13 +169,6 @@
                     ]"
                   />
                 </a-form-item>
-                <div class="terms mb-2">
-                  <a-checkbox
-                    v-decorator="['agreement', { valuePropName: 'checked' }]"
-                  >
-                    Tôi đồng ý với điều khoản
-                  </a-checkbox>
-                </div>
                 <div class="row">
                   <div class="col align-self-center pl-0 ml-3">
                     <NuxtLink to="/my/rules">
