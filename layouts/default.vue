@@ -9,11 +9,7 @@
     </div>
     <!-- <FullScreenModal> </FullScreenModal> -->
     <div class="modal"></div>
-    <!-- <script
-      id="chatway"
-      async="true"
-      src="https://cdn.chatway.app/widget.js?id=xhmDgdx6Q2M9"
-    ></script> -->
+    <script id="chatway" async="true" src="https://cdn.chatway.app/widget.js?id=5S7fXbhsDSUR"></script>
   </div>
 </template>
 

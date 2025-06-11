@@ -10,7 +10,7 @@
         :key="index"
         class="col-3 tab-item"
         :class="{ active: activeTab === index }"
-        @click="setActiveTab(index)"
+        @click="callback(index)"
       >
         {{ tab.label }}
       </div>
@@ -38,6 +38,28 @@
                 </div>
               </div>
               <div class="goods-line align-start flex">
+                <div class="product-image">
+                  <img
+                    :src="domain + order.product.image"
+                    alt="Product Image"
+                    class="image"
+                    v-if="order.product.image"
+                  />
+                  <div class="placeholder-image" v-else>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="24px"
+                      viewBox="0 0 24 24"
+                      width="24px"
+                      fill="#999999"
+                    >
+                      <path d="M0 0h24v24H0V0z" fill="none" />
+                      <path
+                        d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4.86 8.86l-3 3.87L9 13.14 6 17h12l-3.86-5.14z"
+                      />
+                    </svg>
+                  </div>
+                </div>
                 <div class="flex-column">
                   <div class="time text-left">
                     {{ formatDateTime(order.created_at) }}
@@ -124,25 +146,17 @@
                 </div>
 
                 <!-- Product -->
-                <div class="product-info" style="color: #000">
+                <div class="product-info">
                   <img
                     :src="domain + trip.image"
-                    alt="LG Washing Machine"
+                    alt="Product Image"
                     crossorigin="anonymous"
+                    class="product-image"
                   />
-                  <div class="product-details" style="color: #000">
-                    <p class="product-name" style="color: #000">
-                      {{ trip.name }}
-                    </p>
-                    <p
-                      class="model"
-                      style="color: #000; text-transform: uppercase"
-                    >
-                      {{ trip._id | getSpCode }}
-                    </p>
-                    <p class="price" style="color: #000">
-                      {{ trip.meta.value }}
-                    </p>
+                  <div class="product-details">
+                    <p class="product-name">{{ trip.name }}</p>
+                    <p class="model">{{ trip._id | getSpCode }}</p>
+                    <p class="price">{{ trip.meta.value | formatVND }}</p>
                   </div>
                 </div>
 
@@ -236,7 +250,7 @@ export default {
           commission: '',
         },
       },
-      domain: 'https://api.soatdonctv.online/',
+      domain: process.env.BASE_URL_IMAGE,
       indexItem: 1,
       loading: false,
       profile: null,
@@ -255,12 +269,12 @@ export default {
     setActiveTab(index) {
       this.activeTab = index
 
-      // Émettre l'événement pour le composant parent
       this.$emit('tab-changed', {
         index: index,
         tab: this.tabs[index],
       })
     },
+
     async handleSubmit() {
       if (this.isLoading) return // Prevent double click
 
@@ -282,9 +296,13 @@ export default {
     getIndexItem(item) {
       this.indexItem = item
     },
-    async getListOrder() {
+    async getListOrder(status) {
+      let params = {
+        status,
+      }
+      if (!status) delete params.status
       orderApi
-        .getListOrder()
+        .getListOrder(params)
         .then(async (res) => {
           this.listOrder = res.data
           for (let index = 0; index < this.listOrder.length; index++) {
@@ -292,7 +310,7 @@ export default {
             order.isShowModal = false
             try {
               const response = await axios.get(
-                `https://api.soatdonctv.online/${order.product.image}`,
+                `https://api.bestbuy-affilatebb.info/${order.product.image}`,
                 {
                   responseType: 'blob',
                   headers: {
@@ -362,7 +380,28 @@ export default {
         })
       })
     },
+    callback(key) {
+      console.log("key:", key)
+      this.listOrder = []
+      let status = ''
+      if (key == 1) status = 'Processing'
+      else if (key == 2) status = 'Pending'
+      else if (key == 3) status = 'Success'
+      else if (key == 5) status = 'Pending'
+      this.getListOrder(status)
+    },
+    closeDetail(value = 1) {
+      this.viewDetail = false
+      this.defaultKey = value
+      this.callback(value)
+    },
   },
+  filters: {
+    formatTime(value) {
+      if (!value) return ''
+      return moment(value).format('HH:mm:ss DD/MM/YYYY')
+    },
+  }
 }
 </script>
 <style lang="scss">
@@ -701,5 +740,477 @@ export default {
   &.ant-notification-topLeft {
     display: none;
   }
+}
+</style>
+<style scoped lang="scss">
+.item-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.product-image {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.placeholder-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.time {
+  font-size: 12px;
+  color: #666;
+}
+
+.goods-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.item-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.money-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title {
+  font-size: 12px;
+  color: #666;
+}
+
+.money {
+  font-size: 14px;
+  font-weight: 600;
+  color: #22c55e;
+}
+
+.none {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.none_box {
+  display: flex;
+  align-items: center;
+  color: #999;
+}
+
+.tips {
+  font-size: 14px;
+}
+</style>
+<style lang="scss">
+.tab-item {
+  padding: 12px 8px;
+  cursor: pointer;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  user-select: none;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-item:hover {
+  color: #febd69;
+  opacity: 0.8;
+}
+
+.tab-item.active {
+  color: #febd69;
+  border-bottom-color: #febd69;
+}
+
+.tab-content {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  color: white;
+}
+
+/* Version responsive */
+@media (max-width: 768px) {
+  .tab-item {
+    font-size: 14px;
+    padding: 0;
+  }
+}
+
+.modal-give-tour {
+  .ant-modal-content {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  }
+
+  .ant-modal-body {
+    padding: 0;
+  }
+
+  .modal-header {
+    position: relative;
+    padding: 0;
+  }
+
+  .success-header {
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    padding: 15px;
+    position: relative;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+
+  .premium-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ffd700;
+    color: #1a1a1a;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .order-success-card {
+    border: none;
+    background: transparent;
+  }
+
+  .order-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .ant-card-body {
+    padding: 0;
+  }
+
+  .time-and-id {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #333;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 8px;
+  }
+
+  .time-and-id div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .product-info {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    padding: 10px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  .product-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+  }
+
+  .product-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .product-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+  }
+
+  .model {
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .price {
+    font-size: 14px;
+    font-weight: 600;
+    color: #22c55e;
+    margin: 0;
+  }
+
+  .price-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+  }
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .price-row.total {
+    font-weight: 600;
+    font-size: 16px;
+    color: #2c3e50;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 10px;
+  }
+
+  .submit-btn {
+    background: linear-gradient(45deg, #3498db, #2ecc71);
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px;
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    line-height: 10px;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .loading-text {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+  }
+
+  &.premium-modal {
+    .success-header {
+      background: linear-gradient(45deg, #ffd700, #ffa500);
+      color: #fff;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+            45deg,
+            rgba(255, 255, 255, 0.2) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(255, 255, 255, 0.2) 50%,
+            rgba(255, 255, 255, 0.2) 75%,
+            transparent 75%
+        );
+        background-size: 20px 20px;
+        animation: shine 2s linear infinite;
+      }
+    }
+
+    .order-success-card {
+      border: 2px solid #ffd700;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.15);
+    }
+
+    .price-details {
+      background: linear-gradient(
+          45deg,
+          rgba(255, 215, 0, 0.1),
+          rgba(255, 165, 0, 0.1)
+      );
+      border: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    .submit-btn {
+      background: linear-gradient(45deg, #ffd700, #ffa500);
+      border: none;
+      font-weight: 600;
+
+      &:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+      }
+    }
+  }
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 0;
+  }
+}
+</style>
+
+<style scoped lang="scss">
+.item-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.product-image {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.placeholder-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.time {
+  font-size: 12px;
+  color: #666;
+}
+
+.goods-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.item-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.money-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title {
+  font-size: 12px;
+  color: #666;
+}
+
+.money {
+  font-size: 14px;
+  font-weight: 600;
+  color: #22c55e;
+}
+
+.none {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.none_box {
+  display: flex;
+  align-items: center;
+  color: #999;
+}
+
+.tips {
+  font-size: 14px;
 }
 </style>

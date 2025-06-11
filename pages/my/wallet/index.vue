@@ -177,6 +177,7 @@ export default {
       this.$router.push({ path: '/wallet/recharge' })
     },
     getOrderAnalytic() {
+      console.log("vao đây")
       orderApi
         .getOrderAnalytic()
         .then((res) => {

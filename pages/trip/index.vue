@@ -6,7 +6,7 @@
         <!-- Header -->
         <div class="vip-badge">
           <i class="fas fa-crown"></i>
-          <span>VIP2</span>
+          <span>{{vip && vip.name}}</span>
         </div>
         <p class="product-description">
           {{ productDescription }}
@@ -28,7 +28,7 @@
       <div class="confirm-section">
         <button
           class="btn-confirm"
-          @click="handleConfirm"
+          @click="showModalTour"
           :disabled="isProcessing"
         >
           <span v-if="!isProcessing">XÁC NHẬN</span>
@@ -48,21 +48,23 @@
 
         <div class="stats-grid">
           <div class="stat-item">
-            <div class="stat-label">Số đơn đã hoàn</div>
-            <div class="stat-value completed">{{ stats.completedOrders }}</div>
+            <div class="stat-label">Số dư tài khoản</div>
+            <div class="stat-value completed">
+              {{ profile && profile.order_commission | formatVND }} VNĐ
+            </div>
           </div>
           <div class="stat-item">
             <div class="stat-label">Số đơn hoàn thành</div>
-            <div class="stat-value pending">{{ stats.pendingOrders }}</div>
+            <div class="stat-value pending">{{ vip && vip.total_complete || 0 }}</div>
           </div>
           <div class="stat-item">
             <div class="stat-label">Lợi nhuận hôm nay</div>
-            <div class="stat-value profit">${{ stats.todayProfit }}</div>
+            <div class="stat-value profit">${{ vip && vip.total_commission_today || 0 }}</div>
           </div>
           <div class="stat-item">
-            <div class="stat-label">Số đơn chờ xử lý</div>
+            <div class="stat-label">Số tiền chờ xử lý</div>
             <div class="stat-value processing">
-              {{ stats.processingOrders }}
+              0$
             </div>
           </div>
         </div>
@@ -195,7 +197,7 @@
                 >
                   Gửi đơn hàng
                 </a-button>
-                <div v-if="isLoading" class="loading-overlay">
+                <div v-if="isLoading" class="loading-overlay" style="height: 100%; width: 100%;">
                   <div class="loading-container" style="color: #000">
                     <a-spin size="large" />
                     <div class="loading-text" style="color: #000">
@@ -261,7 +263,7 @@ export default {
           commission: '',
         },
       },
-      domain: 'https://api.soatdonctv.online/',
+      domain: process.env.BASE_URL_IMAGE,
       orderId: null,
       profile: null,
       vip: null,
@@ -408,7 +410,7 @@ export default {
       return moment(value).format('DD/MM/YYYY HH:mm:ss')
     },
     formatVND(value) {
-      if (!value) return ''
+      if (!value) return 0;
       // Làm tròn số về dạng số nguyên
       const roundedValue = Math.round(value)
       // Định dạng theo tiêu chuẩn tiền tệ Việt Nam

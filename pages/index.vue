@@ -617,13 +617,11 @@ export default {
     },
   },
   computed: {
-    computed: {
-      ...mapState({
-        user: (state) => state.profile.profile,
-        bank: (state) => state.profile.profile.bank,
-        isLogin: (state) => state.auth.isAuthenticated,
-      }),
-    },
+    ...mapState({
+      user: (state) => state.profile.profile,
+      bank: (state) => state.profile.profile.bank,
+      isLogin: (state) => state.auth.isAuthenticated,
+    }),
   },
 }
 </script>

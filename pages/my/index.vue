@@ -6,10 +6,10 @@
         <i class="fas fa-user"></i>
       </div>
       <div class="user-info">
-        <div class="user-name">{{ user.name }}</div>
-        <div class="user-phone">Số điện thoại: {{ user.phone }}</div>
-        <div class="user-balance">Số dư: {{ user.balance }}</div>
-        <div class="user-code">Mã mời: {{ user.code }}</div>
+        <div class="user-name">{{ user && user.name }}</div>
+        <div class="user-phone">Số điện thoại: {{ user && user.phone }}</div>
+        <div class="user-balance">Số dư: {{ user && user.balance }}</div>
+        <div class="user-code">Mã mời: {{ user && user.invite_code }}</div>
       </div>
     </div>
 
@@ -26,12 +26,12 @@
     <!-- Thông tin cá nhân -->
     <div class="menu-section">
       <div class="section-header">Thông tin cá nhân</div>
-      <div class="menu-item" @click="navigateTo('/my/bankAccount')">
+      <div class="menu-item" @click="navigateTo('/my/bankAccount/')">
         <i class="fas fa-credit-card menu-icon"></i>
         <span class="menu-text">Thẻ ngân hàng</span>
         <i class="fas fa-chevron-right menu-arrow"></i>
       </div>
-      <div class="menu-item" @click="navigateTo('/my/member-rank')">
+      <div class="menu-item" @click="navigateTo('/my/member-rank/')">
         <i class="fas fa-star menu-icon"></i>
         <span class="menu-text">Cấp bậc hội viên</span>
         <i class="fas fa-chevron-right menu-arrow"></i>
@@ -102,7 +102,7 @@
         </div> -->
         <div class="menu-item logout" @click="handleLogout">
           <i class="fas menu-icon fa-sign-out-alt"></i>
-          <span class="menu-text">Đăng xuất</span>
+          <span class="menu-text" @click="logout">Đăng xuất</span>
           <i class="fas menu-icon fa-chevron-right arrow"></i>
         </div>
       </div>
@@ -116,16 +116,11 @@ import * as orderApi from '../../api/order'
 import _ from 'lodash'
 
 import Cookies from 'js-cookie'
+import {mapState} from "vuex";
 export default {
   name: 'index',
   data() {
     return {
-      user: {
-        name: 'TRẦN VĂN HÙNG',
-        phone: '088673****',
-        balance: '$1,000.05',
-        code: '740278',
-      },
       vip: {
         name: '',
         background_urls: [''],
@@ -139,9 +134,16 @@ export default {
       profile: {},
     }
   },
+  computed: {
+    ...mapState({
+      user: (state) => state.profile.profile,
+      bank: (state) => state.profile.profile.bank,
+      isLogin: (state) => state.auth.isAuthenticated,
+    }),
+  },
   methods: {
     navigateTo(page) {
-      this.$router.replace(`${page}`)
+      window.location.href = page;
     },
     chamsockhachhang() {
       //  Xử lý show chatway
@@ -156,7 +158,8 @@ export default {
       Cookies.remove('time_valid')
       this.$store.dispatch('auth/logout')
       this.$store.dispatch('loading/setModalLoading', false)
-      this.$router.push('/login')
+      // this.$router.push('/login')
+      window.location.href = '/login'
       this.$message.success('Đăng xuất thành công')
     },
     async getListByKey() {

@@ -77,6 +77,10 @@
 </template>
 
 <script>
+import * as volatilityApi from "@/api/volatility";
+import * as authApi from "../../../api/auth";
+import {updateAddress} from "../../../api/volatility";
+import {mapState} from "vuex";
 export default {
   name: 'index',
   layout: 'info',
@@ -85,76 +89,53 @@ export default {
     return {
       currentVIP: 'VIP?',
       dailyOrders: 80,
-      vipPackages: [
-        {
-          id: 1,
-          name: 'VIP1',
-          price: 120,
-          dailyOrders: 40,
-          profitRate: 0.4,
-          withdrawals: 1,
-          available: true,
-        },
-        {
-          id: 2,
-          name: 'VIP2',
-          price: 1000,
-          dailyOrders: 80,
-          profitRate: 0.6,
-          withdrawals: 1,
-          available: true,
-        },
-        {
-          id: 3,
-          name: 'VIP3',
-          price: 3000,
-          dailyOrders: 120,
-          profitRate: 0.8,
-          withdrawals: 2,
-          available: false,
-        },
-        {
-          id: 4,
-          name: 'VIP4',
-          price: 5000,
-          dailyOrders: 200,
-          profitRate: 1.0,
-          withdrawals: 3,
-          available: false,
-        },
-      ],
+    }
+  },
+  beforeCreate() {
+    this.form = this.$form.createForm(this, { name: 'login' })
+  },
+  computed: {
+    ...mapState({
+      user: (state) => state.profile.profile,
+      bank: (state) => state.profile.profile.bank,
+      isLogin: (state) => state.auth.isAuthenticated,
+    }),
+  },
+  created() {
+    if (this.user?.order_address) {
+      this.$nextTick(() => {
+        this.form.setFieldsValue({
+          truthName: this.user?.order_address.name,
+          phone: this.user?.order_address.phone,
+          address:this.user?.order_address.address,
+        })
+      })
     }
   },
   methods: {
-    handleInvest(vip) {
-      console.log('Investing in:', vip.name)
-
-      // Confirmation dialog
-      const confirmed = confirm(
-        `Bạn có chắc chắn muốn đầu tư vào ${
-          vip.name
-        } với số tiền $${vip.price.toLocaleString()}?`
-      )
-
-      if (confirmed) {
-        this.$emit('invest', vip)
-        // Logic đầu tư
-        this.processInvestment(vip)
-      }
-    },
-
-    processInvestment(vip) {
-      // Simulate investment process
-      console.log('Processing investment for', vip.name)
-
-      // Show loading or redirect to payment
-      // this.$router.push(`/payment?vip=${vip.id}`)
-
-      // Or emit to parent component
-      this.$emit('investment-selected', {
-        vipLevel: vip.name,
-        amount: vip.price,
-        details: vip,
+    handleSubmit(e) {
+      e.preventDefault()
+      this.form.validateFieldsAndScroll((err, values) => {
+        if (!err) {
+          this.$store.dispatch('loading/setModalLoading', true)
+          volatilityApi
+            .updateAddress({
+              name: values.truthName,
+              phone: values.phone,
+              address: values.address,
+            })
+            .then((res) => {
+              console.log("res 1213:", res)
+              this.$store.dispatch('profile/saveProfile', res.data)
+              this.$message.success('Lưu thành công')
+              this.$router.push('/my')
+            })
+            .catch((err) => {
+              this.$message.error('Có lỗi xảy ra vui lòng thử lại sau')
+            })
+            .finally(() => {
+            })
+        }
       })
     },
   },

@@ -72,7 +72,7 @@
                   <a-input
                     placeholder="Tên ID đăng nhập"
                     v-decorator="[
-                      'name',
+                      'identifier',
                       {
                         rules: [
                           {
@@ -241,12 +241,12 @@ export default {
         if (!err) {
           authApi
             .signUp({
-              identifier: values.name,
+              identifier: values.identifier,
               password: values.password,
               reference_code: values.inviteCode,
               tfa_password: values.passwordMoney,
               name: values.name,
-              phone: values.name,
+              phone: values.phone,
               ip_register: this.ip_register,
             })
             .then((res) => {

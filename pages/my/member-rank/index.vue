@@ -14,8 +14,8 @@
               <i class="fas fa-user"></i>
             </div>
             <div class="status-info">
-              <h2>Gian hàng hiện tại: {{ currentVIP }}</h2>
-              <p>Số lượng đơn hàng mỗi ngày: {{ dailyOrders }} Đơn hàng</p>
+              <h2>Gian hàng hiện tại: {{ vip && vip.name }}</h2>
+              <p>Số lượng đơn hàng mỗi ngày: {{ vip && vip.order_quantity_per_day }} Đơn hàng</p>
             </div>
           </div>
 
@@ -49,7 +49,7 @@
           <!-- VIP Packages -->
           <div class="vip-packages">
             <div
-              v-for="vip in vipPackages"
+              v-for="vip in listLevels"
               :key="vip.id"
               class="vip-card"
               :class="{ available: vip.available }"
@@ -69,18 +69,18 @@
 
               <div class="vip-details">
                 <div class="detail-row">
-                  <span>Số lượng đơn: {{ vip.dailyOrders }} Đơn hàng/ngày</span>
+                  <span>Số lượng đơn: {{ vip.order_quantity_per_day }} Đơn hàng/ngày</span>
                 </div>
                 <div class="detail-row">
                   <span
-                    >Lợi nhuận mỗi đơn: {{ vip.profitRate }}% giá trị đơn
+                    >Lợi nhuận mỗi đơn: {{ vip.commission_percent }}% giá trị đơn
                     hàng</span
                   >
                 </div>
                 <div class="detail-row">
                   <span
-                    >Số lượt rút tiền trong ngày:
-                    {{ vip.withdrawals }} lượt</span
+                    >Số tiền rút tiền trong ngày:
+                    {{ vip.min_withdraw }}$</span
                   >
                 </div>
               </div>
@@ -103,6 +103,13 @@
 </template>
 
 <script>
+import * as tutorApi from '@/api/tuor'
+import * as volatilityApi from '@/api/volatility.js'
+import * as orderApi from '@/api/order'
+import _ from 'lodash'
+import axios from 'axios'
+import moment from 'moment'
+import {getListLevel} from "../../../api/volatility";
 export default {
   name: 'index',
   layout: 'info',
@@ -111,47 +118,38 @@ export default {
     return {
       currentVIP: 'VIP?',
       dailyOrders: 80,
-      vipPackages: [
-        {
-          id: 1,
-          name: 'VIP1',
-          price: 120,
-          dailyOrders: 40,
-          profitRate: 0.4,
-          withdrawals: 1,
-          available: true,
+      vip: null,
+      trip: {
+        name: '',
+        price: '',
+        commission: '',
+        meta: {
+          value: '',
+          commission: '',
         },
-        {
-          id: 2,
-          name: 'VIP2',
-          price: 1000,
-          dailyOrders: 80,
-          profitRate: 0.6,
-          withdrawals: 1,
-          available: true,
-        },
-        {
-          id: 3,
-          name: 'VIP3',
-          price: 3000,
-          dailyOrders: 120,
-          profitRate: 0.8,
-          withdrawals: 2,
-          available: false,
-        },
-        {
-          id: 4,
-          name: 'VIP4',
-          price: 5000,
-          dailyOrders: 200,
-          profitRate: 1.0,
-          withdrawals: 3,
-          available: false,
-        },
-      ],
+      },
+      listLevels: []
     }
   },
+  async created() {
+     await this.getProfile()
+    this.getOrder()
+    this.getListLevel()
+  },
   methods: {
+    async getListLevel() {
+      const res = await volatilityApi.getListLevel()
+      this.listLevels = res.data
+      this.listLevels = this.listLevels.map((s, index) => {
+        console.log("index,:", index)
+        console.log("this.vip.priority,:", this.vip?.priority)
+        console.log("this.vip.priority >= index + 1 ? true : false:", this.vip?.priority >= index + 1 ? true : false)
+        return {
+          ...s,
+          available: this.vip.priority >= index + 1 ? true : false
+        }
+      })
+    },
     handleInvest(vip) {
       console.log('Investing in:', vip.name)
 
@@ -167,6 +165,25 @@ export default {
         // Logic đầu tư
         this.processInvestment(vip)
       }
+    },
+    async getProfile() {
+      await volatilityApi.getProfileUser().then(async (res) => {
+        this.profile = res.data
+        await volatilityApi.getListVips(this.profile.level).then((data) => {
+          this.vip = data.data
+        })
+      })
+    },
+    async getOrder() {
+      await orderApi
+        .getOrderAnalytic()
+        .then((res) => {
+          this.orderOfUser = res.data
+          console.log('this.orderOfUser:', this.orderOfUser)
+        })
+        .catch((err) => {
+          this.$message.error(err)
+        })
     },
 
     processInvestment(vip) {

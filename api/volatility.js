@@ -198,3 +198,20 @@ export function historyWithDraw() {
       })
   })
 }
+export function updateAddress(body) {
+  const url = `${baseURL}/v1/profile/address`;
+  return new Promise((resolve, reject) => {
+    axios
+      .put(url, body, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => {
+        resolve(response.data)
+      })
+      .catch((response) => {
+        reject(response.response.data.message)
+      })
+  })
+}
