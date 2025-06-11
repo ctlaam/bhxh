@@ -194,7 +194,7 @@ ripple {
   object-fit: contain;
   border-radius: 50%;
   padding: 8px;
-  background: linear-gradient(145deg, #fd2c2c, #ed1b2f);
+  background: linear-gradient(145deg, #fd2c2c, #001529);
   box-shadow: 0 4px 15px rgba(245, 27, 27, 0.836);
   border: 2px solid #ffffff;
   width: 50px !important;
@@ -205,7 +205,7 @@ ripple {
 /* Enhanced active state styles */
 .floating-button .center-icon {
   animation: activeScale 0.3s forwards, activePulse 1.5s infinite;
-  background: linear-gradient(145deg, #ed1b2f, #0066ff);
+  background: linear-gradient(145deg, #001529, #0066ff);
   border: 3px solid #ffffff;
   box-shadow: 0 0 20px rgba(37, 160, 254, 0.5);
 }
@@ -284,13 +284,13 @@ ripple {
 }
 
 .footer a:not(.btn).active {
-  color: #ed1b2f;
-  border-color: #ed1b2f;
+  color: #001529;
+  border-color: #001529;
 }
 
 .footer a:not(.btn).active i,
 .footer a:not(.btn).active span {
-  color: #ed1b2f;
+  color: #001529;
 }
 
 .home {
@@ -308,8 +308,8 @@ ripple {
 }
 
 a.mui-tab-item1.nuxt-link-exact-active.nuxt-link-active {
-  border-color: #ed1b2f;
-  color: #ed1b2f;
+  border-color: #001529;
+  color: #001529;
 }
 </style>
 <style scoped>

@@ -86,7 +86,7 @@ export default {
 .app {
 }
 .main-content {
-  background-color: #fdfbef;
+  background-color: #232f3e;
   max-width: 480px;
   color: #000;
   position: relative;
@@ -110,7 +110,7 @@ export default {
 
   background: linear-gradient(
     to bottom,
-    #ed1b2f,
+    #001529,
     #ffffff
   ); // Gradient từ đỏ sang trắng
   position: relative;
