@@ -161,7 +161,7 @@ export default {
         )
         return {
           ...s,
-          available: this.vip.priority >= index + 1 ? true : false,
+          available: parseInt(this.vip.name.replace(/[^0-9]/g, '')) == index + 1 ? true : false,
         }
       })
     },
