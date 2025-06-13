@@ -50,7 +50,7 @@
             </svg>
             <span>Nâng cấp</span>
           </div>
-          <div class="card col ml-2">
+          <div class="card col ml-2" @click="chamsockhachhang">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -342,12 +342,12 @@
                 />
               </div>
               <a-button
-                v-if="false"
+                v-if="parseInt(vip.name.replace(/[^0-9]/g, '')) == index + 1"
                 class="w-100"
                 style="background-color: #232f3e; color: #fff"
-                >Đang hoạt động</a-button
-              >
+              >Đang hoạt động</a-button>
               <a-button
+                v-else
                 class="w-100"
                 style="background-color: #232f3e; color: #fff"
                 >Mở khóa cấp độ</a-button
@@ -491,6 +491,7 @@ export default {
       profitItems: [],
       interval: null,
       maxItems: 10,
+      profile: null,
     }
   },
 
@@ -499,6 +500,9 @@ export default {
     if (this.interval) {
       clearInterval(this.interval)
     }
+  },
+  created() {
+    this.getProfile()
   },
   mounted() {
     this.domain = process.env.BASE_URL_IMAGE
@@ -513,6 +517,12 @@ export default {
     this.startAutoGeneration()
   },
   methods: {
+    chamsockhachhang() {
+      // let chat = document.querySelector('.launcher-icon.launcher-minimize-icon')
+      // if (chat) {
+      //   chat.click()
+      // }
+    },
     navigateTo() {
       this.$router.replace('/my/about')
     },
@@ -598,6 +608,15 @@ export default {
       } else {
         this.$router.push('/my/bankAccount')
       }
+    },
+    async getProfile() {
+      await volatilityApi.getProfileUser().then(async (res) => {
+        this.profile = res.data
+        await volatilityApi.getListVips(this.profile.level).then((data) => {
+          this.vip = data.data
+          this.profitRate = this.vip ? this.vip.commission_percent : 0
+        })
+      })
     },
   },
   watch: {

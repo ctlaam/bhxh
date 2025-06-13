@@ -296,10 +296,13 @@ export default {
     this.profile = this.$store.state.profile.profile
     const bank = this.profile && this.profile.bank
     if (bank) {
+
       this.$nextTick(() => {
         this.form.setFieldsValue({
           truthName: bank.full_name,
-          stk: bank.bank_number,
+          stk: bank.bank_number
+            ? `${bank.bank_number.slice(0, -4)}****`
+            : '',
           bankName: bank.bank_name,
         })
       })
