@@ -7,7 +7,9 @@
       </div>
       <div class="user-info">
         <div class="user-name">{{ user && user.name }}</div>
-        <div class="user-phone">Số điện thoại: {{ user && (user.phone.slice(0, 4) + "****") }}</div>
+        <div class="user-phone">
+          Số điện thoại: {{ user && user.phone.slice(0, 4) + '****' }}
+        </div>
         <div class="user-balance">Số dư: {{ user && user.balance }}</div>
         <div class="user-code">Mã mời: {{ user && user.invite_code }}</div>
       </div>
@@ -100,9 +102,9 @@
           <span class="menu-text">Thay đổi ngôn ngữ</span>
           <i class="fas menu-icon fa-chevron-right arrow"></i>
         </div> -->
-        <div class="menu-item logout" @click="handleLogout">
+        <div class="menu-item logout" @click="logout">
           <i class="fas menu-icon fa-sign-out-alt"></i>
-          <span class="menu-text" @click="logout">Đăng xuất</span>
+          <span class="menu-text">Đăng xuất</span>
           <i class="fas menu-icon fa-chevron-right arrow"></i>
         </div>
       </div>
@@ -116,7 +118,7 @@ import * as orderApi from '../../api/order'
 import _ from 'lodash'
 
 import Cookies from 'js-cookie'
-import {mapState} from "vuex";
+import { mapState } from 'vuex'
 export default {
   name: 'index',
   data() {
@@ -143,7 +145,7 @@ export default {
   },
   methods: {
     navigateTo(page) {
-      window.location.href = page;
+      window.location.href = page
     },
     chamsockhachhang() {
       //  Xử lý show chatway
