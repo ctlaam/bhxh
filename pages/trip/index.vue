@@ -59,12 +59,12 @@
           </div>
           <div class="stat-item">
             <div class="stat-label">Lợi nhuận hôm nay</div>
-            <div class="stat-value profit">${{ vip && vip.total_commission_today || 0 }}</div>
+            <div class="stat-value profit">{{ vip && vip.total_commission_today || 0 }}VNĐ</div>
           </div>
           <div class="stat-item">
             <div class="stat-label">Số tiền chờ xử lý</div>
             <div class="stat-value processing">
-              0$
+              0VNĐ
             </div>
           </div>
         </div>
@@ -161,7 +161,7 @@
                   <div class="price-row" style="color: #000">
                     <span style="color: #000">Tổng tiền </span>
                     <span style="color: #000"
-                      >{{ trip.meta.value | formatVND }} $</span
+                      >{{ trip.meta.value | formatVND }} VNĐ</span
                     >
                   </div>
                   <div class="price-row" style="color: #000">
@@ -171,7 +171,7 @@
                         ((trip.meta.commission / 100) * trip.meta.value)
                           | formatVND
                       }}
-                      $</span
+                      VNĐ</span
                     >
                   </div>
                   <div class="price-row total" style="color: #000">

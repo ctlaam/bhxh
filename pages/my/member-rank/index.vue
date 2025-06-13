@@ -15,7 +15,10 @@
             </div>
             <div class="status-info">
               <h2>Gian hàng hiện tại: {{ vip && vip.name }}</h2>
-              <p>Số lượng đơn hàng mỗi ngày: {{ vip && vip.order_quantity_per_day }} Đơn hàng</p>
+              <p>
+                Số lượng đơn hàng mỗi ngày:
+                {{ vip && vip.order_quantity_per_day }} Đơn hàng
+              </p>
             </div>
           </div>
 
@@ -56,42 +59,45 @@
             >
               <div class="vip-header">
                 <div class="vip-level">
-                  <h3>{{ vip.name }}</h3>
-                  <span class="price">${{ vip.price.toLocaleString() }}</span>
+                  <h3 class="text-left">{{ vip.name }}</h3>
+                  <span class="price">{{ vip.price.toLocaleString() }} VNĐ</span>
                 </div>
                 <div
                   class="status-badge"
                   :class="vip.available ? 'available' : 'locked'"
                 >
-                  {{ vip.available ? 'Đã mở' : 'Đã khoá' }}
+                  {{ vip.available ? 'Đã kích hoạt' : 'Chưa kích hoạt' }}
                 </div>
               </div>
 
               <div class="vip-details">
-                <div class="detail-row">
-                  <span>Số lượng đơn: {{ vip.order_quantity_per_day }} Đơn hàng/ngày</span>
-                </div>
-                <div class="detail-row">
+                <div class="detail-row text-left">
                   <span
-                    >Lợi nhuận mỗi đơn: {{ vip.commission_percent }}% giá trị đơn
-                    hàng</span
+                    >Số lượng đơn: {{ vip.order_quantity_per_day }} Đơn
+                    hàng/ngày</span
                   >
                 </div>
-                <div class="detail-row">
+                <div class="detail-row text-left">
                   <span
-                    >Số tiền rút tiền trong ngày:
-                    {{ vip.min_withdraw }}$</span
+                    >Lợi nhuận mỗi đơn: {{ vip.commission_percent }}% giá trị
+                    đơn hàng</span
+                  >
+                </div>
+                <div class="detail-row text-left">
+                  <span
+                    >Số lần rút tiền trong ngày:
+                    {{ vip.limit_amount_cash_out_per_day }} lượt</span
                   >
                 </div>
               </div>
 
               <div class="vip-actions" v-if="vip.available">
-                <button
+                <button 
                   class="btn-invest"
                   @click="handleInvest(vip)"
                   :disabled="!vip.available"
                 >
-                  Đầu tư ngay
+                  Đã kích hoạt 
                 </button>
               </div>
             </div>
@@ -109,7 +115,7 @@ import * as orderApi from '@/api/order'
 import _ from 'lodash'
 import axios from 'axios'
 import moment from 'moment'
-import {getListLevel} from "../../../api/volatility";
+import { getListLevel } from '../../../api/volatility'
 export default {
   name: 'index',
   layout: 'info',
@@ -128,11 +134,11 @@ export default {
           commission: '',
         },
       },
-      listLevels: []
+      listLevels: [],
     }
   },
   async created() {
-     await this.getProfile()
+    await this.getProfile()
     this.getOrder()
     this.getListLevel()
   },
@@ -141,12 +147,15 @@ export default {
       const res = await volatilityApi.getListLevel()
       this.listLevels = res.data
       this.listLevels = this.listLevels.map((s, index) => {
-        console.log("index,:", index)
-        console.log("this.vip.priority,:", this.vip?.priority)
-        console.log("this.vip.priority >= index + 1 ? true : false:", this.vip?.priority >= index + 1 ? true : false)
+        console.log('index,:', index)
+        console.log('this.vip.priority,:', this.vip?.priority)
+        console.log(
+          'this.vip.priority >= index + 1 ? true : false:',
+          this.vip?.priority >= index + 1 ? true : false
+        )
         return {
           ...s,
-          available: this.vip.priority >= index + 1 ? true : false
+          available: this.vip.priority >= index + 1 ? true : false,
         }
       })
     },
@@ -471,7 +480,7 @@ export default {
 
   .card-header {
     background-color: #fff;
-        padding: 1rem;
+    padding: 1rem;
 
     h6 {
       font-size: 18px;

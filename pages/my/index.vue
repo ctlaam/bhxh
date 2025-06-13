@@ -7,7 +7,7 @@
       </div>
       <div class="user-info">
         <div class="user-name">{{ user && user.name }}</div>
-        <div class="user-phone">Số điện thoại: {{ user && user.phone }}</div>
+        <div class="user-phone">Số điện thoại: {{ user && (user.phone.slice(0, 4) + "****") }}</div>
         <div class="user-balance">Số dư: {{ user && user.balance }}</div>
         <div class="user-code">Mã mời: {{ user && user.invite_code }}</div>
       </div>

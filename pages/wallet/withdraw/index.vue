@@ -7,7 +7,7 @@
             class="subtitle mb-0 text-center text-success"
             style="font-size: 14px"
           >
-            Số dư tài khoản {{ blance | roundToTwoDecimalPlaces }} $
+            Số dư tài khoản {{ blance | roundToTwoDecimalPlaces }} VNĐ
           </h6>
         </div>
         <div class="card-body was-validated">
