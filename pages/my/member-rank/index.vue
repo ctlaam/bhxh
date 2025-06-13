@@ -90,10 +90,7 @@
                     >Số lần rút tiền trong ngày:
                     {{ vip.limit_amount_cash_out_per_day }} lượt</span
                   >
-                  <span v-else
-                    >Số lần rút tiền trong ngày:
-                    Không giới hạn</span
-                  >
+                  <span v-else>Số lần rút tiền trong ngày: Không giới hạn</span>
                 </div>
               </div>
 
@@ -153,15 +150,12 @@ export default {
       const res = await volatilityApi.getListLevel()
       this.listLevels = res.data
       this.listLevels = this.listLevels.map((s, index) => {
-        console.log('index,:', index)
-        console.log('this.vip.priority,:', this.vip?.priority)
-        console.log(
-          'this.vip.priority >= index + 1 ? true : false:',
-          this.vip?.priority >= index + 1 ? true : false
-        )
         return {
           ...s,
-          available: parseInt(this.vip.name.replace(/[^0-9]/g, '')) == index + 1 ? true : false,
+          available:
+            parseInt(this.vip.name.replace(/[^0-9]/g, '')) >= index + 1
+              ? true
+              : false,
         }
       })
     },

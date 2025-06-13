@@ -10,7 +10,9 @@
         <div class="user-phone">
           Số điện thoại: {{ user && user.phone.slice(0, 4) + '****' }}
         </div>
-        <div class="user-balance">Số dư: {{ user && user.balance }}</div>
+        <div class="user-balance">
+          Số dư: {{ user && formatCurrency(user.balance) }}VNĐ
+        </div>
         <div class="user-code">Mã mời: {{ user && user.invite_code }}</div>
       </div>
     </div>
@@ -144,6 +146,20 @@ export default {
     }),
   },
   methods: {
+    formatCurrency(amount) {
+      if (!amount) return 0
+      // Kiểm tra nếu là số nguyên thì chỉ định dạng phần nguyên
+      if (Number.isInteger(amount)) {
+        return amount.toLocaleString('en-US')
+      } else {
+        // Nếu có phần thập phân, giới hạn chỉ 2 chữ số sau dấu phẩy
+        let formattedAmount = Math.floor(amount * 100) / 100
+        return formattedAmount.toLocaleString('en-US', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })
+      }
+    },
     navigateTo(page) {
       window.location.href = page
     },

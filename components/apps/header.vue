@@ -14,8 +14,7 @@
       <div
         class="ant-col tool ant-col-xs-0 ant-col-md-18"
         style="display: flex; justify-content: flex-end"
-      >
-      </div>
+      ></div>
     </div>
   </header>
 </template>
@@ -59,7 +58,7 @@ export default {
   top: 0;
   width: 100%;
   z-index: 99;
-  background: transparent;
+  background: #001529;
   border-radius: 0;
   .group-buttons {
     .button {

@@ -16,7 +16,7 @@
       <div class="main-container">
         <div class="row" style="width: 100%">
           <div class="col-1" style="margin-left: 12px"></div>
-          <div class="card col ml-2">
+          <div class="card col ml-2" @click="$router.push('/my/member-rank')">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -317,7 +317,7 @@
           <div class="col-1"></div>
         </div>
         <div class="container mb-4">
-          <div class="task-header">Cấp bậc thành viên</div>
+          <div class="task-header">Cấp bậc hội viên</div>
         </div>
         <div class="container mb-4">
           <div class="banner-list">
@@ -345,7 +345,8 @@
                 v-if="parseInt(vip.name.replace(/[^0-9]/g, '')) == index + 1"
                 class="w-100"
                 style="background-color: #232f3e; color: #fff"
-              >Đang hoạt động</a-button>
+                >Đang hoạt động</a-button
+              >
               <a-button
                 v-else
                 class="w-100"
@@ -518,10 +519,10 @@ export default {
   },
   methods: {
     chamsockhachhang() {
-      // let chat = document.querySelector('.launcher-icon.launcher-minimize-icon')
-      // if (chat) {
-      //   chat.click()
-      // }
+      let chat = document.querySelector('.launcher-icon.launcher-minimize-icon')
+      if (chat) {
+        chat.click()
+      }
     },
     navigateTo() {
       this.$router.replace('/my/about')
