@@ -60,7 +60,9 @@
               <div class="vip-header">
                 <div class="vip-level">
                   <h3 class="text-left">{{ vip.name }}</h3>
-                  <span class="price">{{ vip.price.toLocaleString() }} VNĐ</span>
+                  <span class="price"
+                    >{{ vip.price.toLocaleString() }} VNĐ</span
+                  >
                 </div>
                 <div
                   class="status-badge"
@@ -84,20 +86,24 @@
                   >
                 </div>
                 <div class="detail-row text-left">
-                  <span
+                  <span v-if="vip.limit_amount_cash_out_per_day < 2"
                     >Số lần rút tiền trong ngày:
                     {{ vip.limit_amount_cash_out_per_day }} lượt</span
+                  >
+                  <span v-else
+                    >Số lần rút tiền trong ngày:
+                    Không giới hạn</span
                   >
                 </div>
               </div>
 
               <div class="vip-actions" v-if="vip.available">
-                <button 
+                <button
                   class="btn-invest"
                   @click="handleInvest(vip)"
                   :disabled="!vip.available"
                 >
-                  Đã kích hoạt 
+                  Đã kích hoạt
                 </button>
               </div>
             </div>
@@ -367,6 +373,7 @@ export default {
     color: #f44336;
     width: 100%;
     height: 50px;
+    max-width: 150px;
   }
 
   .vip-details {
