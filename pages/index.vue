@@ -342,12 +342,10 @@
                 />
               </div>
               <a-button
-                v-if="level.priority >= index + 1"
-
+                v-if="parseInt(vip.name.replace(/[^0-9]/g, '')) == index + 1"
                 class="w-100"
                 style="background-color: #232f3e; color: #fff"
-                >Đang hoạt động</a-button
-              >
+              >Đang hoạt động</a-button>
               <a-button
                 v-else
                 class="w-100"
