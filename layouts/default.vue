@@ -9,7 +9,11 @@
     </div>
     <!-- <FullScreenModal> </FullScreenModal> -->
     <div class="modal"></div>
-    <script id="chatway" async="true" src="https://cdn.chatway.app/widget.js?id=5S7fXbhsDSUR"></script>
+    <script
+      id="chatway"
+      async="true"
+      src="https://cdn.chatway.app/widget.js?id=5S7fXbhsDSUR"
+    ></script>
   </div>
 </template>
 
@@ -88,11 +92,17 @@ export default {
   position: relative;
   width: 100vw;
   overflow-x: hidden;
+  height: 100vh;
+  overflow: hidden;
 }
 #content {
   max-width: 100vw;
   overflow-x: hidden;
   overflow-y: auto;
+  position: relative;
+  max-height: 100vh;
+  padding-bottom: 100px;
+  background-color: #f5f5f5;
   &::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -106,11 +116,6 @@ export default {
     background: #888888;
   }
 
-  background: linear-gradient(
-    to bottom,
-    #001529,
-    #ffffff
-  ); // Gradient từ đỏ sang trắng
   position: relative;
   height: 100vh;
 }
