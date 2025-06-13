@@ -146,7 +146,10 @@ export default {
       window.location.href = page;
     },
     chamsockhachhang() {
-      //  Xử lý show chatway
+      let chat = document.querySelector('.launcher-icon.launcher-minimize-icon')
+      if (chat) {
+        chat.click()
+      }
     },
     logout() {
       this.$store.dispatch('loading/setModalLoading', true)

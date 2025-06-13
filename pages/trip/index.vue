@@ -50,21 +50,21 @@
           <div class="stat-item">
             <div class="stat-label">Số dư tài khoản</div>
             <div class="stat-value completed">
-              {{ profile && profile.order_commission | formatVND }} VNĐ
+              {{ profile && profile.balance | formatVND }} VNĐ
             </div>
           </div>
           <div class="stat-item">
             <div class="stat-label">Số đơn hoàn thành</div>
-            <div class="stat-value pending">{{ vip && vip.total_complete || 0 }}</div>
+            <div class="stat-value pending">{{ orderOfUser && orderOfUser.total_complete || 0 }}</div>
           </div>
           <div class="stat-item">
             <div class="stat-label">Lợi nhuận hôm nay</div>
-            <div class="stat-value profit">${{ vip && vip.total_commission_today || 0 }}</div>
+            <div class="stat-value profit">{{ orderOfUser && orderOfUser.total_commission_today | formatVND }} VNĐ</div>
           </div>
           <div class="stat-item">
             <div class="stat-label">Số tiền chờ xử lý</div>
             <div class="stat-value processing">
-              0$
+              0 VNĐ
             </div>
           </div>
         </div>
@@ -109,7 +109,7 @@
             <a-card class="order-success-card">
               <div
                 class="premium-badge"
-                v-if="trip.is_premium"
+                v-if="trip && trip.is_premium"
                 style="color: #000"
               >
                 <a-icon type="crown" /> Premium
@@ -128,7 +128,7 @@
                   >
                   <div style="color: #000">
                     <span style="color: #000"
-                      >Mã SP: {{ trip._id | getSpCode }}</span
+                      >Mã SP: {{ trip && trip._id | getSpCode }}</span
                     >
                     <a-icon type="qrcode" />
                   </div>
@@ -137,22 +137,22 @@
                 <!-- Product -->
                 <div class="product-info" style="color: #000">
                   <img
-                    :src="domain + trip.image"
+                    :src="domain + (trip && trip.image)"
                     alt="LG Washing Machine"
                     crossorigin="anonymous"
                   />
                   <div class="product-details" style="color: #000">
                     <p class="product-name" style="color: #000">
-                      {{ trip.name }}
+                      {{ trip && trip.name }}
                     </p>
                     <p
                       class="model"
                       style="color: #000; text-transform: uppercase"
                     >
-                      {{ trip._id | getSpCode }}
+                      {{ trip && trip._id | getSpCode }}
                     </p>
                     <p class="price" style="color: #000">
-                      {{ trip.meta.value }}
+                      {{ trip && trip.meta && trip.meta.value }}
                     </p>
                   </div>
                 </div>
@@ -161,14 +161,14 @@
                   <div class="price-row" style="color: #000">
                     <span style="color: #000">Tổng tiền </span>
                     <span style="color: #000"
-                      >{{ trip.meta.value | formatVND }} $</span
+                      >{{ trip && trip.meta && trip.meta.value | formatVND }} $</span
                     >
                   </div>
                   <div class="price-row" style="color: #000">
                     <span style="color: #000">Hoa hồng:</span>
-                    <span style="color: #000"
+                    <span style="color: #000" v-if="trip && trip.meta && trip.meta.commission"
                       >{{
-                        ((trip.meta.commission / 100) * trip.meta.value)
+                        ((trip && trip.meta && trip.meta.commission / 100) * (trip && trip.meta.value))
                           | formatVND
                       }}
                       $</span
@@ -176,7 +176,7 @@
                   </div>
                   <div class="price-row total" style="color: #000">
                     <span style="color: #000">Tổng doanh thu</span>
-                    <span style="color: #000"
+                    <span style="color: #000" v-if="trip && trip.meta && trip.meta.value && trip.meta.commission"
                       >{{
                         (trip.meta.value +
                           (trip.meta.commission / 100) * trip.meta.value)
@@ -234,7 +234,7 @@ export default {
       isProcessing: false,
       productDescription:
         'Thiết Bị Điện Tử | Phụ Kiện  | Đồng hồ |  Xe máy, điện thoại di động  | Đồ Gia Dụng',
-      profitRate: 0.8,
+      profitRate: 0,
       productImage:
         this.customProductImage ||
         'https://via.placeholder.com/600x300/4285f4/ffffff?text=Best+Buy+Store',
@@ -255,6 +255,7 @@ export default {
       showModal: false,
       indexItem: 1,
       trip: {
+        _id: '',
         name: '',
         price: '',
         commission: '',
@@ -300,11 +301,15 @@ export default {
         .getTuor()
         .then(async (res) => {
           this.trip = res.data.product
-          this.trip.meta = res.data.meta
+          this.trip = {
+            ...this.trip,
+            meta: res.data.meta,
+          }
           this.orderId = res.data._id
           this.showModal = true
           this.createdAt = res.data.created_at
           this.isPremium = res.data.is_premium
+          console.log('this.trip:', this.trip)
           if (res.data.is_premium) {
             // Show notification
             this.$notification.success({
@@ -384,6 +389,7 @@ export default {
         this.profile = res.data
         await volatilityApi.getListVips(this.profile.level).then((data) => {
           this.vip = data.data
+          this.profitRate = this.vip ? this.vip.commission_percent : 0
         })
       })
     },

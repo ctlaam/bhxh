@@ -43,7 +43,7 @@
                     :src="domain + order.product.image"
                     alt="Product Image"
                     class="image"
-                    v-if="order.product.image"
+                    v-if="order && order.product && order.product.image"
                   />
                   <div class="placeholder-image" v-else>
                     <svg
@@ -310,7 +310,7 @@ export default {
             order.isShowModal = false
             try {
               const response = await axios.get(
-                `https://api.bestbuy-affilatebb.info/${order.product.image}`,
+                `https://api.bestbuy-affilatebb.info/${order.product?.image}`,
                 {
                   responseType: 'blob',
                   headers: {
