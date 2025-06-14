@@ -6,5 +6,5 @@ Vue.filter('formatVND', function (value) {
   // Chuyển số thành chuỗi và thêm dấu phẩy
   const formattedNumber = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
-  return formattedNumber + ' $'
+  return formattedNumber + ' VNĐ'
 })

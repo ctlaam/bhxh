@@ -58,7 +58,7 @@
             <div class="stat-value pending">{{ orderOfUser && orderOfUser.total_complete || 0 }}</div>
           </div>
           <div class="stat-item">
-            <div class="stat-label">Lợi nhuận hôm nay</div>
+            <div class="stat-label">Lợi nhuận hôm na</div>
             <div class="stat-value profit">{{ orderOfUser && orderOfUser.total_commission_today | formatVND }} VNĐ</div>
           </div>
           <div class="stat-item">
@@ -161,7 +161,7 @@
                   <div class="price-row" style="color: #000">
                     <span style="color: #000">Tổng tiền </span>
                     <span style="color: #000"
-                      >{{ trip && trip.meta && trip.meta.value | formatVND }} $</span
+                      >{{ trip && trip.meta && trip.meta.value | formatVND }} VNĐ</span
                     >
                   </div>
                   <div class="price-row" style="color: #000">
@@ -171,7 +171,7 @@
                         ((trip && trip.meta && trip.meta.commission / 100) * (trip && trip.meta.value))
                           | formatVND
                       }}
-                      $</span
+                      VNĐ</span
                     >
                   </div>
                   <div class="price-row total" style="color: #000">
@@ -182,7 +182,7 @@
                           (trip.meta.commission / 100) * trip.meta.value)
                           | formatVND
                       }}
-                      $</span
+                      VNĐ</span
                     >
                   </div>
                 </div>

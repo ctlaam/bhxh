@@ -1,11 +1,12 @@
 <template>
-  <div style="margin-top: 80px">
+  <div style="margin-top: 80px; color: #666 !important">
     <div class="sc-jrQzAO kPsTlX mb-4" style="text-align: left">
-      <div class="title" style="font-size: 20px;">Lịch sử đơn hàng</div>
+      <div class="title" style="font-size: 20px">Lịch sử đơn hàng</div>
       <span>Dữ liệu được cung cấp bởi trang chính thức</span>
     </div>
     <div class="row mb-4">
       <div
+        style="color: #666"
         v-for="(tab, index) in tabs"
         :key="index"
         class="col-3 tab-item"
@@ -164,7 +165,7 @@
                   <div class="price-row" style="color: #000">
                     <span style="color: #000">Tổng tiền </span>
                     <span style="color: #000"
-                      >{{ trip.meta.value | formatVND }} $</span
+                      >{{ trip.meta.value | formatVND }} VNĐ</span
                     >
                   </div>
                   <div class="price-row" style="color: #000">
@@ -173,7 +174,7 @@
                       >{{
                         (trip.meta.commission * trip.meta.value) | formatVND
                       }}
-                      $</span
+                      VNĐ</span
                     >
                   </div>
                   <div class="price-row total" style="color: #000">
@@ -184,7 +185,7 @@
                           trip.meta.commission * trip.meta.value)
                           | formatVND
                       }}
-                      $</span
+                      VNĐ</span
                     >
                   </div>
                 </div>
@@ -381,7 +382,7 @@ export default {
       })
     },
     callback(key) {
-      console.log("key:", key)
+      console.log('key:', key)
       this.listOrder = []
       let status = ''
       if (key == 1) status = 'Processing'
@@ -401,7 +402,7 @@ export default {
       if (!value) return ''
       return moment(value).format('HH:mm:ss DD/MM/YYYY')
     },
-  }
+  },
 }
 </script>
 <style lang="scss">
@@ -749,8 +750,8 @@ export default {
   gap: 10px;
 }
 .product-image {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -802,6 +803,7 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  margin-right: 10px;
 }
 
 .title {
@@ -1073,13 +1075,13 @@ export default {
         right: 0;
         bottom: 0;
         background: linear-gradient(
-            45deg,
-            rgba(255, 255, 255, 0.2) 25%,
-            transparent 25%,
-            transparent 50%,
-            rgba(255, 255, 255, 0.2) 50%,
-            rgba(255, 255, 255, 0.2) 75%,
-            transparent 75%
+          45deg,
+          rgba(255, 255, 255, 0.2) 25%,
+          transparent 25%,
+          transparent 50%,
+          rgba(255, 255, 255, 0.2) 50%,
+          rgba(255, 255, 255, 0.2) 75%,
+          transparent 75%
         );
         background-size: 20px 20px;
         animation: shine 2s linear infinite;
@@ -1093,9 +1095,9 @@ export default {
 
     .price-details {
       background: linear-gradient(
-          45deg,
-          rgba(255, 215, 0, 0.1),
-          rgba(255, 165, 0, 0.1)
+        45deg,
+        rgba(255, 215, 0, 0.1),
+        rgba(255, 165, 0, 0.1)
       );
       border: 1px solid rgba(255, 215, 0, 0.2);
     }
@@ -1131,11 +1133,13 @@ export default {
   gap: 10px;
 }
 .product-image {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 10px;
+  object-fit: cover;
 }
 
 .image {
@@ -1183,7 +1187,8 @@ export default {
 .money-item {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 10px;
+  margin-right: 10px;
 }
 
 .title {
