@@ -29,7 +29,8 @@
         <button
           class="btn-confirm"
           @click="showModalTour"
-          :disabled="isProcessing"
+          v-if="isButtonReady"
+          :disabled="isProcessing || !isButtonReady"
         >
           <span v-if="!isProcessing">XÁC NHẬN</span>
           <span v-else>
@@ -275,7 +276,13 @@ export default {
       isLoading: false,
       isPremium: false,
       createdAt: null,
+      isButtonReady: false,
     }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.isButtonReady = true
+    }, 3000)
   },
   async created() {
     this.getProfile()
@@ -297,6 +304,7 @@ export default {
       }
     },
     async showModalTour() {
+      this.isProcessing = true
       await tutorApi
         .getTuor()
         .then(async (res) => {
@@ -359,6 +367,7 @@ export default {
           this.showModal = false
           this.getProfile()
           this.getOrder()
+          this.isProcessing = false
         })
         .catch((err) => {
           if (
