@@ -144,12 +144,24 @@ export default {
               await this.getProfile()
               this.$router.push('/')
             })
-            .catch((err) => {
-              if (err.message) {
-                this.$message.error('Sai tài khoản hoặc mật khẩu')
+            .catch((error) => {
+              if (error.message == 'Request failed with status code 401') {
+                this.$confirm({
+                  title: 'Tài khoản của bạn bị khoá',
+                  content: 'Vui lòng liên hệ admin để được hỗ trợ.',
+                  okText: 'OK',
+                  okType: 'primary',
+                  cancelButtonProps: { style: { display: 'none' } }, // Ẩn nút Cancel
+                  onOk() {},
+                })
               } else {
-                this.$message.error('Có lỗi xảy ra vui lòng thử lại sau')
+                this.$message.error(
+                  'Đăng nhập thất bại. Vui lòng kiểm tra lại tài khoản và mật khẩu!'
+                )
               }
+              this.$store.dispatch('auth/login', {
+                accessToken: null,
+              })
             })
             .finally(() => {
               setTimeout(() => {
