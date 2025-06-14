@@ -25,7 +25,7 @@
           </div>
           <div class="card-body was-validated">
             <a-form :form="form" @submit="handleSubmit">
-              <a-form-item>
+              <a-form-item label="Tên tài khoản">
                 <a-input
                   placeholder="Tên tài khoản"
                   v-decorator="[
@@ -41,7 +41,7 @@
                   ]"
                 />
               </a-form-item>
-              <a-form-item>
+              <a-form-item label="Ngân hàng">
                 <a-select
                   mode="bank"
                   style="width: 100%"
@@ -67,7 +67,7 @@
                   </a-select-option>
                 </a-select>
               </a-form-item>
-              <a-form-item>
+              <a-form-item label="Số tài khoản">
                 <a-input
                   type="text"
                   v-decorator="[

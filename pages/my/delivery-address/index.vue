@@ -9,9 +9,10 @@
           </div>
           <div class="card-body was-validated">
             <a-form :form="form" @submit="handleSubmit">
-              <a-form-item>
+              <a-form-item label="Họ và tên">
                 <a-input
                   placeholder="Họ và tên"
+                  :disabled="!!user?.order_address?.name"
                   v-decorator="[
                     'truthName',
                     {
@@ -25,9 +26,10 @@
                   ]"
                 />
               </a-form-item>
-              <a-form-item>
+              <a-form-item label="Số điện thoại">
                 <a-input
                   placeholder="Số điện thoại"
+                  :disabled="!!user?.order_address?.phone"
                   v-decorator="[
                     'phone',
                     {
@@ -41,9 +43,10 @@
                   ]"
                 />
               </a-form-item>
-              <a-form-item>
+              <a-form-item label="Địa chỉ nhận hàng">
                 <a-input
                   type="text"
+                  :disabled="!!user?.order_address?.address"
                   v-decorator="[
                     'address',
                     {
@@ -59,7 +62,9 @@
                   placeholder="Địa chỉ nhận hàng"
                 />
               </a-form-item>
-              <a-form-item>
+              <a-form-item
+                v-if="!user.order_address || !user.order_address.name"
+              >
                 <a-button
                   class="btn-login w-100"
                   type="primary "
@@ -77,10 +82,10 @@
 </template>
 
 <script>
-import * as volatilityApi from "@/api/volatility";
-import * as authApi from "../../../api/auth";
-import {updateAddress} from "../../../api/volatility";
-import {mapState} from "vuex";
+import * as volatilityApi from '@/api/volatility'
+import * as authApi from '../../../api/auth'
+import { updateAddress } from '../../../api/volatility'
+import { mapState } from 'vuex'
 export default {
   name: 'index',
   layout: 'info',
@@ -103,11 +108,17 @@ export default {
   },
   created() {
     if (this.user?.order_address) {
+      const { name, phone, address } = this.user.order_address
+      // Ẩn số điện thoại từ số thứ 5 trở đi
+      const maskedPhone = phone
+        ? phone.substring(0, 4) + '*'.repeat(phone.length - 4)
+        : ''
+
       this.$nextTick(() => {
         this.form.setFieldsValue({
-          truthName: this.user?.order_address.name,
-          phone: this.user?.order_address.phone,
-          address:this.user?.order_address.address,
+          truthName: name,
+          phone: maskedPhone,
+          address,
         })
       })
     }
@@ -125,7 +136,7 @@ export default {
               address: values.address,
             })
             .then((res) => {
-              console.log("res 1213:", res)
+              console.log('res 1213:', res)
               this.$store.dispatch('profile/saveProfile', res.data)
               this.$message.success('Lưu thành công')
               this.$router.push('/my')
@@ -133,8 +144,7 @@ export default {
             .catch((err) => {
               this.$message.error('Có lỗi xảy ra vui lòng thử lại sau')
             })
-            .finally(() => {
-            })
+            .finally(() => {})
         }
       })
     },
@@ -409,7 +419,7 @@ export default {
 
   .card-header {
     background-color: #fff;
-        padding: 1rem;
+    padding: 1rem;
 
     h6 {
       font-size: 18px;

@@ -78,7 +78,7 @@
           <span>Giải mã</span>
         </div>
         <div class="price-info">
-          <p>Lưu ý: Không cần phải làm gì, mọi lượng mỗu nhận sẽ của thị tú trong công cuộc bạn !</p>
+          <p>Lưu ý: Nâng cấp gian hàng để nhận được nhiều đơn và có tỷ lệ hoa hồng cao hơn !</p>
         </div>
       </div>
 
@@ -241,7 +241,7 @@ export default {
         'https://via.placeholder.com/600x300/4285f4/ffffff?text=Best+Buy+Store',
       productTitle: 'Best Buy Store',
       imageCaption:
-        'Lợi nhuận của bạn được xử lí theo lí, chúng chúng gia lá Giai tại bạn hoàn thành.',
+        'Lợi nhuận của bạn được nhận theo % chiết khấu giá trị của từng đơn hàng đã hoàn thành.',
       stats: {
         completedOrders: 45,
         pendingOrders: 12,
@@ -250,8 +250,8 @@ export default {
       },
 
       instructions: [
-        'Nhấn nút ( XÁC NHẬN ) để hoàn thành đơn hàng của bạn',
-        'Sau khi xác thành thành công hàng, hệ thống sẽ tự động cộng tiền vào nhận và trả vốn cho bạn, với cầm tiền thưởng của bạn cùng với bạn .',
+        'Nhấn nút ( XÁC NHẬN ) Để hoàn thành đơn hàng của bạn',
+        'Sau khi bạn hoàn thành đơn hàng, hệ thống sẽ tự động cộng tiền lợi nhuận và tiền vốn ban đầu về tài khoản trên ứng dụng của bạn, xin cảm ơn!',
       ],
       showModal: false,
       indexItem: 1,
