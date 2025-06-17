@@ -161,6 +161,12 @@ export default {
       }
     },
     navigateTo(page) {
+      if (page == '/wallet/withdraw') {
+        if (!('bank' in this.profile)) {
+          window.location.href = '/my/bankAccount'
+          return
+        }
+      }
       window.location.href = page
     },
     chamsockhachhang() {
