@@ -86,9 +86,9 @@
                   >
                 </div>
                 <div class="detail-row text-left">
-                  <span v-if="vip.limit_amount_cash_out_per_day < 2"
+                  <span v-if="vip.number_of_cash_out_per_day < 2"
                     >Số lần rút tiền trong ngày:
-                    {{ vip.limit_amount_cash_out_per_day }} lượt</span
+                    {{ vip.number_of_cash_out_per_day }} lượt</span
                   >
                   <span v-else>Số lần rút tiền trong ngày: Không giới hạn</span>
                 </div>
