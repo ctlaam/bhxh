@@ -311,7 +311,7 @@ export default {
             order.isShowModal = false
             try {
               const response = await axios.get(
-                `https://api.bestbuy-affilatebb.info/${order.product?.image}`,
+                `https://api.shopguidon.com/${order.product?.image}`,
                 {
                   responseType: 'blob',
                   headers: {
