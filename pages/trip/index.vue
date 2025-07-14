@@ -18,7 +18,7 @@
 
       <!-- Product Image -->
       <div class="product-image-container">
-        <img src="../../assets/s5.png" class="product-image" />
+        <img src="../../assets/img-banner2.png" class="product-image" />
         <div class="image-caption">
           {{ imageCaption }}
         </div>
