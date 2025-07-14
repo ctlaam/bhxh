@@ -1,13 +1,13 @@
 <template>
   <header
-    class="ant-layout-header"
+    class="ant-layout-header px-4"
     style="background-color: var(--primary-color)"
   >
     <div class="ant-row ant-row-space-between sc-clIzBv jeRdoU">
       <div class="ant-col ant-col-xs-24 ant-col-md-6">
         <img
           alt="logo"
-          src="../../assets/img/logo_web.png"
+          src="https://i.imgur.com/Cacqy63.png"
           style="width: 22%; min-width: 120px"
         />
       </div>

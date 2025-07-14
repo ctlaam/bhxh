@@ -3,13 +3,12 @@
     <main class="flex-shrink-0 main has-footer">
       <div class="head-top">
         <div class="banner-header">
-          <a-carousel autoplay>
-            <img src="../assets/s1.jpg" alt="" />
-            <img src="../assets/s2.png" alt="" />
-            <img src="../assets/s3.png" alt="" />
-            <img src="../assets/s4.png" alt="" />
-            <img src="../assets/s5.png" alt="" />
-            <img src="../assets/s6.png" alt="" />
+          <a-carousel autoplay :autoplay-speed="1000" :dots="true">
+            <div><img src="../assets/img-banner1.png" alt="" /></div>
+            <div><img src="../assets/img-banner2.png" alt="" /></div>
+            <div><img src="../assets/img-banner3.png" alt="" /></div>
+            <div><img src="../assets/img-banner4.png" alt="" /></div>
+            <div><img src="../assets/img-banner5.png" alt="" /></div>
           </a-carousel>
         </div>
       </div>
@@ -1104,4 +1103,45 @@ export default {
     height: 150px;
   }
 }
+</style>
+<style lang="scss">
+// Thêm CSS cho carousel
+.banner-header {
+  .ant-carousel {
+    .slick-slide {
+      text-align: center;
+      height: 200px;
+      line-height: 200px;
+      background: #364d79;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+    }
+
+    .slick-dots {
+      li {
+        button {
+          background: #fff;
+          opacity: 0.5;
+
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+
+        &.slick-active button {
+          background: #1890ff;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+// CSS hiện có của bạn...
 </style>

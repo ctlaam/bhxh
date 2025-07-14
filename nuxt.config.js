@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'BESTBUY',
+    title: 'alibabavn',
     htmlAttrs: {
       lang: 'en',
     },
@@ -15,7 +15,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/faviconrm.png' }, // Đường dẫn đến favicon của bạn
+      { rel: 'icon', type: 'image/png', href: '/favicon.png' }, // Đường dẫn đến favicon của bạn
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;500;600;700&display=swap',

@@ -20,7 +20,7 @@ export default {
 
 <style scoped>
 .account-content {
-  background: url(../assets/logomobile.jpg) no-repeat 50% fixed;
+  background: url(../assets/wu2n7ei.png) no-repeat 50% fixed;
   background-size: cover;
   cursor: pointer;
   height: 100vh;

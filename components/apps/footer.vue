@@ -43,7 +43,7 @@
           class="mui-tab-item1 floating-button"
           ><div class="button-effects"></div>
           <img
-            src="../../assets/img/logo_web.png"
+            src="https://i.imgur.com/Cacqy63.png"
             alt=""
             width="60px"
             class="center-icon"
