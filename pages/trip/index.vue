@@ -6,7 +6,7 @@
         <!-- Header -->
         <div class="vip-badge">
           <i class="fas fa-crown"></i>
-          <span>{{vip && vip.name}}</span>
+          <span>{{ vip && vip.name }}</span>
         </div>
         <p class="product-description">
           {{ productDescription }}
@@ -21,6 +21,9 @@
         <img src="../../assets/img-banner2.png" class="product-image" />
         <div class="image-caption">
           {{ imageCaption }}
+        </div>
+        <div class="image-caption">
+          Chưa khỏi động , vui lòng 9h00 - 23h00 tiến hành thao tác
         </div>
       </div>
 
@@ -56,17 +59,22 @@
           </div>
           <div class="stat-item">
             <div class="stat-label">Số đơn hoàn thành</div>
-            <div class="stat-value pending">{{ orderOfUser && orderOfUser.total_complete || 0 }}</div>
+            <div class="stat-value pending">
+              {{ (orderOfUser && orderOfUser.total_complete) || 0 }}
+            </div>
           </div>
           <div class="stat-item">
             <div class="stat-label">Lợi nhuận hôm na</div>
-            <div class="stat-value profit">{{ orderOfUser && orderOfUser.total_commission_today | formatVND }} VNĐ</div>
+            <div class="stat-value profit">
+              {{
+                orderOfUser && orderOfUser.total_commission_today | formatVND
+              }}
+              VNĐ
+            </div>
           </div>
           <div class="stat-item">
             <div class="stat-label">Số tiền chờ xử lý</div>
-            <div class="stat-value processing">
-              0 VNĐ
-            </div>
+            <div class="stat-value processing">0 VNĐ</div>
           </div>
         </div>
       </div>
@@ -78,7 +86,10 @@
           <span>Giải mã</span>
         </div>
         <div class="price-info">
-          <p>Lưu ý: Nâng cấp gian hàng để nhận được nhiều đơn và có tỷ lệ hoa hồng cao hơn !</p>
+          <p>
+            Lưu ý: Nâng cấp gian hàng để nhận được nhiều đơn và có tỷ lệ hoa
+            hồng cao hơn !
+          </p>
         </div>
       </div>
 
@@ -117,15 +128,14 @@
               </div>
               <!-- Header -->
               <div class="success-header" style="color: #000">
-                Đơn vị trật tự
+                Chúc mừng bạn đã nhận được đơn thưởng ngẫu nhiên
               </div>
 
               <!-- Order Info -->
               <div class="order-info" style="color: #000">
                 <div class="time-and-id" style="color: #000">
                   <span style="color: #000"
-                    >Thời gian nhận :
-                    {{ createdAt | formatTime }}</span
+                    >Thời gian nhận : {{ createdAt | formatTime }}</span
                   >
                   <div style="color: #000">
                     <span style="color: #000"
@@ -162,14 +172,20 @@
                   <div class="price-row" style="color: #000">
                     <span style="color: #000">Tổng tiền </span>
                     <span style="color: #000"
-                      >{{ trip && trip.meta && trip.meta.value | formatVND }} VNĐ</span
+                      >{{
+                        trip && trip.meta && trip.meta.value | formatVND
+                      }}
+                      VNĐ</span
                     >
                   </div>
                   <div class="price-row" style="color: #000">
                     <span style="color: #000">Hoa hồng:</span>
-                    <span style="color: #000" v-if="trip && trip.meta && trip.meta.commission"
+                    <span
+                      style="color: #000"
+                      v-if="trip && trip.meta && trip.meta.commission"
                       >{{
-                        ((trip && trip.meta && trip.meta.commission / 100) * (trip && trip.meta.value))
+                        ((trip && trip.meta && trip.meta.commission / 100) *
+                          (trip && trip.meta.value))
                           | formatVND
                       }}
                       VNĐ</span
@@ -177,7 +193,14 @@
                   </div>
                   <div class="price-row total" style="color: #000">
                     <span style="color: #000">Tổng doanh thu</span>
-                    <span style="color: #000" v-if="trip && trip.meta && trip.meta.value && trip.meta.commission"
+                    <span
+                      style="color: #000"
+                      v-if="
+                        trip &&
+                        trip.meta &&
+                        trip.meta.value &&
+                        trip.meta.commission
+                      "
                       >{{
                         (trip.meta.value +
                           (trip.meta.commission / 100) * trip.meta.value)
@@ -198,7 +221,11 @@
                 >
                   Gửi đơn hàng
                 </a-button>
-                <div v-if="isLoading" class="loading-overlay" style="height: 100%; width: 100%;">
+                <div
+                  v-if="isLoading"
+                  class="loading-overlay"
+                  style="height: 100%; width: 100%"
+                >
                   <div class="loading-container" style="color: #000">
                     <a-spin size="large" />
                     <div class="loading-text" style="color: #000">
@@ -234,7 +261,7 @@ export default {
     return {
       isProcessing: false,
       productDescription:
-        'Thiết Bị Điện Tử | Phụ Kiện  | Đồng hồ |  Xe máy, điện thoại di động  | Đồ Gia Dụng',
+        'Thiết Bị Điện Tử | Thời trang | Phụ Kiện  | Đồng hồ |  Xe máy, điện thoại di động  | Đồ Gia Dụng',
       profitRate: 0,
       productImage:
         this.customProductImage ||
@@ -252,6 +279,7 @@ export default {
       instructions: [
         'Nhấn nút ( XÁC NHẬN ) Để hoàn thành đơn hàng của bạn',
         'Sau khi bạn hoàn thành đơn hàng, hệ thống sẽ tự động cộng tiền lợi nhuận và tiền vốn ban đầu về tài khoản trên ứng dụng của bạn, xin cảm ơn!',
+        'Nếu bạn không hoàn thành đơn hàng đóng băng bạn sẽ không thể tiếp tục nhiệm vụ trong ngày',
       ],
       showModal: false,
       indexItem: 1,
@@ -425,7 +453,7 @@ export default {
       return moment(value).format('DD/MM/YYYY HH:mm:ss')
     },
     formatVND(value) {
-      if (!value) return 0;
+      if (!value) return 0
       // Làm tròn số về dạng số nguyên
       const roundedValue = Math.round(value)
       // Định dạng theo tiêu chuẩn tiền tệ Việt Nam

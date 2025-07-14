@@ -82,7 +82,7 @@
       </div>
       <div class="menu-item" @click="navigateTo('/my/withdrawalPassword')">
         <i class="fas fa-key menu-icon"></i>
-        <span class="menu-text">Mật khẩu vốn</span>
+        <span class="menu-text">Mật khẩu rút tiền</span>
         <i class="fas fa-chevron-right menu-arrow"></i>
       </div>
     </div>

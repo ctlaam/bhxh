@@ -129,7 +129,7 @@
               </div>
               <!-- Header -->
               <div class="success-header" style="color: #000">
-                Đơn vị trật tự
+                Chúc mừng bạn đã nhận được đơn thưởng ngẫu nhiên
               </div>
 
               <!-- Order Info -->
