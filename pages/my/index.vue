@@ -13,7 +13,7 @@
         <div class="user-balance">
           Số dư: {{ user && formatCurrency(user.balance) }}VNĐ
         </div>
-        <div class="user-code">Mã mời: {{ user && user.reference_code }}</div>
+        <!-- <div class="user-code">Mã mời: {{ user && user.reference_code }}</div> -->
       </div>
     </div>
 
