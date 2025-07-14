@@ -86,7 +86,7 @@
       <div class="instructions">
         <div class="instructions-header">
           <i class="fas fa-info-circle"></i>
-          <span>Instruct</span>
+          <span>Hướng dẫn</span>
         </div>
         <div class="instructions-content">
           <ol>

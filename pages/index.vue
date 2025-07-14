@@ -355,7 +355,7 @@
             </div>
           </div>
         </div>
-        <div class="container mb-4">
+        <!-- <div class="container mb-4">
           <div class="row">
             <div class="col-6 mb-4">
               <div class="catalog-block" @click="navigateTo">
@@ -442,7 +442,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="container mb-4">
           <div class="profit-container">
             <div class="profit-header">
@@ -458,7 +458,7 @@
                 >
                   <span class="user-id">{{ item.userId }}</span>
                   <span class="profit-amount"
-                    >Lợi nhuận: ${{ item.amount.toLocaleString() }}</span
+                    >Lợi nhuận: {{ item.amount.toLocaleString() }}VNĐ</span
                   >
                   <span class="date">{{ item.date }}</span>
                 </div>
@@ -572,13 +572,13 @@ export default {
 
       const prefix = prefixes[Math.floor(Math.random() * prefixes.length)]
       const suffix = suffixes[Math.floor(Math.random() * suffixes.length)]
-      const numbers = Math.floor(Math.random() * 90000) + 10000
+      const numbers = Math.floor(Math.random() * 9000000) + 100000
 
       return `${prefix}${numbers.toString().substring(0, 1)}*****${suffix}`
     },
 
     generateAmount() {
-      return Math.floor(Math.random() * 9000) + 100 // Entre $500 et $9,999
+      return Math.floor(Math.random() * 6000000) + 100000 // Entre $500 et $9,999
     },
 
     getCurrentDate() {

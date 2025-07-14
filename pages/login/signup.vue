@@ -215,13 +215,6 @@
                   </div>
                 </div>
 
-                <!-- Terms Link -->
-                <div class="terms-section">
-                  <NuxtLink to="/my/rules" class="terms-link">
-                    <a-icon type="file-text" />
-                    Xem điều khoản & điều kiện
-                  </NuxtLink>
-                </div>
 
                 <a-form-item class="form-item">
                   <a-button
