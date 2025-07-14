@@ -12,7 +12,7 @@
     <script
       id="chatway"
       async="true"
-      src="https://cdn.chatway.app/widget.js?id=5S7fXbhsDSUR"
+      src="https://cdn.chatway.app/widget.js?id=GbrT1YFgXAld"
     ></script>
   </div>
 </template>

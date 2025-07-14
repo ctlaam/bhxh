@@ -6,7 +6,7 @@
         <i class="fas fa-user"></i>
       </div>
       <div class="user-info">
-        <div class="user-name">{{ user && user.name }}</div>
+        <div class="user-name">{{ user && user.identifier }}</div>
         <div class="user-phone">
           Số điện thoại: {{ user && user.phone.slice(0, 4) + '****' }}
         </div>
