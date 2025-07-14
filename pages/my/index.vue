@@ -35,11 +35,11 @@
         <span class="menu-text">Thẻ ngân hàng</span>
         <i class="fas fa-chevron-right menu-arrow"></i>
       </div>
-      <!-- <div class="menu-item" @click="navigateTo('/my/member-rank/')">
+      <div class="menu-item" @click="navigateTo('/my/member-rank/')">
         <i class="fas fa-star menu-icon"></i>
         <span class="menu-text">Cấp bậc hội viên</span>
         <i class="fas fa-chevron-right menu-arrow"></i>
-      </div> -->
+      </div>
       <!-- <div class="menu-item" @click="navigateTo('/my/delivery-address')">
         <i class="fas fa-map-marker-alt menu-icon"></i>
         <span class="menu-text">Địa chỉ nhận hàng</span>
