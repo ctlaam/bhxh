@@ -128,7 +128,7 @@
               </div>
               <!-- Header -->
               <div class="success-header" style="color: #000">
-                {{ trip.is_premium ? 'Chúc mừng bạn đã nhận được đơn thưởng ngẫu nhiên' : 'Đơn hàng' }} 
+                {{ isPremium ? 'Chúc mừng bạn đã nhận được đơn thưởng ngẫu nhiên' : 'Đơn hàng' }} 
               </div>
 
               <!-- Order Info -->
