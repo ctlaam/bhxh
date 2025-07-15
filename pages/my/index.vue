@@ -155,8 +155,8 @@ export default {
         // Nếu có phần thập phân, giới hạn chỉ 2 chữ số sau dấu phẩy
         let formattedAmount = Math.floor(amount * 100) / 100
         return formattedAmount.toLocaleString('en-US', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
         })
       }
     },
