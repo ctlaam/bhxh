@@ -13,7 +13,7 @@
         <div class="user-balance">
           Số dư: {{ user && formatCurrency(user.balance) }}VNĐ
         </div>
-        <div class="user-code">Mã mời: {{ user && user.reference_code }}</div>
+        <!-- <div class="user-code">Mã mời: {{ user && user.reference_code }}</div> -->
       </div>
     </div>
 
@@ -40,11 +40,11 @@
         <span class="menu-text">Cấp bậc hội viên</span>
         <i class="fas fa-chevron-right menu-arrow"></i>
       </div>
-      <div class="menu-item" @click="navigateTo('/my/delivery-address')">
+      <!-- <div class="menu-item" @click="navigateTo('/my/delivery-address')">
         <i class="fas fa-map-marker-alt menu-icon"></i>
         <span class="menu-text">Địa chỉ nhận hàng</span>
         <i class="fas fa-chevron-right menu-arrow"></i>
-      </div>
+      </div> -->
     </div>
 
     <!-- Lịch sử đơn hàng -->
@@ -82,7 +82,7 @@
       </div>
       <div class="menu-item" @click="navigateTo('/my/withdrawalPassword')">
         <i class="fas fa-key menu-icon"></i>
-        <span class="menu-text">Mật khẩu vốn</span>
+        <span class="menu-text">Mật khẩu rút tiền</span>
         <i class="fas fa-chevron-right menu-arrow"></i>
       </div>
     </div>
@@ -94,11 +94,11 @@
           <span class="menu-text">Trung tâm chăm sóc khách hàng</span>
           <i class="fas menu-icon fa-chevron-right arrow"></i>
         </div>
-        <div class="menu-item" @click="navigateTo('/my/about')">
+        <!-- <div class="menu-item" @click="navigateTo('/my/about')">
           <i class="fas menu-icon fa-comment-dots"></i>
           <span class="menu-text">Ý kiến phản hồi</span>
           <i class="fas menu-icon fa-chevron-right arrow"></i>
-        </div>
+        </div> -->
         <!-- <div class="menu-item" @click="navigateTo('language')">
           <i class="fas menu-icon fa-globe"></i>
           <span class="menu-text">Thay đổi ngôn ngữ</span>

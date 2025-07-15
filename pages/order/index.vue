@@ -129,7 +129,7 @@
               </div>
               <!-- Header -->
               <div class="success-header" style="color: #000">
-                Đơn vị trật tự
+                Chúc mừng bạn đã nhận được đơn thưởng ngẫu nhiên
               </div>
 
               <!-- Order Info -->
@@ -172,7 +172,7 @@
                     <span style="color: #000">Hoa hồng:</span>
                     <span style="color: #000"
                       >{{
-                        (trip.meta.commission * trip.meta.value) | formatVND
+                        (trip.meta.commission /100 * trip.meta.value) | formatVND
                       }}
                       VNĐ</span
                     >
@@ -182,7 +182,7 @@
                     <span style="color: #000"
                       >{{
                         (trip.meta.value +
-                          trip.meta.commission * trip.meta.value)
+                          trip.meta.commission/100 * trip.meta.value)
                           | formatVND
                       }}
                       VNĐ</span

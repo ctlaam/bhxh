@@ -85,13 +85,13 @@
                     đơn hàng</span
                   >
                 </div>
-                <div class="detail-row text-left">
+                <!-- <div class="detail-row text-left">
                   <span v-if="vip.number_of_cash_out_per_day < 2"
                     >Số lần rút tiền trong ngày:
                     {{ vip.number_of_cash_out_per_day }} lượt</span
                   >
                   <span v-else>Số lần rút tiền trong ngày: Không giới hạn</span>
-                </div>
+                </div> -->
               </div>
 
               <div class="vip-actions" v-if="vip.available">

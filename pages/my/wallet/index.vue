@@ -1,10 +1,10 @@
 <template>
   <div style="margin-top: 80px">
     <div class="container mt-3 mb-4 text-center">
-      <h2 class="text-white">
+      <h2 class="text-black">
         {{ profileUser &&formatCurrency(profileUser.balance)}} đ
       </h2>
-      <p class="text-white mb-4">Tổng Tài Sản</p>
+      <p class="text-black mb-4">Tổng Tài Sản</p>
     </div>
     <div class="main-container">
       <div class="container">

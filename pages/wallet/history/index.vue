@@ -16,7 +16,7 @@
                 <h6 class="mb-0 font-weight-normal text-left">
                   <b>{{statusName[history.status]}}</b>
                   <br>
-                <small class="text-mute">Số Lẻ
+                <small class="text-mute">Mã giao dịch
                   <b>
                     {{history.id}}
                   </b>

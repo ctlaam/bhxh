@@ -58,7 +58,7 @@
             bottom: 0;
             transform: translateY(-50%);
           "
-          >Kiện hàng</span
+          >Lấy đơn</span
         >
       </div>
       <div class="col">
