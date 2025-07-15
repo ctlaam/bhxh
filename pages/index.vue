@@ -446,7 +446,7 @@
         <div class="container mb-4">
           <div class="profit-container">
             <div class="profit-header">
-              <h3>LỢI NHUẬN NGƯỜI DÙNG TỰ HỆ THỐNG</h3>
+              <h3>LỢI NHUẬN NGƯỜI DÙNG TỪ HỆ THỐNG</h3>
             </div>
 
             <div class="profit-list">
