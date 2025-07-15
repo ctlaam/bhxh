@@ -128,7 +128,11 @@
               </div>
               <!-- Header -->
               <div class="success-header" style="color: #000">
-                {{ isPremium ? 'Chúc mừng bạn đã nhận được đơn thưởng ngẫu nhiên' : 'Đơn hàng' }} 
+                {{
+                  isPremium
+                    ? 'Chúc mừng bạn đã nhận được đơn thưởng ngẫu nhiên'
+                    : 'Đơn hàng'
+                }}
               </div>
 
               <!-- Order Info -->
@@ -364,6 +368,7 @@ export default {
         .catch((err) => {
           console.log('err:', err)
           this.$message.error(err)
+          this.isProcessing = false
           return
         })
     },
