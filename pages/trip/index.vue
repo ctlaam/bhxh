@@ -64,7 +64,7 @@
             </div>
           </div>
           <div class="stat-item">
-            <div class="stat-label">Lợi nhuận hôm na</div>
+            <div class="stat-label">Lợi nhuận hôm nay</div>
             <div class="stat-value profit">
               {{
                 orderOfUser && orderOfUser.total_commission_today | formatVND
