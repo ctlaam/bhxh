@@ -141,8 +141,9 @@ export default {
   },
   filters: {
     roundToTwoDecimalPlaces(num) {
-      if (!num) return 0
-      return (Math.round(num * 100) / 100).toLocaleString()
+      if (!num) return '0'
+      const rounded = Math.round(num) // làm tròn đến số nguyên
+      return rounded.toLocaleString() // format theo locale, ví dụ 12345 -> "12,345"
     },
   },
 }
