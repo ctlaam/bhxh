@@ -340,6 +340,7 @@ export default {
       await tutorApi
         .getTuor()
         .then(async (res) => {
+          this.isProcessing = false
           this.trip = res.data.product
           this.trip = {
             ...this.trip,
