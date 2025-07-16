@@ -60,7 +60,7 @@
           <div class="stat-item">
             <div class="stat-label">Số đơn hoàn thành</div>
             <div class="stat-value pending">
-              {{ (orderOfUser && orderOfUser.total_order_success) || 0 }}
+              {{ (profile && profile.total_order_success) || 0 }}
             </div>
           </div>
           <div class="stat-item">
