@@ -1,7 +1,6 @@
 <template>
   <div id="signup">
     <div class="row py-2 px-2 m-0">
-
       <div class="text-left col align-self-center"></div>
     </div>
 
@@ -38,7 +37,8 @@
                         rules: [
                           {
                             required: true,
-                            message: 'Tên hoặc số điện thoại không được để trống!',
+                            message:
+                              'Tên hoặc số điện thoại không được để trống!',
                           },
                         ],
                       },
@@ -140,20 +140,9 @@ export default {
               this.$router.push('/')
             })
             .catch((error) => {
-              if (error.message == 'Request failed with status code 401') {
-                this.$confirm({
-                  title: 'Tài khoản của bạn bị khoá',
-                  content: 'Vui lòng liên hệ admin để được hỗ trợ.',
-                  okText: 'OK',
-                  okType: 'primary',
-                  cancelButtonProps: { style: { display: 'none' } },
-                  onOk() {},
-                })
-              } else {
-                this.$message.error(
-                  'Đăng nhập thất bại. Vui lòng kiểm tra lại tài khoản và mật khẩu!'
-                )
-              }
+              this.$message.error(
+                'Đăng nhập thất bại. Vui lòng kiểm tra lại tài khoản và mật khẩu!'
+              )
               this.$store.dispatch('auth/login', {
                 accessToken: null,
               })
@@ -240,7 +229,8 @@ export default {
         border: 2px solid #e8ecf0;
         transition: all 0.3s ease;
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
           border-color: #c62a1c;
           box-shadow: 0 0 0 3px rgba(198, 42, 28, 0.1);
         }
@@ -274,7 +264,8 @@ export default {
       transition: all 0.3s ease;
       box-shadow: 0 4px 15px rgba(198, 42, 28, 0.3);
 
-      &:hover, &:focus {
+      &:hover,
+      &:focus {
         background: linear-gradient(135deg, #a02318, #c0392b);
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(198, 42, 28, 0.4);
