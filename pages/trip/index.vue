@@ -11,9 +11,6 @@
         <p class="product-description">
           {{ productDescription }}
         </p>
-        <p class="profit-rate">
-          Lợi nhuận: <span class="rate">{{ profitRate }}%</span>
-        </p>
       </div>
 
       <!-- Product Image -->
