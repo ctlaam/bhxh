@@ -172,7 +172,8 @@
                     <span style="color: #000">Hoa hồng:</span>
                     <span style="color: #000"
                       >{{
-                        (trip.meta.commission /100 * trip.meta.value) | formatVND
+                        ((trip.meta.commission / 100) * trip.meta.value)
+                          | formatVND
                       }}
                       VNĐ</span
                     >
@@ -182,7 +183,7 @@
                     <span style="color: #000"
                       >{{
                         (trip.meta.value +
-                          trip.meta.commission/100 * trip.meta.value)
+                          (trip.meta.commission / 100) * trip.meta.value)
                           | formatVND
                       }}
                       VNĐ</span

@@ -10,7 +10,7 @@
               'alert-success': history.status === 'Success',
               'alert-danger': history.status === 'Reject',
             }"
-            v-for="(history, index) in historys"
+            v-for="(history, index) in filteredHistorys"
             :key="index"
           >
             <div class="media">
@@ -102,6 +102,12 @@ export default {
       },
     }
   },
+  computed: {
+    filteredHistorys() {
+      return this.historys.filter((item) => item.amount >= 10000)
+    },
+  },
+
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: 'login' })
   },

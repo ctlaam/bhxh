@@ -14,7 +14,7 @@
             class="list-group list-group-flush border-top border-color"
           >
             <div
-              v-for="(item, index) in withdrawHistory"
+              v-for="(item, index) in filteredWithdrawHistory"
               :key="item._id"
               class="list-group-item border-color"
             >
@@ -128,6 +128,9 @@ export default {
     },
   },
   computed: {
+    filteredWithdrawHistory() {
+      return this.withdrawHistory.filter((item) => item.amount >= 10000)
+    },
     profileUser() {
       return this.$store.state.profile.profile
     },

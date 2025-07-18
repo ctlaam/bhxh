@@ -37,9 +37,9 @@
         </NuxtLink>
       </div>
       <div class="col center-button-wrapper">
-        <a
+        <nuxt-link
+          to="/trip"
           style="position: absolute; transform: translateY(-20px)"
-          href="/trip"
           class="mui-tab-item1 floating-button"
           ><div class="button-effects"></div>
           <img
@@ -49,7 +49,7 @@
             class="center-icon"
             style="object-fit: contain; background: #001529"
           />
-        </a>
+        </nuxt-link>
         <span
           style="
             font-size: 13px;
@@ -424,12 +424,10 @@ a.mui-tab-item1.nuxt-link-exact-active.nuxt-link-active {
 
 @keyframes ripple {
   0% {
-    box-shadow: 0 0 0 0 rgba(16, 46, 71, 0.4),
-      0 0 0 1px rgba(16, 46, 71, 0.4);
+    box-shadow: 0 0 0 0 rgba(16, 46, 71, 0.4), 0 0 0 1px rgba(16, 46, 71, 0.4);
   }
   100% {
-    box-shadow: 0 0 0 15px rgba(16, 46, 71, 0),
-      0 0 0 20px rgba(16, 46, 71, 0);
+    box-shadow: 0 0 0 15px rgba(16, 46, 71, 0), 0 0 0 20px rgba(16, 46, 71, 0);
   }
 }
 
