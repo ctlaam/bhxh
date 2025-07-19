@@ -79,12 +79,6 @@
                     hàng/ngày</span
                   >
                 </div>
-                <div class="detail-row text-left">
-                  <span
-                    >Lợi nhuận mỗi đơn: {{ vip.commission_percent }}% giá trị
-                    đơn hàng</span
-                  >
-                </div>
                 <!-- <div class="detail-row text-left">
                   <span v-if="vip.number_of_cash_out_per_day < 2"
                     >Số lần rút tiền trong ngày:

@@ -326,7 +326,7 @@
               :key="index"
             >
               <div class="title">{{ level.name }}</div>
-              <div class="discount">{{ level.commission_percent }}%</div>
+<!--              <div class="discount">{{ level.commission_percent }}%</div>-->
               <div class="categories">
                 <span>Thời trang</span> | <span>Phụ kiện</span> |
                 <span>Điện thoại</span>
