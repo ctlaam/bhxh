@@ -117,6 +117,10 @@ export default {
           full_name: 'Ngân hàng Vietcombank',
         },
         {
+          name: 'LPBank',
+          full_name: 'LPBank - Ngân hàng Lộc Phát Việt Nam',
+        },
+        {
           name: 'DongA Bank',
           full_name: 'Ngân hàng Đông Á',
         },
