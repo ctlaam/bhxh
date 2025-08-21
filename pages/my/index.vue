@@ -163,12 +163,13 @@ export default {
     navigateTo(page) {
       if (page == '/wallet/withdraw') {
         if (!('bank' in this.profile)) {
-          window.location.href = '/my/bankAccount'
+          this.$router.push('/my/bankAccount')
           return
         }
       }
-      window.location.href = page
+      this.$router.push(page)
     },
+
     chamsockhachhang() {
       let chat = document.querySelector('.launcher-icon.launcher-minimize-icon')
       if (chat) {
