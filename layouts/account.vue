@@ -1,32 +1,22 @@
 <template>
-  <div class="account-content">
-    <Nuxt />
-    <!-- <fullscreen-modal> </fullscreen-modal> -->
-    <!-- <script
-      id="chatway"
-      async="true"
-      src="https://cdn.chatway.app/widget.js?id=xhmDgdx6Q2M9"
-    ></script> -->
+    <div class="main-content">
+      <div id="content" ref="content">
+        <Nuxt />
+      </div>
   </div>
 </template>
+
 <script>
-// import FullscreenModal from '../components/apps/FullscreenModal.vue'
+import Footer from '../components/apps/footer.vue'
 export default {
   components: {
-    // FullscreenModal,
+    Footer,
+  },
+  data() {
+    return {}
   },
 }
 </script>
 
-<style scoped>
-.account-content {
-  background: url(../assets/wu2n7ei.png) no-repeat 50% fixed;
-  background-size: cover;
-  cursor: pointer;
-  height: 100vh;
-  overflow-x: auto;
-  overflow-y: hidden;
-  transition: all 0.7s, z-index 0s;
-  width: 100vw;
-}
-</style>
+<style lang="scss">
+</style

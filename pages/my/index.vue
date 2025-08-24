@@ -1,113 +1,92 @@
 <template>
-  <div class="profile-container">
-    <!-- Header với thông tin user -->
-    <div class="profile-header">
-      <div class="avatar">
-        <i class="fas fa-user"></i>
+  <div class="profile-page">
+    <!-- Header -->
+    <div class="header">
+      <h3 class="header-title">Của tôi</h3>
+    </div>
+
+    <!-- Profile Section -->
+    <div class="profile-section">
+      <!-- Avatar -->
+      <div class="avatar-container">
+        <a-avatar :size="80" style="background-color: #1890ff">
+          <a-icon type="user" style="font-size: 40px" />
+        </a-avatar>
       </div>
-      <div class="user-info">
-        <div class="user-name">{{ user && user.identifier }}</div>
-        <div class="user-phone">
-          Số điện thoại: {{ user && user.phone.slice(0, 4) + '****' }}
+
+      <!-- Username placeholder -->
+      <div class="username-placeholder">
+        <span>-</span>
+      </div>
+    </div>
+
+    <!-- Menu Items -->
+    <div class="menu-section">
+      <!-- Đã thêm làm bạn bè -->
+      <div class="menu-item" @click="goToFriendRequests">
+        <div class="d-flex align-items-center justify-content-between">
+          <span class="menu-text">Đã thêm làm bạn bè</span>
+          <a-icon type="right" class="menu-arrow" />
         </div>
-        <div class="user-balance">
-          Số dư: {{ user && formatCurrency(user.balance) }}VNĐ
+      </div>
+
+      <!-- Trang thái đọc tin nhắn -->
+      <div class="menu-item" @click="goToReadStatus">
+        <div class="d-flex align-items-center justify-content-between">
+          <span class="menu-text">Trang thái đọc tin nhắn</span>
+          <div class="d-flex align-items-center">
+            <span class="status-text">Mở</span>
+            <a-icon type="right" class="menu-arrow" />
+          </div>
         </div>
-        <!-- <div class="user-code">Mã mời: {{ user && user.reference_code }}</div> -->
       </div>
-    </div>
 
-    <!-- Action buttons -->
-    <div class="action-buttons">
-      <button class="btn btn-deposit" @click="chamsockhachhang">
-        Nạp tiền
-      </button>
-      <button class="btn btn-withdraw" @click="navigateTo('/wallet/withdraw')">
-        Rút tiền
-      </button>
-    </div>
-
-    <!-- Thông tin cá nhân -->
-    <div class="menu-section">
-      <div class="section-header">Thông tin cá nhân</div>
-      <div class="menu-item" @click="navigateTo('/my/bankAccount/')">
-        <i class="fas fa-credit-card menu-icon"></i>
-        <span class="menu-text">Thẻ ngân hàng</span>
-        <i class="fas fa-chevron-right menu-arrow"></i>
-      </div>
-      <div class="menu-item" @click="navigateTo('/my/member-rank/')">
-        <i class="fas fa-star menu-icon"></i>
-        <span class="menu-text">Cấp bậc hội viên</span>
-        <i class="fas fa-chevron-right menu-arrow"></i>
-      </div>
-      <!-- <div class="menu-item" @click="navigateTo('/my/delivery-address')">
-        <i class="fas fa-map-marker-alt menu-icon"></i>
-        <span class="menu-text">Địa chỉ nhận hàng</span>
-        <i class="fas fa-chevron-right menu-arrow"></i>
-      </div> -->
-    </div>
-
-    <!-- Lịch sử đơn hàng -->
-    <div class="menu-section">
-      <div class="section-header">Lịch sử đơn hàng</div>
-      <div class="menu-item" @click="navigateTo('/order')">
-        <i class="fas fa-file-alt menu-icon"></i>
-        <span class="menu-text">Lịch sử đơn hàng</span>
-        <i class="fas fa-chevron-right menu-arrow"></i>
-      </div>
-      <div class="menu-item" @click="navigateTo('/trip')">
-        <i class="fas fa-shopping-cart menu-icon"></i>
-        <span class="menu-text">XÁC NHẬN săn đơn</span>
-        <i class="fas fa-chevron-right menu-arrow"></i>
-      </div>
-      <!-- <div class="menu-item" @click="navigateTo('/my-group')">
-        <i class="fas fa-users menu-icon"></i>
-        <span class="menu-text">Nhóm của tôi</span>
-        <i class="fas fa-chevron-right menu-arrow"></i>
-      </div> -->
-    </div>
-
-    <!-- Cá nhân -->
-    <div class="menu-section">
-      <div class="section-header">Cá nhân</div>
-      <div class="menu-item" @click="navigateTo('/wallet/history')">
-        <i class="fas fa-history menu-icon"></i>
-        <span class="menu-text">Lịch sử giao dịch</span>
-        <i class="fas fa-chevron-right menu-arrow"></i>
-      </div>
-      <div class="menu-item" @click="navigateTo('/my/password')">
-        <i class="fas fa-lock menu-icon"></i>
-        <span class="menu-text">Mật khẩu tài khoản</span>
-        <i class="fas fa-chevron-right menu-arrow"></i>
-      </div>
-      <div class="menu-item" @click="navigateTo('/my/withdrawalPassword')">
-        <i class="fas fa-key menu-icon"></i>
-        <span class="menu-text">Mật khẩu rút tiền</span>
-        <i class="fas fa-chevron-right menu-arrow"></i>
-      </div>
-    </div>
-    <div class="menu-section">
-      <div class="section-header">Liên hệ chăm sóc khách hàng</div>
-      <div class="menu-items">
-        <div class="menu-item" @click="chamsockhachhang">
-          <i class="fas menu-icon fa-headset"></i>
-          <span class="menu-text">Trung tâm chăm sóc khách hàng</span>
-          <i class="fas menu-icon fa-chevron-right arrow"></i>
+      <!-- Hiển thị trang thái trực tuyến -->
+      <div class="menu-item" @click="goToOnlineStatus">
+        <div class="d-flex align-items-center justify-content-between">
+          <span class="menu-text">Hiển thị trang thái trực tuyến</span>
+          <div class="d-flex align-items-center">
+            <span class="status-text">Mở</span>
+            <a-icon type="right" class="menu-arrow" />
+          </div>
         </div>
-        <!-- <div class="menu-item" @click="navigateTo('/my/about')">
-          <i class="fas menu-icon fa-comment-dots"></i>
-          <span class="menu-text">Ý kiến phản hồi</span>
-          <i class="fas menu-icon fa-chevron-right arrow"></i>
-        </div> -->
-        <!-- <div class="menu-item" @click="navigateTo('language')">
-          <i class="fas menu-icon fa-globe"></i>
-          <span class="menu-text">Thay đổi ngôn ngữ</span>
-          <i class="fas menu-icon fa-chevron-right arrow"></i>
-        </div> -->
-        <div class="menu-item logout" @click="logout">
-          <i class="fas menu-icon fa-sign-out-alt"></i>
-          <span class="menu-text">Đăng xuất</span>
-          <i class="fas menu-icon fa-chevron-right arrow"></i>
+      </div>
+    </div>
+
+    <!-- Logout Section -->
+    <div class="logout-section">
+      <div class="logout-button" @click="showLogoutConfirm">
+        <span class="logout-text">Thoát</span>
+      </div>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    <a-modal
+      v-model="logoutModalVisible"
+      title="Xác nhận"
+      centered
+      :width="300"
+      @ok="handleLogout"
+      @cancel="logoutModalVisible = false"
+      ok-text="Đồng ý"
+      cancel-text="Hủy"
+    >
+      <p>Bạn có chắc chắn muốn đăng xuất?</p>
+    </a-modal>
+    <div
+      v-if="visible"
+      class="bottom-modal-overlay"
+      @click="handleOverlayClick"
+    >
+      <div class="bottom-modal-container" @click.stop>
+        <!-- Action Buttons positioned above footer -->
+        <div class="bottom-action-buttons">
+          <div class="bottom-action-button" @click="handleOpen">
+            <span>Mở</span>
+          </div>
+          <div class="bottom-action-button" @click="handleClose">
+            <span>Đóng</span>
+          </div>
         </div>
       </div>
     </div>
@@ -115,313 +94,370 @@
 </template>
 
 <script>
-import * as volatilityApi from '../../api/volatility'
-import * as orderApi from '../../api/order'
-import _ from 'lodash'
-
-import Cookies from 'js-cookie'
-import { mapState } from 'vuex'
 export default {
-  name: 'index',
+  name: 'ProfilePage',
   data() {
     return {
-      vip: {
+      logoutModalVisible: false,
+      user: {
         name: '',
-        background_urls: [''],
+        avatar: null,
+        readStatus: 'Mở',
+        onlineStatus: 'Mở',
       },
-      orderOfUser: {
-        total_commission_today: 0,
-        total_commission: 0,
-        count_order: 0,
-        count_order_today: 0,
-      },
-      profile: {},
+      visible: true,
     }
-  },
-  computed: {
-    ...mapState({
-      user: (state) => state.profile.profile,
-      bank: (state) => state.profile.profile.bank,
-      isLogin: (state) => state.auth.isAuthenticated,
-    }),
   },
   methods: {
-    formatCurrency(amount) {
-      if (!amount) return 0
-      // Kiểm tra nếu là số nguyên thì chỉ định dạng phần nguyên
-      if (Number.isInteger(amount)) {
-        return amount.toLocaleString('en-US')
-      } else {
-        // Nếu có phần thập phân, giới hạn chỉ 2 chữ số sau dấu phẩy
-        let formattedAmount = Math.floor(amount * 100) / 100
-        return formattedAmount.toLocaleString('en-US', {
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0,
-        })
-      }
+    handleOverlayClick() {
+      this.visible = false
     },
-    navigateTo(page) {
-      if (page == '/wallet/withdraw') {
-        if (!('bank' in this.profile)) {
-          this.$router.push('/my/bankAccount')
-          return
-        }
-      }
-      this.$router.push(page)
+    handleOpen() {
+      this.visible = true
     },
-
-    chamsockhachhang() {
-      let chat = document.querySelector('.launcher-icon.launcher-minimize-icon')
-      if (chat) {
-        chat.click()
-      }
+    handleClose() {
+      this.visible = false
     },
-    logout() {
-      this.$store.dispatch('loading/setModalLoading', true)
-      this.$store.dispatch('profile/saveProfile', null)
-      this.$store.dispatch('profile/saveVip', null)
-      Cookies.remove('access_token')
-      Cookies.remove('refresh_token')
-      Cookies.remove('user_id')
-      Cookies.remove('time_valid')
+    goToFriendRequests() {
+      // Navigate to friend requests page
+    },
+    goToReadStatus() {
+      // Navigate to read status settings
+    },
+    goToOnlineStatus() {
+      // Navigate to online status settings
+    },
+    showLogoutConfirm() {
+      this.logoutModalVisible = true
+    },
+    handleLogout() {
+      // Handle logout logic
+      this.$message.success('Đã đăng xuất thành công')
+      // Clear user data and redirect to login
       this.$store.dispatch('auth/logout')
-      this.$store.dispatch('loading/setModalLoading', false)
-      // this.$router.push('/login')
-      window.location.href = '/login'
-      this.$message.success('Đăng xuất thành công')
+      this.$router.push('/login')
+      this.logoutModalVisible = false
     },
-    async getListByKey() {
-      volatilityApi.getListVips(this.profile.level).then((res) => {
-        this.vip = _.get(res, 'data')
-        this.$store.dispatch('profile/saveVip', this.vip)
-      })
-    },
-    getOrderAnalytic() {
-      orderApi
-        .getOrderAnalytic()
-        .then((res) => {
-          this.orderOfUser = _.get(res, 'data', [])
-        })
-        .catch((err) => {
-          this.$message.error(err)
-        })
-    },
-  },
-  watch: {
-    '$store.state.profile': {
-      handler: function (val) {
-        if (val) {
-          this.profile = this.$store.state.profile.profile
-          this.vip = this.$store.state.profile.vip
-          // this.getListByKey()
-          this.getOrderAnalytic()
-        }
-      },
-      deep: true,
-    },
-    '$store.state.profile.vip': {
-      handler: function (val) {
-        this.vip = this.$store.state.profile.vip
-      },
-      deep: true,
-    },
-  },
-  mounted() {
-    if (this.$store.state.profile) {
-      this.profile = this.$store.state.profile.profile
-      this.vip = this.$store.state.profile.vip
-      // this.getListByKey()
-      this.getOrderAnalytic()
-      this.getListByKey()
-    }
   },
 }
 </script>
 
-<style scoped lang="scss">
-.profile-container {
-  background-color: white;
+<style scoped>
+.profile-page {
   min-height: 100vh;
-  margin-bottom: 100px;
+  background-color: #f5f5f5;
 }
 
-.profile-header {
-  background-color: #e8e8e8;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.avatar {
-  width: 60px;
-  height: 60px;
-  background-color: #ccc;
-  border-radius: 50%;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  color: #888;
-}
-
-.user-info {
-  flex: 1;
-}
-
-.user-name {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 5px;
+/* Header */
+.header {
+  background: white;
   color: #333;
-}
-
-.user-phone {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 5px;
-}
-
-.user-balance {
-  font-size: 16px;
-  font-weight: 600;
-  color: #22c55e;
-  margin-bottom: 3px;
-}
-
-.user-code {
-  font-size: 12px;
-  color: #888;
-}
-
-.action-buttons {
-  background-color: #e8e8e8;
   padding: 15px 20px;
-  display: flex;
-  gap: 10px;
+  text-align: center;
+  border-bottom: 1px solid #e8e8e8;
 }
 
-.btn {
-  flex: 1;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
+.header-title {
+  margin: 0;
   font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  font-size: 18px;
 }
 
-.btn-deposit {
-  background-color: #d1d5db;
-  color: #374151;
+/* Profile Section */
+.profile-section {
+  background: white;
+  padding: 40px 20px;
+  text-align: center;
+  border-bottom: 10px solid #f5f5f5;
 }
 
-.btn-deposit:hover {
-  background-color: #9ca3af;
+.avatar-container {
+  margin-bottom: 20px;
 }
 
-.btn-withdraw {
-  background-color: #d1d5db;
-  color: #374151;
-}
-
-.btn-withdraw:hover {
-  background-color: #9ca3af;
-}
-
-.menu-section {
-  margin-top: 1px;
-}
-
-.section-header {
-  background-color: #d1d5db;
-  padding: 12px 20px;
+.username-placeholder {
   font-size: 16px;
-  font-weight: 600;
-  color: #374151;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Menu Section */
+.menu-section {
+  background: white;
+  margin-bottom: 20px;
 }
 
 .menu-item {
-  background-color: white;
-  padding: 15px 20px;
-  border-bottom: 1px solid #e5e7eb;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid #f0f0f0;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s;
 }
 
 .menu-item:hover {
-  background-color: #f9fafb;
+  background-color: #fafafa;
 }
 
 .menu-item:last-child {
   border-bottom: none;
 }
 
-.menu-icon {
-  width: 20px;
-  color: #6b7280;
-  font-size: 16px;
+.menu-text {
+  font-size: 15px;
+  color: #333;
 }
 
-.menu-text {
-  flex: 1;
-  font-size: 15px;
-  color: #374151;
+.status-text {
+  font-size: 14px;
+  color: #999;
+  margin-right: 8px;
 }
 
 .menu-arrow {
-  color: #9ca3af;
+  color: #ccc;
   font-size: 12px;
 }
 
-.special-text {
-  color: #ef4444;
-  font-weight: 600;
-}
-.action-buttons {
-  display: flex;
-  gap: 10px;
-  flex-shrink: 0;
+/* Logout Section */
+.logout-section {
+  background: white;
+  padding: 0;
 }
 
-.btn {
-  padding: 10px 18px;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
+.logout-button {
+  padding: 18px 20px;
+  text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.2s;
+}
+
+.logout-button:hover {
+  background-color: #fafafa;
+}
+
+.logout-text {
+  font-size: 15px;
+  color: #ff4444;
+  font-weight: 500;
+}
+
+/* Modal Styles */
+.ant-modal-content {
+  border-radius: 8px;
+}
+
+.ant-modal-header {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.ant-modal-body {
+  padding: 20px;
+  text-align: center;
+}
+
+.ant-modal-body p {
+  margin: 0;
+  color: #666;
+  font-size: 15px;
+}
+
+/* Custom button styles for modal */
+:deep(.ant-btn-primary) {
+  background-color: #ff4444;
+  border-color: #ff4444;
+}
+
+:deep(.ant-btn-primary:hover) {
+  background-color: #ff3333;
+  border-color: #ff3333;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .header {
+    padding: 12px 15px;
+  }
+
+  .profile-section {
+    padding: 30px 15px;
+  }
+
+  .menu-item {
+    padding: 15px;
+  }
+
+  .logout-button {
+    padding: 15px;
+  }
+
+  .menu-text,
+  .logout-text {
+    font-size: 14px;
+  }
+}
+
+/* Additional animations */
+.menu-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.menu-item:hover::after {
+  left: 100%;
+}
+
+/* Loading states */
+.loading-avatar {
+  background: #f0f0f0 !important;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Focus states for accessibility */
+.menu-item:focus,
+.logout-button:focus {
+  outline: 2px solid #1890ff;
+  outline-offset: -2px;
+}
+
+/* Success message styling */
+:deep(.ant-message-success) {
+  top: 100px;
+}
+/* Modal Overlay */
+.bottom-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.bottom-modal-container {
+  position: absolute;
+  bottom: 80px; /* Position above footer (footer height = 80px) */
+  left: 0;
+  right: 0;
   display: flex;
-  align-items: center;
-  gap: 6px;
-  min-width: 100px;
   justify-content: center;
+  animation: slideUpFromBottom 0.3s ease-out;
 }
 
-.btn-deposit {
-  background: linear-gradient(135deg, #4caf50, #45a049);
-  color: white;
-  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+/* Action Buttons */
+.bottom-action-buttons {
+  width: 90%;
+  max-width: 450px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
 }
 
-.btn-withdraw {
-  background: rgb(243, 104, 104) !important;
-  color: #ff5722;
-  border: 2px solid #ff5722;
-  box-shadow: 0 2px 8px rgba(255, 87, 34, 0.2);
+.bottom-action-button {
+  padding: 16px 20px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  color: #1890ff;
+  transition: all 0.2s ease;
+  border: none;
+  background: white;
 }
-@import '~/assets/scss/my.scss';
-</style>
-<style lang="css">
-.ant-progress-text {
-  display: none !important;
+
+.bottom-action-button:first-child {
+  border-bottom: 1px solid #f0f0f0; /* Separator between buttons */
 }
-.ant-progress-outer {
-  padding-right: 0 !important;
+
+.bottom-action-button:hover {
+  background-color: #f0f8ff;
+  color: #0066cc;
+}
+
+.bottom-action-button:active {
+  background-color: #e6f4ff;
+  transform: scale(0.98);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUpFromBottom {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .bottom-modal-container {
+    bottom: 70px; /* Adjust for mobile footer height */
+  }
+
+  .bottom-action-buttons {
+    width: 95%;
+    margin: 0 10px;
+  }
+
+  .bottom-action-button {
+    padding: 14px 16px;
+    font-size: 15px;
+  }
+}
+
+/* Additional styling for better visual */
+.bottom-action-buttons {
+  margin-bottom: 10px; /* Small gap above footer */
+}
+
+/* Focus states for accessibility */
+.bottom-action-button:focus {
+  outline: 2px solid #1890ff;
+  outline-offset: -2px;
+  background-color: #f0f8ff;
 }
 </style>

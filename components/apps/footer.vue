@@ -1,77 +1,69 @@
 <template>
   <div
     class="footer col-md-offset-4 col-lg-offset-4 col-xl-offset-4"
-    style="max-width: 480px"
   >
     <div class="row no-gutters justify-content-center">
-      <div class="col" @click="keyRender">
+      <!-- Tin nhắn -->
+      <div class="col">
         <nuxt-link
-          to="/"
+          to="/mess"
           exact
           active-class="active"
           class="mui-tab-item1 item-footer"
         >
-          <a-icon class="home" theme="filled" type="home" />
-          <p>Trang Chủ</p>
+          <div class="icon-circle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="20px"
+              viewBox="0 -960 960 960"
+              width="20px"
+              fill="#666666"
+            >
+              <path
+                d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Z"
+              />
+            </svg>
+          </div>
+          <p>Tin nhắn</p>
         </nuxt-link>
       </div>
+
+      <!-- Sổ địa chỉ -->
       <div class="col">
         <NuxtLink
-          to="/order?title=Lịch sử"
+          to="/address"
           exact
           active-class="active"
           class="mui-tab-item1"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24px"
-            viewBox="0 -960 960 960"
-            width="24px"
-            fill="#909090"
-          >
-            <path
-              d="M480-120q-138 0-240.5-91.5T122-440h82q14 104 92.5 172T480-200q117 0 198.5-81.5T760-480q0-117-81.5-198.5T480-760q-69 0-129 32t-101 88h110v80H120v-240h80v94q51-64 124.5-99T480-840q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-480q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-120Zm112-192L440-464v-216h80v184l128 128-56 56Z"
-            />
-          </svg>
-          <p>Lịch sử</p>
+          <div class="icon-circle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="20px"
+              viewBox="0 -960 960 960"
+              width="20px"
+              fill="#666666"
+            >
+              <path
+                d="M200-246q54-53 125.5-83.5T480-360q83 0 154.5 30.5T760-246v-514H200v514Zm280-194q58 0 99-41t41-99q0-58-41-99t-99-41q-58 0-99 41t-41 99q0 58 41 99t99 41ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm69-80h422q-44-39-99.5-59.5T480-280q-56 0-112.5 20.5T269-200Zm211-320q-25 0-42.5-17.5T420-580q0-25 17.5-42.5T480-640q25 0 42.5 17.5T540-580q0 25-17.5 42.5T480-520Zm0 17Z"
+              />
+            </svg>
+          </div>
+          <p>Sổ địa chỉ</p>
         </NuxtLink>
       </div>
+
+      <!-- Go!vietnam - Bouton central rouge -->
       <div class="col center-button-wrapper">
-        <nuxt-link
-          to="/trip"
-          style="position: absolute; transform: translateY(-20px)"
-          class="mui-tab-item1 floating-button"
-          ><div class="button-effects"></div>
-          <img
-            src="https://i.imgur.com/Cacqy63.png"
-            alt=""
-            width="60px"
-            class="center-icon"
-            style="object-fit: contain; background: #001529"
-          />
+        <nuxt-link to="/" class="mui-tab-item1 central-red-button">
+          <div class="red-circle">
+            <span class="go-text">Go!</span>
+            <span class="vietnam-text">vietnam</span>
+          </div>
         </nuxt-link>
-        <span
-          style="
-            font-size: 13px;
-            color: black;
-            position: absolute;
-            bottom: 0;
-            transform: translateY(-50%);
-          "
-          >Lấy đơn</span
-        >
       </div>
-      <div class="col">
-        <NuxtLink
-          to="#"
-          @click.native.prevent="chamsockhachhang"
-          active-class="active"
-          class="mui-tab-item1"
-        >
-          <a-icon class="home" type="message" theme="filled" />
-          <p>Hỗ trợ</p>
-        </NuxtLink>
-      </div>
+
+      <!-- Của tôi -->
       <div class="col">
         <NuxtLink
           to="/my"
@@ -79,18 +71,20 @@
           active-class="active"
           class="mui-tab-item1 item-footer"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24px"
-            viewBox="0 -960 960 960"
-            width="24px"
-            fill="#999999"
-          >
-            <path
-              d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"
-            />
-          </svg>
-          <p>Tài khoản</p>
+          <div class="icon-circle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="20px"
+              viewBox="0 -960 960 960"
+              width="20px"
+              fill="#666666"
+            >
+              <path
+                d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Z"
+              />
+            </svg>
+          </div>
+          <p>Của tôi</p>
         </NuxtLink>
       </div>
     </div>
@@ -119,24 +113,6 @@ export default {
 </script>
 
 <style lang="css">
-.floating-button {
-  border: none !important;
-  bottom: 10px;
-  transition: all 0.3s ease;
-}
-.floating-button .button-effects {
-  animation: ripple 1.5s linear infinite;
-}
-ripple {
-  0% {
-    box-shadow: 0 0 0 0 rgba(37, 160, 254, 0.4),
-      0 0 0 1px rgba(37, 160, 254, 0.4);
-  }
-  100% {
-    box-shadow: 0 0 0 15px rgba(37, 160, 254, 0),
-      0 0 0 20px rgba(37, 160, 254, 0);
-  }
-}
 .row .col {
   flex-shrink: 0;
   width: 100%;
@@ -153,293 +129,146 @@ ripple {
 .footer {
   background: #fff;
   z-index: 9;
-  padding: 0 15px;
-  border-radius: 20px 20px 0 0;
+  padding: 15px;
   position: fixed;
-  bottom: -1px;
+  bottom: 0;
   width: 100%;
   z-index: 99;
   background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  border-top: 1px solid #f0f0f0;
 }
 
 .center-button-wrapper {
   position: relative;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.floating-button {
-  bottom: 10px;
-  transition: all 0.3s ease;
-  border: none !important;
+/* Bouton central rouge Go!vietnam */
+.central-red-button {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-decoration: none;
 }
 
-.floating-button:hover {
-  transform: translateY(-25px);
-}
-
-.button-effects {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 54px;
-  height: 54px;
+.red-circle {
+  width: 50px;
+  height: 50px;
+  background: #ff4444;
   border-radius: 50%;
-  z-index: -1;
-}
-
-.center-icon {
-  object-fit: contain;
-  border-radius: 50%;
-  padding: 8px;
-  background: linear-gradient(145deg, #fd2c2c, #001529);
-  box-shadow: 0 4px 15px rgba(245, 27, 27, 0.836);
-  border: 2px solid #ffffff;
-  width: 50px !important;
-  height: 50px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(255, 68, 68, 0.3);
   transition: all 0.3s ease;
 }
 
-/* Enhanced active state styles */
-.floating-button .center-icon {
-  animation: activeScale 0.3s forwards, activePulse 1.5s infinite;
-  background: linear-gradient(145deg, #001529, #0066ff);
-  border: 3px solid #ffffff;
-  box-shadow: 0 0 20px rgba(37, 160, 254, 0.5);
+.red-circle:hover {
+  background: #ff3333;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 68, 68, 0.4);
 }
 
-.floating-button .button-effects {
-  animation: ripple 1.5s linear infinite;
+.go-text {
+  font-size: 12px;
+  line-height: 1;
+  margin-bottom: -2px;
 }
 
-@keyframes activeScale {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1.05);
-  }
+.vietnam-text {
+  font-size: 8px;
+  line-height: 1;
 }
 
-@keyframes activePulse {
-  0% {
-    box-shadow: 0 0 20px rgba(37, 160, 254, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(37, 160, 254, 0.8);
-  }
-  100% {
-    box-shadow: 0 0 20px rgba(37, 160, 254, 0.5);
-  }
+/* Icônes circulaires normales */
+.icon-circle {
+  width: 40px;
+  height: 40px;
+  background: #f5f5f5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 8px auto;
+  transition: all 0.3s ease;
 }
 
-@keyframes ripple {
-  0% {
-    box-shadow: 0 0 0 0 rgba(250, 10, 50, 0.4), 0 0 0 1px rgba(250, 10, 50, 0.4);
-  }
-  100% {
-    box-shadow: 0 0 0 15px rgba(37, 160, 254, 0), 0 0 0 20px rgba(253, 8, 8, 0);
-  }
+.icon-circle:hover {
+  background: #e0e0e0;
+  transform: scale(1.05);
 }
 
-@keyframes pulse {
-  0% {
-    box-shadow: 0 4px 15px rgba(37, 160, 254, 0.3);
-  }
-  50% {
-    box-shadow: 0 4px 25px rgba(37, 160, 254, 0.5);
-  }
-  100% {
-    box-shadow: 0 4px 15px rgba(37, 160, 254, 0.3);
-  }
-}
-
+/* Styles des liens */
 .footer a:not(.btn) {
   padding: 10px 0px;
   text-align: center;
-  color: #999999;
+  color: #666666;
   display: block;
   text-decoration: none;
-  border-top: 4px solid transparent;
-}
-
-.footer a:not(.btn) i,
-.footer a:not(.btn) span {
-  width: 24px;
-  height: 24px;
-  text-align: center;
-  margin-bottom: 15px;
-  display: block;
-  margin: 0 auto;
-  overflow: hidden;
 }
 
 .footer a:not(.btn) p {
-  font-size: 13px;
+  font-size: 12px;
+  margin: 0;
+  color: #666666;
 }
 
-.footer a:not(.btn).active {
-  color: #001529;
-  border-color: #001529;
+.footer a:not(.btn).active .icon-circle {
+  background: #ff4444;
 }
 
-.footer a:not(.btn).active i,
-.footer a:not(.btn).active span {
-  color: #001529;
+.footer a:not(.btn).active .icon-circle svg {
+  fill: white;
 }
 
-.home {
-  font-size: 20px;
+.footer a:not(.btn).active p {
+  color: #ff4444;
+  font-weight: 500;
 }
+
+/* Alignement des éléments */
 .mui-tab-item1 {
   display: flex !important;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  min-height: 70px;
 }
+
 .mui-tab-item1 p {
   margin-bottom: 0;
-  color: #000;
 }
 
-a.mui-tab-item1.nuxt-link-exact-active.nuxt-link-active {
-  border-color: #001529;
-  color: #001529;
-}
-</style>
-<style scoped>
-.center-button-wrapper {
-  position: relative;
+/* Slot vide */
+.empty-slot {
+  height: 70px;
 }
 
-.special-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(145deg, #f84a4a, #fd2c2c);
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  margin: 0 auto;
-}
-
-.special-button::before {
-  content: '';
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  background: white;
-  border-radius: 50%;
-}
-
-.center-icon {
-  position: relative;
-  z-index: 1;
-  transition: transform 0.3s;
-}
-
-/* Hover effect */
-.mui-tab-item1:hover .special-button {
-  transform: scale(1.05);
-}
-
-/* Active state */
-.mui-tab-item1.active .special-button {
-  background: linear-gradient(145deg, #40a9ff, #1890ff);
-}
-
-.floating-button {
-  bottom: 10px;
-  transition: all 0.3s ease;
-  border: none !important;
-}
-
-.floating-button:hover {
-  transform: translateY(-25px);
-}
-
-.button-effects {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  z-index: -1;
-}
-
-.center-icon {
-  border-radius: 50%;
-  padding: 8px;
-  background: linear-gradient(145deg, #4494ff, #25a0fe);
-  box-shadow: 0 4px 15px rgba(37, 160, 254, 0.3);
-  border: 2px solid #ffffff;
-  width: 50px !important;
-  height: 50px !important;
-  transition: all 0.3s ease;
-  animation: pulse 2s infinite;
-}
-
-/* Enhanced active state styles */
-.floating-button .center-icon {
-  animation: activeScale 0.3s forwards, activePulse 1.5s infinite;
-  background: linear-gradient(145deg, #25a0fe, #0066ff);
-  border: 3px solid #ffffff;
-  box-shadow: 0 0 20px rgba(37, 160, 254, 0.5);
-}
-
-.floating-button .button-effects {
-  animation: ripple 1.5s linear infinite;
-}
-
-@keyframes activeScale {
-  0% {
-    transform: scale(1);
+/* Responsive */
+@media (max-width: 480px) {
+  .footer {
+    padding: 10px;
   }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1.05);
-  }
-}
 
-@keyframes activePulse {
-  0% {
-    box-shadow: 0 0 20px rgba(16, 46, 71, 0.3);
+  .icon-circle {
+    width: 35px;
+    height: 35px;
   }
-  50% {
-    box-shadow: 0 0 30px rgba(16, 46, 71, 0.5);
-  }
-  100% {
-    box-shadow: 0 0 20px rgba(16, 46, 71, 0.3);
-  }
-}
 
-@keyframes ripple {
-  0% {
-    box-shadow: 0 0 0 0 rgba(16, 46, 71, 0.4), 0 0 0 1px rgba(16, 46, 71, 0.4);
+  .red-circle {
+    width: 45px;
+    height: 45px;
   }
-  100% {
-    box-shadow: 0 0 0 15px rgba(16, 46, 71, 0), 0 0 0 20px rgba(16, 46, 71, 0);
-  }
-}
 
-@keyframes pulse {
-  0% {
-    box-shadow: 0 4px 15px rgba(16, 46, 71, 0.3);
-  }
-  50% {
-    box-shadow: 0 4px 25px rgba(16, 46, 71, 0.5);
-  }
-  100% {
-    box-shadow: 0 4px 15px rgba(16, 46, 71, 0.3);
+  .footer a:not(.btn) p {
+    font-size: 11px;
   }
 }
 </style>

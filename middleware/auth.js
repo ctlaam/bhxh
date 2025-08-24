@@ -1,6 +1,5 @@
 import Cookies from 'js-cookie'
 // middleware/auth.js
-import * as volatilityApi from '../api/volatility'
 import * as authApi from '../api/auth.js'
 export default async function ({ store, redirect, route }) {
   const accessToken = Cookies.get('access_token')
