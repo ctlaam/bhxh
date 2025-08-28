@@ -66,7 +66,7 @@
       <!-- Của tôi -->
       <div class="col">
         <NuxtLink
-          to="/my"
+          to="/"
           exact
           active-class="active"
           class="mui-tab-item1 item-footer"

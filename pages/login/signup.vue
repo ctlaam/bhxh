@@ -5,15 +5,15 @@
       <div class="login-box">
         <!-- Logo -->
         <div class="logo-wrapper">
-          <img src="~/assets/go-maket/icon-DOt7N7oV.png" alt="Logo" class="logo" />
+          <img
+            src="~/assets/go-maket/icon-DOt7N7oV.png"
+            alt="Logo"
+            class="logo"
+          />
         </div>
 
         <!-- Form đăng ký -->
-        <a-form
-          :form="form"
-          @submit="handleSubmit"
-          class="login-form"
-        >
+        <a-form :form="form" @submit="handleSubmit" class="login-form">
           <h2 class="login-title">Đăng ký tài khoản</h2>
 
           <!-- Username -->
@@ -24,15 +24,26 @@
                 {
                   rules: [
                     { required: true, message: 'Vui lòng nhập tên đăng nhập!' },
-                    { min: 6, message: 'Tên đăng nhập phải có ít nhất 6 ký tự!' },
-                    { pattern: /^[a-zA-Z0-9_]+$/, message: 'Tên đăng nhập chỉ được chứa chữ cái, số và dấu gạch dưới!' }
-                  ]
-                }
+                    {
+                      min: 6,
+                      message: 'Tên đăng nhập phải có ít nhất 6 ký tự!',
+                    },
+                    {
+                      pattern: /^[a-zA-Z0-9_]+$/,
+                      message:
+                        'Tên đăng nhập chỉ được chứa chữ cái, số và dấu gạch dưới!',
+                    },
+                  ],
+                },
               ]"
               size="large"
               placeholder="Tên đăng nhập"
             >
-              <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)" />
+              <a-icon
+                slot="prefix"
+                type="user"
+                style="color: rgba(0, 0, 0, 0.25)"
+              />
             </a-input>
           </a-form-item>
 
@@ -45,14 +56,18 @@
                   rules: [
                     { required: true, message: 'Vui lòng nhập mật khẩu!' },
                     { min: 6, message: 'Mật khẩu phải có ít nhất 6 ký tự!' },
-                    { validator: validateToNextPassword }
-                  ]
-                }
+                    { validator: validateToNextPassword },
+                  ],
+                },
               ]"
               size="large"
               placeholder="Mật khẩu"
             >
-              <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)" />
+              <a-icon
+                slot="prefix"
+                type="lock"
+                style="color: rgba(0, 0, 0, 0.25)"
+              />
             </a-input-password>
           </a-form-item>
 
@@ -64,15 +79,19 @@
                 {
                   rules: [
                     { required: true, message: 'Vui lòng xác nhận mật khẩu!' },
-                    { validator: compareToFirstPassword }
-                  ]
-                }
+                    { validator: compareToFirstPassword },
+                  ],
+                },
               ]"
               size="large"
               placeholder="Xác nhận mật khẩu"
               @blur="handleConfirmBlur"
             >
-              <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)" />
+              <a-icon
+                slot="prefix"
+                type="lock"
+                style="color: rgba(0, 0, 0, 0.25)"
+              />
             </a-input-password>
           </a-form-item>
 
@@ -83,17 +102,27 @@
                 'passwordMoney',
                 {
                   rules: [
-                    { required: true, message: 'Vui lòng nhập mật khẩu rút tiền!' },
+                    {
+                      required: true,
+                      message: 'Vui lòng nhập mật khẩu rút tiền!',
+                    },
                     { len: 6, message: 'Mật khẩu rút tiền phải có đúng 6 số!' },
-                    { pattern: /^[0-9]+$/, message: 'Mật khẩu rút tiền chỉ được chứa số!' }
-                  ]
-                }
+                    {
+                      pattern: /^[0-9]+$/,
+                      message: 'Mật khẩu rút tiền chỉ được chứa số!',
+                    },
+                  ],
+                },
               ]"
               size="large"
               placeholder="Mật khẩu rút tiền (6 số)"
               maxLength="6"
             >
-              <a-icon slot="prefix" type="wallet" style="color: rgba(0,0,0,.25)" />
+              <a-icon
+                slot="prefix"
+                type="wallet"
+                style="color: rgba(0, 0, 0, 0.25)"
+              />
             </a-input-password>
           </a-form-item>
 
@@ -103,15 +132,17 @@
               v-decorator="[
                 'inviteCode',
                 {
-                  rules: [
-                    { required: true, message: 'Vui lòng nhập mã mời!' }
-                  ]
-                }
+                  rules: [{ required: true, message: 'Vui lòng nhập mã mời!' }],
+                },
               ]"
               size="large"
               placeholder="Mã mời"
             >
-              <a-icon slot="prefix" type="gift" style="color: rgba(0,0,0,.25)" />
+              <a-icon
+                slot="prefix"
+                type="gift"
+                style="color: rgba(0, 0, 0, 0.25)"
+              />
             </a-input>
           </a-form-item>
 
@@ -169,7 +200,7 @@ export default {
             password: values.password,
             name: values.username,
           }
-          console.log("registerData:", registerData)
+          console.log('registerData:', registerData)
           authApi
             .signUp(registerData)
             .then((res) => {
@@ -225,7 +256,7 @@ export default {
       // Xử lý hiển thị điều khoản sử dụng
       this.$message.info('Điều khoản sử dụng')
       // Có thể mở modal hoặc chuyển đến trang điều khoản
-    }
+    },
   },
 }
 </script>
@@ -250,6 +281,7 @@ export default {
   align-items: center;
   background: #fff;
   padding: 20px;
+  display: flex;
 }
 
 /* Box đăng ký */

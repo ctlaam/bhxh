@@ -7,8 +7,6 @@
         <a-icon type="plus" />
       </div>
     </div>
-
-    <!-- Search Bar -->
     <div class="search-container">
       <a-input v-model="searchText" placeholder="Tìm kiếm" class="search-input">
         <template #prefix>
@@ -16,32 +14,49 @@
         </template>
       </a-input>
     </div>
-
-    <!-- Contact Categories -->
-    <div class="contact-categories">
-      <!-- Tất cả người dùng -->
-      <div class="category-item" @click="toggleCategory('users')">
-        <div class="d-flex align-items-center">
-          <a-icon
-            :type="expandedCategories.users ? 'caret-down' : 'caret-right'"
-            class="category-arrow"
-          />
-          <span class="category-title">Tất cả người dùng ({{ allUsers.length }})</span>
-        </div>
-      </div>
-
-      <!-- Users List -->
-      <div v-if="expandedCategories.users" class="friends-list">
+    <!-- Kết quả tìm kiếm -->
+    <div v-if="searchText" class="search-results-container">
+      <template v-if="listSearchResults.length">
         <div
-          class="friend-item"
-          v-for="user in filteredUsers"
+          class="search-result-item"
+          v-for="user in listSearchResults"
           :key="user"
         >
+          <div class="result-avatar">
+            <a-avatar
+              :size="32"
+              :src="user.avatar"
+              style="background-color: #1890ff"
+            >
+            </a-avatar>
+          </div>
+          <div class="result-name">{{ user.name }}</div>
+          <div class="result-action">
+            <a-button
+              size="small"
+              type="primary"
+              @click="handleAddFriend(user.name)"
+              :loading="loadingActions[`add-${user.name}`]"
+            >
+              Kết bạn
+            </a-button>
+          </div>
+        </div>
+      </template>
+
+      <div v-else class="no-result">Không tìm thấy kết quả.</div>
+    </div>
+    <div class="contact-categories">
+      <div v-if="expandedCategories.users" class="friends-list">
+        <div class="friend-item" v-for="user in filteredUsers" :key="user">
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
               <div class="friend-avatar">
-                <a-avatar :size="40" style="background-color: #1890ff">
-                  <span class="avatar-text">{{ getInitials(user) }}</span>
+                <a-avatar
+                  :size="40"
+                  :src="user.senderAvatar"
+                  style="background-color: #1890ff"
+                >
                 </a-avatar>
               </div>
               <div class="friend-info">
@@ -89,12 +104,19 @@
       <!-- Friend Requests List -->
       <div v-if="expandedCategories.requests" class="friends-list">
         <!-- Incoming requests -->
-        <div v-for="req in friendRequests.incoming" :key="`in-${req.from}`" class="friend-item">
+        <div
+          v-for="req in friendRequests.incoming"
+          :key="`in-${req.from}`"
+          class="friend-item"
+        >
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
               <div class="friend-avatar">
-                <a-avatar :size="40" style="background-color: #52c41a">
-                  <span class="avatar-text">{{ getInitials(req.from) }}</span>
+                <a-avatar
+                  :size="40"
+                  :src="req.senderAvatar"
+                  style="background-color: #52c41a"
+                >
                 </a-avatar>
               </div>
               <div class="friend-info">
@@ -123,12 +145,19 @@
         </div>
 
         <!-- Outgoing requests -->
-        <div v-for="req in friendRequests.outgoing" :key="`out-${req.to}`" class="friend-item">
+        <div
+          v-for="req in friendRequests.outgoing"
+          :key="`out-${req.to}`"
+          class="friend-item"
+        >
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
               <div class="friend-avatar">
-                <a-avatar :size="40" style="background-color: #faad14">
-                  <span class="avatar-text">{{ getInitials(req.to) }}</span>
+                <a-avatar
+                  :size="40"
+                  :src="req.senderAvatar"
+                  style="background-color: #faad14"
+                >
                 </a-avatar>
               </div>
               <div class="friend-info">
@@ -156,22 +185,23 @@
             :type="expandedCategories.blocked ? 'caret-down' : 'caret-right'"
             class="category-arrow"
           />
-          <span class="category-title">Danh sách bị chặn ({{ blockedUsers.length }})</span>
+          <span class="category-title"
+            >Danh sách bị chặn ({{ blockedUsers.length }})</span
+          >
         </div>
       </div>
 
       <!-- Blocked List -->
       <div v-if="expandedCategories.blocked" class="friends-list">
-        <div
-          class="friend-item"
-          v-for="user in blockedUsers"
-          :key="user"
-        >
+        <div class="friend-item" v-for="user in blockedUsers" :key="user">
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
               <div class="friend-avatar">
-                <a-avatar :size="40" style="background-color: #ff4d4f">
-                  <span class="avatar-text">{{ getInitials(user) }}</span>
+                <a-avatar
+                  :size="40"
+                  :src="user.senderAvatar"
+                  style="background-color: #ff4d4f"
+                >
                 </a-avatar>
               </div>
               <div class="friend-info">
@@ -196,7 +226,9 @@
             :type="expandedCategories.groups ? 'caret-down' : 'caret-right'"
             class="category-arrow"
           />
-          <span class="category-title">Trò chuyện nhóm của tôi ({{ myGroups.length }})</span>
+          <span class="category-title"
+            >Trò chuyện nhóm của tôi ({{ myGroups.length }})</span
+          >
         </div>
       </div>
 
@@ -220,9 +252,7 @@
                 <span class="group-id">ID: {{ group.id }}</span>
               </div>
             </div>
-            <a-button size="small" type="primary">
-              Vào phòng
-            </a-button>
+            <a-button size="small" type="primary"> Vào phòng </a-button>
           </div>
         </div>
       </div>
@@ -248,20 +278,19 @@
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
               <div class="friend-avatar">
-                <a-avatar :size="40" style="background-color: #1890ff">
-                  <span class="avatar-text">{{ getInitials(friend) }}</span>
+                <a-avatar
+                  :size="40"
+                  :src="friend.senderAvatar"
+                  style="background-color: #1890ff"
+                >
                 </a-avatar>
               </div>
               <div class="friend-info">
-                <span class="friend-name">{{ friend }}</span>
+                <span class="friend-name">{{ friend.name }}</span>
               </div>
             </div>
             <div class="action-buttons">
-              <a-button
-                size="small"
-                type="primary"
-                @click="openChat(friend)"
-              >
+              <a-button size="small" type="primary" @click="openChat(friend)">
                 Chat
               </a-button>
               <a-button
@@ -285,17 +314,15 @@
       @ok="handleAddFriendFromModal"
       @cancel="showAddFriendModal = false"
     >
-      <a-input
-        v-model="newFriendName"
-        placeholder="Nhập tên người dùng"
-      />
+      <a-input v-model="newFriendName" placeholder="Nhập tên người dùng" />
     </a-modal>
   </div>
 </template>
 
 <script>
 import * as chatApi from '@/api/chat'
-
+import { searchUsers } from '../../api/chat'
+import * as _ from 'lodash'
 export default {
   name: 'AddressBookPage',
   data() {
@@ -315,37 +342,60 @@ export default {
       myGroups: [],
       friendRequests: {
         incoming: [],
-        outgoing: []
+        outgoing: [],
       },
       myId: null,
       myName: null,
       loadingActions: {},
       showAddFriendModal: false,
       newFriendName: '',
+      listSearchResults: [],
+      debouncedSearchUsers: null, // Khai báo trước để dễ đọc
     }
   },
   computed: {
     filteredUsers() {
       if (!this.searchText) return this.allUsers
-      return this.allUsers.filter(user =>
-        user.toLowerCase().includes(this.searchText.toLowerCase())
-      )
+      return this.allUsers
     },
     filteredFriends() {
       if (!this.searchText) return this.friends
-      return this.friends.filter(friend =>
-        friend.toLowerCase().includes(this.searchText.toLowerCase())
-      )
+      return this.friends
     },
     totalRequests() {
-      return this.friendRequests.incoming.length + this.friendRequests.outgoing.length
-    }
+      return (
+        this.friendRequests.incoming.length +
+        this.friendRequests.outgoing.length
+      )
+    },
+  },
+  watch: {
+    searchText(newVal) {
+      this.debouncedSearchUsers(newVal)
+    },
+  },
+  created() {
+    this.debouncedSearchUsers = _.debounce(this.searchUsers, 300)
   },
   async mounted() {
     await this.checkAuth()
     await this.loadAllData()
   },
   methods: {
+    async searchUsers() {
+      if (!this.searchText) {
+        this.listSearchResults = []
+        return
+      }
+      try {
+        const response = await searchUsers(this.searchText)
+        console.log('Search response:', response)
+        this.listSearchResults = response.data.users
+      } catch (error) {
+        this.$message.error('Tìm kiếm người dùng thất bại')
+        console.error('Search users error:', error)
+      }
+    },
     async checkAuth() {
       try {
         const response = await chatApi.getProfile()
@@ -360,11 +410,11 @@ export default {
 
     async loadAllData() {
       await Promise.all([
-        this.loadUsers(),
+        // this.loadUsers(),
         this.loadFriends(),
         this.loadBlockedUsers(),
         this.loadGroups(),
-        this.loadFriendRequests()
+        this.loadFriendRequests(),
       ])
     },
 
@@ -401,7 +451,7 @@ export default {
       try {
         const response = await chatApi.getGroups()
         this.groups = response.data
-        this.myGroups = this.groups.filter(g =>
+        this.myGroups = this.groups.filter((g) =>
           (g.members || []).includes(this.myName)
         )
       } catch (error) {
@@ -415,7 +465,7 @@ export default {
         const response = await chatApi.getFriendRequests()
         this.friendRequests = {
           incoming: response.data.incoming || [],
-          outgoing: response.data.outgoing || []
+          outgoing: response.data.outgoing || [],
         }
       } catch (error) {
         console.error('Load requests error:', error)
@@ -443,7 +493,9 @@ export default {
         await this.loadAllData()
       } catch (error) {
         console.error('Add friend error:', error)
-        this.$message.error('Không thể gửi lời mời kết bạn')
+        this.$message.error(
+          'Không thể gửi lời mời kết bạn hoặc hai bạn đã là bạn bè'
+        )
       } finally {
         this.$set(this.loadingActions, `add-${userName}`, false)
       }
@@ -588,11 +640,14 @@ export default {
         if (!userResponse.data?.ok) return
 
         // Lưu thông tin chat target và chuyển đến trang chat
-        localStorage.setItem('chatTarget', JSON.stringify({
-          type: 'dm',
-          id: userResponse.data.user._id,
-          name: friendName
-        }))
+        localStorage.setItem(
+          'chatTarget',
+          JSON.stringify({
+            type: 'dm',
+            id: userResponse.data.user._id,
+            name: friendName,
+          })
+        )
         this.$router.push('/chat')
       } catch (error) {
         console.error('Open chat error:', error)
@@ -602,11 +657,14 @@ export default {
 
     openGroupChat(group) {
       // Lưu thông tin group và chuyển đến trang chat
-      localStorage.setItem('chatTarget', JSON.stringify({
-        type: 'group',
-        id: group.id,
-        name: group.name
-      }))
+      localStorage.setItem(
+        'chatTarget',
+        JSON.stringify({
+          type: 'group',
+          id: group.id,
+          name: group.name,
+        })
+      )
       this.$router.push('/chat')
     },
   },
@@ -894,5 +952,48 @@ export default {
   font-size: 48px;
   color: #ddd;
   margin-bottom: 16px;
+}
+.search-results-container {
+  background: white;
+  border-top: 1px solid #e8e8e8;
+  max-height: 250px;
+  overflow-y: auto;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 8px 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.result-avatar {
+  margin-right: 10px;
+}
+
+.result-name {
+  flex: 1;
+  font-size: 14px;
+  color: #333;
+}
+
+.result-action a {
+  color: #1890ff;
+  font-size: 13px;
+}
+
+.no-result {
+  text-align: center;
+  color: #999;
+  padding: 10px 0;
+  font-size: 13px;
 }
 </style>

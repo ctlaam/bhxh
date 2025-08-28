@@ -22,8 +22,20 @@
     <!-- Empty State -->
     <div v-else-if="filteredConversations.length === 0" class="empty-messages">
       <a-icon type="message" :style="{ fontSize: '48px', color: '#d9d9d9' }" />
-      <p>{{ searchText ? 'Không tìm thấy cuộc trò chuyện nào' : 'Chưa có tin nhắn nào' }}</p>
-      <p class="sub-text">{{ searchText ? 'Thử tìm kiếm với từ khóa khác' : 'Bắt đầu trò chuyện mới từ danh bạ' }}</p>
+      <p>
+        {{
+          searchText
+            ? 'Không tìm thấy cuộc trò chuyện nào'
+            : 'Chưa có tin nhắn nào'
+        }}
+      </p>
+      <p class="sub-text">
+        {{
+          searchText
+            ? 'Thử tìm kiếm với từ khóa khác'
+            : 'Bắt đầu trò chuyện mới từ danh bạ'
+        }}
+      </p>
     </div>
 
     <!-- Messages List -->
@@ -33,7 +45,7 @@
         v-for="conversation in filteredConversations"
         :key="conversation.id"
         class="message-item"
-        :class="{ 'unread': conversation.unreadCount > 0 }"
+        :class="{ unread: conversation.unreadCount > 0 }"
         @click="openChat(conversation)"
       >
         <div class="d-flex align-items-center">
@@ -41,14 +53,20 @@
           <div class="avatar-container">
             <a-badge :count="conversation.unreadCount" :offset="[-5, 5]">
               <a-avatar
+                v-if="conversation.type === 'group'"
                 :size="50"
                 :style="{
-                  backgroundColor: conversation.type === 'dm' ? '#1890ff' : '#722ed1'
+                  backgroundColor:
+                    conversation.type === 'dm' ? '#1890ff' : '#722ed1',
                 }"
               >
-                <a-icon v-if="conversation.type === 'group'" type="team" />
-                <span v-else class="avatar-text">{{ getInitials(conversation.name) }}</span>
+                <a-icon type="team" />
               </a-avatar>
+              <img
+                v-else
+                class="avatar-text"
+                :src="conversation.lastMessage.senderAvatar"
+              />
             </a-badge>
           </div>
 
@@ -58,18 +76,26 @@
               <div class="message-info">
                 <h6 class="sender-name mb-1">
                   {{ conversation.name }}
-                  <span v-if="conversation.type === 'group'" class="group-badge">Nhóm</span>
+                  <span v-if="conversation.type === 'group'" class="group-badge"
+                    >Nhóm</span
+                  >
                 </h6>
                 <p class="message-preview mb-0">
                   <span v-if="conversation.lastMessage">
-                    <strong v-if="conversation.lastMessage.from">{{ conversation.lastMessage.from }}:</strong>
+                    <strong v-if="conversation.lastMessage.from"
+                      >{{ conversation.lastMessage.from }}:</strong
+                    >
                     {{ conversation.lastMessage.text }}
                   </span>
                   <span v-else class="no-message">Chưa có tin nhắn</span>
                 </p>
               </div>
               <div class="message-meta">
-                <span class="message-time">{{ formatTime(conversation.updatedAt || conversation.lastMessage?.ts) }}</span>
+                <span class="message-time">{{
+                  formatTime(
+                    conversation.updatedAt || conversation.lastMessage?.ts
+                  )
+                }}</span>
               </div>
             </div>
           </div>
@@ -113,22 +139,28 @@ export default {
       }
 
       const searchLower = this.searchText.toLowerCase()
-      return this.conversations.filter(conv => {
+      return this.conversations.filter((conv) => {
         // Tìm theo tên
         if (conv.name && conv.name.toLowerCase().includes(searchLower)) {
           return true
         }
         // Tìm theo nội dung tin nhắn cuối
-        if (conv.lastMessage?.text && conv.lastMessage.text.toLowerCase().includes(searchLower)) {
+        if (
+          conv.lastMessage?.text &&
+          conv.lastMessage.text.toLowerCase().includes(searchLower)
+        ) {
           return true
         }
         // Tìm theo người gửi tin nhắn cuối
-        if (conv.lastMessage?.from && conv.lastMessage.from.toLowerCase().includes(searchLower)) {
+        if (
+          conv.lastMessage?.from &&
+          conv.lastMessage.from.toLowerCase().includes(searchLower)
+        ) {
           return true
         }
         return false
       })
-    }
+    },
   },
 
   async mounted() {
@@ -171,13 +203,20 @@ export default {
 
           // Sắp xếp theo thời gian mới nhất
           this.conversations.sort((a, b) => {
-            const timeA = new Date(a.updatedAt || a.lastMessage?.ts || 0).getTime()
-            const timeB = new Date(b.updatedAt || b.lastMessage?.ts || 0).getTime()
+            const timeA = new Date(
+              a.updatedAt || a.lastMessage?.ts || 0
+            ).getTime()
+            const timeB = new Date(
+              b.updatedAt || b.lastMessage?.ts || 0
+            ).getTime()
             return timeB - timeA
           })
 
           // Tính tổng số tin nhắn chưa đọc
-          const totalUnread = this.conversations.reduce((sum, conv) => sum + (conv.unreadCount || 0), 0)
+          const totalUnread = this.conversations.reduce(
+            (sum, conv) => sum + (conv.unreadCount || 0),
+            0
+          )
           if (totalUnread > 0) {
             document.title = `(${totalUnread}) Tin nhắn - GoVietNam`
           } else {
@@ -245,7 +284,7 @@ export default {
       return date.toLocaleDateString('vi-VN', {
         day: '2-digit',
         month: '2-digit',
-        year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined
+        year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined,
       })
     },
 
@@ -263,19 +302,18 @@ export default {
 
   watch: {
     // Khi quay lại trang, reload conversations
-    '$route'(to) {
+    $route(to) {
       if (to.path === '/messages') {
         this.loadConversations(true)
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style scoped>
 .messages-page {
   min-height: 100vh;
-  background-color: #f5f5f5;
   padding-bottom: 80px;
   position: relative;
 }
@@ -353,8 +391,11 @@ export default {
 }
 
 .avatar-text {
-  font-size: 16px;
   font-weight: bold;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .message-content {

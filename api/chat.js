@@ -115,3 +115,32 @@ export function resetSeed() {
   const url = `${baseURL}/setup/reset`
   return axios.post(url)
 }
+
+export function searchUsers(query) {
+  const url = `${baseURL}/users/search?q=${query}&limit=100`
+  return axios.get(url)
+}
+
+export function uploadImage(data) {
+  const url = `${baseURL}/upload`
+  console.log("url:", url)
+  return new Promise((resolve, reject) => {
+    axios
+      .post(url, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((response) => {
+        if (response.status == 200) {
+          resolve(response.data)
+        } else {
+          reject(response)
+        }
+
+      })
+      .catch((response) => {
+        reject(response)
+      })
+  })
+}

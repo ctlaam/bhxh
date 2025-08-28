@@ -198,7 +198,17 @@
             @click="sendMessage"
             :disabled="!messageText.trim()"
           >
-            <a-icon type="arrow-right" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#5985E1"
+            >
+              <path
+                d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z"
+              />
+            </svg>
           </a-button>
         </div>
       </div>
@@ -316,7 +326,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .chat-page {
   display: flex;
   flex-direction: column;
@@ -560,8 +570,15 @@ export default {
 
 .send-button:disabled {
   opacity: 0.5;
+  svg {
+  }
 }
-
+.send-button svg {
+  width: 20px;
+  height: 20px;
+  color: #fff;
+  fill: #fff;
+}
 /* Responsive */
 @media (max-width: 576px) {
   .chat-header {

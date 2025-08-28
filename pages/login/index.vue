@@ -172,6 +172,7 @@ export default {
   align-items: center;
   background: #fff;
   padding: 20px;
+  display: flex;
 }
 
 /* Box đăng nhập */

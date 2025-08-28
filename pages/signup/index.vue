@@ -5,15 +5,27 @@
       <div class="login-box">
         <!-- Logo -->
         <div class="logo-wrapper">
-          <img src="~/assets/go-maket/icon-DOt7N7oV.png" alt="Logo" class="logo" />
+          <img
+            src="~/assets/go-maket/icon-DOt7N7oV.png"
+            alt="Logo"
+            class="logo"
+          />
         </div>
 
         <!-- Upload Avatar -->
         <div class="avatar-upload-wrapper">
           <div class="avatar-preview" @click="$refs.avatarInput.click()">
-            <img v-if="avatarUrl" :src="domain + avatarUrl" alt="Avatar" class="avatar-image" />
+            <img
+              v-if="avatarUrl"
+              :src="domain + avatarUrl"
+              alt="Avatar"
+              class="avatar-image"
+            />
             <div v-else class="avatar-placeholder">
-              <a-icon type="camera" :style="{ fontSize: '32px', color: '#999' }" />
+              <a-icon
+                type="camera"
+                :style="{ fontSize: '32px', color: '#999' }"
+              />
               <p class="upload-text">Tải ảnh đại diện</p>
             </div>
             <div v-if="uploadingAvatar" class="avatar-loading">
@@ -31,11 +43,7 @@
         </div>
 
         <!-- Form đăng ký -->
-        <a-form
-          :form="form"
-          @submit="handleSubmit"
-          class="login-form"
-        >
+        <a-form :form="form" @submit="handleSubmit" class="login-form">
           <h2 class="login-title">Đăng ký tài khoản</h2>
 
           <!-- Username -->
@@ -46,15 +54,26 @@
                 {
                   rules: [
                     { required: true, message: 'Vui lòng nhập tên đăng nhập!' },
-                    { min: 6, message: 'Tên đăng nhập phải có ít nhất 6 ký tự!' },
-                    { pattern: /^[a-zA-Z0-9_]+$/, message: 'Tên đăng nhập chỉ được chứa chữ cái, số và dấu gạch dưới!' }
-                  ]
-                }
+                    {
+                      min: 6,
+                      message: 'Tên đăng nhập phải có ít nhất 6 ký tự!',
+                    },
+                    {
+                      pattern: /^[a-zA-Z0-9_]+$/,
+                      message:
+                        'Tên đăng nhập chỉ được chứa chữ cái, số và dấu gạch dưới!',
+                    },
+                  ],
+                },
               ]"
               size="large"
               placeholder="Tên đăng nhập"
             >
-              <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)" />
+              <a-icon
+                slot="prefix"
+                type="user"
+                style="color: rgba(0, 0, 0, 0.25)"
+              />
             </a-input>
           </a-form-item>
 
@@ -67,14 +86,18 @@
                   rules: [
                     { required: true, message: 'Vui lòng nhập mật khẩu!' },
                     { min: 6, message: 'Mật khẩu phải có ít nhất 6 ký tự!' },
-                    { validator: validateToNextPassword }
-                  ]
-                }
+                    { validator: validateToNextPassword },
+                  ],
+                },
               ]"
               size="large"
               placeholder="Mật khẩu"
             >
-              <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)" />
+              <a-icon
+                slot="prefix"
+                type="lock"
+                style="color: rgba(0, 0, 0, 0.25)"
+              />
             </a-input-password>
           </a-form-item>
 
@@ -86,15 +109,19 @@
                 {
                   rules: [
                     { required: true, message: 'Vui lòng xác nhận mật khẩu!' },
-                    { validator: compareToFirstPassword }
-                  ]
-                }
+                    { validator: compareToFirstPassword },
+                  ],
+                },
               ]"
               size="large"
               placeholder="Xác nhận mật khẩu"
               @blur="handleConfirmBlur"
             >
-              <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)" />
+              <a-icon
+                slot="prefix"
+                type="lock"
+                style="color: rgba(0, 0, 0, 0.25)"
+              />
             </a-input-password>
           </a-form-item>
 
@@ -137,7 +164,7 @@ export default {
       confirmDirty: false,
       avatarUrl: null,
       uploadingAvatar: false,
-      domain: process.env.BASE_URL_IMAGE
+      domain: process.env.BASE_URL_IMAGE,
     }
   },
   beforeCreate() {
@@ -166,10 +193,10 @@ export default {
 
     async uploadAvatar(file) {
       this.uploadingAvatar = true
-      console.log("file:", file)
+      console.log('file:', file)
       const formData = new FormData()
       formData.append('file', file)
-      console.log("formData:", formData)
+      console.log('formData:', formData)
       try {
         const response = await authApi.uploadImage(formData)
         // Giả sử API trả về URL của ảnh đã upload
@@ -252,7 +279,7 @@ export default {
       // Xử lý hiển thị điều khoản sử dụng
       this.$message.info('Điều khoản sử dụng')
       // Có thể mở modal hoặc chuyển đến trang điều khoản
-    }
+    },
   },
 }
 </script>
@@ -277,6 +304,7 @@ export default {
   align-items: center;
   background: #fff;
   padding: 20px;
+  display: flex;
 }
 
 /* Box đăng ký */
