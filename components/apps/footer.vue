@@ -55,7 +55,7 @@
 
       <!-- Go!vietnam - Bouton central rouge -->
       <div class="col center-button-wrapper">
-        <nuxt-link to="/" class="mui-tab-item1 central-red-button">
+        <nuxt-link to="/game" class="mui-tab-item1 central-red-button">
           <div class="red-circle">
             <span class="go-text">Go!</span>
             <span class="vietnam-text">vietnam</span>

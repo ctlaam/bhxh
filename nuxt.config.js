@@ -84,7 +84,7 @@ export default {
     '@/assets/styles.css',
   ],
   router: {
-    // middleware: ['auth', 'axios'], // Sử dụng middleware auth.js
+    middleware: ['auth', 'axios'], // Sử dụng middleware auth.js
   },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -121,6 +121,6 @@ export default {
   build: {},
   server: {
     host: '0.0.0.0', // hoặc là địa chỉ IP cụ thể của bạn
-    port: 3000 // hoặc port mà bạn muốn
+    port: 4000 // hoặc port mà bạn muốn
   },
 }

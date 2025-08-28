@@ -77,7 +77,7 @@ export function recharge(data) {
 }
 
 export function getProfileUser() {
-  const url = `${baseURL}/v1/profile`
+  const url = `${baseURL}/profile`
   return new Promise((resolve, reject) => {
     axios
       .get(url, {

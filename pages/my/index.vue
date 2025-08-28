@@ -9,14 +9,14 @@
     <div class="profile-section">
       <!-- Avatar -->
       <div class="avatar-container">
-        <a-avatar :size="80" style="background-color: #1890ff">
+        <a-avatar :src="user && user.avatar" :size="80" style="background-color: #1890ff">
           <a-icon type="user" style="font-size: 40px" />
         </a-avatar>
       </div>
 
       <!-- Username placeholder -->
       <div class="username-placeholder">
-        <span>-</span>
+        <span>{{user && user.name}}</span>
       </div>
     </div>
 
@@ -94,19 +94,20 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie'
+import {mapState} from "vuex";
 export default {
   name: 'ProfilePage',
   data() {
     return {
       logoutModalVisible: false,
-      user: {
-        name: '',
-        avatar: null,
-        readStatus: 'Mở',
-        onlineStatus: 'Mở',
-      },
       visible: true,
     }
+  },
+  computed: {
+    ...mapState({
+      user: (state) => state.profile.profile,
+    }),
   },
   methods: {
     handleOverlayClick() {
@@ -128,7 +129,28 @@ export default {
       // Navigate to online status settings
     },
     showLogoutConfirm() {
-      this.logoutModalVisible = true
+      this.$confirm({
+        title: 'Xác nhận đăng xuất',
+        content: 'Bạn có chắc chắn muốn đăng xuất khỏi tài khoản?',
+        okText: 'Đăng xuất',
+        cancelText: 'Hủy',
+        okType: 'danger',
+        centered: true,
+        onOk: () => {
+          this.$store.dispatch('profile/saveProfile', null)
+          Cookies.remove('access_token')
+          Cookies.remove('refresh_token')
+          Cookies.remove('user_id')
+          Cookies.remove('time_valid')
+          this.$store.dispatch('auth/logout')
+          this.$store.dispatch('loading/setModalLoading', false)
+          this.$message.success('Đăng xuất thành công')
+
+          setTimeout(() => {
+            this.$router.push('/login')
+          }, 1000)
+        }
+      })
     },
     handleLogout() {
       // Handle logout logic

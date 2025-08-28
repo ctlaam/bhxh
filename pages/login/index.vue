@@ -1,97 +1,77 @@
 <template>
-  <div id="signup">
-    <div class="row py-2 px-2 m-0">
-      <div class="text-left col align-self-center"></div>
-    </div>
-
-    <div class="container h-100">
-      <div class="row h-100 justify-content-center align-items-center">
-        <div class="col-12 col-md-8 col-lg-6 col-xl-4">
-          <div class="login-card">
-            <!-- Logo Section -->
-            <div class="logo-section">
-              <img
-                src="https://i.imgur.com/Cacqy63.png"
-                alt="logo"
-                class="logo-img"
-              />
-            </div>
-
-            <!-- Welcome Text -->
-            <div class="welcome-section">
-              <h4 class="welcome-title">Chào mừng trở lại!</h4>
-              <p class="welcome-subtitle">Đăng nhập để tiếp tục</p>
-            </div>
-
-            <!-- Login Form -->
-            <div class="form-section">
-              <a-form :form="form" @submit="handleSubmit">
-                <a-form-item class="form-item">
-                  <a-input
-                    size="large"
-                    placeholder="Tên ID đăng nhập"
-                    prefix-icon="user"
-                    v-decorator="[
-                      'username',
-                      {
-                        rules: [
-                          {
-                            required: true,
-                            message:
-                              'Tên hoặc số điện thoại không được để trống!',
-                          },
-                        ],
-                      },
-                    ]"
-                  >
-                    <a-icon slot="prefix" type="user" class="input-icon" />
-                  </a-input>
-                </a-form-item>
-
-                <a-form-item class="form-item">
-                  <a-input
-                    size="large"
-                    type="password"
-                    placeholder="Mật khẩu"
-                    v-decorator="[
-                      'password',
-                      {
-                        rules: [
-                          {
-                            required: true,
-                            message: 'Mật khẩu không được để trống!',
-                          },
-                        ],
-                      },
-                    ]"
-                  >
-                    <a-icon slot="prefix" type="lock" class="input-icon" />
-                  </a-input>
-                </a-form-item>
-
-                <a-form-item class="form-item">
-                  <a-button
-                    class="login-btn"
-                    type="primary"
-                    size="large"
-                    html-type="submit"
-                    block
-                  >
-                    Đăng nhập
-                  </a-button>
-                </a-form-item>
-              </a-form>
-            </div>
-
-            <!-- Signup Link -->
-            <div class="signup-section">
-              <span class="signup-text">Chưa có tài khoản? </span>
-              <NuxtLink to="/login/signup" class="signup-link">
-                Đăng ký
-              </NuxtLink>
-            </div>
-          </div>
+  <div>
+    <div class="login-container">
+      <div class="login-box">
+        <!-- Logo -->
+        <div class="logo-wrapper">
+          <img src="~/assets/go-maket/icon-DOt7N7oV.png" alt="Logo" class="logo" />
         </div>
+
+        <!-- Form đăng nhập -->
+        <a-form
+          :form="form"
+          @submit="handleLogin"
+          class="login-form"
+        >
+          <h2 class="login-title">Đăng nhập</h2>
+
+          <!-- Username/Email -->
+          <a-form-item>
+            <a-input
+              v-decorator="[
+              'username',
+              {
+                rules: [
+                  { required: true, message: 'Vui lòng nhập tên đăng nhập!' }
+                ]
+              }
+            ]"
+              size="large"
+              placeholder="Vui lòng nhập tên đăng nhập"
+            >
+              <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)" />
+            </a-input>
+          </a-form-item>
+
+          <!-- Password -->
+          <a-form-item>
+            <a-input-password
+              v-decorator="[
+              'password',
+              {
+                rules: [
+                  { required: true, message: 'Vui lòng nhập mật khẩu!' }
+                ]
+              }
+            ]"
+              size="large"
+              placeholder="Mật khẩu"
+            >
+              <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)" />
+            </a-input-password>
+          </a-form-item>
+          <a-form-item>
+            <a-button
+              type="primary"
+              html-type="submit"
+              size="large"
+              block
+              class="login-button"
+              :loading="loading"
+            >
+              Đăng nhập
+            </a-button>
+
+            <a-button
+              size="large"
+              block
+              class="register-button"
+              @click="$router.push('/signup')"
+            >
+              Đăng ký
+            </a-button>
+          </a-form-item>
+        </a-form>
       </div>
     </div>
   </div>
@@ -99,35 +79,27 @@
 
 <script>
 import * as authApi from '../../api/auth'
-import * as volatilityApi from '../../api/volatility'
 import Cookies from 'js-cookie'
-import _ from 'lodash'
-
 export default {
   layout: 'account',
+  name: 'LoginPage',
   data() {
     return {
-      username: null,
-      password: null,
-      password2: null,
-      profile: null,
+      loading: false
     }
   },
   beforeCreate() {
-    this.form = this.$form.createForm(this, { name: 'login' })
+    this.form = this.$form.createForm(this, { name: 'login_form' });
   },
   methods: {
-    backHistory() {
-      this.$router.push({ path: '/' })
-    },
-    handleSubmit(e) {
-      e.preventDefault()
-      this.form.validateFieldsAndScroll((err, values) => {
+    handleLogin(e) {
+      e.preventDefault();
+      this.form.validateFields((err, values) => {
         if (!err) {
-          this.$store.dispatch('loading/setModalLoading', true)
+          this.loading = true;
           authApi
             .logIn({
-              identifier: values.username,
+              name: values.username,
               password: values.password,
             })
             .then(async (res) => {
@@ -136,218 +108,211 @@ export default {
                 accessToken: res.token,
               })
               Cookies.set('access_token', res.token, { expires: 1 })
-              await this.getProfile()
+              await authApi
+                .getDataUser(res.token)
+                .then(async (response) => {
+                  console.log("response aaa:", response)
+                  await this.$store.dispatch(
+                    'profile/saveProfile',
+                    response.user
+                  )
+                })
+                .catch((error) => {
+                  this.$store.dispatch('auth/login', {
+                    accessToken: null,
+                  })
+                })
               this.$router.push('/')
             })
-            .catch((error) => {
-              this.$message.error(
-                'Đăng nhập thất bại. Vui lòng kiểm tra lại tài khoản và mật khẩu!'
-              )
-              this.$store.dispatch('auth/login', {
-                accessToken: null,
-              })
+            .catch((err) => {
+              console.log(err)
+              if (err.message) {
+                this.$message.error('Sai tài khoản hoặc mật khẩu')
+              } else {
+                this.$message.error('Có lỗi xảy ra vui lòng thử lại sau')
+              }
             })
             .finally(() => {
               setTimeout(() => {
-                this.$store.dispatch('loading/setModalLoading', false)
+                // this.$store.dispatch('loading/setModalLoading', false)
               }, 1500)
             })
         }
-      })
+      });
     },
-    async getProfile() {
-      volatilityApi.getProfileUser().then((res) => {
-        this.profile = _.get(res, 'data')
-        this.$store.dispatch('profile/saveProfile', this.profile)
-      })
-    },
-  },
+
+    handleRegister() {
+      console.log('Navigate to register page');
+      // this.$router.push('/register');
+    }
+  }
 }
 </script>
 
-<style lang="scss">
-#signup {
+<style scoped>
+.blace {
+  width: 100%;
+  height: 50px;
+  line-height: 30px;
+  flex: 1;
+  text-align: center;
+  background-color: #ec1d27;
+  /* margin-top: 40px; */
+  margin-bottom: 0;
+  padding-top: 5px;
+  font-size: 24px;
+  font-weight: bolder;
+  color: #fff;
+  z-index: 999;
+}
+/* Container chính */
+.login-container {
   min-height: 100vh;
-  padding: 20px 0;
-
-  .login-card {
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    padding: 40px 30px;
-    margin: 0 auto;
-    max-width: 400px;
-    position: relative;
-    overflow: hidden;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #c62a1c, #e74c3c);
-    }
-  }
-
-  .logo-section {
-    text-align: center;
-    margin-bottom: 30px;
-
-    .logo-img {
-      width: 120px;
-      height: auto;
-      object-fit: contain;
-    }
-  }
-
-  .welcome-section {
-    text-align: center;
-    margin-bottom: 30px;
-
-    .welcome-title {
-      font-size: 24px;
-      font-weight: 700;
-      color: #2c3e50;
-      margin-bottom: 8px;
-    }
-
-    .welcome-subtitle {
-      font-size: 14px;
-      color: #7f8c8d;
-      margin-bottom: 0;
-    }
-  }
-
-  .form-section {
-    .form-item {
-      margin-bottom: 20px;
-
-      .ant-input-affix-wrapper {
-        border-radius: 12px;
-        border: 2px solid #e8ecf0;
-        transition: all 0.3s ease;
-
-        &:hover,
-        &:focus {
-          border-color: #c62a1c;
-          box-shadow: 0 0 0 3px rgba(198, 42, 28, 0.1);
-        }
-
-        .input-icon {
-          color: #95a5a6;
-        }
-      }
-
-      .ant-input {
-        border: none;
-        font-size: 14px;
-        font-weight: 500;
-
-        &::placeholder {
-          color: #bdc3c7;
-          font-weight: 400;
-        }
-      }
-    }
-
-    .login-btn {
-      background: linear-gradient(135deg, #c62a1c, #e74c3c);
-      border: none;
-      border-radius: 12px;
-      height: 48px;
-      font-size: 16px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(198, 42, 28, 0.3);
-
-      &:hover,
-      &:focus {
-        background: linear-gradient(135deg, #a02318, #c0392b);
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(198, 42, 28, 0.4);
-      }
-
-      &:active {
-        transform: translateY(0);
-      }
-    }
-  }
-
-  .signup-section {
-    text-align: center;
-    margin-top: 25px;
-    padding-top: 20px;
-    border-top: 1px solid #ecf0f1;
-
-    .signup-text {
-      color: #7f8c8d;
-      font-size: 14px;
-    }
-
-    .signup-link {
-      color: #c62a1c;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
-
-      &:hover {
-        color: #a02318;
-        text-decoration: underline;
-      }
-    }
-  }
-
-  .has-error {
-    .ant-form-explain {
-      color: #e74c3c;
-      font-size: 12px;
-      font-weight: 500;
-      margin-top: 5px;
-    }
-
-    .ant-input-affix-wrapper {
-      border-color: #e74c3c;
-      box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
-    }
-  }
-
-  .back-btn {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    border-radius: 12px;
-    padding: 8px 12px;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: translateX(-2px);
-    }
-
-    svg {
-      fill: white;
-    }
-  }
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  padding: 20px;
 }
 
-// Responsive
-@media (max-width: 768px) {
-  #signup {
-    padding: 10px;
+/* Box đăng nhập */
+.login-box {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 100%;
+  max-width: 450px;
+}
 
-    .login-card {
-      padding: 30px 20px;
-      margin: 10px;
-    }
+/* Logo */
+.logo-wrapper {
+  text-align: center;
+  margin-bottom: 30px;
+}
 
-    .welcome-section {
-      .welcome-title {
-        font-size: 20px;
-      }
-    }
+.logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+/* Tiêu đề */
+.login-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Form */
+.login-form {
+  width: 100%;
+}
+
+/* Options (Remember & Forgot) */
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.forgot-password {
+  color: #ff5c5e;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* Button đăng nhập - màu #ff5c5e */
+.login-button {
+  background-color: #ff5c5e !important;
+  border-color: #ff5c5e !important;
+  color: white !important;
+  font-weight: 500;
+  height: 45px;
+  font-size: 16px;
+  margin-bottom: 15px;
+  transition: all 0.3s;
+}
+
+.login-button:hover {
+  background-color: #ff4547 !important;
+  border-color: #ff4547 !important;
+  box-shadow: 0 4px 12px rgba(255, 92, 94, 0.3);
+}
+
+/* Button đăng ký - màu #f6f6f6 */
+.register-button {
+  background-color: #f6f6f6 !important;
+  border-color: #f6f6f6 !important;
+  color: #000 !important;
+  font-weight: 500;
+  height: 45px;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.register-button:hover {
+  background-color: #ebebeb !important;
+  border-color: #ebebeb !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Social login */
+.social-login {
+  display: flex;
+  gap: 10px;
+}
+
+.social-button {
+  flex: 1;
+  height: 40px;
+}
+
+/* Input styles */
+.ant-input-affix-wrapper,
+.ant-input {
+  height: 45px;
+  font-size: 15px;
+}
+
+.ant-input-affix-wrapper:hover,
+.ant-input:hover {
+  border-color: #ff5c5e;
+}
+
+.ant-input-affix-wrapper:focus,
+.ant-input:focus,
+.ant-input-affix-wrapper-focused {
+  border-color: #ff5c5e;
+  box-shadow: 0 0 0 2px rgba(255, 92, 94, 0.2);
+}
+
+/* Checkbox */
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #ff5c5e;
+  border-color: #ff5c5e;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-box {
+    padding: 30px 20px;
+  }
+
+  .login-title {
+    font-size: 24px;
+  }
+
+  .social-login {
+    flex-direction: column;
+  }
+
+  .social-button {
+    width: 100%;
   }
 }
 </style>

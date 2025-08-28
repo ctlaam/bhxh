@@ -8,6 +8,28 @@
           <img src="~/assets/go-maket/icon-DOt7N7oV.png" alt="Logo" class="logo" />
         </div>
 
+        <!-- Upload Avatar -->
+        <div class="avatar-upload-wrapper">
+          <div class="avatar-preview" @click="$refs.avatarInput.click()">
+            <img v-if="avatarUrl" :src="domain + avatarUrl" alt="Avatar" class="avatar-image" />
+            <div v-else class="avatar-placeholder">
+              <a-icon type="camera" :style="{ fontSize: '32px', color: '#999' }" />
+              <p class="upload-text">Tải ảnh đại diện</p>
+            </div>
+            <div v-if="uploadingAvatar" class="avatar-loading">
+              <a-spin />
+            </div>
+          </div>
+          <input
+            ref="avatarInput"
+            type="file"
+            accept="image/*"
+            style="display: none"
+            @change="handleAvatarChange"
+          />
+          <p class="avatar-hint">Click để tải ảnh (JPG, PNG, tối đa 5MB)</p>
+        </div>
+
         <!-- Form đăng ký -->
         <a-form
           :form="form"
@@ -76,45 +98,6 @@
             </a-input-password>
           </a-form-item>
 
-          <!-- Mật khẩu rút tiền -->
-          <a-form-item>
-            <a-input-password
-              v-decorator="[
-                'passwordMoney',
-                {
-                  rules: [
-                    { required: true, message: 'Vui lòng nhập mật khẩu rút tiền!' },
-                    { len: 6, message: 'Mật khẩu rút tiền phải có đúng 6 số!' },
-                    { pattern: /^[0-9]+$/, message: 'Mật khẩu rút tiền chỉ được chứa số!' }
-                  ]
-                }
-              ]"
-              size="large"
-              placeholder="Mật khẩu rút tiền (6 số)"
-              maxLength="6"
-            >
-              <a-icon slot="prefix" type="wallet" style="color: rgba(0,0,0,.25)" />
-            </a-input-password>
-          </a-form-item>
-
-          <!-- Mã mời -->
-          <a-form-item>
-            <a-input
-              v-decorator="[
-                'inviteCode',
-                {
-                  rules: [
-                    { required: true, message: 'Vui lòng nhập mã mời!' }
-                  ]
-                }
-              ]"
-              size="large"
-              placeholder="Mã mời"
-            >
-              <a-icon slot="prefix" type="gift" style="color: rgba(0,0,0,.25)" />
-            </a-input>
-          </a-form-item>
-
           <!-- Buttons -->
           <a-form-item>
             <a-button
@@ -147,17 +130,60 @@
 import * as authApi from '../../api/auth'
 
 export default {
-  layout: 'nonelayout',
+  layout: 'account',
   data() {
     return {
       loading: false,
       confirmDirty: false,
+      avatarUrl: null,
+      uploadingAvatar: false,
+      domain: process.env.BASE_URL_IMAGE
     }
   },
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: 'register' })
   },
   methods: {
+    handleAvatarChange(e) {
+      const file = e.target.files[0]
+      if (!file) return
+
+      // Kiểm tra loại file
+      if (!file.type.startsWith('image/')) {
+        this.$message.error('Vui lòng chọn file ảnh!')
+        return
+      }
+
+      // Kiểm tra kích thước file (5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        this.$message.error('Kích thước ảnh không được vượt quá 5MB!')
+        return
+      }
+
+      // Upload ảnh
+      this.uploadAvatar(file)
+    },
+
+    async uploadAvatar(file) {
+      this.uploadingAvatar = true
+      console.log("file:", file)
+      const formData = new FormData()
+      formData.append('file', file)
+      console.log("formData:", formData)
+      try {
+        const response = await authApi.uploadImage(formData)
+        // Giả sử API trả về URL của ảnh đã upload
+        // Điều chỉnh theo cấu trúc response thực tế của API
+        this.avatarUrl = response.data?.path || response.url || response
+        this.$message.success('Tải ảnh thành công!')
+      } catch (error) {
+        console.error('Upload error:', error)
+        this.$message.error('Tải ảnh thất bại, vui lòng thử lại!')
+      } finally {
+        this.uploadingAvatar = false
+      }
+    },
+
     handleSubmit(e) {
       e.preventDefault()
       this.form.validateFieldsAndScroll((err, values) => {
@@ -168,8 +194,9 @@ export default {
           const registerData = {
             password: values.password,
             name: values.username,
+            avatar: this.domain + this.avatarUrl || '', // Thêm avatar URL
           }
-          console.log("registerData:", registerData)
+
           authApi
             .signUp(registerData)
             .then((res) => {
@@ -273,6 +300,67 @@ export default {
   width: 70px;
   height: 70px;
   object-fit: contain;
+}
+
+/* Avatar Upload Styles */
+.avatar-upload-wrapper {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.avatar-preview {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  border: 2px dashed #d9d9d9;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fafafa;
+}
+
+.avatar-preview:hover {
+  border-color: #ff5c5e;
+  background-color: #fff5f5;
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  text-align: center;
+}
+
+.upload-text {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #999;
+}
+
+.avatar-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-hint {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #999;
 }
 
 /* Tiêu đề */
@@ -392,6 +480,11 @@ export default {
   .logo {
     width: 60px;
     height: 60px;
+  }
+
+  .avatar-preview {
+    width: 100px;
+    height: 100px;
   }
 
   .ant-form-item {

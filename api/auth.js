@@ -1,7 +1,7 @@
 import axios from 'axios'
 const baseURL = process.env.BASE_URL ?? 'https://api.soatdonctv.online/api'
 export function logIn(data) {
-  const url = `${baseURL}/v1/auth/login/`
+  const url = `${baseURL}/auth/login/`
   return new Promise((resolve, reject) => {
     axios
       .post(url, data, {
@@ -10,8 +10,8 @@ export function logIn(data) {
         },
       })
       .then((response) => {
-        if (response.status) {
-          resolve(response.data.data)
+        if (response.data) {
+          resolve(response.data)
         } else {
           reject(response)
         }
@@ -23,7 +23,7 @@ export function logIn(data) {
 }
 
 export function signUp(data) {
-  const url = `${baseURL}/v1/auth/register`
+  const url = `${baseURL}/auth/register`
   return new Promise((resolve, reject) => {
     axios
       .post(url, data, {
@@ -44,7 +44,7 @@ export function signUp(data) {
   })
 }
 export async function getDataUser(data) {
-  const url = `${baseURL}/v1/profile`;
+  const url = `${baseURL}/profile`;
   return new Promise((resolve, reject) => {
     axios
       .get(url, {
@@ -86,7 +86,7 @@ export function getUserInfo(data) {
 }
 
 export function updatePassword(data) {
-  const url = `${baseURL}/v1/profile/password`
+  const url = `${baseURL}/profile/password`
   return new Promise((resolve, reject) => {
     axios
       .put(url, data, {
@@ -107,4 +107,28 @@ export function updatePassword(data) {
       })
   })
 }
+export function uploadImage(data) {
+  const url = `${baseURL}/upload`
+  console.log("url:", url)
+  return new Promise((resolve, reject) => {
+    axios
+      .post(url, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((response) => {
+        if (response.status == 200) {
+          resolve(response.data)
+        } else {
+          reject(response)
+        }
+
+      })
+      .catch((response) => {
+        reject(response)
+      })
+  })
+}
+
 

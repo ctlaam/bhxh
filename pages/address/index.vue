@@ -3,7 +3,7 @@
     <!-- Header -->
     <div class="header">
       <h3 class="header-title">Sổ địa chỉ</h3>
-      <div class="add-button" @click="addNewContact">
+      <div class="add-button" @click="showAddFriendModal = true">
         <a-icon type="plus" />
       </div>
     </div>
@@ -19,14 +19,133 @@
 
     <!-- Contact Categories -->
     <div class="contact-categories">
-      <!-- Liên hệ mới -->
-      <div class="category-item" @click="toggleCategory('recent')">
+      <!-- Tất cả người dùng -->
+      <div class="category-item" @click="toggleCategory('users')">
         <div class="d-flex align-items-center">
           <a-icon
-            :type="expandedCategories.recent ? 'caret-down' : 'caret-right'"
+            :type="expandedCategories.users ? 'caret-down' : 'caret-right'"
             class="category-arrow"
           />
-          <span class="category-title">Liên hệ mới</span>
+          <span class="category-title">Tất cả người dùng ({{ allUsers.length }})</span>
+        </div>
+      </div>
+
+      <!-- Users List -->
+      <div v-if="expandedCategories.users" class="friends-list">
+        <div
+          class="friend-item"
+          v-for="user in filteredUsers"
+          :key="user"
+        >
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+              <div class="friend-avatar">
+                <a-avatar :size="40" style="background-color: #1890ff">
+                  <span class="avatar-text">{{ getInitials(user) }}</span>
+                </a-avatar>
+              </div>
+              <div class="friend-info">
+                <span class="friend-name">{{ user }}</span>
+              </div>
+            </div>
+            <div class="action-buttons">
+              <a-button
+                v-if="!isFriend(user) && user !== myName"
+                size="small"
+                type="primary"
+                @click="handleAddFriend(user)"
+                :loading="loadingActions[`add-${user}`]"
+              >
+                Kết bạn
+              </a-button>
+              <a-button
+                v-if="!isBlocked(user) && user !== myName"
+                size="small"
+                danger
+                @click="handleBlockUser(user)"
+                :loading="loadingActions[`block-${user}`]"
+              >
+                Chặn
+              </a-button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lời mời kết bạn -->
+      <div class="category-item" @click="toggleCategory('requests')">
+        <div class="d-flex align-items-center">
+          <a-icon
+            :type="expandedCategories.requests ? 'caret-down' : 'caret-right'"
+            class="category-arrow"
+          />
+          <span class="category-title">
+            Lời mời kết bạn
+            <a-badge v-if="totalRequests > 0" :count="totalRequests" />
+          </span>
+        </div>
+      </div>
+
+      <!-- Friend Requests List -->
+      <div v-if="expandedCategories.requests" class="friends-list">
+        <!-- Incoming requests -->
+        <div v-for="req in friendRequests.incoming" :key="`in-${req.from}`" class="friend-item">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+              <div class="friend-avatar">
+                <a-avatar :size="40" style="background-color: #52c41a">
+                  <span class="avatar-text">{{ getInitials(req.from) }}</span>
+                </a-avatar>
+              </div>
+              <div class="friend-info">
+                <span class="friend-name">{{ req.from }}</span>
+                <span class="request-type">Đã gửi lời mời cho bạn</span>
+              </div>
+            </div>
+            <div class="action-buttons">
+              <a-button
+                size="small"
+                type="primary"
+                @click="handleAcceptRequest(req.from)"
+                :loading="loadingActions[`accept-${req.from}`]"
+              >
+                Chấp nhận
+              </a-button>
+              <a-button
+                size="small"
+                @click="handleDeclineRequest(req.from)"
+                :loading="loadingActions[`decline-${req.from}`]"
+              >
+                Từ chối
+              </a-button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Outgoing requests -->
+        <div v-for="req in friendRequests.outgoing" :key="`out-${req.to}`" class="friend-item">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+              <div class="friend-avatar">
+                <a-avatar :size="40" style="background-color: #faad14">
+                  <span class="avatar-text">{{ getInitials(req.to) }}</span>
+                </a-avatar>
+              </div>
+              <div class="friend-info">
+                <span class="friend-name">{{ req.to }}</span>
+                <span class="request-type">Đang chờ phản hồi</span>
+              </div>
+            </div>
+            <div class="action-buttons">
+              <a-button
+                size="small"
+                @click="handleCancelRequest(req.to)"
+                :loading="loadingActions[`cancel-${req.to}`]"
+              >
+                Hủy
+              </a-button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -37,7 +156,36 @@
             :type="expandedCategories.blocked ? 'caret-down' : 'caret-right'"
             class="category-arrow"
           />
-          <span class="category-title">Danh sách bị chặn</span>
+          <span class="category-title">Danh sách bị chặn ({{ blockedUsers.length }})</span>
+        </div>
+      </div>
+
+      <!-- Blocked List -->
+      <div v-if="expandedCategories.blocked" class="friends-list">
+        <div
+          class="friend-item"
+          v-for="user in blockedUsers"
+          :key="user"
+        >
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+              <div class="friend-avatar">
+                <a-avatar :size="40" style="background-color: #ff4d4f">
+                  <span class="avatar-text">{{ getInitials(user) }}</span>
+                </a-avatar>
+              </div>
+              <div class="friend-info">
+                <span class="friend-name">{{ user }}</span>
+              </div>
+            </div>
+            <a-button
+              size="small"
+              @click="handleUnblockUser(user)"
+              :loading="loadingActions[`unblock-${user}`]"
+            >
+              Bỏ chặn
+            </a-button>
+          </div>
         </div>
       </div>
 
@@ -48,7 +196,34 @@
             :type="expandedCategories.groups ? 'caret-down' : 'caret-right'"
             class="category-arrow"
           />
-          <span class="category-title">Trò chuyện nhóm của tôi</span>
+          <span class="category-title">Trò chuyện nhóm của tôi ({{ myGroups.length }})</span>
+        </div>
+      </div>
+
+      <!-- Groups List -->
+      <div v-if="expandedCategories.groups" class="friends-list">
+        <div
+          class="friend-item"
+          v-for="group in myGroups"
+          :key="group.id"
+          @click="openGroupChat(group)"
+        >
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+              <div class="friend-avatar">
+                <a-avatar :size="40" style="background-color: #722ed1">
+                  <a-icon type="team" />
+                </a-avatar>
+              </div>
+              <div class="friend-info">
+                <span class="friend-name">{{ group.name }}</span>
+                <span class="group-id">ID: {{ group.id }}</span>
+              </div>
+            </div>
+            <a-button size="small" type="primary">
+              Vào phòng
+            </a-button>
+          </div>
         </div>
       </div>
 
@@ -59,7 +234,7 @@
             :type="expandedCategories.friends ? 'caret-down' : 'caret-right'"
             class="category-arrow"
           />
-          <span class="category-title">Bạn bè</span>
+          <span class="category-title">Bạn bè ({{ friends.length }})</span>
         </div>
       </div>
 
@@ -67,52 +242,333 @@
       <div v-if="expandedCategories.friends" class="friends-list">
         <div
           class="friend-item"
-          v-for="friend in friends"
-          :key="friend.id"
-          @click="openChat(friend)"
+          v-for="friend in filteredFriends"
+          :key="friend"
         >
-          <div class="d-flex align-items-center">
-            <div class="friend-avatar">
-              <a-avatar :size="40" style="background-color: #1890ff">
-                <span class="avatar-text">{{ getInitials(friend.name) }}</span>
-              </a-avatar>
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+              <div class="friend-avatar">
+                <a-avatar :size="40" style="background-color: #1890ff">
+                  <span class="avatar-text">{{ getInitials(friend) }}</span>
+                </a-avatar>
+              </div>
+              <div class="friend-info">
+                <span class="friend-name">{{ friend }}</span>
+              </div>
             </div>
-            <div class="friend-info">
-              <span class="friend-name">{{ friend.name }}</span>
+            <div class="action-buttons">
+              <a-button
+                size="small"
+                type="primary"
+                @click="openChat(friend)"
+              >
+                Chat
+              </a-button>
+              <a-button
+                size="small"
+                danger
+                @click="handleRemoveFriend(friend)"
+                :loading="loadingActions[`remove-${friend}`]"
+              >
+                Xóa
+              </a-button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Add Friend Modal -->
+    <a-modal
+      v-model="showAddFriendModal"
+      title="Thêm bạn bè"
+      @ok="handleAddFriendFromModal"
+      @cancel="showAddFriendModal = false"
+    >
+      <a-input
+        v-model="newFriendName"
+        placeholder="Nhập tên người dùng"
+      />
+    </a-modal>
   </div>
 </template>
 
 <script>
+import * as chatApi from '@/api/chat'
+
 export default {
   name: 'AddressBookPage',
   data() {
     return {
       searchText: '',
       expandedCategories: {
-        recent: false,
+        users: false,
+        requests: false,
         blocked: false,
         groups: false,
-        friends: true, // Expanded by default as shown in image
+        friends: true,
       },
-      friends: [
-        {
-          id: 1,
-          name: 'hê hê',
-          avatar: null,
-          phone: '',
-          email: '',
-        },
-        // Add more friends here
-      ],
+      allUsers: [],
+      friends: [],
+      blockedUsers: [],
+      groups: [],
+      myGroups: [],
+      friendRequests: {
+        incoming: [],
+        outgoing: []
+      },
+      myId: null,
+      myName: null,
+      loadingActions: {},
+      showAddFriendModal: false,
+      newFriendName: '',
     }
   },
+  computed: {
+    filteredUsers() {
+      if (!this.searchText) return this.allUsers
+      return this.allUsers.filter(user =>
+        user.toLowerCase().includes(this.searchText.toLowerCase())
+      )
+    },
+    filteredFriends() {
+      if (!this.searchText) return this.friends
+      return this.friends.filter(friend =>
+        friend.toLowerCase().includes(this.searchText.toLowerCase())
+      )
+    },
+    totalRequests() {
+      return this.friendRequests.incoming.length + this.friendRequests.outgoing.length
+    }
+  },
+  async mounted() {
+    await this.checkAuth()
+    await this.loadAllData()
+  },
   methods: {
+    async checkAuth() {
+      try {
+        const response = await chatApi.getProfile()
+        this.myId = response.data.user._id
+        this.myName = response.data.user.name
+      } catch (error) {
+        console.error('Auth error:', error)
+        this.$message.error('Phiên đăng nhập hết hạn')
+        this.$router.push('/login')
+      }
+    },
+
+    async loadAllData() {
+      await Promise.all([
+        this.loadUsers(),
+        this.loadFriends(),
+        this.loadBlockedUsers(),
+        this.loadGroups(),
+        this.loadFriendRequests()
+      ])
+    },
+
+    async loadUsers() {
+      try {
+        const response = await chatApi.getUsers()
+        this.allUsers = response.data
+      } catch (error) {
+        console.error('Load users error:', error)
+      }
+    },
+
+    async loadFriends() {
+      if (!this.myId) return
+      try {
+        const response = await chatApi.getFriendList()
+        this.friends = response.data.friends || []
+      } catch (error) {
+        console.error('Load friends error:', error)
+      }
+    },
+
+    async loadBlockedUsers() {
+      if (!this.myId) return
+      try {
+        const response = await chatApi.getBlockList()
+        this.blockedUsers = response.data.blocked || []
+      } catch (error) {
+        console.error('Load blocked error:', error)
+      }
+    },
+
+    async loadGroups() {
+      try {
+        const response = await chatApi.getGroups()
+        this.groups = response.data
+        this.myGroups = this.groups.filter(g =>
+          (g.members || []).includes(this.myName)
+        )
+      } catch (error) {
+        console.error('Load groups error:', error)
+      }
+    },
+
+    async loadFriendRequests() {
+      if (!this.myId) return
+      try {
+        const response = await chatApi.getFriendRequests()
+        this.friendRequests = {
+          incoming: response.data.incoming || [],
+          outgoing: response.data.outgoing || []
+        }
+      } catch (error) {
+        console.error('Load requests error:', error)
+      }
+    },
+
+    async handleAddFriend(userName) {
+      if (!this.myId || userName === this.myName) return
+
+      this.$set(this.loadingActions, `add-${userName}`, true)
+      try {
+        const userResponse = await chatApi.getUserByName(userName)
+        if (!userResponse.data?.ok) {
+          this.$message.error('Không tìm thấy người dùng')
+          return
+        }
+
+        const response = await chatApi.addFriend(userResponse.data.user._id)
+        if (response.data.accepted) {
+          this.$message.success('Đã trở thành bạn bè!')
+        } else {
+          this.$message.success('Đã gửi lời mời kết bạn')
+        }
+
+        await this.loadAllData()
+      } catch (error) {
+        console.error('Add friend error:', error)
+        this.$message.error('Không thể gửi lời mời kết bạn')
+      } finally {
+        this.$set(this.loadingActions, `add-${userName}`, false)
+      }
+    },
+
+    async handleAddFriendFromModal() {
+      if (!this.newFriendName) {
+        this.$message.warning('Vui lòng nhập tên người dùng')
+        return
+      }
+      await this.handleAddFriend(this.newFriendName)
+      this.showAddFriendModal = false
+      this.newFriendName = ''
+    },
+
+    async handleRemoveFriend(friendName) {
+      this.$set(this.loadingActions, `remove-${friendName}`, true)
+      try {
+        const userResponse = await chatApi.getUserByName(friendName)
+        if (!userResponse.data?.ok) return
+
+        await chatApi.removeFriend(userResponse.data.user._id)
+        this.$message.success('Đã xóa bạn bè')
+        await this.loadAllData()
+      } catch (error) {
+        console.error('Remove friend error:', error)
+        this.$message.error('Không thể xóa bạn bè')
+      } finally {
+        this.$set(this.loadingActions, `remove-${friendName}`, false)
+      }
+    },
+
+    async handleBlockUser(userName) {
+      this.$set(this.loadingActions, `block-${userName}`, true)
+      try {
+        const userResponse = await chatApi.getUserByName(userName)
+        if (!userResponse.data?.ok) return
+
+        await chatApi.addBlock(userResponse.data.user._id)
+        this.$message.success('Đã chặn người dùng')
+        await this.loadAllData()
+      } catch (error) {
+        console.error('Block error:', error)
+        this.$message.error('Không thể chặn người dùng')
+      } finally {
+        this.$set(this.loadingActions, `block-${userName}`, false)
+      }
+    },
+
+    async handleUnblockUser(userName) {
+      this.$set(this.loadingActions, `unblock-${userName}`, true)
+      try {
+        const userResponse = await chatApi.getUserByName(userName)
+        if (!userResponse.data?.ok) return
+
+        await chatApi.removeBlock(userResponse.data.user._id)
+        this.$message.success('Đã bỏ chặn')
+        await this.loadAllData()
+      } catch (error) {
+        console.error('Unblock error:', error)
+        this.$message.error('Không thể bỏ chặn')
+      } finally {
+        this.$set(this.loadingActions, `unblock-${userName}`, false)
+      }
+    },
+
+    async handleAcceptRequest(fromName) {
+      this.$set(this.loadingActions, `accept-${fromName}`, true)
+      try {
+        const userResponse = await chatApi.getUserByName(fromName)
+        if (!userResponse.data?.ok) return
+
+        await chatApi.acceptFriendRequest(userResponse.data.user._id)
+        this.$message.success('Đã chấp nhận lời mời kết bạn')
+        await this.loadAllData()
+      } catch (error) {
+        console.error('Accept error:', error)
+        this.$message.error('Không thể chấp nhận lời mời')
+      } finally {
+        this.$set(this.loadingActions, `accept-${fromName}`, false)
+      }
+    },
+
+    async handleDeclineRequest(fromName) {
+      this.$set(this.loadingActions, `decline-${fromName}`, true)
+      try {
+        const userResponse = await chatApi.getUserByName(fromName)
+        if (!userResponse.data?.ok) return
+
+        await chatApi.declineFriendRequest(userResponse.data.user._id)
+        this.$message.success('Đã từ chối lời mời')
+        await this.loadAllData()
+      } catch (error) {
+        console.error('Decline error:', error)
+        this.$message.error('Không thể từ chối lời mời')
+      } finally {
+        this.$set(this.loadingActions, `decline-${fromName}`, false)
+      }
+    },
+
+    async handleCancelRequest(toName) {
+      this.$set(this.loadingActions, `cancel-${toName}`, true)
+      try {
+        const userResponse = await chatApi.getUserByName(toName)
+        if (!userResponse.data?.ok) return
+
+        await chatApi.cancelFriendRequest(userResponse.data.user._id)
+        this.$message.success('Đã hủy lời mời')
+        await this.loadAllData()
+      } catch (error) {
+        console.error('Cancel error:', error)
+        this.$message.error('Không thể hủy lời mời')
+      } finally {
+        this.$set(this.loadingActions, `cancel-${toName}`, false)
+      }
+    },
+
+    isFriend(userName) {
+      return this.friends.includes(userName)
+    },
+
+    isBlocked(userName) {
+      return this.blockedUsers.includes(userName)
+    },
+
     getInitials(name) {
       return name
         .split(' ')
@@ -121,19 +577,37 @@ export default {
         .toUpperCase()
         .slice(0, 2)
     },
+
     toggleCategory(category) {
       this.expandedCategories[category] = !this.expandedCategories[category]
     },
-    addNewContact() {
-      // Open add contact modal or navigate to add contact page
-      console.log('Add new contact')
+
+    async openChat(friendName) {
+      try {
+        const userResponse = await chatApi.getUserByName(friendName)
+        if (!userResponse.data?.ok) return
+
+        // Lưu thông tin chat target và chuyển đến trang chat
+        localStorage.setItem('chatTarget', JSON.stringify({
+          type: 'dm',
+          id: userResponse.data.user._id,
+          name: friendName
+        }))
+        this.$router.push('/chat')
+      } catch (error) {
+        console.error('Open chat error:', error)
+        this.$message.error('Không thể mở chat')
+      }
     },
-    openChat(friend) {
-      // Navigate to chat with this friend
-      this.$router.push(`/chat/${friend.id}`)
-    },
-    navigateTo(route) {
-      this.$router.push(route)
+
+    openGroupChat(group) {
+      // Lưu thông tin group và chuyển đến trang chat
+      localStorage.setItem('chatTarget', JSON.stringify({
+        type: 'group',
+        id: group.id,
+        name: group.name
+      }))
+      this.$router.push('/chat')
     },
   },
 }

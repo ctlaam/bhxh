@@ -11,7 +11,7 @@ export default async function ({ store, redirect, route }) {
   let isAuthenticated = store.state.auth.isAuthenticated
   if (!(route.path === '/login/' || route.path === '/login' || route.path === '/login/signup' || route.path === '/login/signup/' || route.path === '/')) {
     await authApi.getDataUser(accessToken).then(async (response) => {
-      await store.dispatch('profile/saveProfile', response.data)
+      await store.dispatch('profile/saveProfile', response.user)
     }).catch((error) => {
       isAuthenticated = false;
       store.dispatch('auth/login', {

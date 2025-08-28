@@ -14,60 +14,195 @@
       </a-input>
     </div>
 
+    <!-- Loading State -->
+    <div v-if="loading" class="loading-container">
+      <a-spin size="large" />
+    </div>
+
+    <!-- Empty State -->
+    <div v-else-if="filteredConversations.length === 0" class="empty-messages">
+      <a-icon type="message" :style="{ fontSize: '48px', color: '#d9d9d9' }" />
+      <p>{{ searchText ? 'Không tìm thấy cuộc trò chuyện nào' : 'Chưa có tin nhắn nào' }}</p>
+      <p class="sub-text">{{ searchText ? 'Thử tìm kiếm với từ khóa khác' : 'Bắt đầu trò chuyện mới từ danh bạ' }}</p>
+    </div>
+
     <!-- Messages List -->
-    <div class="messages-list">
+    <div v-else class="messages-list">
       <!-- Single Message Item -->
-      <div class="message-item" @click="openChat">
+      <div
+        v-for="conversation in filteredConversations"
+        :key="conversation.id"
+        class="message-item"
+        :class="{ 'unread': conversation.unreadCount > 0 }"
+        @click="openChat(conversation)"
+      >
         <div class="d-flex align-items-center">
           <!-- Avatar -->
           <div class="avatar-container">
-            <a-avatar :size="50" style="background-color: #1890ff">
-              <span class="avatar-text">{{ getInitials('hê hê') }}</span>
-            </a-avatar>
+            <a-badge :count="conversation.unreadCount" :offset="[-5, 5]">
+              <a-avatar
+                :size="50"
+                :style="{
+                  backgroundColor: conversation.type === 'dm' ? '#1890ff' : '#722ed1'
+                }"
+              >
+                <a-icon v-if="conversation.type === 'group'" type="team" />
+                <span v-else class="avatar-text">{{ getInitials(conversation.name) }}</span>
+              </a-avatar>
+            </a-badge>
           </div>
 
           <!-- Message Content -->
           <div class="message-content flex-grow-1">
             <div class="d-flex justify-content-between align-items-start">
               <div class="message-info">
-                <h6 class="sender-name mb-1">hê hê</h6>
-                <p class="message-preview mb-0">1</p>
+                <h6 class="sender-name mb-1">
+                  {{ conversation.name }}
+                  <span v-if="conversation.type === 'group'" class="group-badge">Nhóm</span>
+                </h6>
+                <p class="message-preview mb-0">
+                  <span v-if="conversation.lastMessage">
+                    <strong v-if="conversation.lastMessage.from">{{ conversation.lastMessage.from }}:</strong>
+                    {{ conversation.lastMessage.text }}
+                  </span>
+                  <span v-else class="no-message">Chưa có tin nhắn</span>
+                </p>
               </div>
               <div class="message-meta">
-                <span class="message-time">11 phút trước đây</span>
+                <span class="message-time">{{ formatTime(conversation.updatedAt || conversation.lastMessage?.ts) }}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Add more message items as needed -->
-      <!-- You can use v-for to render multiple messages -->
     </div>
+
+    <!-- Refresh Button -->
+    <a-button
+      type="primary"
+      shape="circle"
+      size="large"
+      class="refresh-button"
+      @click="loadConversations"
+      :loading="loading"
+    >
+      <a-icon type="reload" />
+    </a-button>
   </div>
 </template>
 
 <script>
+import * as chatApi from '@/api/chat'
+import Cookies from 'js-cookie'
+
 export default {
   name: 'MessagesPage',
   data() {
     return {
       searchText: '',
-      messages: [
-        {
-          id: 1,
-          sender: 'hê hê',
-          lastMessage: '1',
-          time: '11 phút trước đây',
-          avatar: null,
-          unread: false,
-        },
-        // Add more messages here
-      ],
+      conversations: [],
+      loading: false,
+      refreshInterval: null,
     }
   },
+
+  computed: {
+    filteredConversations() {
+      if (!this.searchText) {
+        return this.conversations
+      }
+
+      const searchLower = this.searchText.toLowerCase()
+      return this.conversations.filter(conv => {
+        // Tìm theo tên
+        if (conv.name && conv.name.toLowerCase().includes(searchLower)) {
+          return true
+        }
+        // Tìm theo nội dung tin nhắn cuối
+        if (conv.lastMessage?.text && conv.lastMessage.text.toLowerCase().includes(searchLower)) {
+          return true
+        }
+        // Tìm theo người gửi tin nhắn cuối
+        if (conv.lastMessage?.from && conv.lastMessage.from.toLowerCase().includes(searchLower)) {
+          return true
+        }
+        return false
+      })
+    }
+  },
+
+  async mounted() {
+    await this.checkAuth()
+    await this.loadConversations()
+
+    // Auto refresh mỗi 10 giây
+    this.refreshInterval = setInterval(() => {
+      this.loadConversations(true) // silent refresh
+    }, 10000)
+  },
+
+  beforeDestroy() {
+    if (this.refreshInterval) {
+      clearInterval(this.refreshInterval)
+    }
+  },
+
   methods: {
+    async checkAuth() {
+      const token = Cookies.get('access_token')
+      if (!token) {
+        this.$message.warning('Vui lòng đăng nhập để xem tin nhắn')
+        this.$router.push('/login')
+        return false
+      }
+      return true
+    },
+
+    async loadConversations(silent = false) {
+      if (!silent) {
+        this.loading = true
+      }
+
+      try {
+        const response = await chatApi.getConversations()
+
+        if (response.data?.ok) {
+          this.conversations = response.data.conversations || []
+
+          // Sắp xếp theo thời gian mới nhất
+          this.conversations.sort((a, b) => {
+            const timeA = new Date(a.updatedAt || a.lastMessage?.ts || 0).getTime()
+            const timeB = new Date(b.updatedAt || b.lastMessage?.ts || 0).getTime()
+            return timeB - timeA
+          })
+
+          // Tính tổng số tin nhắn chưa đọc
+          const totalUnread = this.conversations.reduce((sum, conv) => sum + (conv.unreadCount || 0), 0)
+          if (totalUnread > 0) {
+            document.title = `(${totalUnread}) Tin nhắn - GoVietNam`
+          } else {
+            document.title = 'Tin nhắn - GoVietNam'
+          }
+        } else {
+          throw new Error('Invalid response')
+        }
+      } catch (error) {
+        console.error('Load conversations error:', error)
+        if (!silent) {
+          this.$message.error('Không thể tải danh sách tin nhắn')
+        }
+
+        // Nếu lỗi 401, redirect về login
+        if (error.response?.status === 401) {
+          this.$router.push('/login')
+        }
+      } finally {
+        this.loading = false
+      }
+    },
+
     getInitials(name) {
+      if (!name) return '?'
       return name
         .split(' ')
         .map((word) => word.charAt(0))
@@ -75,14 +210,65 @@ export default {
         .toUpperCase()
         .slice(0, 2)
     },
-    openChat() {
-      // Navigate to chat detail
-      this.$router.push('/chat/1')
+
+    formatTime(timestamp) {
+      if (!timestamp) return ''
+
+      const date = new Date(timestamp)
+      const now = new Date()
+      const diff = now - date
+
+      // Dưới 1 phút
+      if (diff < 60000) {
+        return 'Vừa xong'
+      }
+
+      // Dưới 1 giờ
+      if (diff < 3600000) {
+        const minutes = Math.floor(diff / 60000)
+        return `${minutes} phút trước`
+      }
+
+      // Dưới 24 giờ
+      if (diff < 86400000) {
+        const hours = Math.floor(diff / 3600000)
+        return `${hours} giờ trước`
+      }
+
+      // Dưới 7 ngày
+      if (diff < 604800000) {
+        const days = Math.floor(diff / 86400000)
+        return `${days} ngày trước`
+      }
+
+      // Format ngày tháng
+      return date.toLocaleDateString('vi-VN', {
+        day: '2-digit',
+        month: '2-digit',
+        year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined
+      })
     },
-    navigateTo(route) {
-      this.$router.push(route)
+
+    openChat(conversation) {
+      if (conversation.type === 'dm') {
+        // Mở chat DM với user
+        this.$router.push(`/chat?name=${encodeURIComponent(conversation.name)}`)
+      } else if (conversation.type === 'group') {
+        // Mở chat group
+        const groupId = conversation.id.replace('group_', '') // Loại bỏ prefix nếu có
+        this.$router.push(`/chat?groupId=${encodeURIComponent(groupId)}`)
+      }
     },
   },
+
+  watch: {
+    // Khi quay lại trang, reload conversations
+    '$route'(to) {
+      if (to.path === '/messages') {
+        this.loadConversations(true)
+      }
+    }
+  }
 }
 </script>
 
@@ -90,7 +276,8 @@ export default {
 .messages-page {
   min-height: 100vh;
   background-color: #f5f5f5;
-  padding-bottom: 80px; /* Space for footer */
+  padding-bottom: 80px;
+  position: relative;
 }
 
 /* Header */
@@ -112,6 +299,9 @@ export default {
   padding: 15px;
   background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .search-input {
@@ -130,17 +320,28 @@ export default {
 .messages-list {
   background: white;
   margin-top: 1px;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
 }
 
 .message-item {
   padding: 15px;
   border-bottom: 1px solid #f0f0f0;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
+  position: relative;
 }
 
 .message-item:hover {
   background-color: #fafafa;
+}
+
+.message-item.unread {
+  background-color: #e6f7ff;
+}
+
+.message-item.unread:hover {
+  background-color: #d6efff;
 }
 
 .message-item:last-child {
@@ -158,12 +359,27 @@ export default {
 
 .message-content {
   min-height: 50px;
+  flex: 1;
+  overflow: hidden;
 }
 
 .sender-name {
   font-weight: 500;
   color: #333;
   margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.group-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  background: #722ed1;
+  color: white;
+  font-size: 10px;
+  border-radius: 4px;
+  font-weight: normal;
 }
 
 .message-preview {
@@ -172,7 +388,18 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 200px;
+  max-width: calc(100vw - 150px);
+}
+
+.message-preview strong {
+  color: #999;
+  font-weight: normal;
+  margin-right: 4px;
+}
+
+.no-message {
+  color: #bfbfbf;
+  font-style: italic;
 }
 
 .message-time {
@@ -181,82 +408,51 @@ export default {
   white-space: nowrap;
 }
 
-/* Footer Navigation */
-.footer-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: white;
-  border-top: 1px solid #e8e8e8;
-  padding: 10px 0;
-  z-index: 1000;
-}
-
-.nav-item {
-  padding: 8px 0;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.nav-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 4px;
-  transition: all 0.2s;
-}
-
-.gray-circle {
-  background: #f0f0f0;
-  color: #666;
-}
-
-.red-circle {
-  background: #ff4444;
-  color: white;
-}
-
-.red-main-circle {
-  background: #ff4444;
-  color: white;
-  flex-direction: column;
-  font-weight: bold;
-  width: 50px;
-  height: 50px;
-}
-
-.go-text {
-  font-size: 12px;
-  line-height: 1;
-}
-
-.vietnam-text {
-  font-size: 8px;
-  line-height: 1;
-  margin-top: -2px;
-}
-
-.nav-text {
-  font-size: 12px;
-  color: #666;
-  display: block;
-}
-
-.nav-item.active .nav-text {
-  color: #ff4444;
+.message-item.unread .message-time {
+  color: #1890ff;
   font-weight: 500;
 }
 
-.nav-item:hover .nav-icon {
-  transform: scale(1.05);
+/* Loading and Empty states */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px;
+  background: white;
+  margin-top: 1px;
 }
 
-.nav-item:hover .gray-circle {
-  background: #e0e0e0;
+.empty-messages {
+  text-align: center;
+  padding: 60px 20px;
+  color: #999;
+  background: white;
+  margin-top: 1px;
+}
+
+.empty-messages p {
+  margin: 8px 0;
+}
+
+.sub-text {
+  font-size: 12px;
+  color: #bfbfbf;
+}
+
+/* Refresh Button */
+.refresh-button {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+}
+
+/* Badge customization */
+.ant-badge-count {
+  background-color: #ff4d4f;
+  box-shadow: 0 0 0 2px #fff;
 }
 
 /* Responsive */
@@ -269,48 +465,47 @@ export default {
     padding: 12px;
   }
 
-  .nav-icon {
-    width: 35px;
-    height: 35px;
+  .message-preview {
+    max-width: calc(100vw - 120px);
   }
 
-  .red-main-circle {
-    width: 45px;
-    height: 45px;
-  }
-
-  .nav-text {
-    font-size: 11px;
+  .refresh-button {
+    bottom: 90px;
+    right: 15px;
   }
 }
 
-/* Additional styles for better UX */
-.ant-input::placeholder {
-  color: #bfbfbf;
+/* Scrollbar styling */
+.messages-list::-webkit-scrollbar {
+  width: 6px;
 }
 
-.ant-input:focus {
-  box-shadow: none;
-  border-color: #40a9ff;
+.messages-list::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-/* Scroll behavior */
-.messages-list {
-  max-height: calc(100vh - 200px);
-  overflow-y: auto;
+.messages-list::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 3px;
 }
 
-/* Loading and empty states */
-.empty-messages {
-  text-align: center;
-  padding: 40px 20px;
-  color: #999;
+.messages-list::-webkit-scrollbar-thumb:hover {
+  background: #bfbfbf;
 }
 
-.loading-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
+/* Animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message-item {
+  animation: slideIn 0.3s ease;
 }
 </style>
