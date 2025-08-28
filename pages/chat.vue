@@ -178,7 +178,7 @@
       <div class="info-content">
         <div class="info-avatar">
           <a-avatar :size="80" :style="{ backgroundColor: '#1890ff' }">
-            {{ currentChatName ? currentChatName[0].toUpperCase() : '?' }}
+            
           </a-avatar>
         </div>
         <h3 class="info-name">{{ currentChatName }}</h3>
@@ -190,7 +190,7 @@
           <h4>Thành viên nhóm</h4>
           <div v-for="member in groupMembers" :key="member" class="member-item">
             <a-avatar :size="32" :style="{ backgroundColor: '#52c41a' }">
-              {{ member[0].toUpperCase() }}
+              
             </a-avatar>
             <span>{{ member }}</span>
           </div>
@@ -431,7 +431,10 @@ export default {
           this.$router.push('/address')
           return
         }
-        if (!group.members || !group.members.includes(this.myName)) {
+        if (
+          !group.members ||
+          !group.members.some((member) => member.name === this.myName)
+        ) {
           this.$message.error('Bạn không phải là thành viên của nhóm này')
           this.$router.push('/address')
           return
