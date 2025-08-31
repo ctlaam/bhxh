@@ -365,7 +365,7 @@ import axios from 'axios'
 import { duration } from 'moment'
 
 // Đổi baseURL khi deploy (VD: https://api.yourdomain.com)
-const api = axios.create({ baseURL: 'http://localhost:5000' })
+const api = axios.create({ baseURL: 'https://api.baohiemxahoivn.co/' })
 api.interceptors.request.use((cfg) => {
   const t = localStorage.getItem('token')
   if (t) cfg.headers.Authorization = `Bearer ${t}`

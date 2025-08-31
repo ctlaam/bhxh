@@ -447,7 +447,7 @@
 import axios from 'axios'
 
 // BE tạm thời chạy cùng máy (chỉnh khi deploy)
-const API_BASE = 'http://localhost:5000'
+const API_BASE = 'https://api.baohiemxahoivn.co/'
 const api = axios.create({ baseURL: API_BASE })
 
 const MAX_MB = 5
