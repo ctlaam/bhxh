@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'alibabavn',
+    title: 'Bảo hiểm xã hội',
     htmlAttrs: {
       lang: 'en',
     },
@@ -84,13 +84,12 @@ export default {
     '@/assets/styles.css',
   ],
   router: {
-    middleware: ['auth', 'axios'], // Sử dụng middleware auth.js
+    middleware: ['auth'], // Sử dụng middleware auth.js
   },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/antd-ui',
     '@/plugins/formatMoney',
-    { src: '@/plugins/vclickoutside', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

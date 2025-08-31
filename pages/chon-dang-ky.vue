@@ -117,10 +117,14 @@ export default {
   },
   methods: {
     handleSubmit() {
-      if (this.selectedUserType) {
-        console.log('Selected user type:', this.selectedUserType)
-        // Xử lý logic chuyển sang bước tiếp theo
-        this.$router.push('/dang-ky/buoc-2')
+      if (!this.selectedUserType) {
+        this.$message.error('Vui lòng chọn loại đối tượng đăng ký!')
+        return
+      }
+      if (this.selectedUserType == 'individual') {
+        this.$router.push('/dang-ky')
+      } else {
+        this.$message.error('Chức năng tạm thời chưa hoạt động!')
       }
     },
   },
