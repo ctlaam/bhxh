@@ -522,6 +522,7 @@ export default {
         event.target.value = ''
         return
       }
+      console.log('Uploading:', file)
 
       try {
         this.uploading[type] = true
@@ -530,6 +531,7 @@ export default {
         // giữ file nếu sau này cần, nhưng submit sẽ dùng URL luôn (không upload lần 2)
         this.uploadedFiles[type] = file
         this.uploadedUrls[type] = url
+        console.log('Uploaded:', url)
         // console.log(`✅ ${type} uploaded:`, url)
       } catch (e) {
         alert(

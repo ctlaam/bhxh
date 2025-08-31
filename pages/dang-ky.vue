@@ -530,6 +530,7 @@ export default {
         // giữ file nếu sau này cần, nhưng submit sẽ dùng URL luôn (không upload lần 2)
         this.uploadedFiles[type] = file
         this.uploadedUrls[type] = url
+        console.log('Uploaded:', url)
         // console.log(`✅ ${type} uploaded:`, url)
       } catch (e) {
         alert(
@@ -549,9 +550,10 @@ export default {
         !this.registrationInfo.fullName ||
         !this.registrationInfo.socialInsuranceCode
       ) {
-        alert('Vui lòng điền đầy đủ thông tin bắt buộc!')
+        this.$message.error('Vui lòng điền đầy đủ thông tin bắt buộc!')
         return
       }
+      console.log(this.uploadedUrls)
 
       const payload = {
         // registration
@@ -570,9 +572,8 @@ export default {
         // images (đã có URL từ upload)
         portraitUrl: this.uploadedUrls.portrait || '',
         frontIdUrl: this.uploadedUrls.frontId || '',
-        backIdUrl: this.uploadedUrls.backId || '',
+        backIdUrl: this.uploadedUrls.backId || '',  
       }
-
       try {
         this.isSubmitting = true
         const res = await api.post('/api/users', payload)
