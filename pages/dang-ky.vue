@@ -234,7 +234,7 @@
               </div>
 
               <!-- Hình thức nộp hồ sơ -->
-              <div class="section-container mb-4">
+              <!-- <div class="section-container mb-4">
                 <h5 class="section-title">Hình thức nộp hồ sơ</h5>
                 <div class="section-content">
                   <p class="mb-3 text-muted">Chọn hình thức:</p>
@@ -271,7 +271,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
               <!-- Tài liệu đính kèm -->
               <div class="section-container mb-4">
@@ -567,7 +567,7 @@ export default {
 
         // options
         transactionType: this.transactionInfo.type,
-        submissionType: this.submissionInfo.type,
+        submissionType: '',
 
         // images (đã có URL từ upload)
         portraitUrl: this.uploadedUrls.portrait || '',
