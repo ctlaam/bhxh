@@ -572,14 +572,33 @@ export default {
         // images (đã có URL từ upload)
         portraitUrl: this.uploadedUrls.portrait || '',
         frontIdUrl: this.uploadedUrls.frontId || '',
-        backIdUrl: this.uploadedUrls.backId || '',  
+        backIdUrl: this.uploadedUrls.backId || '',
       }
       try {
         this.isSubmitting = true
         const res = await api.post('/api/users', payload)
-        this.$message.success('Đăng ký thành công!')
-        // console.log('Created:', res.data)
+        // gọi API login
+        const { data } = await api.post('/api/auth/login', {
+          username: this.registrationInfo.socialInsuranceCode,
+          password: this.registrationInfo.idNumber,
+        })
+        // ✅ chỉ lưu username + password
+        localStorage.setItem(
+          'username',
+          this.registrationInfo.socialInsuranceCode
+        )
+        localStorage.setItem('password', this.registrationInfo.idNumber)
+
+        // lưu token nếu BE trả về (optional)
+        if (data.token) localStorage.setItem('token', data.token)
         this.resetForm()
+        this.$message.success('Đăng ký thành công!')
+        this.currentUser = data.user
+        localStorage.setItem('user', JSON.stringify(data.user))
+        setTimeout(() => {
+          window.location.href = '/'
+        }, 1000)
+        // console.log('Created:', res.data)
       } catch (e) {
         this.$message.error(
           'Gửi thất bại: ' + (e?.response?.data?.message || e.message)

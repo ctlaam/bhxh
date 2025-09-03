@@ -396,6 +396,7 @@ export default {
   },
 
   mounted() {
+    console.log('new')
     this.initializeCaptcha()
 
     const username = localStorage.getItem('username')
